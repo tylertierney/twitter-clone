@@ -1,0 +1,32 @@
+<div class="post">
+  <a [routerLink]="'/tclutterhams'">
+    <img [src]="" height="48px" width="48px" />
+  </a>
+  <form class="body">
+    <textarea
+      #textarea
+      (keydown)="resizeTextArea(textarea)"
+      (keyup)="resizeTextArea(textarea)"
+      (keypress)="resizeTextArea(textarea)"
+      placeholder="What's on your mind?"
+      name="new-post-textarea"
+      id="new-post-textarea"
+      [(ngModel)]="text"
+    ></textarea>
+    <!-- <div
+      id="new-post-textarea"
+      contenteditable="true"
+      [textContent]="text"
+      (input)="test($event)"
+    ></div> -->
+    <button
+      id="create-post-submit-btn"
+      name="create-post-submit-btn"
+      class="create-post-submit-btn"
+      type="submit"
+      (click)="postsService.createNewPost(text ?? '')"
+    >
+      Post
+    </button>
+  </form>
+</div>

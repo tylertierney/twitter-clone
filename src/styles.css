@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  color: rgba(var(--text-color));
+}
+
+*:focus-visible {
+  outline-color: rgba(var(--brand-primary));
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  margin: 0;
+  background-color: rgba(var(--bkg-color));
+  color: rgba(var(--text-color));
+
+  --text-color: 34, 34, 34;
+  --bkg-color: 248, 248, 255;
+  /* --brand-primary: rgb(61, 194, 196); */
+  --brand-primary: 61, 194, 196;
+  /* --brand-primary-dark: rgb(27, 146, 148); */
+  --brand-primary-dark: 27, 146, 148;
+}
+
+body.dark-theme {
+  --text-color: 238, 238, 238;
+  --bkg-color: 37, 34, 34;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

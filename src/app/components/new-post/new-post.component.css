@@ -1,0 +1,80 @@
+.post {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1rem;
+  max-width: 598px;
+  border-bottom: 1px solid rgba(var(--text-color), 0.1);
+}
+
+img {
+  border-radius: 50%;
+  background-color: green;
+}
+
+.body {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+textarea {
+  flex-grow: 1;
+  padding: 1rem;
+  font-size: 1.1rem;
+  background-color: transparent;
+  border: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+#new-post-textarea {
+  flex-grow: 1;
+  padding: 1rem;
+  position: relative;
+  /* white-space: ; */
+  overflow: auto;
+  word-wrap: break-word;
+  font-size: 1.1rem;
+}
+
+#new-post-textarea:empty::before {
+  content: "What's on your mind?";
+  position: relative;
+  display: auto;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+#new-post-textarea:focus::before {
+  display: none;
+}
+
+button {
+  background-color: rgba(var(--brand-primary));
+  color: white;
+  font-size: 1.1rem;
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  border-radius: 1000px;
+  transition: background-color 0.2s ease-in-out, translate 0.05s;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: rgba(var(--brand-primary-dark));
+}
+
+button:active {
+  translate: 0 1px;
+}
+
+button:disabled {
+  background-color: rgba(var(--brand-primary-dark));
+}

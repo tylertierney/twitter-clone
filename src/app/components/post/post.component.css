@@ -1,0 +1,37 @@
+:host {
+  flex-grow: 1;
+}
+
+.post {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1rem;
+  max-width: 598px;
+  border-bottom: 1px solid rgba(var(--text-color), 0.1);
+  cursor: pointer;
+}
+
+.post:hover {
+  background-color: rgba(var(--text-color), 0.03);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  border-radius: 50%;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.username:hover {
+  border-bottom: 1px solid;
+}
+
+.body {
+  flex-grow: 1;
+}

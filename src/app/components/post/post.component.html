@@ -1,0 +1,16 @@
+<a class="post"
+  ><a [routerLink]="'/users/' + post.user_id">
+    <img [src]="post.user_photo_url" height="48px" width="48px" />
+  </a>
+  <div class="body">
+    <app-post-header
+      [user_id]="post.user_id"
+      [username]="post.username"
+      [date]="post.date"
+      [expanded]="expanded"
+    ></app-post-header>
+    <app-post-body
+      [expanded]="expanded"
+      [text]="post.text"
+    ></app-post-body></div
+></a>

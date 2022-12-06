@@ -1,0 +1,17 @@
+<nav
+  [ngStyle]="{
+    color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
+  }"
+>
+  <a routerLink="/" class="logo">Logo</a>
+  <div style="display: flex; align-items: center">
+    <button (click)="themeService.toggleTheme()">
+      <span style="font-size: inherit" class="material-symbols-outlined">
+        {{ themeService.usingDarkTheme ? "light_mode" : "dark_mode" }}
+      </span>
+    </button>
+    <a routerLink="/tclutterhams" class="material-symbols-outlined userIcon"
+      >account_circle</a
+    >
+  </div>
+</nav>
