@@ -1,0 +1,83 @@
+<form [formGroup]="myForm">
+  <div>
+    <label
+      [ngStyle]="{
+        color:
+          myForm.controls['name'].invalid && !myForm.controls['name'].pristine
+            ? 'var(--red)'
+            : 'inherit'
+      }"
+      for="name"
+      >Name</label
+    ><input
+      formControlName="name"
+      id="name"
+      name="name"
+      type="text"
+      autocomplete="name"
+    />
+  </div>
+  <div>
+    <label
+      [ngStyle]="{
+        color:
+          myForm.controls['username'].invalid &&
+          !myForm.controls['username'].pristine
+            ? 'var(--red)'
+            : 'inherit'
+      }"
+      for="username"
+      >Username</label
+    ><input
+      formControlName="username"
+      id="username"
+      name="username"
+      type="text"
+      autocomplete="username"
+    />
+  </div>
+
+  <div>
+    <label
+      [ngStyle]="{
+        color:
+          myForm.controls['email'].invalid && !myForm.controls['email'].pristine
+            ? 'var(--red)'
+            : 'inherit'
+      }"
+      for="email"
+      >Email</label
+    >
+    <input
+      formControlName="email"
+      id="email"
+      name="email"
+      type="email"
+      autocomplete="email"
+    />
+  </div>
+
+  <div>
+    <label
+      [ngStyle]="{
+        color:
+          myForm.controls['password'].invalid &&
+          !myForm.controls['password'].pristine
+            ? 'var(--red)'
+            : 'inherit'
+      }"
+      for="password"
+      >Password</label
+    >
+    <input
+      formControlName="password"
+      id="password"
+      name="password"
+      type="password"
+      autocomplete="password"
+    />
+  </div>
+  <app-submit-button (click)="submit()" style="width: 100%"
+    >Submit</app-submit-button
+  >
+</form>

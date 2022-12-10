@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  color: rgba(var(--text-color));
 }
 
 *:focus-visible {
@@ -14,6 +13,7 @@ body {
   margin: 0;
   background-color: rgba(var(--bkg-color));
   color: rgba(var(--text-color));
+  min-height: 100vh;
 
   --text-color: 34, 34, 34;
   --bkg-color: 248, 248, 255;
@@ -28,11 +28,11 @@ body.dark-theme {
   --bkg-color: 37, 34, 34;
 }
 
-button {
+/* button {
   background-color: transparent;
   border: none;
   color: inherit;
   display: flex;
   align-items: center;
   cursor: pointer;
-}
+} */

@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface IPost {
   date: string;
@@ -19,7 +20,7 @@ export class PostsService {
   constructor(private http: HttpClient) {}
 
   getAllPosts(): Observable<any[]> {
-    return this.http.get<IPost[]>('http://localhost:8080/api/posts').pipe(
+    return this.http.get<IPost[]>(`${environment.domain}/posts`).pipe(
       map((res) => {
         console.log(res);
         return res;
@@ -28,8 +29,6 @@ export class PostsService {
   }
 
   createNewPost(text: string) {
-    console.log('hi');
-    console.log(text);
     return this.http
       .post('http://localhost:8080/api/posts', {
         text,

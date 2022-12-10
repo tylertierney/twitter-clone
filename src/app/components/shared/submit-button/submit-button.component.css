@@ -1,0 +1,25 @@
+button {
+  background-color: rgba(var(--brand-primary));
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1000px;
+  transition: background-color 0.2s ease-in-out, translate 0.05s;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(var(--brand-primary-dark));
+}
+
+button:active {
+  translate: 0 1px;
+}
+
+button:disabled {
+  background-color: rgba(var(--brand-primary-dark));
+}
