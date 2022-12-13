@@ -1,6 +1,5 @@
 :host {
   display: flex;
-  justify-content: space-between;
 }
 
 a {
@@ -8,9 +7,13 @@ a {
   color: inherit;
 }
 
-.username {
+.name {
   font-weight: bold;
+}
+
+.username {
   border-bottom: 1px solid transparent;
+  opacity: 0.7;
 }
 
 .username:hover {
@@ -20,4 +23,5 @@ a {
 .date {
   font-size: 0.8rem;
   color: rgba(var(--text-color), 0.3);
+  margin-left: auto;
 }

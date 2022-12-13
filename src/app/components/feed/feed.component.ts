@@ -12,9 +12,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class FeedComponent implements OnInit {
   posts$: Observable<any[]>;
-
-  // posts$ = new Subject([]);
-  // posts$ = new BehaviorSubject<any[]>([]);
+  // user$: Observable<any>;
 
   constructor(
     private postsService: PostsService,
@@ -24,16 +22,13 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.posts$ = this.postsService.getAllPosts();
-    // this.postsService.getAllPosts().subscribe(this.posts$.next);
-    // this.postsService.getAllPosts().subscribe((res) => console.log(res));
   }
 
   getUser() {
     console.log(document.cookie);
-    this.http
-      .get(`${environment.domain}/auth`, {
-        withCredentials: true,
-      })
-      .subscribe(console.log);
+  }
+
+  checkUser() {
+    this.authService.user$.subscribe(console.log);
   }
 }

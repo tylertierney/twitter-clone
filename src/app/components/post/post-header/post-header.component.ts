@@ -10,6 +10,7 @@ export class PostHeaderComponent implements OnInit {
   @Input() username: string;
   @Input() date: string;
   @Input() expanded: boolean;
+  @Input() name: string;
 
   constructor() {}
 

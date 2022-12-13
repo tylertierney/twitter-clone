@@ -3,7 +3,7 @@
     color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
   }"
 >
-  <a routerLink="/" class="logo">
+  <a routerLink="/" class="logo" style="margin-bottom: auto">
     <svg
       stroke="currentColor"
       fill="currentColor"
@@ -18,7 +18,14 @@
       ></path>
     </svg>
   </a>
-  <!-- (click)="themeService.toggleTheme()" -->
+  <button>
+    <a
+      [routerLink]="'../' + (authService.user$ | async)?.username"
+      class="material-symbols-outlined"
+    >
+      person
+    </a>
+  </button>
   <button [menu]="settingsMenu">
     <span style="font-size: inherit" class="material-symbols-outlined">
       settings
@@ -27,7 +34,24 @@
   <ng-template #settingsMenu>
     <app-settings-menu></app-settings-menu>
   </ng-template>
-  <a routerLink="/tclutterhams" class="material-symbols-outlined userIcon"
+  <!-- <button class="material-symbols-outlined userIcon" [menu]="userMenu">
+    account_circle
+  </button> -->
+  <!-- <button [menu]="userMenu"> -->
+  <img
+    class="userIcon"
+    [menu]="userMenu"
+    [src]="(authService.user$ | async).profile_pic"
+    height="44px"
+    width="44px"
+  />
+  <!-- </button> -->
+  <ng-template #userMenu>
+    <app-user-menu></app-user-menu>
+  </ng-template>
+  <!-- <a
+    [routerLink]="'../' + (authService.user$ | async).username"
+    class="material-symbols-outlined userIcon"
     >account_circle</a
-  >
+  > -->
 </nav>

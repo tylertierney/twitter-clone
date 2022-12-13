@@ -1,6 +1,7 @@
 <a class="post"
-  ><a [routerLink]="'/users/' + post.user_id">
-    <img [src]="post.user_photo_url" height="48px" width="48px" />
+  ><a [routerLink]="'../' + post.username">
+    <!-- <img [src]="post.user_photo_url" height="48px" width="48px" /> -->
+    <img [src]="post.profile_pic" height="48px" width="48px" />
   </a>
   <div class="body">
     <app-post-header
@@ -8,6 +9,7 @@
       [username]="post.username"
       [date]="post.date"
       [expanded]="expanded"
+      [name]="post.name"
     ></app-post-header>
     <app-post-body
       [expanded]="expanded"

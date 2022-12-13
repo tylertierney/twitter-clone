@@ -10,6 +10,7 @@ import {
   Input,
   TemplateRef,
 } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { MenuComponent } from '../menu.component';
 
 @Directive({
@@ -23,12 +24,18 @@ export class MenuDirective {
     private elementRef: ElementRef,
     private appRef: ApplicationRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector
-  ) {}
+    private injector: Injector,
+    private router: Router
+  ) {
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationStart) {
+        this.destroy();
+      }
+    });
+  }
 
   @HostListener('click')
   onClick(): void {
-    // console.log('clicked inside');
     if (!this.componentRef) {
       const componentFactoryResolver =
         this.componentFactoryResolver.resolveComponentFactory(MenuComponent);
@@ -44,11 +51,8 @@ export class MenuDirective {
   setMenuComponentProperties() {
     if (this.componentRef !== null && this.componentRef.instance !== null) {
       this.componentRef.instance.content = this.menu;
-      const { left, right, bottom, top, height } =
+      const { right, top, height } =
         this.elementRef.nativeElement.getBoundingClientRect();
-      console.log(height);
-      console.log(top);
-      // this.componentRef.instance.left = (right - left) / 2 + left;
       this.componentRef.instance.left = parseInt(right, 10) + 16;
       this.componentRef.instance.top = top - Math.floor(height / 4);
     }

@@ -7,14 +7,14 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   font-family: sans-serif;
   margin: 0;
   background-color: rgba(var(--bkg-color));
   color: rgba(var(--text-color));
-  min-height: 100vh;
-  height: 100vh;
+  /* min-height: 100vh; */
+  height: 100%;
 
   --text-color: 34, 34, 34;
   --bkg-color: 248, 248, 255;

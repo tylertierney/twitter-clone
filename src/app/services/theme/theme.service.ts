@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { using } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +11,11 @@ export class ThemeService {
     if (themeFromLocalStorage) {
       if (JSON.parse(themeFromLocalStorage) === true) {
         document.body.classList.add('dark-theme');
+        this.usingDarkTheme = true;
       }
     } else {
-      localStorage.setItem('dark-theme', JSON.stringify(this.usingDarkTheme));
+      localStorage.setItem('dark-theme', 'false');
+      this.usingDarkTheme = false;
     }
   }
 

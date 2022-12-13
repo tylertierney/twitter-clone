@@ -1,6 +1,10 @@
+<div class="nav">Home</div>
 <app-new-post></app-new-post>
-<!-- <p>{{ authService.user$ | async | json }}</p> -->
-<button (click)="getUser()">cookie</button>
+<p>{{ (authService.user$ | async)?.username }}</p>
+<div *ngIf="authService.user$ | async as user">
+  <p>{{ user.name }}</p>
+</div>
+<button (click)="checkUser()">check user</button>
 
 <ng-container *ngIf="posts$ | async as posts">
   <app-post
