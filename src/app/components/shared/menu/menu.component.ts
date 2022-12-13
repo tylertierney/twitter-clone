@@ -10,6 +10,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 
@@ -19,7 +20,7 @@ import {
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  content: string;
+  content: TemplateRef<any>;
   left = 0;
   top = 0;
 

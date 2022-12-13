@@ -19,18 +19,14 @@
     </svg>
   </a>
   <!-- (click)="themeService.toggleTheme()" -->
-  <button (click)="menuOpen = true">
-    <span
-      [menu]="'something'"
-      style="font-size: inherit"
-      class="material-symbols-outlined"
-    >
-      {{ themeService.usingDarkTheme ? "light_mode" : "dark_mode" }}
+  <button [menu]="settingsMenu">
+    <span style="font-size: inherit" class="material-symbols-outlined">
+      settings
     </span>
-    <!-- <app-menu *ngIf="menuOpen" (open)="(menuOpen)">
-      <p>hello this is a paragraph</p>
-    </app-menu> -->
   </button>
+  <ng-template #settingsMenu>
+    <app-settings-menu></app-settings-menu>
+  </ng-template>
   <a routerLink="/tclutterhams" class="material-symbols-outlined userIcon"
     >account_circle</a
   >

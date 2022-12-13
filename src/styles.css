@@ -18,17 +18,17 @@ body {
 
   --text-color: 34, 34, 34;
   --bkg-color: 248, 248, 255;
-  /* --brand-primary: rgb(61, 194, 196); */
   --brand-primary: 61, 194, 196;
-  /* --brand-primary-dark: rgb(27, 146, 148); */
   --brand-primary-dark: 27, 146, 148;
   --hover-color: 15, 20, 25, 0.1;
+  --box-shadow-color: 0, 0, 0;
 }
 
 body.dark-theme {
   --text-color: 238, 238, 238;
   --bkg-color: 37, 34, 34;
   --hover-color: 45, 45, 52;
+  --box-shadow-color: 190, 190, 190;
 }
 
 /* button {

@@ -22,6 +22,7 @@ import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 import { MenuComponent } from '../../components/shared/menu/menu.component';
 import { MenuDirective } from '../../components/shared/menu/directive/menu.directive';
 import { MenuModule } from '../menu/menu.module';
+import { SettingsMenuComponent } from '../../components/navbar/settings-menu/settings-menu.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MenuModule } from '../menu/menu.module';
     RegisterComponent,
     HomeComponent,
     SubmitButtonComponent,
+    SettingsMenuComponent,
   ],
   imports: [
     BrowserModule,

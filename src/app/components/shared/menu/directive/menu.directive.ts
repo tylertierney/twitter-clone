@@ -8,6 +8,7 @@ import {
   HostListener,
   Injector,
   Input,
+  TemplateRef,
 } from '@angular/core';
 import { MenuComponent } from '../menu.component';
 
@@ -15,7 +16,7 @@ import { MenuComponent } from '../menu.component';
   selector: '[menu]',
 })
 export class MenuDirective {
-  @Input() menu: string;
+  @Input() menu: TemplateRef<any>;
   private componentRef: ComponentRef<MenuComponent> | null;
 
   constructor(
@@ -43,10 +44,13 @@ export class MenuDirective {
   setMenuComponentProperties() {
     if (this.componentRef !== null && this.componentRef.instance !== null) {
       this.componentRef.instance.content = this.menu;
-      const { left, right, bottom } =
+      const { left, right, bottom, top, height } =
         this.elementRef.nativeElement.getBoundingClientRect();
-      this.componentRef.instance.left = (right - left) / 2 + left;
-      this.componentRef.instance.top = bottom;
+      console.log(height);
+      console.log(top);
+      // this.componentRef.instance.left = (right - left) / 2 + left;
+      this.componentRef.instance.left = parseInt(right, 10) + 16;
+      this.componentRef.instance.top = top - Math.floor(height / 4);
     }
   }
 
