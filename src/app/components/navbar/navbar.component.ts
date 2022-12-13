@@ -7,6 +7,7 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  menuOpen = false;
   constructor(public themeService: ThemeService) {}
 
   ngOnInit(): void {}

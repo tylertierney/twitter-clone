@@ -67,6 +67,8 @@ button {
   border-radius: 1000px;
   transition: background-color 0.2s ease-in-out, translate 0.05s;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 button:hover {

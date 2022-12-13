@@ -1,15 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  showPassword = false;
 
-  constructor() { }
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
-  ngOnInit(): void {
+  loginForm = this.fb.group({
+    email: new FormControl('tytierney@yahoo.com', {
+      validators: [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(255),
+      ],
+      updateOn: 'change',
+    }),
+    password: new FormControl('hunter77', {
+      validators: [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(255),
+      ],
+      updateOn: 'change',
+    }),
+  });
+
+  ngOnInit(): void {}
+
+  submit(): void {
+    this.authService.login(this.loginForm.value);
   }
-
 }

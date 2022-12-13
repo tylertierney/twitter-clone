@@ -1,1 +1,66 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" autocomplete="off">
+  <div>
+    <div
+      class="inputContainer email"
+      [ngClass]="{ placeholderShown: loginForm.value.email === '' }"
+    >
+      <input
+        formControlName="email"
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        spellcheck="false"
+      />
+    </div>
+    <div style="min-height: 1.1rem">
+      <small
+        *ngIf="loginForm.controls?.['email']?.errors?.['email'] || loginForm.controls?.['email']?.dirty && loginForm.controls?.['email']?.errors?.['required']"
+        >Enter a valid email address.</small
+      >
+      <small
+        *ngIf="loginForm.controls?.['email']?.errors?.['availableEmail'] === false"
+        >Email address is already taken.</small
+      >
+    </div>
+  </div>
+
+  <div>
+    <div
+      class="inputContainer password"
+      [ngClass]="{ placeholderShown: loginForm.value.password === '' }"
+    >
+      <input
+        formControlName="password"
+        id="password"
+        name="password"
+        [type]="showPassword ? 'text' : 'password'"
+        autocomplete="password"
+      />
+      <div class="showPasswordIcon" (click)="showPassword = !showPassword">
+        <span
+          *ngIf="!showPassword; else elseBlock"
+          class="material-symbols-outlined"
+        >
+          visibility
+        </span>
+        <ng-template #elseBlock>
+          <span class="material-symbols-outlined"> visibility_off </span>
+        </ng-template>
+      </div>
+    </div>
+    <div style="min-height: 1.1rem">
+      <small
+        *ngIf="loginForm.controls?.['password']?.errors?.['minlength'] || loginForm.controls?.['password']?.dirty && loginForm.controls?.['password']?.errors?.['required']"
+        >Password must be at least 8 characters.</small
+      >
+    </div>
+  </div>
+  <span style="text-align: center"
+    >Don't have an account yet?
+    <a style="color: #3ccbfb" routerLink="/register">Sign up!</a>
+  </span>
+  <app-submit-button (click)="submit()" style="width: 100%"
+    >Submit</app-submit-button
+  >
+</form>

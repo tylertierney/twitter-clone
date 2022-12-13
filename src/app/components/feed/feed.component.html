@@ -1,4 +1,7 @@
 <app-new-post></app-new-post>
+<!-- <p>{{ authService.user$ | async | json }}</p> -->
+<button (click)="getUser()">cookie</button>
+
 <ng-container *ngIf="posts$ | async as posts">
   <app-post
     [expanded]="false"

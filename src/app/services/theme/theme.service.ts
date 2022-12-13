@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
+import { using } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  prefersDarkScheme: boolean = false;
   usingDarkTheme: boolean = false;
 
   constructor() {
-    this.prefersDarkScheme = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    document.body.classList.toggle('dark-theme', this.prefersDarkScheme);
-    this.usingDarkTheme = document.body.classList.contains('dark-theme');
+    let themeFromLocalStorage = localStorage.getItem('dark-theme');
+    if (themeFromLocalStorage) {
+      if (JSON.parse(themeFromLocalStorage) === true) {
+        document.body.classList.add('dark-theme');
+      }
+    } else {
+      localStorage.setItem('dark-theme', JSON.stringify(this.usingDarkTheme));
+    }
   }
 
   toggleTheme(): void {
     document.body.classList.toggle('dark-theme');
-    this.usingDarkTheme = document.body.classList.contains('dark-theme');
+    const usingDarkTheme = document.body.classList.contains('dark-theme');
+    localStorage.setItem('dark-theme', JSON.stringify(usingDarkTheme));
+    this.usingDarkTheme = usingDarkTheme;
   }
 }

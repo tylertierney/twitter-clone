@@ -1,0 +1,14 @@
+:host {
+  position: absolute;
+}
+
+menu {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(var(--bkg-color));
+  font-size: 1rem;
+  position: fixed;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  padding: 0.6rem 0;
+}

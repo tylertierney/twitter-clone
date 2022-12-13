@@ -1,82 +1,129 @@
-<form [formGroup]="myForm">
-  <div>
-    <label
-      [ngStyle]="{
-        color:
-          myForm.controls['name'].invalid && !myForm.controls['name'].pristine
-            ? 'var(--red)'
-            : 'inherit'
-      }"
-      for="name"
-      >Name</label
-    ><input
-      formControlName="name"
-      id="name"
-      name="name"
-      type="text"
-      autocomplete="name"
-    />
+<form [formGroup]="registrationForm" autocomplete="off">
+  <div
+    [ngClass]="{
+      formControlInvalid:
+        registrationForm.controls['name'].invalid &&
+        !registrationForm.controls['name'].pristine
+    }"
+  >
+    <div
+      class="inputContainer name"
+      [ngClass]="{ placeholderShown: registrationForm.value.name === '' }"
+    >
+      <input
+        id="field1"
+        name="field1"
+        formControlName="name"
+        type="text"
+        autocomplete="off"
+        maxlength="50"
+        spellcheck="false"
+        autofill
+      />
+    </div>
+    <div style="min-height: 1.1rem">
+      <small
+        *ngIf="registrationForm.controls?.['name']?.errors?.['minlength'] || registrationForm.controls?.['name']?.errors?.['maxlength']"
+        >Name must be 1-50 characters.</small
+      >
+      <small
+        *ngIf="registrationForm.controls?.['name']?.dirty && registrationForm.controls?.['name']?.errors?.['required']"
+        >What's your name?</small
+      >
+    </div>
   </div>
   <div>
-    <label
-      [ngStyle]="{
-        color:
-          myForm.controls['username'].invalid &&
-          !myForm.controls['username'].pristine
-            ? 'var(--red)'
-            : 'inherit'
-      }"
-      for="username"
-      >Username</label
-    ><input
-      formControlName="username"
-      id="username"
-      name="username"
-      type="text"
-      autocomplete="username"
-    />
+    <div
+      class="inputContainer username"
+      [ngClass]="{ placeholderShown: registrationForm.value.username === '' }"
+      #usernameInputContainer
+    >
+      <input
+        formControlName="username"
+        id="field2"
+        name="field2"
+        type="text"
+        autocomplete="off"
+        maxlength="15"
+        spellcheck="false"
+      />
+      <span class="usernameLength"
+        >{{ registrationForm.value.username.length }}/15</span
+      >
+    </div>
+    <div style="min-height: 1.1rem">
+      <small
+        *ngIf="registrationForm.controls?.['username']?.errors?.['minlength'] || registrationForm.controls?.['username']?.errors?.['maxlength'] || registrationForm.controls?.['username']?.dirty && registrationForm.controls?.['username']?.errors?.['required']"
+        >Username must be 4-15 characters.</small
+      >
+      <small
+        *ngIf="registrationForm.controls?.['username']?.errors?.['availableUsername'] === false"
+        >Username is already taken.</small
+      >
+    </div>
   </div>
 
   <div>
-    <label
-      [ngStyle]="{
-        color:
-          myForm.controls['email'].invalid && !myForm.controls['email'].pristine
-            ? 'var(--red)'
-            : 'inherit'
-      }"
-      for="email"
-      >Email</label
+    <div
+      class="inputContainer email"
+      [ngClass]="{ placeholderShown: registrationForm.value.email === '' }"
     >
-    <input
-      formControlName="email"
-      id="email"
-      name="email"
-      type="email"
-      autocomplete="email"
-    />
+      <input
+        formControlName="email"
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        spellcheck="false"
+      />
+    </div>
+    <div style="min-height: 1.1rem">
+      <small
+        *ngIf="registrationForm.controls?.['email']?.errors?.['email'] || registrationForm.controls?.['email']?.dirty && registrationForm.controls?.['email']?.errors?.['required']"
+        >Enter a valid email address.</small
+      >
+      <small
+        *ngIf="registrationForm.controls?.['email']?.errors?.['availableEmail'] === false"
+        >Email address is already taken.</small
+      >
+    </div>
   </div>
 
   <div>
-    <label
-      [ngStyle]="{
-        color:
-          myForm.controls['password'].invalid &&
-          !myForm.controls['password'].pristine
-            ? 'var(--red)'
-            : 'inherit'
-      }"
-      for="password"
-      >Password</label
+    <div
+      class="inputContainer password"
+      [ngClass]="{ placeholderShown: registrationForm.value.password === '' }"
     >
-    <input
-      formControlName="password"
-      id="password"
-      name="password"
-      type="password"
-      autocomplete="password"
-    />
+      <input
+        formControlName="password"
+        id="password"
+        name="password"
+        [type]="showPassword ? 'text' : 'password'"
+        autocomplete="password"
+      />
+      <div class="showPasswordIcon" (click)="showPassword = !showPassword">
+        <span
+          *ngIf="!showPassword; else elseBlock"
+          class="material-symbols-outlined"
+        >
+          visibility
+        </span>
+        <ng-template #elseBlock>
+          <span class="material-symbols-outlined"> visibility_off </span>
+        </ng-template>
+      </div>
+    </div>
+    <div style="min-height: 1.1rem">
+      <small
+        *ngIf="registrationForm.controls?.['password']?.errors?.['minlength'] || registrationForm.controls?.['password']?.dirty && registrationForm.controls?.['password']?.errors?.['required']"
+        >Password must be at least 8 characters.</small
+      >
+    </div>
   </div>
+  <span style="text-align: center"
+    >Already have an account?
+    <a style="color: #3ccbfb" routerLink="/login">Sign in!</a>
+  </span>
   <app-submit-button (click)="submit()" style="width: 100%"
     >Submit</app-submit-button
   >

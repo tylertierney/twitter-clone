@@ -1,0 +1,124 @@
+* {
+  color: rgba(var(--text-color), 0.8);
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  --red: #cc5c5c;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 400px;
+  gap: 1.2rem;
+}
+
+div {
+  flex-grow: 1;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.3rem;
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid rgba(var(--text-color), 0.4);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  padding: 0.6rem;
+  width: 100%;
+  color: inherit;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputContainer::before {
+  position: absolute;
+  transition: 0.1s ease-in-out;
+  background-color: rgba(var(--bkg-color));
+  padding: 0 0.5rem;
+  top: 0;
+  left: 0.8rem;
+  translate: 0 -50%;
+  color: rgba(var(--text-color), 0.6);
+  pointer-events: none;
+}
+
+.inputContainer.placeholderShown::before {
+  top: 50%;
+}
+
+.inputContainer:focus-within::before {
+  top: 0;
+}
+
+.inputContainer.email::before {
+  content: "Email";
+}
+
+.inputContainer.password::before {
+  content: "Password";
+}
+
+.usernameLength {
+  position: absolute;
+  transition: 0.1s ease-in-out;
+  background-color: rgba(var(--bkg-color));
+  padding: 0 0.5rem;
+  top: 0;
+  right: 0.8rem;
+  translate: 0 -50%;
+  color: rgba(var(--text-color), 0.6);
+  pointer-events: none;
+}
+
+.inputContainer:focus-within .usernameLength {
+  top: 0;
+}
+
+.inputContainer.placeholderShown .usernameLength {
+  top: 50%;
+}
+
+.showPasswordIcon {
+  position: absolute;
+  top: 58%;
+  right: 0.8rem;
+  translate: 0 -50%;
+  cursor: pointer;
+}
+
+.showPasswordIcon span {
+  color: rgba(var(--text-color), 0.6);
+}
+
+.ng-invalid:not(.ng-pristine) {
+  border-color: var(--red);
+}
+
+.ng-invalid:not(.ng-pristine):focus {
+  outline: 1px solid var(--red);
+  outline: none;
+}
+
+.formControlInvalid label,
+small {
+  color: var(--red);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}

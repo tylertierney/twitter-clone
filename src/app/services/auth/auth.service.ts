@@ -1,6 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  mapTo,
+  Observable,
+  of,
+  Subject,
+} from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface IUser {
@@ -17,9 +26,11 @@ export interface IRegistration {}
   providedIn: 'root',
 })
 export class AuthService {
-  user$: any;
+  isLoggedIn = false;
+  user$ = new BehaviorSubject<any>(null);
+  // user$: Observable<any>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   register(formData: {
     email: string;
@@ -27,16 +38,7 @@ export class AuthService {
     username: string;
     displayName: string;
     photoURL: string;
-  }) {
-    console.log('register called');
-    // console.log(environment.domain + 'auth/register');
-    // return this.http.post(`${environment.domain}auth/register`, formData).pipe(
-    //   map((res) => {
-    //     console.log(res);
-    //     return res;
-    //   })
-    // );
-
+  }): void {
     this.http
       .post(`${environment.domain}auth/register`, formData)
       .pipe(
@@ -46,5 +48,54 @@ export class AuthService {
         })
       )
       .subscribe(console.log);
+  }
+
+  login(formData: { email: string; password: string }): void {
+    this.http
+      .post(`${environment.domain}auth/login`, formData, {
+        withCredentials: true,
+      })
+      .subscribe((user) => {
+        console.log(user);
+        this.user$.next(user);
+        this.isLoggedIn = true;
+        this.router.navigate(['']);
+      });
+  }
+
+  logout(): void {
+    this.http.get(`${environment.domain}auth/logout`).subscribe((res) => {
+      this.user$.next(null);
+      this.isLoggedIn = false;
+      this.router.navigate(['login']);
+    });
+  }
+
+  checkUsernameAvailable(username: string): Observable<boolean> {
+    return this.http
+      .post<{ isAvailable: boolean }>(
+        `${environment.domain}auth/check-username-available`,
+        { username }
+      )
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res.isAvailable;
+        })
+      );
+  }
+
+  checkEmailAvailable(email: string): Observable<boolean> {
+    return this.http
+      .post<{ isAvailable: boolean }>(
+        `${environment.domain}auth/check-email-available`,
+        { email }
+      )
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res.isAvailable;
+        })
+      );
   }
 }

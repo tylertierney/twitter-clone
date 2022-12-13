@@ -18,6 +18,10 @@ import { LoginComponent } from '../../components/auth/login/login.component';
 import { RegisterComponent } from '../../components/auth/register/register.component';
 import { HomeComponent } from '../../components/home/home.component';
 import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
+import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
+import { MenuComponent } from '../../components/shared/menu/menu.component';
+import { MenuDirective } from '../../components/shared/menu/directive/menu.directive';
+import { MenuModule } from '../menu/menu.module';
 
 @NgModule({
   declarations: [
@@ -44,8 +48,9 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    MenuModule,
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

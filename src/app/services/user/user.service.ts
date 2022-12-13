@@ -22,6 +22,8 @@ export class UserService {
   }
 
   getAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.domain}/users/`);
+    return this.http.get<any[]>(`${environment.domain}/users/`, {
+      withCredentials: true,
+    });
   }
 }
