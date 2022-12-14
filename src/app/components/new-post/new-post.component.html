@@ -1,6 +1,10 @@
 <div class="post">
-  <a [routerLink]="'/tclutterhams'">
-    <img [src]="" height="48px" width="48px" />
+  <a [routerLink]="'../' + (authService.user$ | async).username">
+    <img
+      [src]="(authService.user$ | async).profile_pic"
+      height="48px"
+      width="48px"
+    />
   </a>
   <form class="body">
     <textarea

@@ -1,7 +1,7 @@
 :host {
   flex-grow: 1;
   max-width: 598px;
-  /* overflow-y: scroll; */
+  border-right: 1px solid rgba(var(--text-color), 0.08);
 }
 
 .nav {

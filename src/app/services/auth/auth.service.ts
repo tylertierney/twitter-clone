@@ -69,10 +69,10 @@ export class AuthService {
 
     const body = { ...formData, profile_pic };
 
-    console.log(body);
-
     this.http
-      .post(`${environment.domain}auth/register`, body)
+      .post(`${environment.domain}auth/register`, body, {
+        withCredentials: true,
+      })
       .pipe(
         catchError((err) => {
           console.log('caught error');
@@ -80,7 +80,7 @@ export class AuthService {
         })
       )
       .subscribe((user) => {
-        console.log(user);
+        console.log('registered user = ', user);
         this.user$.next(user);
         this.isLoggedIn = true;
         this.router.navigate(['']);
@@ -93,7 +93,6 @@ export class AuthService {
         withCredentials: true,
       })
       .subscribe((user) => {
-        console.log(user);
         this.user$.next(user);
         this.isLoggedIn = true;
         this.router.navigate(['']);

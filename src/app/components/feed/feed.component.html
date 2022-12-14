@@ -1,10 +1,18 @@
-<div class="nav">Home</div>
+<div
+  class="nav"
+  [ngStyle]="{
+    color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
+  }"
+>
+  Home
+</div>
 <app-new-post></app-new-post>
 <p>{{ (authService.user$ | async)?.username }}</p>
 <div *ngIf="authService.user$ | async as user">
   <p>{{ user.name }}</p>
 </div>
-<button (click)="checkUser()">check user</button>
+<button (click)="getNewPosts()">getNewPosts</button>
+<button (click)="getUser()">getUser</button>
 
 <ng-container *ngIf="posts$ | async as posts">
   <app-post

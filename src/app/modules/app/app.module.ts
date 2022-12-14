@@ -24,6 +24,9 @@ import { MenuDirective } from '../../components/shared/menu/directive/menu.direc
 import { MenuModule } from '../menu/menu.module';
 import { SettingsMenuComponent } from '../../components/navbar/settings-menu/settings-menu.component';
 import { UserMenuComponent } from '../../components/navbar/user-menu/user-menu.component';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
+import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-follow.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { UserMenuComponent } from '../../components/navbar/user-menu/user-menu.c
     SubmitButtonComponent,
     SettingsMenuComponent,
     UserMenuComponent,
+    SidebarComponent,
+    SearchbarComponent,
+    WhoToFollowComponent,
   ],
   imports: [
     BrowserModule,

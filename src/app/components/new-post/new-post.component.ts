@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from 'src/app/services/posts/posts.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-new-post',
@@ -9,7 +10,10 @@ import { PostsService } from 'src/app/services/posts/posts.service';
 export class NewPostComponent implements OnInit {
   text: string | null = null;
 
-  constructor(public postsService: PostsService) {}
+  constructor(
+    public postsService: PostsService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 

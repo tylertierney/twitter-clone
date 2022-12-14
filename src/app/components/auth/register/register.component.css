@@ -8,6 +8,7 @@
   align-items: center;
   flex-grow: 1;
   --red: #cc5c5c;
+  min-height: 100vh;
 }
 
 form {

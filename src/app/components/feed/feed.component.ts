@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-feed',
@@ -12,12 +13,12 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class FeedComponent implements OnInit {
   posts$: Observable<any[]>;
-  // user$: Observable<any>;
 
   constructor(
     private postsService: PostsService,
     public authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -25,10 +26,10 @@ export class FeedComponent implements OnInit {
   }
 
   getUser() {
-    console.log(document.cookie);
+    this.authService.user$.subscribe(console.log);
   }
 
-  checkUser() {
-    this.authService.user$.subscribe(console.log);
+  getNewPosts() {
+    this.posts$ = this.postsService.getAllPosts();
   }
 }

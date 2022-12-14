@@ -3,11 +3,10 @@
   top: 0;
   height: 100vh;
   display: flex;
+  border-right: 1px solid rgba(var(--text-color), 0.08);
 }
 
 nav {
-  background-color: rgba(var(--bkg-color), 0.7);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
   font-size: 1.2rem;
   padding: 0.8rem;
   display: flex;
@@ -20,17 +19,11 @@ nav {
 
 a {
   text-decoration: none;
-  color: inherit;
-  font-size: inherit;
 }
 
-/* .userIcon {
-  font-size: 2.6rem;
-  padding: 0.5rem;
-  border-radius: 100%;
-} */
-
-button {
+button,
+.userIcon,
+.userAvatar {
   font-size: 2.4rem;
   border: none;
   background-color: transparent;
@@ -41,14 +34,18 @@ button {
   padding: 0.5rem;
   border-radius: 100%;
   position: relative;
+  color: rgba(var(--text-color), 1);
 }
 
-button:hover {
+button:hover,
+.userIcon:hover,
+.userAvatar:hover {
   background-color: rgba(var(--hover-color));
 }
 
-.userIcon {
-  font-size: 2.8rem;
+.userAvatar {
   margin-top: 2rem;
   cursor: pointer;
+  width: 58px;
+  height: 58px;
 }

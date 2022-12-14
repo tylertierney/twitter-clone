@@ -3,7 +3,7 @@
     color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
   }"
 >
-  <a routerLink="/" class="logo" style="margin-bottom: auto">
+  <a routerLink="/" class="logo" style="margin-bottom: auto; color: inherit">
     <svg
       stroke="currentColor"
       fill="currentColor"
@@ -18,14 +18,14 @@
       ></path>
     </svg>
   </a>
-  <button>
-    <a
-      [routerLink]="'../' + (authService.user$ | async)?.username"
-      class="material-symbols-outlined"
-    >
-      person
-    </a>
-  </button>
+  <!-- <button> -->
+  <a
+    [routerLink]="'../' + (authService.user$ | async)?.username"
+    class="material-symbols-outlined userIcon"
+  >
+    person
+  </a>
+  <!-- </button> -->
   <button [menu]="settingsMenu">
     <span style="font-size: inherit" class="material-symbols-outlined">
       settings
@@ -34,24 +34,16 @@
   <ng-template #settingsMenu>
     <app-settings-menu></app-settings-menu>
   </ng-template>
-  <!-- <button class="material-symbols-outlined userIcon" [menu]="userMenu">
-    account_circle
-  </button> -->
-  <!-- <button [menu]="userMenu"> -->
+  <!-- <ng-template *ngIf="authService.user$ | async as user">
+    <img class="userAvatar" [menu]="userMenu" [src]="user.profile_pic" />
+  </ng-template> -->
   <img
-    class="userIcon"
+    class="userAvatar"
     [menu]="userMenu"
     [src]="(authService.user$ | async).profile_pic"
-    height="44px"
-    width="44px"
   />
-  <!-- </button> -->
+  <!-- <button (click)="getUser()">get user</button> -->
   <ng-template #userMenu>
     <app-user-menu></app-user-menu>
   </ng-template>
-  <!-- <a
-    [routerLink]="'../' + (authService.user$ | async).username"
-    class="material-symbols-outlined userIcon"
-    >account_circle</a
-  > -->
 </nav>
