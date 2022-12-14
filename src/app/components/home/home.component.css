@@ -1,4 +1,39 @@
 :host {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
+
+app-sidebar {
+  display: none;
+}
+
+app-navbar {
+  display: none;
+}
+
+@media screen and (min-width: 380px) {
+  app-navbar {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  :host {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  app-sidebar {
+    display: flex;
+  }
+
+  :host {
+    justify-content: center;
+  }
+}
+
+/* @media screen and (min-width: 1294px) {
+  app-navbar {
+  }
+} */

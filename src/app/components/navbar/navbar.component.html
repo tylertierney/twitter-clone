@@ -18,31 +18,37 @@
       ></path>
     </svg>
   </a>
-  <!-- <button> -->
-  <a
-    [routerLink]="'../' + (authService.user$ | async)?.username"
-    class="material-symbols-outlined userIcon"
-  >
-    person
+  <!-- <button class="userIcon">
+    <a
+      [routerLink]="'../' + (authService.user$ | async)?.username"
+      class="material-symbols-outlined"
+    >
+      person
+    </a>
+    <span class="navItemLabel">Profile</span>
+  </button> -->
+  <a [routerLink]="'../' + (authService.user$ | async)?.username">
+    <button>
+      <span class="material-symbols-outlined">person</span>
+      <span class="navItemLabel">Profile</span>
+    </button>
   </a>
-  <!-- </button> -->
   <button [menu]="settingsMenu">
     <span style="font-size: inherit" class="material-symbols-outlined">
       settings
     </span>
+    <span class="navItemLabel">More</span>
   </button>
   <ng-template #settingsMenu>
     <app-settings-menu></app-settings-menu>
   </ng-template>
-  <!-- <ng-template *ngIf="authService.user$ | async as user">
-    <img class="userAvatar" [menu]="userMenu" [src]="user.profile_pic" />
-  </ng-template> -->
-  <img
-    class="userAvatar"
-    [menu]="userMenu"
-    [src]="(authService.user$ | async).profile_pic"
-  />
-  <!-- <button (click)="getUser()">get user</button> -->
+  <button [menu]="userMenu" class="userAvatar">
+    <img [src]="(authService.user$ | async).profile_pic" width="58px" />
+    <div class="userAvatarLabel">
+      <span>{{ (authService.user$ | async).name }}</span>
+      <span>@{{ (authService.user$ | async).username }}</span>
+    </div>
+  </button>
   <ng-template #userMenu>
     <app-user-menu></app-user-menu>
   </ng-template>

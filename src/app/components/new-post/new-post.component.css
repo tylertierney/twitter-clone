@@ -14,7 +14,6 @@ img {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  gap: 0.8rem;
 }
 
 textarea {
@@ -32,6 +31,10 @@ textarea {
 
 textarea::-webkit-scrollbar {
   display: none;
+}
+
+textarea:focus {
+  outline: none;
 }
 
 #new-post-textarea {

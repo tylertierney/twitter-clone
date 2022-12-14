@@ -1,1 +1,13 @@
-<h3>Who To Follow</h3>
+<div class="container">
+  <h3>Who To Follow</h3>
+  <li *ngFor="let user of allUsers$ | async">
+    <a [routerLink]="'../' + user.username">
+      <img [src]="user.profile_pic" width="38px" />
+      <div class="names">
+        <span>{{ user.name }}</span>
+        <span>@{{ user.username }}</span>
+      </div>
+      <button>Follow</button>
+    </a>
+  </li>
+</div>

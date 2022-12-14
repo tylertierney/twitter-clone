@@ -1,11 +1,68 @@
 :host {
+  padding: 1rem;
+  width: 100%;
+}
+
+.container {
   border-radius: 16px;
   background-color: var(--panel-color);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0 1rem;
   gap: 0.4rem;
   font-size: 1rem;
-  color: rgba(var(--text-color));
+  color: rgba(var(--text-color), 0.9);
   width: 100%;
+  align-items: flex-start;
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  list-style-type: none;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  display: flex;
+  /* width: 100%; */
+  padding: 0.5rem 1rem;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.5rem;
+  color: rgba(var(--text-color), 1);
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgb(var(--hover-color), 0.5);
+}
+
+.names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.names > span:first-child {
+  font-weight: bold;
+}
+
+.names > span:nth-child(2) {
+  opacity: 0.5;
+}
+
+button {
+  border-radius: 1000px;
+  background-color: rgb(218, 218, 218);
+  border: none;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  margin-left: auto;
 }

@@ -5,13 +5,13 @@
 }
 
 .nav {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
   color: rgba(var(--brand-primary));
-  background-color: rgba(var(--bkg-color), 0.85);
+  background-color: rgba(var(--bkg-color), 0.8);
   position: sticky;
   top: 0;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
   z-index: 1;
 }
