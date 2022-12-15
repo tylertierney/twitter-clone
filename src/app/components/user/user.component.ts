@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
 import { IUser, UserService } from 'src/app/services/user/user.service';
 import { PostsService } from '../../services/posts/posts.service';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +17,8 @@ export class UserComponent implements OnInit {
   constructor(
     public userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private postsService: PostsService
+    private postsService: PostsService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
