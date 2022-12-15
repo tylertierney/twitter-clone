@@ -10,33 +10,31 @@ import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    // component: HomeComponent,
-    // canActivate: [AuthGuardService],
-    pathMatch: 'full',
     redirectTo: 'home',
+    pathMatch: 'full',
   },
   {
     path: 'home',
-    component: HomeComponent,
-    canActivate: [AuthGuardService],
-    children: [
-      {
-        path: '',
-        component: FeedComponent,
-      },
-    ],
+    loadChildren: () => import('../home/home.module').then((m) => m.HomeModule),
   },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  //   canActivate: [AuthGuardService],
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: FeedComponent,
+  //     },
+  //     {
+  //       path: ':username',
+  //       component: UserComponent,
+  //     },
+  //   ],
+  // },
   {
     path: 'login',
     component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: ':username',
-    component: UserComponent,
   },
   {
     path: 'register',

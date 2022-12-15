@@ -12,24 +12,36 @@ import { ThemeService } from '../../services/theme/theme.service';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
-  posts$: Observable<any[]>;
+  user$: Observable<any>;
+  // posts$: Observable<any[]>;
+
+  posts$ = new BehaviorSubject<any[]>([]);
 
   constructor(
-    private postsService: PostsService,
+    public postsService: PostsService,
     public authService: AuthService,
     private http: HttpClient,
     public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
-    this.posts$ = this.postsService.getAllPosts();
+    this.authService.user$.subscribe((user) => {
+      this.getFollowedPosts(user.id);
+      // this.postsService
+      //   .getFollowedPosts(user.id)
+      //   .subscribe((posts) => this.posts$.next(posts));
+    });
+    // this.user$ = this.authService.user$;
+    // this.posts$ = this.postsService.getFollowedPosts();
   }
 
   getUser() {
     this.authService.user$.subscribe(console.log);
   }
 
-  getNewPosts() {
-    this.posts$ = this.postsService.getAllPosts();
+  getFollowedPosts(userId: string) {
+    this.postsService
+      .getFollowedPosts(userId)
+      .subscribe((posts) => this.posts$.next(posts));
   }
 }

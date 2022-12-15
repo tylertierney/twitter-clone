@@ -3,11 +3,14 @@
   justify-content: flex-start;
 }
 
-app-sidebar {
+app-navbar {
   display: none;
 }
-
-app-navbar {
+div {
+  max-width: 580px;
+  flex-grow: 1;
+}
+app-sidebar {
   display: none;
 }
 

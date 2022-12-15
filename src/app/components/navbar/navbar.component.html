@@ -18,16 +18,8 @@
       ></path>
     </svg>
   </a>
-  <!-- <button class="userIcon">
-    <a
-      [routerLink]="'../' + (authService.user$ | async)?.username"
-      class="material-symbols-outlined"
-    >
-      person
-    </a>
-    <span class="navItemLabel">Profile</span>
-  </button> -->
-  <a [routerLink]="'../' + (authService.user$ | async)?.username">
+
+  <a [routerLink]="'' + (authService.user$ | async)?.username">
     <button>
       <span class="material-symbols-outlined">person</span>
       <span class="navItemLabel">Profile</span>
@@ -43,7 +35,7 @@
     <app-settings-menu></app-settings-menu>
   </ng-template>
   <button [menu]="userMenu" class="userAvatar">
-    <img [src]="(authService.user$ | async).profile_pic" width="58px" />
+    <img [src]="(authService.user$ | async).profile_pic" width="38px" />
     <div class="userAvatarLabel">
       <span>{{ (authService.user$ | async).name }}</span>
       <span>@{{ (authService.user$ | async).username }}</span>

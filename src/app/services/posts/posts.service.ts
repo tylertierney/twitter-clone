@@ -21,17 +21,21 @@ export class PostsService {
 
   constructor(private http: HttpClient, public authService: AuthService) {
     this.authService.user$.subscribe((user) => {
-      this.userId = user.id;
+      if (user && user.id) {
+        this.userId = user.id;
+      }
     });
   }
 
-  getAllPosts(): Observable<any[]> {
-    return this.http.get<IPost[]>(`${environment.domain}/posts`).pipe(
-      map((res) => {
-        console.log(res);
-        return res;
-      })
-    );
+  getFollowedPosts(userId: string): Observable<any[]> {
+    return this.http
+      .get<IPost[]>(`${environment.domain}posts/${userId}/feed`)
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
 
   createNewPost(text: string) {
@@ -43,5 +47,9 @@ export class PostsService {
       .subscribe((res) => {
         console.log(res);
       });
+  }
+
+  getPostsByUsername(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.domain}posts/${username}`);
   }
 }

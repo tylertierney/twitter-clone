@@ -24,7 +24,7 @@ body {
   --brand-primary-dark: 27, 146, 148;
   --hover-color: 15, 20, 25, 0.1;
   --box-shadow-color: 0, 0, 0;
-  --panel-color: #e8e8e8;
+  --panel-color: #e8e8e863;
 }
 
 body.dark-theme {

@@ -27,7 +27,6 @@ export interface IRegistration {}
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn = false;
   user$ = new BehaviorSubject<any>(null);
   // user$: Observable<any>;
 
@@ -37,10 +36,8 @@ export class AuthService {
     this.http
       .post(`${environment.domain}auth/login`, {}, { withCredentials: true })
       .subscribe((user) => {
-        console.log(user);
         this.user$.next(user);
-        this.isLoggedIn = true;
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
       });
   }
 
@@ -80,9 +77,7 @@ export class AuthService {
         })
       )
       .subscribe((user) => {
-        console.log('registered user = ', user);
         this.user$.next(user);
-        this.isLoggedIn = true;
         this.router.navigate(['']);
       });
   }
@@ -94,8 +89,7 @@ export class AuthService {
       })
       .subscribe((user) => {
         this.user$.next(user);
-        this.isLoggedIn = true;
-        this.router.navigate(['']);
+        this.router.navigate(['../home']);
       });
   }
 
@@ -105,7 +99,6 @@ export class AuthService {
       .subscribe(() => {
         this.router.navigate(['login']);
         this.user$.next(null);
-        this.isLoggedIn = false;
       });
   }
 
@@ -117,7 +110,6 @@ export class AuthService {
       )
       .pipe(
         map((res) => {
-          console.log(res);
           return res.isAvailable;
         })
       );
@@ -131,7 +123,6 @@ export class AuthService {
       )
       .pipe(
         map((res) => {
-          console.log(res);
           return res.isAvailable;
         })
       );

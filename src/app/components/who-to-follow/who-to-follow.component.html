@@ -1,13 +1,9 @@
-<div class="container">
+<div class="container" *ngIf="authService.user$ | async as currentUser">
   <h3>Who To Follow</h3>
-  <li *ngFor="let user of allUsers$ | async">
-    <a [routerLink]="'../' + user.username">
-      <img [src]="user.profile_pic" width="38px" />
-      <div class="names">
-        <span>{{ user.name }}</span>
-        <span>@{{ user.username }}</span>
-      </div>
-      <button>Follow</button>
-    </a>
+  <li *ngFor="let targetUser of allUsers$ | async">
+    <app-user-follow-link
+      [currentUser]="currentUser"
+      [targetUser]="targetUser"
+    ></app-user-follow-link>
   </li>
 </div>

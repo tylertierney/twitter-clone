@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   loginForm = this.fb.group({
-    email: new FormControl('tytierney@yahoo.com', {
+    email: new FormControl('', {
       validators: [
         Validators.required,
         Validators.email,
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
       ],
       updateOn: 'change',
     }),
-    password: new FormControl('hunter77', {
+    password: new FormControl('', {
       validators: [
         Validators.required,
         Validators.minLength(8),

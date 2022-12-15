@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth/auth.service';
+import { ThemeService } from '../../services/theme/theme.service';
 import { UserService } from '../../services/user/user.service';
 
 @Component({
@@ -10,7 +13,12 @@ import { UserService } from '../../services/user/user.service';
 export class WhoToFollowComponent implements OnInit {
   allUsers$: Observable<any[]>;
 
-  constructor(private usersService: UserService) {}
+  constructor(
+    public usersService: UserService,
+    public authService: AuthService,
+    public themeService: ThemeService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.allUsers$ = this.usersService.getAllUsers();

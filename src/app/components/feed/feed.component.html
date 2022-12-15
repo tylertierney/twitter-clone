@@ -7,12 +7,7 @@
   Home
 </div>
 <app-new-post></app-new-post>
-<p>{{ (authService.user$ | async)?.username }}</p>
-<div *ngIf="authService.user$ | async as user">
-  <p>{{ user.name }}</p>
-</div>
-<button (click)="getNewPosts()">getNewPosts</button>
-<button (click)="getUser()">getUser</button>
+<!-- <button (click)="getFollowedPosts()">getNewPosts</button> -->
 
 <ng-container *ngIf="posts$ | async as posts">
   <app-post

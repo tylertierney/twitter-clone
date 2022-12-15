@@ -1,0 +1,14 @@
+<img [src]="targetUser.profile_pic" width="38px" />
+<div class="names">
+  <a [routerLink]="'../' + targetUser.username">{{ targetUser.name }}</a>
+  <span>@{{ targetUser.username }}</span>
+</div>
+<button
+  [ngStyle]="{
+    'background-color': themeService.usingDarkTheme ? 'white' : '#4a4a4a',
+    color: themeService.usingDarkTheme ? 'black' : 'white'
+  }"
+  (click)="followUser()"
+>
+  {{ isFollowing ? "Following" : "Follow" }}
+</button>
