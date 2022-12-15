@@ -35,10 +35,10 @@
     <app-settings-menu></app-settings-menu>
   </ng-template>
   <button [menu]="userMenu" class="userAvatar">
-    <img [src]="(authService.user$ | async).profile_pic" width="38px" />
+    <img [src]="(authService.user$ | async)?.profile_pic" width="38px" />
     <div class="userAvatarLabel">
-      <span>{{ (authService.user$ | async).name }}</span>
-      <span>@{{ (authService.user$ | async).username }}</span>
+      <span>{{ (authService.user$ | async)?.name }}</span>
+      <span>@{{ (authService.user$ | async)?.username }}</span>
     </div>
   </button>
   <ng-template #userMenu>

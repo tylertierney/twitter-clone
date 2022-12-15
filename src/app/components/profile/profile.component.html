@@ -1,0 +1,76 @@
+<!-- <div *ngIf="user$ | async as user">
+  <button (click)="test()">test</button>
+  <div
+    class="nav"
+    [ngStyle]="{
+      color: themeService.usingDarkTheme
+        ? 'white'
+        : 'rgba(var(--brand-primary))'
+    }"
+  >
+    {{ user.name }}
+  </div>
+  <h1>{{ user.username }}</h1>
+  <ng-container *ngFor="let post of user.posts | async">
+    <app-post [post]="post"></app-post>
+  </ng-container>
+</div> -->
+
+<!-- <button (click)="test()">test</button>
+<div *ngIf="account$ | async as account">
+  <div
+    *ngIf="account.user$ | async as user"
+    class="nav"
+    [ngStyle]="{
+      color: themeService.usingDarkTheme
+        ? 'white'
+        : 'rgba(var(--brand-primary))'
+    }"
+  >
+    {{ user.name }}
+  </div>
+</div> -->
+
+<!-- <p>{{ profile$ | async | json }}</p> -->
+<!-- <p>{{ posts$ | async | json }}</p>
+<p>{{ user$ | async | json }}</p> -->
+
+<ng-container *ngIf="user$ | async as user">
+  <div class="headerPicContainer">
+    <img
+      *ngIf="user.header_pic || newHeaderPicUrl; else fallback"
+      [src]="newHeaderPicUrl ? newHeaderPicUrl : user.header_pic"
+      width="100%"
+    />
+    <ng-template #fallback>
+      <div
+        style="
+          width: 100%;
+          background-color: rgba(255, 192, 203, 0.708);
+          padding-bottom: 56.25%;
+          resize: horizontal;
+        "
+      ></div>
+    </ng-template>
+    <div class="editPhotoControls">
+      <div *ngIf="newHeaderPicUrl; else headerPicInput">
+        <button class="material-symbols-outlined editPhotoButton">close</button>
+        <button class="material-symbols-outlined editPhotoButton">done</button>
+      </div>
+      <ng-template #headerPicInput>
+        <label
+          for="headerPicInput"
+          class="material-symbols-outlined editPhotoButton"
+          >add_a_photo</label
+        >
+      </ng-template>
+    </div>
+  </div>
+  <input
+    style="display: none; appearance: none"
+    id="headerPicInput"
+    name="headerPicInput"
+    type="file"
+    (change)="test($event)"
+  />
+</ng-container>

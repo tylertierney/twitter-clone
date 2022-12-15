@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface IUser {
   id: string;
   username: string;
   email: string;
-  first_name: string;
-  last_name: string;
+  name: string;
+  profile_pic: string;
+  header_pic: string;
+  created_at: string;
 }
 
 @Injectable({
@@ -19,6 +21,10 @@ export class UserService {
 
   getUserById(id: string): Observable<any> {
     return this.http.get<IUser>(`http://localhost:8080/api/users/${id}`);
+  }
+
+  getUserByUsername(username: string): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.domain}users/${username}`);
   }
 
   getAllUsers(): Observable<any[]> {

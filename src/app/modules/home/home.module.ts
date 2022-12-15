@@ -12,7 +12,7 @@ import { PostHeaderComponent } from '../../components/post/post-header/post-head
 import { PostComponent } from '../../components/post/post.component';
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { UserComponent } from '../../components/user/user.component';
+import { ProfileComponent } from '../../components/profile/profile.component';
 import { UserFollowLinkComponent } from '../../components/who-to-follow/user-follow-link/user-follow-link.component';
 import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-follow.component';
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
@@ -35,7 +35,7 @@ import { HomeRoutingModule } from './home-routing.module';
     PostHeaderComponent,
     PostBodyComponent,
     ReadableDatePipe,
-    UserComponent,
+    ProfileComponent,
   ],
   imports: [CommonModule, FormsModule, HomeRoutingModule, MenuModule],
   exports: [],

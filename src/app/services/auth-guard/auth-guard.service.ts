@@ -24,16 +24,13 @@ export class AuthGuardService implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return this.authService.user$.pipe(
-      tap((user) => {
-        console.log(user);
-        console.log(user == true);
-      }),
+    return this.authService.isAuthenticated().pipe(
       map((user) => {
         if (user) {
+          this.authService.user$.next(user);
           return true;
         }
-        this.router.navigateByUrl('login');
+        this.router.navigate(['login']);
         return false;
       })
     );

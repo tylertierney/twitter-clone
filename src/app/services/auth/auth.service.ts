@@ -10,16 +10,18 @@ import {
   of,
   ReplaySubject,
   Subject,
+  tap,
 } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { IUser } from '../user/user.service';
 
-export interface IUser {
-  uid: string;
-  email: string;
-  handle: string;
-  photoURL?: string;
-  displayName?: string;
-}
+// export interface IUser {
+//   uid: string;
+//   email: string;
+//   handle: string;
+//   photoURL?: string;
+//   displayName?: string;
+// }
 
 export interface IRegistration {}
 
@@ -28,18 +30,8 @@ export interface IRegistration {}
 })
 export class AuthService {
   user$ = new BehaviorSubject<any>(null);
-  // user$: Observable<any>;
 
-  // user$: Observable<any>;
-
-  constructor(private http: HttpClient, private router: Router) {
-    this.http
-      .post(`${environment.domain}auth/login`, {}, { withCredentials: true })
-      .subscribe((user) => {
-        this.user$.next(user);
-        this.router.navigate(['home']);
-      });
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   register(formData: {
     email: string;
@@ -84,7 +76,7 @@ export class AuthService {
 
   login(formData: { email: string; password: string }): void {
     this.http
-      .post(`${environment.domain}auth/login`, formData, {
+      .post<IUser>(`${environment.domain}auth/login`, formData, {
         withCredentials: true,
       })
       .subscribe((user) => {
@@ -98,7 +90,7 @@ export class AuthService {
       .get(`${environment.domain}auth/logout`, { withCredentials: true })
       .subscribe(() => {
         this.router.navigate(['login']);
-        this.user$.next(null);
+        // this.user$.next(null);
       });
   }
 
@@ -126,5 +118,11 @@ export class AuthService {
           return res.isAvailable;
         })
       );
+  }
+
+  isAuthenticated() {
+    return this.http.get<IUser>(`${environment.domain}auth`, {
+      withCredentials: true,
+    });
   }
 }
