@@ -17,7 +17,7 @@ export class ReadableDatePipe implements PipeTransform {
     if (seconds < 86400) {
       return Math.floor(seconds / 60 / 60) + 'h ago';
     }
-    return value.toLocaleTimeString('en-us', {
+    return value.toLocaleDateString('en-us', {
       month: 'short',
       day: 'numeric',
     });

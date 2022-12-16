@@ -59,7 +59,7 @@ export class AuthService {
     const body = { ...formData, profile_pic };
 
     this.http
-      .post(`${environment.domain}auth/register`, body, {
+      .post(`/auth/register`, body, {
         // withCredentials: true,
       })
       .pipe(
@@ -75,26 +75,23 @@ export class AuthService {
   }
 
   login(formData: { email: string; password: string }): void {
-    this.http
-      .post<IUser>(`${environment.domain}auth/login`, formData, {})
-      .subscribe((user) => {
-        this.user$.next(user);
-        this.router.navigate(['../home']);
-      });
+    this.http.post<IUser>(`/auth/login`, formData, {}).subscribe((user) => {
+      this.user$.next(user);
+      this.router.navigate(['../home']);
+    });
   }
 
   logout(): void {
-    this.http.get(`${environment.domain}auth/logout`, {}).subscribe(() => {
+    this.http.get(`/auth/logout`, {}).subscribe(() => {
       this.router.navigate(['login']);
     });
   }
 
   checkUsernameAvailable(username: string): Observable<boolean> {
     return this.http
-      .post<{ isAvailable: boolean }>(
-        `${environment.domain}auth/check-username-available`,
-        { username }
-      )
+      .post<{ isAvailable: boolean }>(`/auth/check-username-available`, {
+        username,
+      })
       .pipe(
         map((res) => {
           return res.isAvailable;
@@ -104,10 +101,7 @@ export class AuthService {
 
   checkEmailAvailable(email: string): Observable<boolean> {
     return this.http
-      .post<{ isAvailable: boolean }>(
-        `${environment.domain}auth/check-email-available`,
-        { email }
-      )
+      .post<{ isAvailable: boolean }>(`/auth/check-email-available`, { email })
       .pipe(
         map((res) => {
           return res.isAvailable;
@@ -116,6 +110,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.http.get<IUser>(`${environment.domain}auth`, {});
+    return this.http.get<IUser>(`/auth`, {}).pipe(tap(console.log));
   }
 }

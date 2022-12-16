@@ -20,15 +20,15 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserById(id: string): Observable<any> {
-    return this.http.get<IUser>(`http://localhost:8080/api/users/${id}`);
+    return this.http.get<IUser>(`/users/${id}`);
   }
 
   getUserByUsername(username: string): Observable<IUser> {
-    return this.http.get<IUser>(`${environment.domain}users/${username}`);
+    return this.http.get<IUser>(`/users/${username}`);
   }
 
   getAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.domain}/users/`, {
+    return this.http.get<any[]>(`/users/`, {
       withCredentials: true,
     });
   }

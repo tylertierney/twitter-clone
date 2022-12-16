@@ -22,15 +22,4 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
-  submit(e: Event) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-    this.http
-      .post('http://localhost:8080/api/', { text: this.text }, httpOptions)
-      .subscribe((res) => console.log(res));
-  }
 }

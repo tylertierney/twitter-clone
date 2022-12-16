@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -15,6 +16,7 @@ import {
 } from 'rxjs';
 import { IUser, UserService } from 'src/app/services/user/user.service';
 import { PostsService } from '../../services/posts/posts.service';
+import { EditProfileService } from '../../services/profile/edit-profile.service';
 import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
@@ -27,13 +29,16 @@ export class ProfileComponent implements OnInit {
   user$: Observable<IUser>;
   posts$: Observable<any[]>;
   newHeaderPicUrl: SafeUrl;
+  newHeaderPicFile: File;
 
   constructor(
     public userService: UserService,
     private activatedRoute: ActivatedRoute,
     private postsService: PostsService,
     public themeService: ThemeService,
-    private sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private editProfileService: EditProfileService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -58,8 +63,22 @@ export class ProfileComponent implements OnInit {
     const files = (e.target as HTMLInputElement).files;
     if (files && files.length) {
       const file = files[0];
+      this.newHeaderPicFile = file;
       const url = URL.createObjectURL(file);
       this.newHeaderPicUrl = this.sanitizer.bypassSecurityTrustUrl(url);
     }
+  }
+
+  confirmNewHeaderPic(username: string, newPicUrl: SafeUrl) {
+    const formdata = new FormData();
+    formdata.append('header_pic', this.newHeaderPicFile);
+    // this.editProfileService.updateHeaderPic(username, newPicUrl);
+    this.http
+      .put(`/users/${username}/header_pic`, formdata, {
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // },
+      })
+      .subscribe(console.log);
   }
 }

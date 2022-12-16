@@ -1,7 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 export interface IPost {
@@ -27,13 +26,13 @@ export class PostsService {
     });
   }
 
-  getFollowedPosts(userId: string): Observable<any[]> {
-    return this.http.get<IPost[]>(`${environment.domain}posts/${userId}/feed`);
+  getFollowedPosts(userId: string): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`/posts/${userId}/feed`);
   }
 
   createNewPost(text: string) {
     return this.http
-      .post('http://localhost:8080/api/posts', {
+      .post('/posts', {
         text,
         author: this.userId,
       })
@@ -43,6 +42,7 @@ export class PostsService {
   }
 
   getPostsByUsername(username: string): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.domain}posts/${username}`);
+    return this.http.get<any[]>(`/posts/${username}`);
+    // return of([]);
   }
 }

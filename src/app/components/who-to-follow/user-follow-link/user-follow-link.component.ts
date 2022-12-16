@@ -22,9 +22,7 @@ export class UserFollowLinkComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get(
-        `http://localhost:8080/api/follow/${this.currentUser.id}/${this.targetUser.id}`
-      )
+      .get(`/follow/${this.currentUser.id}/${this.targetUser.id}`)
       .subscribe((res: any) => {
         this.isFollowing = res.following;
       });
@@ -32,10 +30,9 @@ export class UserFollowLinkComponent implements OnInit {
 
   followUser(): void {
     this.http
-      .post(
-        `http://localhost:8080/api/follow/${this.currentUser.id}/${this.targetUser.id}`,
-        { action: this.isFollowing ? 'unfollow' : 'follow' }
-      )
+      .post(`/follow/${this.currentUser.id}/${this.targetUser.id}`, {
+        action: this.isFollowing ? 'unfollow' : 'follow',
+      })
       .subscribe({
         error: console.log,
         complete: () => (this.isFollowing = !this.isFollowing),

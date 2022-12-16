@@ -1,76 +1,65 @@
-<!-- <div *ngIf="user$ | async as user">
-  <button (click)="test()">test</button>
-  <div
-    class="nav"
-    [ngStyle]="{
-      color: themeService.usingDarkTheme
-        ? 'white'
-        : 'rgba(var(--brand-primary))'
-    }"
-  >
-    {{ user.name }}
-  </div>
-  <h1>{{ user.username }}</h1>
-  <ng-container *ngFor="let post of user.posts | async">
-    <app-post [post]="post"></app-post>
-  </ng-container>
-</div> -->
-
-<!-- <button (click)="test()">test</button>
-<div *ngIf="account$ | async as account">
-  <div
-    *ngIf="account.user$ | async as user"
-    class="nav"
-    [ngStyle]="{
-      color: themeService.usingDarkTheme
-        ? 'white'
-        : 'rgba(var(--brand-primary))'
-    }"
-  >
-    {{ user.name }}
-  </div>
-</div> -->
-
-<!-- <p>{{ profile$ | async | json }}</p> -->
-<!-- <p>{{ posts$ | async | json }}</p>
-<p>{{ user$ | async | json }}</p> -->
-
 <ng-container *ngIf="user$ | async as user">
-  <div class="headerPicContainer">
-    <img
-      *ngIf="user.header_pic || newHeaderPicUrl; else fallback"
-      [src]="newHeaderPicUrl ? newHeaderPicUrl : user.header_pic"
-      width="100%"
-    />
-    <ng-template #fallback>
-      <div
-        style="
-          width: 100%;
-          background-color: rgba(255, 192, 203, 0.708);
-          padding-bottom: 56.25%;
-          resize: horizontal;
-        "
-      ></div>
-    </ng-template>
-    <div class="editPhotoControls">
-      <div *ngIf="newHeaderPicUrl; else headerPicInput">
-        <button class="material-symbols-outlined editPhotoButton">close</button>
-        <button class="material-symbols-outlined editPhotoButton">done</button>
-      </div>
-      <ng-template #headerPicInput>
-        <label
-          for="headerPicInput"
-          class="material-symbols-outlined editPhotoButton"
-          >add_a_photo</label
-        >
-      </ng-template>
+  <ng-container *ngIf="posts$ | async as posts">
+    <div class="nav">
+      <h4 style="margin: 0">{{ user.name }}</h4>
+      <span>{{ posts.length }} Tweets</span>
     </div>
-  </div>
-  <input
-    style="display: none; appearance: none"
-    id="headerPicInput"
-    name="headerPicInput"
-    type="file"
-    (change)="setNewHeaderPicUrl($event)"
-  />
+    <div class="headerPicContainer">
+      <img
+        *ngIf="user.header_pic || newHeaderPicUrl; else fallback"
+        [src]="
+          newHeaderPicUrl
+            ? newHeaderPicUrl
+            : 'http://localhost:8080/api/users/' +
+              user.username +
+              '/' +
+              user.header_pic
+        "
+        width="100%"
+        class="header_pic"
+      />
+      <ng-template #fallback>
+        <div
+          style="
+            width: 100%;
+            background-color: #cfd9de;
+            padding-bottom: 56.25%;
+            resize: horizontal;
+          "
+        ></div>
+      </ng-template>
+      <div class="editPhotoControls">
+        <div *ngIf="newHeaderPicUrl; else headerPicInput">
+          <button
+            class="material-symbols-outlined editPhotoButton"
+            (click)="newHeaderPicUrl = ''"
+          >
+            close
+          </button>
+          <button
+            class="material-symbols-outlined editPhotoButton"
+            (click)="confirmNewHeaderPic(user.username, newHeaderPicUrl)"
+          >
+            done
+          </button>
+        </div>
+        <ng-template #headerPicInput>
+          <label
+            for="headerPicInput"
+            class="material-symbols-outlined editPhotoButton"
+            >add_a_photo</label
+          >
+        </ng-template>
+      </div>
+    </div>
+    <input
+      style="display: none; appearance: none"
+      id="headerPicInput"
+      name="headerPicInput"
+      type="file"
+      accept="image/*"
+      (change)="setNewHeaderPicUrl($event)"
+    />
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  </ng-container>
 </ng-container>

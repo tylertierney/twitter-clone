@@ -12,7 +12,7 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
 import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
-import { TokenInterceptor } from '../../interceptors/token-interceptor';
+import { ApiInterceptor } from '../../interceptors/api-interceptor';
 import { Token } from '@angular/compiler';
 
 @NgModule({
@@ -36,7 +36,7 @@ import { Token } from '@angular/compiler';
   ],
   providers: [
     AuthGuardService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
