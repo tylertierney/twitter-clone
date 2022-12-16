@@ -60,7 +60,7 @@ export class AuthService {
 
     this.http
       .post(`${environment.domain}auth/register`, body, {
-        withCredentials: true,
+        // withCredentials: true,
       })
       .pipe(
         catchError((err) => {
@@ -76,9 +76,7 @@ export class AuthService {
 
   login(formData: { email: string; password: string }): void {
     this.http
-      .post<IUser>(`${environment.domain}auth/login`, formData, {
-        withCredentials: true,
-      })
+      .post<IUser>(`${environment.domain}auth/login`, formData, {})
       .subscribe((user) => {
         this.user$.next(user);
         this.router.navigate(['../home']);
@@ -86,12 +84,9 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http
-      .get(`${environment.domain}auth/logout`, { withCredentials: true })
-      .subscribe(() => {
-        this.router.navigate(['login']);
-        // this.user$.next(null);
-      });
+    this.http.get(`${environment.domain}auth/logout`, {}).subscribe(() => {
+      this.router.navigate(['login']);
+    });
   }
 
   checkUsernameAvailable(username: string): Observable<boolean> {
@@ -121,8 +116,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.http.get<IUser>(`${environment.domain}auth`, {
-      withCredentials: true,
-    });
+    return this.http.get<IUser>(`${environment.domain}auth`, {});
   }
 }

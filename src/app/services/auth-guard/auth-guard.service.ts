@@ -30,6 +30,7 @@ export class AuthGuardService implements CanActivate {
           this.authService.user$.next(user);
           return true;
         }
+        console.log('auth is false');
         this.router.navigate(['login']);
         return false;
       })

@@ -37,20 +37,9 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.profile$ = this.activatedRoute.params.pipe(
-    //   mergeMap((params) => {
-    //     const username = params['username'];
-    //     return forkJoin({
-    //       user$: this.userService.getUserByUsername(username),
-    //       posts$: this.postsService.getPostsByUsername(username),
-    //     });
-    //   })
-    // );
-
     const username$ = this.activatedRoute.params.pipe(
       tap(console.log),
       map((params) => params['username'])
-      // share()
     );
 
     this.user$ = username$.pipe(
@@ -61,13 +50,11 @@ export class ProfileComponent implements OnInit {
       switchMap((username) => this.postsService.getPostsByUsername(username))
     );
 
-    zip(this.user$, this.posts$).subscribe((res) => console.log('zip = ', res));
-    this.profile$ = zip(this.user$, this.posts$);
-
-    // username$.subscribe((res) => console.log(res));
+    // zip(this.user$, this.posts$).subscribe((res) => console.log('zip = ', res));
+    // this.profile$ = zip(this.user$, this.posts$);
   }
 
-  test(e: Event) {
+  setNewHeaderPicUrl(e: Event) {
     const files = (e.target as HTMLInputElement).files;
     if (files && files.length) {
       const file = files[0];

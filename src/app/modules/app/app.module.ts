@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../../app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from '../../components/auth/login/login.component';
 import { RegisterComponent } from '../../components/auth/register/register.component';
@@ -12,6 +12,8 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
 import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
+import { TokenInterceptor } from '../../interceptors/token-interceptor';
+import { Token } from '@angular/compiler';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,10 @@ import { HomeModule } from '../home/home.module';
     MenuModule,
     HomeModule,
   ],
-  providers: [AuthGuardService],
+  providers: [
+    AuthGuardService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
