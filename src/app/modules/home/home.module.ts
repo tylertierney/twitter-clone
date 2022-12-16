@@ -18,6 +18,8 @@ import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-foll
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { MenuModule } from '../menu/menu.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { PostButtonComponent } from '../../components/post/post-button/post-button.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +38,9 @@ import { HomeRoutingModule } from './home-routing.module';
     PostBodyComponent,
     ReadableDatePipe,
     ProfileComponent,
+    PostButtonComponent,
   ],
-  imports: [CommonModule, FormsModule, HomeRoutingModule, MenuModule],
+  imports: [CommonModule, SharedModule, HomeRoutingModule, MenuModule],
   exports: [],
 })
 export class HomeModule {}

@@ -1,14 +1,7 @@
-<div
-  class="nav"
-  [ngStyle]="{
-    color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
-  }"
->
-  Home
+<div class="sub-nav">
+  <h4>Home</h4>
 </div>
 <app-new-post></app-new-post>
-<!-- <button (click)="getFollowedPosts()">getNewPosts</button> -->
-
 <ng-container *ngIf="posts$ | async as posts">
   <app-post
     [expanded]="false"

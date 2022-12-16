@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../../app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from '../../components/auth/login/login.component';
@@ -13,7 +12,7 @@ import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
 import { ApiInterceptor } from '../../interceptors/api-interceptor';
-import { Token } from '@angular/compiler';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,12 +24,10 @@ import { Token } from '@angular/compiler';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
     MenuModule,
     HomeModule,
   ],

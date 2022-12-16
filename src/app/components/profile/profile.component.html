@@ -1,7 +1,7 @@
 <ng-container *ngIf="user$ | async as user">
   <ng-container *ngIf="posts$ | async as posts">
-    <div class="nav">
-      <h4 style="margin: 0">{{ user.name }}</h4>
+    <div class="sub-nav">
+      <h4>{{ user.name }}</h4>
       <span>{{ posts.length }} Tweets</span>
     </div>
     <div class="headerPicContainer">
@@ -31,13 +31,13 @@
       <div class="editPhotoControls">
         <div *ngIf="newHeaderPicUrl; else headerPicInput">
           <button
-            class="material-symbols-outlined editPhotoButton"
+            class="material-symbols-outlined circleButton"
             (click)="newHeaderPicUrl = ''"
           >
             close
           </button>
           <button
-            class="material-symbols-outlined editPhotoButton"
+            class="material-symbols-outlined circleButton"
             (click)="confirmNewHeaderPic(user.username, newHeaderPicUrl)"
           >
             done
@@ -46,7 +46,7 @@
         <ng-template #headerPicInput>
           <label
             for="headerPicInput"
-            class="material-symbols-outlined editPhotoButton"
+            class="material-symbols-outlined circleButton"
             >add_a_photo</label
           >
         </ng-template>

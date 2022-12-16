@@ -3,15 +3,3 @@
   max-width: 598px;
   border-right: 1px solid rgba(var(--text-color), 0.08);
 }
-
-.nav {
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 0.8rem 1rem;
-  color: rgba(var(--brand-primary));
-  background-color: rgba(var(--bkg-color), 0.8);
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(8px);
-  z-index: 1;
-}

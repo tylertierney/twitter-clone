@@ -1,27 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  mapTo,
-  Observable,
-  of,
-  ReplaySubject,
-  Subject,
-  tap,
-} from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { IUser } from '../user/user.service';
-
-// export interface IUser {
-//   uid: string;
-//   email: string;
-//   handle: string;
-//   photoURL?: string;
-//   displayName?: string;
-// }
 
 export interface IRegistration {}
 
@@ -59,9 +40,7 @@ export class AuthService {
     const body = { ...formData, profile_pic };
 
     this.http
-      .post(`/auth/register`, body, {
-        // withCredentials: true,
-      })
+      .post(`/auth/register`, body, {})
       .pipe(
         catchError((err) => {
           console.log('caught error');
@@ -110,6 +89,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.http.get<IUser>(`/auth`, {}).pipe(tap(console.log));
+    return this.http.get<IUser>(`/auth`, {});
   }
 }

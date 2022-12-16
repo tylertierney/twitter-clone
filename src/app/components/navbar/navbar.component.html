@@ -19,6 +19,12 @@
     </svg>
   </a>
 
+  <a routerLink="/">
+    <button>
+      <span class="material-symbols-outlined">home</span>
+      <span class="navItemLabel">Home</span>
+    </button>
+  </a>
   <a [routerLink]="'' + (authService.user$ | async)?.username">
     <button>
       <span class="material-symbols-outlined">person</span>

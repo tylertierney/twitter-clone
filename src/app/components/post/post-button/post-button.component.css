@@ -1,0 +1,40 @@
+.pink {
+  --text: #f91880;
+  --bkg: #f918801a;
+}
+
+.green {
+  --text: #00ba7c;
+  --bkg: #00ba7c1a;
+}
+
+.blue {
+  --text: #1d9bf0;
+  --bkg: #1d9bf01a;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: rgb(83, 100, 113);
+}
+
+button:hover {
+  color: var(--text);
+}
+
+button .material-symbols-outlined {
+  font-size: 1.2rem;
+  margin-right: 0.3rem;
+  padding: 0.5rem 0.4rem 0.4rem 0.4rem;
+  border-radius: 1000px;
+}
+
+button:hover .material-symbols-outlined {
+  background-color: var(--bkg);
+}

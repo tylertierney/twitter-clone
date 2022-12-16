@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const username$ = this.activatedRoute.params.pipe(
-      tap(console.log),
       map((params) => params['username'])
     );
 
