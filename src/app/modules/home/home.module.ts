@@ -20,6 +20,8 @@ import { MenuModule } from '../menu/menu.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostButtonComponent } from '../../components/post/post-button/post-button.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProfileHeaderComponent } from '../../components/profile/profile-header/profile-header.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +41,15 @@ import { PostButtonComponent } from '../../components/post/post-button/post-butt
     ReadableDatePipe,
     ProfileComponent,
     PostButtonComponent,
+    ProfileHeaderComponent,
   ],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, MenuModule],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    SharedModule,
+    HomeRoutingModule,
+    MenuModule,
+  ],
   exports: [],
 })
 export class HomeModule {}

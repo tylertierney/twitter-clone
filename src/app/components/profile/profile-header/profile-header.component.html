@@ -1,0 +1,130 @@
+<div class="headerPicContainer">
+  <img
+    *ngIf="user.header_pic || newHeaderPicUrl; else header_pic_bkg"
+    [src]="
+      newHeaderPicUrl
+        ? newHeaderPicUrl
+        : 'http://localhost:8080/api/users/' +
+          user.username +
+          '/' +
+          user.header_pic
+    "
+    width="100%"
+    class="header_pic"
+  />
+  <ng-template #header_pic_bkg>
+    <div
+      style="
+        width: 100%;
+        background-color: #cfd9de;
+        padding-bottom: 56.25%;
+        resize: horizontal;
+      "
+    ></div>
+  </ng-template>
+  <div class="editPhotoControls" style="z-index: 1">
+    <div *ngIf="newHeaderPicUrl; else headerPicInput">
+      <button
+        class="material-symbols-outlined circleButton"
+        (click)="newHeaderPicUrl = ''"
+      >
+        close
+      </button>
+      <button
+        class="material-symbols-outlined circleButton"
+        (click)="
+          editProfileService.updateHeaderPic(user.username, newHeaderPicFile)
+        "
+      >
+        done
+      </button>
+    </div>
+    <ng-template #headerPicInput>
+      <label for="headerPicInput" class="material-symbols-outlined circleButton"
+        >add_a_photo</label
+      >
+    </ng-template>
+  </div>
+</div>
+<input
+  style="display: none; appearance: none"
+  id="headerPicInput"
+  name="headerPicInput"
+  type="file"
+  accept="image/*"
+  (change)="setNewHeaderPicUrl($event)"
+/>
+
+<div class="profileInfo">
+  <div class="profilePicContainer">
+    <input
+      style="display: none; appearance: none"
+      id="profilePicInput"
+      name="profilePicInput"
+      type="file"
+      accept="image/*"
+      (change)="setNewProfilePicUrl($event)"
+    />
+    <img
+      *ngIf="user.profile_pic || newProfilePicUrl; else profile_pic_bkg"
+      [src]="
+        newProfilePicUrl
+          ? newProfilePicUrl
+          : 'http://localhost:8080/api/users/' +
+            user.username +
+            '/' +
+            user.profile_pic
+      "
+      width="100%"
+      class="profile_pic"
+    />
+    <div class="editPhotoControls" style="padding: 0">
+      <div *ngIf="newProfilePicUrl; else profilePicInput">
+        <button
+          class="material-symbols-outlined circleButton"
+          (click)="newProfilePicUrl = ''"
+        >
+          close
+        </button>
+        <button
+          class="material-symbols-outlined circleButton"
+          (click)="
+            editProfileService.updateProfilePic(
+              user.username,
+              newProfilePicFile
+            )
+          "
+        >
+          done
+        </button>
+      </div>
+      <ng-template #profilePicInput>
+        <label
+          for="profilePicInput"
+          class="material-symbols-outlined circleButton"
+          >add_a_photo</label
+        >
+      </ng-template>
+    </div>
+  </div>
+  <button class="editProfileBtn">Edit Profile</button>
+  <ng-template #profile_pic_bkg>
+    <div
+      style="
+        height: 100px;
+        width: 100px;
+        background-color: #cfd9de;
+        padding-bottom: 15%;
+        resize: horizontal;
+      "
+    ></div>
+  </ng-template>
+</div>
+<input
+  style="display: none; appearance: none"
+  id="profilePicInput"
+  name="profilePicInput"
+  type="file"
+  accept="image/*"
+  (change)="setNewProfilePicUrl($event)"
+/>

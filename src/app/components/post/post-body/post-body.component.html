@@ -1,6 +1,17 @@
-<p>{{ text }}</p>
+<p>{{ post.text }}</p>
 <div class="toolbar">
-  <app-post-button color="pink" [value]="123">favorite</app-post-button>
-  <app-post-button color="green" [value]="123">cached</app-post-button>
-  <app-post-button color="blue" [value]="123">chat_bubble</app-post-button>
+  <app-post-button
+    [isActive]="isLiked"
+    (onClick)="togglePostLiked(post.id, currentUser.id)"
+    color="pink"
+    [value]="123"
+    type="like"
+    >favorite</app-post-button
+  >
+  <app-post-button color="green" [value]="123" type="retweet"
+    >cached</app-post-button
+  >
+  <app-post-button color="blue" [value]="123" type="reply"
+    >chat_bubble</app-post-button
+  >
 </div>

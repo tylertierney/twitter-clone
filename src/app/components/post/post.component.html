@@ -1,16 +1,32 @@
-<a class="post"
-  ><a [routerLink]="'../' + post.username">
-    <!-- <img [src]="post.user_photo_url" height="48px" width="48px" /> -->
-    <img [src]="post.profile_pic" height="48px" width="48px" />
+<ng-container *ngIf="authService.user$ | async as currentUser">
+  <a class="post"
+    ><a [routerLink]="'../' + post.username">
+      <img
+        [src]="post.profile_pic"
+        [src]="
+          'http://localhost:8080/api/users/' +
+          post.username +
+          '/' +
+          post.profile_pic
+        "
+        style="object-fit: cover"
+        height="48px"
+        width="48px"
+      />
+    </a>
+    <div class="body">
+      <app-post-header
+        [user_id]="post.user_id"
+        [username]="post.username"
+        [date]="post.date"
+        [expanded]="expanded"
+        [name]="post.name"
+      ></app-post-header>
+      <app-post-body
+        [currentUser]="currentUser"
+        [post]="post"
+        [expanded]="expanded"
+      ></app-post-body>
+    </div>
   </a>
-  <div class="body">
-    <app-post-header
-      [user_id]="post.user_id"
-      [username]="post.username"
-      [date]="post.date"
-      [expanded]="expanded"
-      [name]="post.name"
-    ></app-post-header>
-    <app-post-body [expanded]="expanded" [text]="post.text"></app-post-body>
-  </div>
-</a>
+</ng-container>

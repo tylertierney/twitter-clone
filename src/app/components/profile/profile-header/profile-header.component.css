@@ -1,0 +1,60 @@
+.headerPicContainer {
+  position: relative;
+}
+
+.editPhotoControls {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.5rem;
+}
+
+.editPhotoControls > div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.material-symbols-outlined:hover {
+  background-color: rgba(0, 0, 0, 0.643);
+}
+
+.header_pic {
+  object-fit: cover;
+  max-height: 300px;
+}
+
+.profileInfo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1rem;
+  position: relative;
+  margin-bottom: 44px;
+}
+
+.profilePicContainer {
+  position: absolute;
+  flex-grow: 0;
+  width: 26%;
+  min-width: 100px;
+  left: 0;
+  translate: 0 -22px;
+}
+
+.profile_pic {
+  object-fit: cover;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  border: 3px solid rgba(var(--bkg-color));
+}
+
+.editProfileBtn {
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 1000px;
+  border: 1px solid rgba(var(--text-color), 0.25);
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: rgba(var(--text-color));
+}

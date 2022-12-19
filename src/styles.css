@@ -44,6 +44,7 @@ body.dark-theme {
   padding: 0.6rem;
   font-size: 1.5rem;
   transition: 0.2s ease-in-out;
+  backdrop-filter: blur(14px);
 }
 
 .sub-nav {
@@ -56,10 +57,21 @@ body.dark-theme {
   top: 0;
   backdrop-filter: blur(8px);
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .sub-nav h4 {
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

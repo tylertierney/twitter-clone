@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPost } from 'src/app/services/posts/posts.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -10,7 +11,7 @@ export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() expanded: boolean;
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
 }

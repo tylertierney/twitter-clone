@@ -8,9 +8,27 @@ import { SafeUrl } from '@angular/platform-browser';
 export class EditProfileService {
   constructor(private http: HttpClient) {}
 
-  updateHeaderPic(username: string, header_pic: SafeUrl) {
+  updateHeaderPic(username: string, headerPicFile: File) {
+    const formdata = new FormData();
+    formdata.append('header_pic', headerPicFile);
     this.http
-      .put(`/users/${username}/header_pic`, { header_pic })
+      .put(`/users/${username}/header_pic`, formdata, {
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // },
+      })
+      .subscribe(console.log);
+  }
+
+  updateProfilePic(username: string, profilePicFile: File) {
+    const formdata = new FormData();
+    formdata.append('profile_pic', profilePicFile);
+    this.http
+      .put(`/users/${username}/profile_pic`, formdata, {
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // },
+      })
       .subscribe(console.log);
   }
 }

@@ -1,9 +1,10 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 export interface IPost {
+  id: string;
   date: string;
   username: string;
   text: string;
@@ -27,7 +28,9 @@ export class PostsService {
   }
 
   getFollowedPosts(userId: string): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`/posts/${userId}/feed`);
+    return this.http
+      .get<IPost[]>(`/posts/${userId}/feed`)
+      .pipe(tap(console.log));
   }
 
   createNewPost(text: string) {
@@ -43,6 +46,13 @@ export class PostsService {
 
   getPostsByUsername(username: string): Observable<any[]> {
     return this.http.get<any[]>(`/posts/${username}`);
-    // return of([]);
+  }
+
+  getPostIsLiked(post_id: string, user_id: string) {
+    return this.http.get<boolean>(`/posts/like/${post_id}/${user_id}`);
+  }
+
+  togglePostLiked(post_id: string, user_id: string) {
+    return this.http.post<boolean>(`/posts/like/${post_id}/${user_id}`, {});
   }
 }

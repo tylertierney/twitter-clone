@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post-button',
@@ -8,6 +10,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PostButtonComponent implements OnInit {
   @Input() value: number = 123;
   @Input() color: 'pink' | 'green' | 'blue';
+  @Output() onClick = new EventEmitter();
+  @Input() isActive: boolean;
+  @Input() type: 'like' | 'retweet' | 'reply';
+  faHeart = faHeart;
 
   constructor() {}
 

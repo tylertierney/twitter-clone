@@ -3,27 +3,10 @@
   opacity: 0.7;
 }
 
-.headerPicContainer {
-  position: relative;
+.names {
+  padding: 0 1rem;
 }
-
-.editPhotoControls {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 0.5rem;
-}
-
-.editPhotoControls > div {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.material-symbols-outlined:hover {
-  background-color: rgba(0, 0, 0, 0.643);
-}
-
-.header_pic {
-  object-fit: cover;
-  max-height: 300px;
+.names h2 {
+  margin: 0;
+  font-size: 1.5rem;
 }
