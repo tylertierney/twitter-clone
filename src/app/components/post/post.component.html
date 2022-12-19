@@ -4,9 +4,10 @@
       <img
         [src]="post.profile_pic"
         [src]="
-          'http://localhost:8080/api/users/' +
+          domain +
+          '/users/' +
           post.username +
-          '/' +
+          '/profile_pic/' +
           post.profile_pic
         "
         style="object-fit: cover"

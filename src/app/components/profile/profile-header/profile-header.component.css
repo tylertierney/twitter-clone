@@ -14,10 +14,6 @@
   gap: 0.5rem;
 }
 
-.material-symbols-outlined:hover {
-  background-color: rgba(0, 0, 0, 0.643);
-}
-
 .header_pic {
   object-fit: cover;
   max-height: 300px;

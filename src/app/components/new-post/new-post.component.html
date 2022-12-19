@@ -1,7 +1,9 @@
-<div class="post">
-  <a [routerLink]="'../' + (authService.user$ | async)?.username">
+<div class="post" *ngIf="authService.user$ | async as user">
+  <a [routerLink]="'../' + user.username">
     <img
-      [src]="(authService.user$ | async)?.profile_pic"
+      [src]="
+        domain + '/users/' + user.username + '/profile_pic/' + user.profile_pic
+      "
       height="48px"
       width="48px"
     />
@@ -17,12 +19,6 @@
       id="new-post-textarea"
       [(ngModel)]="text"
     ></textarea>
-    <!-- <div
-      id="new-post-textarea"
-      contenteditable="true"
-      [textContent]="text"
-      (input)="test($event)"
-    ></div> -->
     <button
       id="create-post-submit-btn"
       name="create-post-submit-btn"

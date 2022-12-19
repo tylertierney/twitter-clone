@@ -1,13 +1,32 @@
 <ng-container *ngIf="user$ | async as user">
   <ng-container *ngIf="posts$ | async as posts">
     <div class="sub-nav" style="z-index: 2">
-      <h4>{{ user.name }}</h4>
-      <span>{{ posts.length }} Tweets</span>
+      <a routerLink="../" class="circleButton material-symbols-outlined">
+        arrow_back
+      </a>
+      <div class="navInfo">
+        <h4>{{ user.name }}</h4>
+        <span>{{ posts.length }} Tweets</span>
+      </div>
     </div>
     <app-profile-header [user]="user"></app-profile-header>
     <div class="names">
-      <h2>{{ user.name }}</h2>
-      <span>@{{ user.username }}</span>
+      <h2 class="name">{{ user.name }}</h2>
+      <span class="username">@{{ user.username }}</span>
+    </div>
+    <div class="memberSinceContainer">
+      <span class="material-symbols-outlined"> calendar_month </span>
+      <span>Joined {{ user.created_at | date : "MMM YYYY" }}</span>
+    </div>
+    <div class="followersContainer">
+      <div class="followerCount">
+        <span class="value">{{ numOfFollowing$ | async }}</span>
+        <span>Following</span>
+      </div>
+      <div class="followerCount">
+        <span class="value">{{ numOfFollowers$ | async }}</span>
+        <span>Followers</span>
+      </div>
     </div>
     <app-post *ngFor="let post of posts" [post]="post"></app-post>
   </ng-container>

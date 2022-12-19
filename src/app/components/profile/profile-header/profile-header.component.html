@@ -4,10 +4,7 @@
     [src]="
       newHeaderPicUrl
         ? newHeaderPicUrl
-        : 'http://localhost:8080/api/users/' +
-          user.username +
-          '/' +
-          user.header_pic
+        : domain + '/users/' + user.username + '/header_pic/' + user.header_pic
     "
     width="100%"
     class="header_pic"
@@ -70,9 +67,10 @@
       [src]="
         newProfilePicUrl
           ? newProfilePicUrl
-          : 'http://localhost:8080/api/users/' +
+          : domain +
+            '/users/' +
             user.username +
-            '/' +
+            '/profile_pic/' +
             user.profile_pic
       "
       width="100%"

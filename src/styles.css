@@ -36,8 +36,8 @@ body.dark-theme {
 }
 
 .circleButton {
-  background-color: rgba(0, 0, 0, 0.271);
-  color: white;
+  background-color: rgba(var(--text-color), 0.4);
+  color: rgba(var(--bkg-color));
   cursor: pointer;
   border: none;
   border-radius: 1000px;
@@ -45,6 +45,10 @@ body.dark-theme {
   font-size: 1.5rem;
   transition: 0.2s ease-in-out;
   backdrop-filter: blur(14px);
+}
+
+.circleButton:hover {
+  background-color: rgba(var(--text-color), 1);
 }
 
 .sub-nav {

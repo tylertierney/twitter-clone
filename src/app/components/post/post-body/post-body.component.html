@@ -4,14 +4,14 @@
     [isActive]="isLiked"
     (onClick)="togglePostLiked(post.id, currentUser.id)"
     color="pink"
-    [value]="123"
+    [value]="numOfLikes"
     type="like"
     >favorite</app-post-button
   >
-  <app-post-button color="green" [value]="123" type="retweet"
+  <app-post-button color="green" [value]="numOfLikes" type="retweet"
     >cached</app-post-button
   >
-  <app-post-button color="blue" [value]="123" type="reply"
+  <app-post-button color="blue" [value]="numOfLikes" type="reply"
     >chat_bubble</app-post-button
   >
 </div>

@@ -2,6 +2,7 @@
   [ngStyle]="{
     color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
   }"
+  *ngIf="authService.user$ | async as user"
 >
   <a routerLink="/" class="logo" style="margin-bottom: auto; color: inherit">
     <svg
@@ -41,10 +42,16 @@
     <app-settings-menu></app-settings-menu>
   </ng-template>
   <button [menu]="userMenu" class="userAvatar">
-    <img [src]="(authService.user$ | async)?.profile_pic" width="38px" />
+    <img
+      [src]="
+        domain + '/users/' + user.username + '/profile_pic/' + user.profile_pic
+      "
+      width="38px"
+      class="profile_pic"
+    />
     <div class="userAvatarLabel">
-      <span>{{ (authService.user$ | async)?.name }}</span>
-      <span>@{{ (authService.user$ | async)?.username }}</span>
+      <span>{{ user.name }}</span>
+      <span>@{{ user.username }}</span>
     </div>
   </button>
   <ng-template #userMenu>

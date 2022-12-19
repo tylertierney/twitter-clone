@@ -1,22 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
-import {
-  forkJoin,
-  map,
-  merge,
-  mergeMap,
-  Observable,
-  of,
-  share,
-  switchMap,
-  tap,
-  zip,
-} from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { IUser, UserService } from 'src/app/services/user/user.service';
 import { PostsService } from '../../services/posts/posts.service';
-import { EditProfileService } from '../../services/profile/edit-profile.service';
 import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
@@ -31,13 +19,15 @@ export class ProfileComponent implements OnInit {
   newHeaderPicUrl: SafeUrl;
   newHeaderPicFile: File;
 
+  numOfFollowing$: Observable<number>;
+  numOfFollowers$: Observable<number>;
+
   constructor(
     public userService: UserService,
     private activatedRoute: ActivatedRoute,
     private postsService: PostsService,
     public themeService: ThemeService,
     public sanitizer: DomSanitizer,
-    private editProfileService: EditProfileService,
     private http: HttpClient
   ) {}
 
@@ -54,30 +44,16 @@ export class ProfileComponent implements OnInit {
       switchMap((username) => this.postsService.getPostsByUsername(username))
     );
 
-    // zip(this.user$, this.posts$).subscribe((res) => console.log('zip = ', res));
-    // this.profile$ = zip(this.user$, this.posts$);
+    this.numOfFollowing$ = this.user$.pipe(
+      switchMap(({ id }) =>
+        this.http.get<number>('/users/' + id + '/following/')
+      )
+    );
+
+    this.numOfFollowers$ = this.user$.pipe(
+      switchMap(({ id }) =>
+        this.http.get<number>('/users/' + id + '/followers/')
+      )
+    );
   }
-
-  // setNewHeaderPicUrl(e: Event) {
-  //   const files = (e.target as HTMLInputElement).files;
-  //   if (files && files.length) {
-  //     const file = files[0];
-  //     this.newHeaderPicFile = file;
-  //     const url = URL.createObjectURL(file);
-  //     this.newHeaderPicUrl = this.sanitizer.bypassSecurityTrustUrl(url);
-  //   }
-  // }
-
-  // confirmNewHeaderPic(username: string, newPicUrl: SafeUrl) {
-  //   const formdata = new FormData();
-  //   formdata.append('header_pic', this.newHeaderPicFile);
-  //   // this.editProfileService.updateHeaderPic(username, newPicUrl);
-  //   this.http
-  //     .put(`/users/${username}/header_pic`, formdata, {
-  //       // headers: {
-  //       //   'Content-Type': 'multipart/form-data',
-  //       // },
-  //     })
-  //     .subscribe(console.log);
-  // }
 }

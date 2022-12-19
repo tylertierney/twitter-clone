@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme/theme.service';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  domain = environment.domain;
+
   constructor(
     public themeService: ThemeService,
     public authService: AuthService

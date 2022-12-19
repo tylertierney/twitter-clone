@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from 'src/app/services/posts/posts.service';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NewPostComponent implements OnInit {
   text: string | null = null;
+  domain = environment.domain;
 
   constructor(
     public postsService: PostsService,

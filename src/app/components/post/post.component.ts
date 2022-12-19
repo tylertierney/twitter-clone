@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPost } from 'src/app/services/posts/posts.service';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() expanded: boolean;
+  domain = environment.domain;
 
   constructor(public authService: AuthService) {}
 

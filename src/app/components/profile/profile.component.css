@@ -1,12 +1,60 @@
-.sub-nav span {
+.sub-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.circleButton {
+  text-decoration: none;
+}
+
+.navInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.navInfo span {
   font-size: 0.8rem;
   opacity: 0.7;
 }
 
-.names {
-  padding: 0 1rem;
+.names,
+.memberSinceContainer,
+.followersContainer {
+  padding: 0 0 1rem 1rem;
 }
-.names h2 {
+
+.name {
   margin: 0;
   font-size: 1.5rem;
+}
+
+.username {
+  color: rgba(var(--text-color), 0.7);
+}
+
+.memberSinceContainer {
+  color: rgba(var(--text-color), 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.memberSinceContainer .material-symbols-outlined {
+  font-size: 1.4rem;
+}
+
+.followersContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.followersContainer div {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.value {
+  font-weight: bold;
 }

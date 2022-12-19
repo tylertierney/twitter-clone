@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EditProfileService } from '../../../services/profile/edit-profile.service';
 import { IUser } from '../../../services/user/user.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profile-header',
@@ -16,6 +17,7 @@ export class ProfileHeaderComponent implements OnInit {
 
   newProfilePicUrl: SafeUrl;
   newProfilePicFile: File;
+  domain = environment.domain;
 
   constructor(
     private http: HttpClient,
