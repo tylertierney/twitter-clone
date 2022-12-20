@@ -24,6 +24,7 @@ button {
   color: rgb(83, 100, 113);
   color: var(--text-color);
   stroke: rgb(var(--text-color));
+  gap: 0.3rem;
 }
 
 .active span {

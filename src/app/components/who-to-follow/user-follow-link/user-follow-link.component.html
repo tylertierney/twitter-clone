@@ -1,4 +1,14 @@
-<img [src]="targetUser.profile_pic" width="38px" />
+<img
+  [src]="
+    domain +
+    '/users/' +
+    targetUser.username +
+    '/profile_pic/' +
+    targetUser.profile_pic
+  "
+  width="38px"
+  style="border-radius: 100%"
+/>
 <div class="names">
   <a [routerLink]="'../' + targetUser.username">{{ targetUser.name }}</a>
   <span>@{{ targetUser.username }}</span>

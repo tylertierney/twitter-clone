@@ -19,7 +19,7 @@
       "
     ></div>
   </ng-template>
-  <div class="editPhotoControls" style="z-index: 1">
+  <div class="editPhotoControls" style="z-index: 1" *ngIf="isEditable">
     <div *ngIf="newHeaderPicUrl; else headerPicInput">
       <button
         class="material-symbols-outlined circleButton"
@@ -29,9 +29,7 @@
       </button>
       <button
         class="material-symbols-outlined circleButton"
-        (click)="
-          editProfileService.updateHeaderPic(user.username, newHeaderPicFile)
-        "
+        (click)="confirmUpdatedHeaderPic(user.username, newHeaderPicFile)"
       >
         done
       </button>
@@ -76,7 +74,7 @@
       width="100%"
       class="profile_pic"
     />
-    <div class="editPhotoControls" style="padding: 0">
+    <div class="editPhotoControls" style="padding: 0" *ngIf="isEditable">
       <div *ngIf="newProfilePicUrl; else profilePicInput">
         <button
           class="material-symbols-outlined circleButton"
@@ -92,6 +90,7 @@
               newProfilePicFile
             )
           "
+          (click)="confirmUpdatedProfilePic(user.username, newProfilePicFile)"
         >
           done
         </button>

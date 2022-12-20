@@ -20,22 +20,10 @@ export class AuthService {
     username: string;
     name: string;
   }): void {
-    const profilePics = [
-      'coral',
-      'lightblue',
-      'lightgreen',
-      'orange',
-      'palegreen',
-      'pink',
-      'plum',
-      'powderblue',
-      'slateblue',
-    ];
+    const profilePics = ['coral', 'bluejeans', 'aeroblue', 'pastelpink'];
 
     const profile_pic =
-      '/assets/svg/user-avatar/' +
-      profilePics[Math.floor(Math.random() * profilePics.length)] +
-      '.svg';
+      profilePics[Math.floor(Math.random() * profilePics.length)];
 
     const body = { ...formData, profile_pic };
 
