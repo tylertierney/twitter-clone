@@ -7,8 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -28,7 +28,7 @@ export class NewPostComponent implements OnInit {
   @Input() helperText: TemplateRef<HTMLParagraphElement>;
 
   tweetForm = this.fb.group({
-    text: new FormControl('', {
+    text: new UntypedFormControl('', {
       validators: [Validators.required, Validators.maxLength(280)],
       updateOn: 'change',
     }),
@@ -43,7 +43,7 @@ export class NewPostComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public authService: AuthService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

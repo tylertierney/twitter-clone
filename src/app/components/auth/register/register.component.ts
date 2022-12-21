@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UniqueEmailValidator } from '../validators/UniqueEmailValidator';
 import { UniqueUsernameValidator } from '../validators/UniqueUsernameValidator';
@@ -13,21 +13,21 @@ export class RegisterComponent implements OnInit {
   showPassword = false;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
     private uniqueUsernameValidator: UniqueUsernameValidator,
     private uniqueEmailValidator: UniqueEmailValidator
   ) {}
 
   registrationForm = this.fb.group({
-    name: new FormControl('', {
+    name: new UntypedFormControl('', {
       validators: [
         Validators.required,
         Validators.maxLength(50),
         Validators.minLength(1),
       ],
     }),
-    username: new FormControl('', {
+    username: new UntypedFormControl('', {
       asyncValidators: [
         this.uniqueUsernameValidator.validate.bind(
           this.uniqueUsernameValidator
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
       ],
       updateOn: 'change',
     }),
-    email: new FormControl('', {
+    email: new UntypedFormControl('', {
       asyncValidators: [
         this.uniqueEmailValidator.validate.bind(this.uniqueEmailValidator),
       ],
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
       ],
       updateOn: 'change',
     }),
-    password: new FormControl('', {
+    password: new UntypedFormControl('', {
       validators: [
         Validators.required,
         Validators.minLength(8),

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class LoginComponent implements OnInit {
   showPassword = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: UntypedFormBuilder, private authService: AuthService) {}
 
   loginForm = this.fb.group({
-    email: new FormControl('', {
+    email: new UntypedFormControl('', {
       validators: [
         Validators.required,
         Validators.email,
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
       ],
       updateOn: 'change',
     }),
-    password: new FormControl('', {
+    password: new UntypedFormControl('', {
       validators: [
         Validators.required,
         Validators.minLength(8),
