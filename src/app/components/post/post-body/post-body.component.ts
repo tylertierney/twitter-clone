@@ -11,6 +11,9 @@ import {
   OverlayRef,
   PositionStrategy,
 } from '@angular/cdk/overlay';
+import { Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
+import { NewPostComponent } from '../../new-post/new-post.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-body',
@@ -38,7 +41,8 @@ export class PostBodyComponent implements OnInit {
     public postsService: PostsService,
     public authService: AuthService,
     private http: HttpClient,
-    private overlay: Overlay
+    private overlay: Overlay,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,10 @@ export class PostBodyComponent implements OnInit {
       .subscribe((x) => (this.numOfLikes = x));
   }
 
+  openDialog() {
+    this.dialog.open(NewPostComponent);
+  }
+
   togglePostLiked(post_id: string, user_id: string) {
     this.postsService.togglePostLiked(post_id, user_id).subscribe((isLiked) => {
       this.isLiked = isLiked;
@@ -67,3 +75,11 @@ export class PostBodyComponent implements OnInit {
     // const overlayRef = overlay.create();
   }
 }
+
+// @Component({
+//   selector: 'dialog-animations-example-dialog',
+//   templateUrl: './test.component.html',
+// })
+// export class DialogAnimationsExampleDialog {
+//   constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>) {}
+// }

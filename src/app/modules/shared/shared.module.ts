@@ -5,6 +5,8 @@ import { CircularProgressComponent } from '../../components/shared/circular-prog
 import { MenuModule } from '../menu/menu.module';
 import { ModalModule } from '../modal/modal.module';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { DialogModule } from '@angular/cdk/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 // import { MatIconModule } from '@angular/material/icon';
 
 // const materialModules = [MatIconModule];
@@ -18,6 +20,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MenuModule,
     ModalModule,
     OverlayModule,
+    DialogModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,
@@ -27,6 +31,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MenuModule,
     ModalModule,
     OverlayModule,
+    DialogModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}

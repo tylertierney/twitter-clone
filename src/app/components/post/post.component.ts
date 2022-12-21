@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() expanded: boolean;
+  @Input() showPhoto = true;
   domain = environment.domain;
 
   constructor(public authService: AuthService) {}
