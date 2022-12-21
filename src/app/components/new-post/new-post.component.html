@@ -8,25 +8,34 @@
       width="48px"
     />
   </a>
-  <form class="body">
+  <form class="body" [formGroup]="tweetForm">
+    <div class="helperTextContainer">
+      <ng-container [ngTemplateOutlet]="helperText"></ng-container>
+    </div>
     <textarea
+      formControlName="text"
       #textarea
-      (keydown)="resizeTextArea(textarea)"
-      (keyup)="resizeTextArea(textarea)"
-      (keypress)="resizeTextArea(textarea)"
       placeholder="What's on your mind?"
       name="new-post-textarea"
       id="new-post-textarea"
-      [(ngModel)]="text"
+      maxlength="280"
     ></textarea>
-    <button
-      id="create-post-submit-btn"
-      name="create-post-submit-btn"
-      class="create-post-submit-btn"
-      type="submit"
-      (click)="postsService.createNewPost(text ?? '')"
-    >
-      Post
-    </button>
+    <div class="toolbar">
+      <span class="material-symbols-outlined circleButton"> imagesmode </span>
+      <app-circular-progress
+        *ngIf="(tweetLength$ | async) > 0"
+        [val]="((tweetLength$ | async) / 280) * 100"
+      ></app-circular-progress>
+      <button
+        id="create-post-submit-btn"
+        name="create-post-submit-btn"
+        class="create-post-submit-btn"
+        type="submit"
+        (click)="postsService.createNewPost(tweetForm.value.text)"
+        [disabled]="tweetForm.controls['text'].invalid"
+      >
+        Post
+      </button>
+    </div>
   </form>
 </div>

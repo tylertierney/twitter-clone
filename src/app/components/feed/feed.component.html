@@ -2,6 +2,11 @@
   <h4>Home</h4>
 </div>
 <app-new-post></app-new-post>
+<!-- [helperText]="helperText" -->
+<!-- <ng-template #helperText>
+  <span>Replying to&nbsp;</span>
+  <a>@TomSegura</a>
+</ng-template> -->
 <ng-container *ngIf="posts$ | async as posts">
   <app-post
     [expanded]="false"

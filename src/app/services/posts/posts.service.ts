@@ -1,6 +1,6 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 export interface IPost {
@@ -11,6 +11,7 @@ export interface IPost {
   name: string;
   user_id: string;
   profile_pic: string;
+  photo_url: string;
 }
 
 @Injectable({

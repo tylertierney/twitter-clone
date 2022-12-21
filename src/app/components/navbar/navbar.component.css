@@ -6,6 +6,10 @@
   border-right: 1px solid rgba(var(--text-color), 0.08);
 }
 
+a.active {
+  color: rgba(var(--brand-primary));
+}
+
 nav {
   font-size: 1.2rem;
   padding: 0.8rem;
@@ -59,10 +63,19 @@ button:hover,
 
 .userAvatarLabel {
   display: none;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 0.7rem;
+}
+
+.userAvatarLabel > span {
+  text-align: left;
+  max-width: 110px;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 ul {
@@ -107,7 +120,6 @@ li:hover {
   }
 
   .userAvatar {
-    translate: -2rem 0;
     border-radius: 1000px;
   }
 

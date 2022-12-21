@@ -1,7 +1,7 @@
 .post {
   display: flex;
   gap: 0.6rem;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   border-bottom: 1px solid rgba(var(--text-color), 0.1);
   color: rgba(var(--text-color));
 }
@@ -16,9 +16,14 @@ img {
   flex-direction: column;
 }
 
+.helperTextContainer {
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
 textarea {
   flex-grow: 1;
-  padding: 1rem;
+  height: auto;
   font-size: 1.1rem;
   background-color: transparent;
   border: none;
@@ -27,6 +32,8 @@ textarea {
   overflow: hidden;
   white-space: pre-wrap;
   color: inherit;
+  border-bottom: 1px solid rgba(var(--text-color), 0.08);
+  padding: 0.5rem;
 }
 
 textarea::-webkit-scrollbar {
@@ -37,33 +44,10 @@ textarea:focus {
   outline: none;
 }
 
-#new-post-textarea {
-  flex-grow: 1;
-  padding: 1rem;
-  position: relative;
-  /* white-space: ; */
-  overflow: auto;
-  word-wrap: break-word;
-  font-size: 1.1rem;
-}
-
-#new-post-textarea:empty::before {
-  content: "What's on your mind?";
-  position: relative;
-  display: auto;
-  opacity: 0.4;
-  z-index: -1;
-}
-
-#new-post-textarea:focus::before {
-  display: none;
-}
-
 button {
   background-color: rgba(var(--brand-primary));
   color: white;
   font-size: 1.1rem;
-  margin-left: auto;
   padding: 0.5rem 1rem;
   border-radius: 1000px;
   transition: background-color 0.2s ease-in-out, translate 0.05s;
@@ -81,5 +65,23 @@ button:active {
 }
 
 button:disabled {
-  background-color: rgba(var(--brand-primary-dark));
+  opacity: 0.5;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.circleButton {
+  color: rgba(var(--brand-primary));
+  margin-right: auto;
+  background-color: transparent;
+}
+
+.circleButton:hover {
+  background-color: rgba(var(--brand-primary), 0.1);
 }

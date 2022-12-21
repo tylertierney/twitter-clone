@@ -1,20 +1,22 @@
 <ng-container *ngIf="authService.user$ | async as currentUser">
-  <a class="post"
-    ><a [routerLink]="'../' + post.username">
-      <img
-        [src]="post.profile_pic"
-        [src]="
-          domain +
-          '/users/' +
-          post.username +
-          '/profile_pic/' +
-          post.profile_pic
-        "
-        style="object-fit: cover"
-        height="48px"
-        width="48px"
-      />
-    </a>
+  <a class="post">
+    <div class="post_left">
+      <a [routerLink]="'../' + post.username">
+        <img
+          [src]="post.profile_pic"
+          [src]="
+            domain +
+            '/users/' +
+            post.username +
+            '/profile_pic/' +
+            post.profile_pic
+          "
+          height="48px"
+          width="48px"
+          class="profile_pic"
+        />
+      </a>
+    </div>
     <div class="body">
       <app-post-header
         [user_id]="post.user_id"

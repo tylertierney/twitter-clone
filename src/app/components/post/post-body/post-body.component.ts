@@ -1,9 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, filter, map, Observable, Subject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
 import { IPost, PostsService } from '../../../services/posts/posts.service';
 import { IUser } from '../../../services/user/user.service';
+import {
+  CdkOverlayOrigin,
+  Overlay,
+  OverlayRef,
+  PositionStrategy,
+} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-post-body',
@@ -18,13 +25,28 @@ export class PostBodyComponent implements OnInit {
 
   numOfLikes: number;
 
+  domain = environment.domain;
+
+  // private overlayRef: OverlayRef;
+  isOpen = false;
+
+  // positionStrategy: PositionStrategy = {
+  //   attach() {}
+  // };
+
   constructor(
     public postsService: PostsService,
     public authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private overlay: Overlay
   ) {}
 
   ngOnInit(): void {
+    // this.overlayRef = this.overlay.create({
+    //   hasBackdrop: true,
+    //   scrollStrategy: this.overlay.scrollStrategies.noop(),
+    // });
+
     this.postsService
       .getPostIsLiked(this.post.id, this.currentUser.id)
       .subscribe((isLiked) => (this.isLiked = isLiked));
@@ -39,5 +61,9 @@ export class PostBodyComponent implements OnInit {
       this.isLiked = isLiked;
       isLiked ? (this.numOfLikes += 1) : (this.numOfLikes -= 1);
     });
+  }
+
+  test() {
+    // const overlayRef = overlay.create();
   }
 }

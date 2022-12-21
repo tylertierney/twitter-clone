@@ -26,7 +26,10 @@
       <span class="navItemLabel">Home</span>
     </button>
   </a>
-  <a [routerLink]="'' + (authService.user$ | async)?.username">
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="'' + (authService.user$ | async)?.username"
+  >
     <button>
       <span class="material-symbols-outlined">person</span>
       <span class="navItemLabel">Profile</span>

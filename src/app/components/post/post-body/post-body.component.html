@@ -1,4 +1,9 @@
-<p>{{ post.text }}</p>
+<p style="overflow-wrap: anywhere">{{ post.text }}</p>
+<img
+  *ngIf="post.photo_url"
+  class="photo"
+  [src]="domain + '/posts/' + post.id + '/photo_url/' + post.photo_url"
+/>
 <div class="toolbar">
   <app-post-button
     [isActive]="isLiked"
@@ -11,7 +16,25 @@
   <app-post-button color="green" [value]="numOfLikes" type="retweet"
     >cached</app-post-button
   >
+
   <app-post-button color="blue" [value]="numOfLikes" type="reply"
     >chat_bubble</app-post-button
   >
+  <button
+    (click)="isOpen = !isOpen"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+  >
+    test
+  </button>
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen"
+  >
+    <!-- [cdkConnectedOverlayPositionStrategy]="positionStrategy" -->
+    <div style="background-color: black" (click)="isOpen = false">
+      <h1 style="color: white">this is the modal</h1>
+    </div>
+  </ng-template>
 </div>

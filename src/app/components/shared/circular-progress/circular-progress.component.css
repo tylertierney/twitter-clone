@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+}
+
+svg {
+  transform: rotate(-90deg);
+}
+
+.fifty {
+  --val: 50;
+}
+
+.sixty {
+  --val: 60;
+}
+
+.ninety {
+  --val: 90;
+}

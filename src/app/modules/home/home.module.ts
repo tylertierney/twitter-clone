@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FeedComponent } from '../../components/feed/feed.component';
 import { HomeComponent } from '../../components/home/home.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -16,7 +15,6 @@ import { ProfileComponent } from '../../components/profile/profile.component';
 import { UserFollowLinkComponent } from '../../components/who-to-follow/user-follow-link/user-follow-link.component';
 import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-follow.component';
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
-import { MenuModule } from '../menu/menu.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostButtonComponent } from '../../components/post/post-button/post-button.component';
@@ -43,13 +41,7 @@ import { ProfileHeaderComponent } from '../../components/profile/profile-header/
     PostButtonComponent,
     ProfileHeaderComponent,
   ],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    SharedModule,
-    HomeRoutingModule,
-    MenuModule,
-  ],
+  imports: [CommonModule, FontAwesomeModule, SharedModule, HomeRoutingModule],
   exports: [],
 })
 export class HomeModule {}

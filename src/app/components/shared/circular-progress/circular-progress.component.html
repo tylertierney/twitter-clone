@@ -1,0 +1,22 @@
+<svg width="30" height="30" viewBox="0 0 30 30">
+  <circle
+    cx="15"
+    cy="15"
+    r="13"
+    fill="none"
+    stroke="rgba(var(--text-color), 0.2)"
+    stroke-width="4"
+  />
+  <circle
+    style="stroke-dasharray: 100"
+    [ngStyle]="{ 'stroke-dashoffset': 100 - val }"
+    cx="15"
+    cy="15"
+    r="13"
+    fill="none"
+    stroke="rgba(var(--brand-primary))"
+    stroke-width="4.5"
+    pathLength="100"
+  />
+</svg>
+<!-- <input type="number" (change)="change($event)" /> -->

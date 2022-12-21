@@ -1,3 +1,6 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+/* @import "@angular/material/prebuilt-themes/indigo-pink.css"; */
+
 html {
   font-size: 16px;
 }
@@ -69,6 +72,15 @@ body.dark-theme {
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 html,

@@ -20,6 +20,7 @@
 }
 
 .profileInfo {
+  padding-top: 1rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -33,7 +34,7 @@
   flex-grow: 0;
   width: 26%;
   min-width: 100px;
-  left: 0;
+  left: 1rem;
   translate: 0 -22px;
 }
 

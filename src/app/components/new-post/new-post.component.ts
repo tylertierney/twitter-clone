@@ -1,4 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { map, tap } from 'rxjs';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
@@ -9,18 +23,36 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./new-post.component.css'],
 })
 export class NewPostComponent implements OnInit {
-  text: string | null = null;
+  @ViewChild('textarea') textarea: ElementRef;
   domain = environment.domain;
+  @Input() helperText: TemplateRef<HTMLParagraphElement>;
+
+  tweetForm = this.fb.group({
+    text: new FormControl('', {
+      validators: [Validators.required, Validators.maxLength(280)],
+      updateOn: 'change',
+    }),
+  });
+
+  tweetLength$ = this.tweetForm.valueChanges.pipe(
+    map((form) => {
+      return form.text.length;
+    })
+  );
 
   constructor(
     public postsService: PostsService,
-    public authService: AuthService
+    public authService: AuthService,
+    private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tweetForm.valueChanges.subscribe((_) => {
+      this.textarea.nativeElement.style.height = 'auto';
+      this.textarea.nativeElement.style.height = `${this.textarea.nativeElement.scrollHeight}px`;
+    });
 
-  test(e: Event) {
-    this.text = (e.target as HTMLDivElement).textContent;
+    this.tweetLength$.subscribe(console.log);
   }
 
   resizeTextArea(textarea: HTMLTextAreaElement) {
