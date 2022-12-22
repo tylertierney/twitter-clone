@@ -1,6 +1,7 @@
 @import "@angular/cdk/overlay-prebuilt.css";
 /* @import "@angular/material/prebuilt-themes/indigo-pink.css"; */
 
+:root,
 html {
   font-size: 16px;
 }
@@ -18,7 +19,7 @@ body {
   margin: 0;
   background-color: rgba(var(--bkg-color));
   color: rgba(var(--text-color));
-  height: 100%;
+  /* height: 100%; */
   overflow-x: hidden;
 
   --text-color: 34, 34, 34;

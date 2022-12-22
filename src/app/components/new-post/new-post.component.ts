@@ -25,7 +25,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class NewPostComponent implements OnInit {
   @ViewChild('textarea') textarea: ElementRef;
   domain = environment.domain;
-  @Input() helperText: TemplateRef<HTMLParagraphElement>;
+  @Input() helperText: TemplateRef<HTMLSpanElement>;
 
   tweetForm = this.fb.group({
     text: new UntypedFormControl('', {

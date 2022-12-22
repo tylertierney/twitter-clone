@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { ModalService } from '../../../services/modal/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -8,7 +10,11 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 export class ModalComponent implements OnInit {
   @Input() content: TemplateRef<any>;
 
-  constructor() {}
+  constructor(public modalService: ModalService) {}
 
   ngOnInit(): void {}
+
+  test(e: Event) {
+    e.stopPropagation();
+  }
 }

@@ -29,9 +29,7 @@ export class PostsService {
   }
 
   getFollowedPosts(userId: string): Observable<IPost[]> {
-    return this.http
-      .get<IPost[]>(`/posts/${userId}/feed`)
-      .pipe(tap(console.log));
+    return this.http.get<IPost[]>(`/posts/${userId}/feed`);
   }
 
   createNewPost(text: string) {

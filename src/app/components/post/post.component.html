@@ -16,6 +16,9 @@
           class="profile_pic"
         />
       </a>
+      <div *ngIf="type === 'reply'" class="handleContainer">
+        <div class="handle"></div>
+      </div>
     </div>
     <div class="body">
       <app-post-header
@@ -28,7 +31,7 @@
       <app-post-body
         [currentUser]="currentUser"
         [post]="post"
-        [expanded]="expanded"
+        [type]="type"
       ></app-post-body>
     </div>
   </a>

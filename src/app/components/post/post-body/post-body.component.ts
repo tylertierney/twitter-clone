@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { BehaviorSubject, filter, map, Observable, Subject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -14,6 +14,7 @@ import {
 import { Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
 import { NewPostComponent } from '../../new-post/new-post.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalService } from '../../../services/modal/modal.service';
 
 @Component({
   selector: 'app-post-body',
@@ -22,8 +23,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class PostBodyComponent implements OnInit {
   @Input() currentUser: IUser;
-  @Input() expanded: boolean;
   @Input() post: IPost;
+  @Input() type: 'reply' | 'feed' | 'expanded';
+
   isLiked: boolean;
 
   numOfLikes: number;
@@ -31,7 +33,7 @@ export class PostBodyComponent implements OnInit {
   domain = environment.domain;
 
   // private overlayRef: OverlayRef;
-  isOpen = false;
+  // isOpen = false;
 
   // positionStrategy: PositionStrategy = {
   //   attach() {}
@@ -42,7 +44,8 @@ export class PostBodyComponent implements OnInit {
     public authService: AuthService,
     private http: HttpClient,
     private overlay: Overlay,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -71,8 +74,10 @@ export class PostBodyComponent implements OnInit {
     });
   }
 
-  test() {
-    // const overlayRef = overlay.create();
+  test(template: TemplateRef<any>) {
+    console.log('test called');
+    this.modalService.content$.next(template);
+    this.modalService.isOpen$.next(true);
   }
 }
 

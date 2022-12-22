@@ -3,21 +3,23 @@
   top: 0;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   border-right: 1px solid rgba(var(--text-color), 0.08);
-}
-
-a.active {
-  color: rgba(var(--brand-primary));
 }
 
 nav {
   font-size: 1.2rem;
   padding: 0.8rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: inherit;
   justify-content: flex-end;
   align-items: center;
   gap: 0.8rem;
+  flex-grow: 1;
+}
+
+.logo {
+  margin-bottom: auto;
 }
 
 a {
@@ -130,5 +132,23 @@ li:hover {
 
   .userAvatarLabel > span:nth-child(2) {
     opacity: 0.5;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  :host {
+    position: fixed;
+    bottom: 0;
+    flex-direction: row;
+    width: 100%;
+    z-index: 3;
+    flex-grow: 0;
+    height: unset;
+    top: unset;
+    background-color: rgba(var(--bkg-color));
+  }
+
+  .logo {
+    margin-bottom: unset;
   }
 }

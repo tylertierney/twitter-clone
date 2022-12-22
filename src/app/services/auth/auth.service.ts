@@ -77,6 +77,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.http.get<IUser>(`/auth`, {}).pipe(tap(console.log));
+    return this.http.get<IUser>(`/auth`, {});
   }
 }

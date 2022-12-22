@@ -1,1 +1,12 @@
-<app-post [post]="post" [showPhoto]="false"></app-post>
+<app-post [post]="post" [type]="'reply'"></app-post>
+<app-new-post [helperText]="replyingTo"></app-new-post>
+<ng-template #replyingTo>
+  <span
+    >Replying to
+    <a
+      [routerLink]="post.username"
+      style="color: rgba(var(--brand-primary)); text-decoration: none"
+      >@{{ post.username }}</a
+    ></span
+  >
+</ng-template>

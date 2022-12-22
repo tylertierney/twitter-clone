@@ -26,7 +26,6 @@ export class AuthGuardService implements CanActivate {
     | Promise<boolean | UrlTree> {
     return this.authService.isAuthenticated().pipe(
       map((user) => {
-        console.log(user);
         if (user) {
           this.authService.user$.next(user);
           return true;

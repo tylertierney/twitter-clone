@@ -1,5 +1,11 @@
-<div class="overlay">
-  <div class="modal">
-    <ng-template [ngTemplateOutlet]="content"></ng-template>
+<div
+  class="overlay"
+  [style.display]="(modalService.isOpen$ | async) === true ? 'flex' : 'none'"
+  (click)="modalService.isOpen$.next(false)"
+>
+  <div class="modal" (click)="test($event)">
+    <ng-template
+      [ngTemplateOutlet]="modalService.content$ | async"
+    ></ng-template>
   </div>
 </div>

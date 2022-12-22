@@ -36,3 +36,23 @@ a {
 .body {
   flex-grow: 1;
 }
+
+.post_left {
+  display: flex;
+  flex-direction: column;
+}
+
+.handleContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.handle {
+  padding: 1rem 0;
+  width: 3px;
+  background-color: rgba(var(--text-color), 0.09);
+  border-radius: 10px;
+  height: 100%;
+}

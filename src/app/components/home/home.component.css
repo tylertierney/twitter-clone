@@ -4,9 +4,9 @@
 }
 
 app-navbar {
-  display: none;
+  display: flex;
 }
-div {
+.middle {
   max-width: 580px;
   flex-grow: 1;
   border-right: 1px solid rgba(var(--text-color), 0.08);

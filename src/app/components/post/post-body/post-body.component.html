@@ -1,10 +1,10 @@
 <p style="overflow-wrap: anywhere">{{ post.text }}</p>
 <img
-  *ngIf="post.photo_url"
+  *ngIf="post.photo_url && type !== 'reply'"
   class="photo"
   [src]="domain + '/posts/' + post.id + '/photo_url/' + post.photo_url"
 />
-<div class="toolbar">
+<div class="toolbar" *ngIf="type !== 'reply'">
   <app-post-button
     [isActive]="isLiked"
     (onClick)="togglePostLiked(post.id, currentUser.id)"
@@ -21,24 +21,13 @@
     color="blue"
     [value]="numOfLikes"
     type="reply"
-    (click)="openDialog()"
+    (onClick)="test(reply)"
     >chat_bubble</app-post-button
   >
-  <!-- <button
-    (click)="isOpen = !isOpen"
-    cdkOverlayOrigin
-    #trigger="cdkOverlayOrigin"
-  >
-    test
-  </button> -->
-  <!-- <button (click)="openDialog()">test</button> -->
-  <!-- <ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="isOpen"
-  >
-    <div style="background-color: black" (click)="isOpen = false">
-      <h1 style="color: white">this is the modal</h1>
-    </div>
+  <!-- <ng-template #replyModal>
+    <div>DOES THE MODAL WORK???</div>
   </ng-template> -->
+  <ng-template #reply>
+    <app-reply [post]="post"></app-reply>
+  </ng-template>
 </div>
