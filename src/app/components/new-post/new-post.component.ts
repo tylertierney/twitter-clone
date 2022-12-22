@@ -26,6 +26,8 @@ export class NewPostComponent implements OnInit {
   @ViewChild('textarea') textarea: ElementRef;
   domain = environment.domain;
   @Input() helperText: TemplateRef<HTMLSpanElement>;
+  @Input() label: 'Reply' | 'Tweet' = 'Tweet';
+  @Input() placeholder = "What's on your mind?";
 
   tweetForm = this.fb.group({
     text: new UntypedFormControl('', {

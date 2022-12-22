@@ -1,5 +1,9 @@
 <app-post [post]="post" [type]="'reply'"></app-post>
-<app-new-post [helperText]="replyingTo"></app-new-post>
+<app-new-post
+  [helperText]="replyingTo"
+  label="Reply"
+  placeholder="Tweet your reply"
+></app-new-post>
 <ng-template #replyingTo>
   <span
     >Replying to

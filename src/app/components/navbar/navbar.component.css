@@ -148,6 +148,10 @@ li:hover {
     background-color: rgba(var(--bkg-color));
   }
 
+  nav {
+    justify-content: space-around;
+  }
+
   .logo {
     margin-bottom: unset;
   }

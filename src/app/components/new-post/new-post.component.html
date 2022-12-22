@@ -15,7 +15,7 @@
     <textarea
       formControlName="text"
       #textarea
-      placeholder="What's on your mind?"
+      [placeholder]="placeholder"
       name="new-post-textarea"
       id="new-post-textarea"
       maxlength="280"
@@ -34,7 +34,7 @@
         (click)="postsService.createNewPost(tweetForm.value.text)"
         [disabled]="tweetForm.controls['text'].invalid"
       >
-        Post
+        {{ label }}
       </button>
     </div>
   </form>
