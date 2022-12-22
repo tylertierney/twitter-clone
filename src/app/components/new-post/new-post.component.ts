@@ -1,19 +1,16 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, UntypedFormBuilder, Validators } from '@angular/forms';
 import { map, tap } from 'rxjs';
-import { PostsService } from 'src/app/services/posts/posts.service';
+import { IPost, PostsService } from '../../services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -28,9 +25,10 @@ export class NewPostComponent implements OnInit {
   @Input() helperText: TemplateRef<HTMLSpanElement>;
   @Input() label: 'Reply' | 'Tweet' = 'Tweet';
   @Input() placeholder = "What's on your mind?";
+  @Output() onSubmit = new EventEmitter<IPost>();
 
   tweetForm = this.fb.group({
-    text: new UntypedFormControl('', {
+    text: new FormControl('', {
       validators: [Validators.required, Validators.maxLength(280)],
       updateOn: 'change',
     }),
