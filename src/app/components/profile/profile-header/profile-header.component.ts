@@ -50,7 +50,6 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['user']);
     if (
       this.currentUser &&
       changes['user'] &&

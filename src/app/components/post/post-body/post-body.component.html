@@ -1,33 +1,12 @@
 <p style="overflow-wrap: anywhere">{{ post.text }}</p>
 <img
-  *ngIf="post.photo_url && type !== 'reply'"
+  *ngIf="post.photo_url && showMedia"
   class="photo"
   [src]="domain + '/posts/' + post.id + '/photo_url/' + post.photo_url"
 />
-<div class="toolbar" *ngIf="type !== 'reply'">
-  <app-post-button
-    [isActive]="isLiked"
-    (onClick)="togglePostLiked(post.id, currentUser.id)"
-    color="pink"
-    [value]="numOfLikes"
-    type="like"
-    >favorite</app-post-button
-  >
-  <app-post-button color="green" [value]="numOfLikes" type="retweet"
-    >cached</app-post-button
-  >
 
-  <app-post-button
-    color="blue"
-    [value]="numOfLikes"
-    type="reply"
-    (onClick)="test(reply)"
-    >chat_bubble</app-post-button
-  >
-  <!-- <ng-template #replyModal>
-    <div>DOES THE MODAL WORK???</div>
-  </ng-template> -->
-  <ng-template #reply>
-    <app-reply [post]="post"></app-reply>
-  </ng-template>
-</div>
+<app-post-toolbar
+  *ngIf="showToolbar"
+  [currentUser]="currentUser"
+  [post]="post"
+></app-post-toolbar>

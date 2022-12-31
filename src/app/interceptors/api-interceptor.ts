@@ -5,13 +5,14 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   DOMAIN = environment.domain;
-  constructor() {}
+  constructor(private toast: ToastrService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -21,6 +22,20 @@ export class ApiInterceptor implements HttpInterceptor {
       withCredentials: true,
       url: this.DOMAIN + req.url,
     });
-    return next.handle(newRequest);
+    return next.handle(newRequest).pipe(
+      catchError((err) => {
+        console.log(err);
+        this.toast.error(err.error, '', {
+          closeButton: false,
+          positionClass: 'toastPosition',
+          toastClass: 'toastClass',
+          easing: 'ease-in-out',
+          tapToDismiss: true,
+          newestOnTop: false,
+          // disableTimeOut: true,
+        });
+        return of(err);
+      })
+    );
   }
 }

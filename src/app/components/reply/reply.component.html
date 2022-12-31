@@ -1,4 +1,11 @@
-<app-post [post]="post" [type]="'reply'"></app-post>
+<app-post
+  [post]="post"
+  [showToolbar]="false"
+  [showReplyHandle]="true"
+  [showParent]="false"
+  [showMedia]="false"
+></app-post>
+<!-- [isReply]="true" -->
 <app-new-post
   [helperText]="replyingTo"
   label="Reply"

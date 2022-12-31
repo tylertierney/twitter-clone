@@ -36,19 +36,18 @@
     </div>
     <ng-template #headerPicInput>
       <label for="headerPicInput" class="material-symbols-outlined circleButton"
-        >add_a_photo</label
-      >
+        >add_a_photo
+        <input
+          style="display: none; appearance: none"
+          id="headerPicInput"
+          name="headerPicInput"
+          type="file"
+          accept="image/*"
+          (change)="setNewHeaderPicUrl($event)"
+      /></label>
     </ng-template>
   </div>
 </div>
-<input
-  style="display: none; appearance: none"
-  id="headerPicInput"
-  name="headerPicInput"
-  type="file"
-  accept="image/*"
-  (change)="setNewHeaderPicUrl($event)"
-/>
 
 <div class="profileInfo">
   <div class="profilePicContainer">
@@ -99,8 +98,15 @@
         <label
           for="profilePicInput"
           class="material-symbols-outlined circleButton"
-          >add_a_photo</label
-        >
+          >add_a_photo
+          <input
+            style="display: none; appearance: none"
+            id="profilePicInput"
+            name="profilePicInput"
+            type="file"
+            accept="image/*"
+            (change)="setNewProfilePicUrl($event)"
+        /></label>
       </ng-template>
     </div>
   </div>
@@ -117,11 +123,3 @@
     ></div>
   </ng-template>
 </div>
-<input
-  style="display: none; appearance: none"
-  id="profilePicInput"
-  name="profilePicInput"
-  type="file"
-  accept="image/*"
-  (change)="setNewProfilePicUrl($event)"
-/>

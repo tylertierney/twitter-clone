@@ -1,12 +1,10 @@
 <div class="sub-nav">
   <h4>Home</h4>
 </div>
-<app-new-post></app-new-post>
-<!-- [helperText]="helperText" -->
-<!-- <ng-template #helperText>
-  <span>Replying to&nbsp;</span>
-  <a>@TomSegura</a>
-</ng-template> -->
+<app-new-post
+  (onSubmit)="createNewPost($event)"
+  (getFormForReset)="getFormForReset($event)"
+></app-new-post>
 <ng-container *ngIf="posts$ | async as posts">
-  <app-post [type]="'feed'" *ngFor="let post of posts" [post]="post"></app-post>
+  <app-post *ngFor="let post of posts" [post]="post"></app-post>
 </ng-container>

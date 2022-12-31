@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { PostsService } from 'src/app/services/posts/posts.service';
+import { IPost, PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 import { ThemeService } from '../../services/theme/theme.service';
@@ -21,7 +23,8 @@ export class FeedComponent implements OnInit {
     public postsService: PostsService,
     public authService: AuthService,
     private http: HttpClient,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,5 +46,26 @@ export class FeedComponent implements OnInit {
     this.postsService
       .getFollowedPosts(userId)
       .subscribe((posts) => this.posts$.next(posts));
+  }
+
+  tweetForm: FormGroup;
+
+  createNewPost(form: FormGroup) {
+    // this.postsService.createNewPost(form.value.text).subscribe((res) => {
+    //   this.toast.success('Your tweet was posted!', '', {
+    //     positionClass: 'toastPosition',
+    //     toastClass: 'toastClass',
+    //     easing: 'ease-in-out',
+    //     tapToDismiss: true,
+    //     newestOnTop: false,
+    //   });
+
+    //   form.reset();
+    // });
+    this.postsService.createNewPost(form).subscribe(console.log);
+  }
+
+  getFormForReset(form: FormGroup) {
+    this.tweetForm = form;
   }
 }

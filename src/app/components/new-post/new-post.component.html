@@ -6,6 +6,7 @@
       "
       height="48px"
       width="48px"
+      class="profile_pic"
     />
   </a>
   <form class="body" [formGroup]="tweetForm">
@@ -20,8 +21,32 @@
       id="new-post-textarea"
       maxlength="280"
     ></textarea>
+    <div class="photoContainer">
+      <img class="photo" [src]="safePhotoUrl$ | async" />
+      <button
+        *ngIf="safePhotoUrl$ | async"
+        class="material-symbols-outlined circleButton cancelPhotoBtn"
+        (click)="cancelPhotoUpload()"
+      >
+        close
+      </button>
+    </div>
+
     <div class="toolbar">
-      <span class="material-symbols-outlined circleButton"> imagesmode </span>
+      <label
+        for="photoInput"
+        class="material-symbols-outlined circleButton toolbarButton"
+      >
+        imagesmode
+        <input
+          type="file"
+          name="photoInput"
+          id="photoInput"
+          accept="image/*"
+          (change)="setPhoto($event)"
+        />
+      </label>
+
       <app-circular-progress
         *ngIf="(tweetLength$ | async) > 0"
         [val]="((tweetLength$ | async) / 280) * 100"
@@ -31,7 +56,7 @@
         name="create-post-submit-btn"
         class="create-post-submit-btn"
         type="submit"
-        (click)="postsService.createNewPost(tweetForm.value.text)"
+        (click)="submit()"
         [disabled]="tweetForm.controls['text'].invalid"
       >
         {{ label }}

@@ -12,20 +12,12 @@ export class EditProfileService {
   updateHeaderPic(username: string, headerPicFile: File) {
     const formdata = new FormData();
     formdata.append('header_pic', headerPicFile);
-    return this.http.put<IUser>(`/users/${username}/header_pic`, formdata, {
-      // headers: {
-      //   'Content-Type': 'multipart/form-data',
-      // },
-    });
+    return this.http.put<IUser>(`/users/${username}/header_pic`, formdata);
   }
 
   updateProfilePic(username: string, profilePicFile: File) {
     const formdata = new FormData();
     formdata.append('profile_pic', profilePicFile);
-    return this.http.put<IUser>(`/users/${username}/profile_pic`, formdata, {
-      // headers: {
-      //   'Content-Type': 'multipart/form-data',
-      // },
-    });
+    return this.http.put<IUser>(`/users/${username}/profile_pic`, formdata);
   }
 }

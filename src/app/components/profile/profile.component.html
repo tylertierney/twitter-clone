@@ -28,10 +28,7 @@
         <span>Followers</span>
       </div>
     </div>
-    <app-post
-      *ngFor="let post of posts"
-      [post]="post"
-      [type]="'feed'"
-    ></app-post>
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+    <!-- [type]="'feed'" -->
   </ng-container>
 </ng-container>

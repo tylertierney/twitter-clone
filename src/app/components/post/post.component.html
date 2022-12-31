@@ -1,5 +1,5 @@
 <ng-container *ngIf="authService.user$ | async as currentUser">
-  <a class="post">
+  <a class="post" [ngClass]="{ borderBottom: !showReplyHandle }">
     <div class="post_left">
       <a [routerLink]="'../' + post.username">
         <img
@@ -16,7 +16,7 @@
           class="profile_pic"
         />
       </a>
-      <div *ngIf="type === 'reply'" class="handleContainer">
+      <div *ngIf="showReplyHandle" class="handleContainer">
         <div class="handle"></div>
       </div>
     </div>
@@ -29,10 +29,15 @@
         [name]="post.name"
       ></app-post-header>
       <app-post-body
+        [showToolbar]="showToolbar"
         [currentUser]="currentUser"
         [post]="post"
-        [type]="type"
+        [showMedia]="showMedia"
       ></app-post-body>
+      <!-- [isReply]="isReply" -->
     </div>
   </a>
+  <ng-container *ngIf="showParent && (repliedPost$ | async) as repliedPost">
+    <app-post [post]="repliedPost"></app-post>
+  </ng-container>
 </ng-container>

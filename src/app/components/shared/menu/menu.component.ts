@@ -1,15 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnChanges,
-  OnDestroy,
   OnInit,
-  Output,
-  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -29,31 +21,4 @@ export class MenuComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  // @HostListener('document:click')
-  // public onClickOutside(e: Event) {
-  //   console.log('hi');
-  //   if (
-  //     this.menu &&
-  //     this.menu.nativeElement.contains(e.target as Node) === false
-  //   ) {
-  //     console.log('click outside?');
-  //   }
-  // }
-
-  // clickListener(e: Event) {
-  //   if (e.target && this.menu) {
-  //     console.log(this.menu.nativeElement.contains(e.target as HTMLElement));
-  //   }
-  // }
-
-  // onClickOutside(e: Event) {
-  //   console.log('hi');
-  //   if (
-  //     this.open &&
-  //     this.menu.nativeElement.contains(e.target as HTMLElement) === false
-  //   ) {
-  //     this.openChange.emit(false);
-  //   }
-  // }
 }

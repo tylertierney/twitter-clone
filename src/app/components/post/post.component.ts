@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPost } from 'src/app/services/posts/posts.service';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { IPost, PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -11,10 +12,25 @@ import { AuthService } from '../../services/auth/auth.service';
 export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() expanded: boolean;
-  @Input() type: 'reply' | 'feed' | 'expanded';
+  // @Input() type: 'reply' | 'feed' | 'expanded';
+  // @Input() isReply: boolean;
   domain = environment.domain;
+  @Input() showToolbar = true;
+  @Input() showReplyHandle = false;
+  @Input() showParent = true;
+  @Input() showMedia = true;
 
-  constructor(public authService: AuthService) {}
+  repliedPost$: Observable<IPost>;
 
-  ngOnInit(): void {}
+  constructor(
+    public authService: AuthService,
+    public postsService: PostsService
+  ) {}
+
+  ngOnInit(): void {
+    if (this.post.replying_to) {
+      this.showReplyHandle = true;
+      this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
+    }
+  }
 }

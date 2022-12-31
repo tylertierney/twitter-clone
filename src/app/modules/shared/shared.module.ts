@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CircularProgressComponent } from '../../components/shared/circular-progress/circular-progress.component';
 import { MenuModule } from '../menu/menu.module';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogModule } from '@angular/cdk/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/shared/modal/modal.component';
-// import { MatIconModule } from '@angular/material/icon';
-
-// const materialModules = [MatIconModule];
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [CircularProgressComponent, ModalComponent],
@@ -18,9 +15,12 @@ import { ModalComponent } from '../../components/shared/modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
     MenuModule,
-    OverlayModule,
     DialogModule,
-    MatDialogModule,
+    ToastrModule.forRoot({
+      maxOpened: 4,
+      autoDismiss: true,
+      timeOut: 5000,
+    }),
   ],
   exports: [
     CommonModule,
@@ -28,10 +28,10 @@ import { ModalComponent } from '../../components/shared/modal/modal.component';
     ReactiveFormsModule,
     CircularProgressComponent,
     MenuModule,
-    OverlayModule,
     DialogModule,
     MatDialogModule,
     ModalComponent,
+    ToastrModule,
   ],
 })
 export class SharedModule {}

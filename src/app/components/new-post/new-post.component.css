@@ -6,8 +6,10 @@
   color: rgba(var(--text-color));
 }
 
-img {
+.profile_pic {
   border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .body {
@@ -17,7 +19,6 @@ img {
 }
 
 .helperTextContainer {
-  padding: 0 0.5rem;
   font-size: 0.9rem;
 }
 
@@ -32,8 +33,7 @@ textarea {
   overflow: hidden;
   white-space: pre-wrap;
   color: inherit;
-  border-bottom: 1px solid rgba(var(--text-color), 0.08);
-  padding: 0.5rem;
+  /* border-bottom: 1px solid rgba(var(--text-color), 0.08); */
 }
 
 textarea::-webkit-scrollbar {
@@ -44,7 +44,25 @@ textarea:focus {
   outline: none;
 }
 
-button {
+.photoContainer {
+  width: 100%;
+  position: relative;
+}
+
+.photo {
+  width: 100%;
+  object-fit: contain;
+  max-height: 400px;
+  margin-top: 0.5rem;
+}
+
+.cancelPhotoBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.create-post-submit-btn {
   background-color: rgba(var(--brand-primary));
   color: white;
   font-size: 1.1rem;
@@ -56,15 +74,15 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.create-post-submit-btn:hover {
   background-color: rgba(var(--brand-primary-dark));
 }
 
-button:active {
+.create-post-submit-btn:active {
   translate: 0 1px;
 }
 
-button:disabled {
+.create-post-submit-btn:disabled {
   opacity: 0.5;
 }
 
@@ -74,9 +92,11 @@ button:disabled {
   align-items: center;
   gap: 1rem;
   padding: 0.5rem 0;
+  border-top: 1px solid rgba(var(--text-color), 0.08);
+  margin-top: 0.5rem;
 }
 
-.circleButton {
+/* .circleButton {
   color: rgba(var(--brand-primary));
   margin-right: auto;
   background-color: transparent;
@@ -84,4 +104,19 @@ button:disabled {
 
 .circleButton:hover {
   background-color: rgba(var(--brand-primary), 0.1);
+} */
+
+.toolbarButton {
+  color: rgba(var(--brand-primary));
+  margin-right: auto;
+  background-color: transparent;
+}
+
+.toolbarButton:hover {
+  background-color: rgba(var(--brand-primary), 0.1);
+}
+
+#photoInput {
+  display: none;
+  appearance: none;
 }

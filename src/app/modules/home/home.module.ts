@@ -21,6 +21,7 @@ import { PostButtonComponent } from '../../components/post/post-button/post-butt
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfileHeaderComponent } from '../../components/profile/profile-header/profile-header.component';
 import { ReplyComponent } from '../../components/reply/reply.component';
+import { PostToolbarComponent } from '../../components/post/post-toolbar/post-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,10 @@ import { ReplyComponent } from '../../components/reply/reply.component';
     PostButtonComponent,
     ProfileHeaderComponent,
     ReplyComponent,
+    PostToolbarComponent,
   ],
   imports: [CommonModule, FontAwesomeModule, SharedModule, HomeRoutingModule],
   exports: [],
+  providers: [],
 })
 export class HomeModule {}
