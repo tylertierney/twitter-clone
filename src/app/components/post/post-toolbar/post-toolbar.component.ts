@@ -5,6 +5,7 @@ import { ModalService } from '../../../services/modal/modal.service';
 import { IPost, PostsService } from '../../../services/posts/posts.service';
 import { IUser } from '../../../services/user/user.service';
 import { NewPostComponent } from '../../new-post/new-post.component';
+import { ReplyComponent } from '../../reply/reply.component';
 
 @Component({
   selector: 'app-post-toolbar',
@@ -52,8 +53,7 @@ export class PostToolbarComponent implements OnInit {
     this.dialog.open(NewPostComponent);
   }
 
-  test(template: TemplateRef<any>) {
-    console.log('test called');
+  test(template: TemplateRef<ReplyComponent>) {
     this.modalService.content$.next(template);
     this.modalService.isOpen$.next(true);
   }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IPost } from '../../services/posts/posts.service';
+import { IPost, PostsService } from '../../services/posts/posts.service';
 
 @Component({
   selector: 'app-reply',
@@ -7,5 +7,6 @@ import { IPost } from '../../services/posts/posts.service';
   styleUrls: ['./reply.component.css'],
 })
 export class ReplyComponent {
+  constructor(public postsService: PostsService) {}
   @Input() post: IPost;
 }

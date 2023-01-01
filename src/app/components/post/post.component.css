@@ -6,7 +6,6 @@
   display: flex;
   gap: 0.6rem;
   padding: 1rem 1rem 0.3rem 1rem;
-  /* border-bottom: 1px solid rgba(var(--text-color), 0.1); */
   cursor: pointer;
 }
 

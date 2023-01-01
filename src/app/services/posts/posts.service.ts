@@ -45,13 +45,6 @@ export class PostsService {
     return this.http.get<IPost[]>(`/posts/${userId}/feed`);
   }
 
-  // createNewPost(text: string, replying_to?: number | null) {
-  //   return this.http.post('/posts', {
-  //     text,
-  //     author: this.userId,
-  //   });
-  // }
-
   createNewPost(form: FormGroup) {
     const formData = new FormData();
     console.log(form.controls['text'].value);
@@ -66,15 +59,10 @@ export class PostsService {
     }
     formData.append('author', this.userId);
 
-    return this.http.post(
-      '/posts',
-      // {
-      //   text: form.controls.text.value,
-      //   photo_file: form.controls.photo_file.value,
-      //   replying_to: form.controls.replying_to.value,
-      // }
-      formData
-    );
+    return this.http.post('/posts', formData).subscribe((_) => {
+      this.toast.success('Your tweet was posted!');
+      form.reset();
+    });
   }
 
   getPostsByUsername(username: string): Observable<any[]> {

@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
@@ -19,6 +20,18 @@
   width: 100vw;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.circleButton {
+  font-size: 1.6rem;
+  padding: 0;
+  border-radius: 100%;
 }
 
 @media screen and (min-width: 600px) {

@@ -25,15 +25,7 @@ export class ApiInterceptor implements HttpInterceptor {
     return next.handle(newRequest).pipe(
       catchError((err) => {
         console.log(err);
-        this.toast.error(err.error, '', {
-          closeButton: false,
-          positionClass: 'toastPosition',
-          toastClass: 'toastClass',
-          easing: 'ease-in-out',
-          tapToDismiss: true,
-          newestOnTop: false,
-          // disableTimeOut: true,
-        });
+        this.toast.error(err.error);
         return of(err);
       })
     );

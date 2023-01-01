@@ -10,6 +10,8 @@
   [helperText]="replyingTo"
   label="Reply"
   placeholder="Tweet your reply"
+  [replying_to]="post.id"
+  (onSubmit)="postsService.createNewPost($event)"
 ></app-new-post>
 <ng-template #replyingTo>
   <span

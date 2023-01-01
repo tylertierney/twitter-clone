@@ -20,6 +20,11 @@ import { ToastrModule } from 'ngx-toastr';
       maxOpened: 4,
       autoDismiss: true,
       timeOut: 5000,
+      positionClass: 'toastPosition',
+      toastClass: 'toastClass',
+      easing: 'ease-in-out',
+      tapToDismiss: true,
+      newestOnTop: false,
     }),
   ],
   exports: [

@@ -26,7 +26,7 @@
       <button
         *ngIf="safePhotoUrl$ | async"
         class="material-symbols-outlined circleButton cancelPhotoBtn"
-        (click)="cancelPhotoUpload()"
+        (click)="tweetForm.patchValue({ photo_file: null })"
       >
         close
       </button>
@@ -56,7 +56,7 @@
         name="create-post-submit-btn"
         class="create-post-submit-btn"
         type="submit"
-        (click)="submit()"
+        (click)="onSubmit.emit(tweetForm)"
         [disabled]="tweetForm.controls['text'].invalid"
       >
         {{ label }}

@@ -4,6 +4,9 @@
   (click)="modalService.isOpen$.next(false)"
 >
   <div class="modal" (click)="test($event)">
+    <div class="toolbar">
+      <button class="material-symbols-outlined circleButton">close</button>
+    </div>
     <ng-template
       [ngTemplateOutlet]="modalService.content$ | async"
     ></ng-template>
