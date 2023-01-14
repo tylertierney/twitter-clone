@@ -7,9 +7,14 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/shared/modal/modal.component';
 import { ToastrModule } from 'ngx-toastr';
+import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
 
 @NgModule({
-  declarations: [CircularProgressComponent, ModalComponent],
+  declarations: [
+    CircularProgressComponent,
+    ModalComponent,
+    SubmitButtonComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -37,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatDialogModule,
     ModalComponent,
     ToastrModule,
+    SubmitButtonComponent,
   ],
 })
 export class SharedModule {}

@@ -32,9 +32,9 @@ export class PostBodyComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public authService: AuthService,
-    public dialog: MatDialog,
-    public modalService: ModalService
-  ) {}
+    public dialog: MatDialog
+  ) // public modalService: ModalService
+  {}
 
   ngOnInit(): void {}
 

@@ -22,6 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfileHeaderComponent } from '../../components/profile/profile-header/profile-header.component';
 import { ReplyComponent } from '../../components/reply/reply.component';
 import { PostToolbarComponent } from '../../components/post/post-toolbar/post-toolbar.component';
+import { EditProfileFormComponent } from '../../components/profile/edit-profile-form/edit-profile-form.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PostToolbarComponent } from '../../components/post/post-toolbar/post-to
     ProfileHeaderComponent,
     ReplyComponent,
     PostToolbarComponent,
+    EditProfileFormComponent,
   ],
   imports: [CommonModule, FontAwesomeModule, SharedModule, HomeRoutingModule],
   exports: [],

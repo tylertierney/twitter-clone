@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SafeUrl } from '@angular/platform-browser';
+import { tap } from 'rxjs';
 import { IUser } from '../user/user.service';
 
 @Injectable({
@@ -19,5 +19,15 @@ export class EditProfileService {
     const formdata = new FormData();
     formdata.append('profile_pic', profilePicFile);
     return this.http.put<IUser>(`/users/${username}/profile_pic`, formdata);
+  }
+
+  updateNameAndDescription(
+    username: string,
+    nameAndDescription: { name: string; description: string }
+  ) {
+    return this.http.put<IUser>(
+      `/users/${username}/nameAndDescription`,
+      nameAndDescription
+    );
   }
 }

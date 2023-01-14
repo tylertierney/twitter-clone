@@ -11,6 +11,7 @@ export interface IUser {
   profile_pic: string;
   header_pic: string;
   created_at: string;
+  description: string;
 }
 
 @Injectable({

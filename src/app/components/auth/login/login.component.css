@@ -19,6 +19,19 @@ form {
   gap: 1.2rem;
 }
 
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.logoContainer svg {
+  height: 100%;
+  width: auto;
+  fill: rgba(var(--brand-primary));
+}
+
 div {
   flex-grow: 1;
 }

@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { ModalService } from '../../../services/modal/modal.service';
+import {
+  IModalConfig,
+  ModalService,
+} from '../../../services/modal/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -8,7 +11,9 @@ import { ModalService } from '../../../services/modal/modal.service';
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnInit {
-  @Input() content: TemplateRef<any>;
+  // @Input() content: TemplateRef<any>;
+  // @Input() title: string;
+  // @Input() config: IModalConfig;
 
   constructor(public modalService: ModalService) {}
 

@@ -1,12 +1,23 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 
+export interface IModalConfig {
+  title?: string;
+  content: TemplateRef<any>;
+  showSubmitButton?: boolean;
+  onSubmit?: Function;
+  submitButtonLabel?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
   isOpen$ = new BehaviorSubject<boolean>(false);
   content$ = new BehaviorSubject<TemplateRef<any> | null>(null);
+  title$ = new BehaviorSubject<string>('');
+
+  config$ = new BehaviorSubject<IModalConfig | null>(null);
 
   constructor() {
     this.isOpen$.subscribe((open) => {
@@ -20,8 +31,13 @@ export class ModalService {
     });
   }
 
-  content(template: TemplateRef<any>) {
-    console.log(template);
-    this.content$.next(template);
+  open(config: IModalConfig) {
+    this.isOpen$.next(true);
+    this.config$.next(config);
+  }
+
+  close() {
+    this.isOpen$.next(false);
+    this.config$.next(null);
   }
 }

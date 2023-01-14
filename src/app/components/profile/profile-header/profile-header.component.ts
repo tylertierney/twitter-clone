@@ -1,16 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import {
   Component,
   Input,
   OnChanges,
   OnInit,
   SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EditProfileService } from '../../../services/profile/edit-profile.service';
 import { IUser } from '../../../services/user/user.service';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { ModalService } from '../../../services/modal/modal.service';
+import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile-header',
@@ -28,25 +34,29 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
   domain = environment.domain;
   isEditable = false;
 
+  editProfileFormData: { name: string; description: string };
+
   constructor(
-    private http: HttpClient,
     private sanitizer: DomSanitizer,
     public editProfileService: EditProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: Dialog,
+    private modalService: ModalService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe((currentUser) => {
-      // if (currentUser.id === this.user.id) {
-      //   console.log(currentUser.id);
-      //   console.log(this.user.id);
-      //   this.isEditable = true;
-      // }
       this.currentUser = currentUser;
       if (currentUser.id === this.user.id) {
         this.isEditable = true;
       }
     });
+
+    this.editProfileFormData = {
+      name: this.user.name,
+      description: this.user.description,
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -106,16 +116,29 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
       });
   }
 
-  // confirmNewHeaderPic(username: string, profilePicFile: File) {
-  //   const formdata = new FormData();
-  //   formdata.append('header_pic', profilePicFile);
-  //   // this.editProfileService.updateHeaderPic(username, newPicUrl);
-  //   this.http
-  //     .put(`/users/${username}/header_pic`, formdata, {
-  //       // headers: {
-  //       //   'Content-Type': 'multipart/form-data',
-  //       // },
-  //     })
-  //     .subscribe(console.log);
-  // }
+  openEditProfileModal(template: TemplateRef<EditProfileFormComponent>) {
+    this.modalService.open({
+      title: 'Edit Profile',
+      content: template,
+      showSubmitButton: true,
+      onSubmit: () => {
+        this.editProfileService
+          .updateNameAndDescription(
+            this.user.username,
+            this.editProfileFormData
+          )
+          .subscribe((updatedUser) => {
+            this.modalService.close();
+            this.toast.success('Your profile was updated!');
+            this.authService.user$.next(updatedUser);
+          });
+      },
+      submitButtonLabel: 'Save',
+    });
+  }
+
+  getFormData(formData: { name: string; description: string }) {
+    this.editProfileFormData.name = formData.name;
+    this.editProfileFormData.description = formData.description;
+  }
 }

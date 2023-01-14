@@ -1,14 +1,31 @@
-<div
-  class="overlay"
-  [style.display]="(modalService.isOpen$ | async) === true ? 'flex' : 'none'"
-  (click)="modalService.isOpen$.next(false)"
->
-  <div class="modal" (click)="test($event)">
-    <div class="toolbar">
-      <button class="material-symbols-outlined circleButton">close</button>
+<ng-container *ngIf="modalService.config$ | async as config">
+  <div
+    class="overlay"
+    [style.display]="(modalService.isOpen$ | async) === true ? 'flex' : 'none'"
+    (click)="modalService.close()"
+  >
+    <div class="modal" (click)="test($event)">
+      <div class="toolbar">
+        <button
+          class="material-symbols-outlined closeButton"
+          (click)="modalService.close()"
+        >
+          close
+        </button>
+        <h2>{{ config.title }}</h2>
+        <app-submit-button
+          *ngIf="
+            config.showSubmitButton &&
+            config.submitButtonLabel &&
+            config.onSubmit
+          "
+          style="margin-left: auto"
+          type="secondary"
+          (click)="config.onSubmit($event)"
+          >Save</app-submit-button
+        >
+      </div>
+      <ng-template [ngTemplateOutlet]="config.content"></ng-template>
     </div>
-    <ng-template
-      [ngTemplateOutlet]="modalService.content$ | async"
-    ></ng-template>
   </div>
-</div>
+</ng-container>

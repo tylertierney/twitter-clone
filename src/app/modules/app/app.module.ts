@@ -7,7 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from '../../components/auth/login/login.component';
 import { RegisterComponent } from '../../components/auth/register/register.component';
-import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
+// import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
 import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
@@ -19,7 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    SubmitButtonComponent,
+    // SubmitButtonComponent,
   ],
   imports: [
     BrowserModule,

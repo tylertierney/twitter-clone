@@ -1,0 +1,50 @@
+form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.textbox {
+  border-radius: 0.5rem;
+  border: 2px solid rgba(var(--text-color), 0.2);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.textbox:focus-within,
+.textbox:focus-within .textbox-title {
+  border-color: rgba(var(--brand-primary));
+  color: rgba(var(--brand-primary));
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(var(--text-color), 0.6);
+}
+
+.maxLengthIndicator {
+  font-size: 0.75rem;
+}
+
+textarea,
+input {
+  background: transparent;
+  border: none;
+  color: rgba(var(--text-color));
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+/* input {
+  background: transparent;
+  border: none;
+} */

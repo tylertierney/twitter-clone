@@ -14,6 +14,9 @@
       <h2 class="name">{{ user.name }}</h2>
       <span class="username">@{{ user.username }}</span>
     </div>
+    <div class="descriptionContainer">
+      <p style="margin: 0">{{ user.description }}</p>
+    </div>
     <div class="memberSinceContainer">
       <span class="material-symbols-outlined"> calendar_month </span>
       <span>Joined {{ user.created_at | date : "MMM YYYY" }}</span>

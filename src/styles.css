@@ -19,7 +19,6 @@ body {
   margin: 0;
   background-color: rgba(var(--bkg-color));
   color: rgba(var(--text-color));
-  /* height: 100%; */
   overflow-x: hidden;
 
   --text-color: 34, 34, 34;

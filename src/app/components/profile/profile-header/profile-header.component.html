@@ -110,7 +110,19 @@
       </ng-template>
     </div>
   </div>
-  <button class="editProfileBtn">Edit Profile</button>
+  <button
+    *ngIf="isEditable"
+    class="editProfileBtn"
+    (click)="openEditProfileModal(editProfileModal)"
+  >
+    Edit Profile
+  </button>
+  <ng-template #editProfileModal>
+    <app-edit-profile-form
+      (formData)="getFormData($event)"
+      [user]="user"
+    ></app-edit-profile-form>
+  </ng-template>
   <ng-template #profile_pic_bkg>
     <div
       style="
