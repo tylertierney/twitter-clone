@@ -98,10 +98,10 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
     this.editProfileService
       .updateHeaderPic(username, newHeaderPicFile)
       .subscribe((user) => {
-        console.log(user);
         this.newHeaderPicUrl = '';
         this.user = user;
         this.authService.user$.next(user);
+        this.toast.success('Header pic updated!');
       });
   }
 
@@ -109,10 +109,10 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
     this.editProfileService
       .updateProfilePic(username, newProfilePicFile)
       .subscribe((user) => {
-        console.log(user);
         this.newProfilePicUrl = '';
         this.user = user;
         this.authService.user$.next(user);
+        this.toast.success('Profile pic updated!');
       });
   }
 

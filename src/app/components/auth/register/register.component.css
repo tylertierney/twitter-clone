@@ -9,6 +9,8 @@
   flex-grow: 1;
   --red: #cc5c5c;
   min-height: 100vh;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 form {
@@ -17,6 +19,19 @@ form {
   flex-grow: 1;
   max-width: 400px;
   gap: 1.2rem;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.logoContainer svg {
+  height: 100%;
+  width: auto;
+  fill: rgba(var(--brand-primary));
 }
 
 div {

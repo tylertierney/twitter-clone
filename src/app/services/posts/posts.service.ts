@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 export interface IPost {
@@ -29,6 +29,11 @@ export interface ITweetForm {
 export class PostsService {
   userId: string;
 
+  // followedPosts$: Observable<IPost[]>;
+  // refreshFollowedPosts$ = new BehaviorSubject<boolean>(false);
+
+  followedPosts$ = new BehaviorSubject<IPost[]>([]);
+
   constructor(
     private http: HttpClient,
     public authService: AuthService,
@@ -39,15 +44,34 @@ export class PostsService {
         this.userId = user.id;
       }
     });
+
+    // this.authService.user$.pipe(switchMap(({ id }) => {
+    //   return this.http.get<IPost[]>(`/posts/${id}/feed`)
+    // }))
+
+    // this.followedPosts$.next()
+
+    // this.followedPosts$ = this.authService.user$.pipe(
+    //   switchMap(({ id }) => {
+    //     return this.http.get<IPost[]>(`/posts/${id}/feed`);
+    //   })
+    // );
   }
 
-  getFollowedPosts(userId: string): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`/posts/${userId}/feed`);
+  fetchFollowedPosts() {
+    this.authService.user$.subscribe(({ id }) => {
+      this.http.get<IPost[]>(`/posts/${id}/feed`).subscribe((posts) => {
+        this.followedPosts$.next(posts);
+      });
+    });
   }
+
+  // getFollowedPosts(userId: string): Observable<IPost[]> {
+  //   return this.http.get<IPost[]>(`/posts/${userId}/feed`);
+  // }
 
   createNewPost(form: FormGroup) {
     const formData = new FormData();
-    console.log(form.controls['text'].value);
     formData.append('text', form.controls['text'].value);
     const photo_file = form.controls['photo_file'].value;
     if (photo_file) {

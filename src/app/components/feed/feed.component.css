@@ -3,3 +3,10 @@
   max-width: 598px;
   border-right: 1px solid rgba(var(--text-color), 0.08);
 }
+
+article {
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: rgba(var(--text-color), 0.5);
+  text-align: center;
+}

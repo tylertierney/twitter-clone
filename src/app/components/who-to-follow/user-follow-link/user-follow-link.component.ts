@@ -37,9 +37,10 @@ export class UserFollowLinkComponent implements OnInit {
       })
       .subscribe({
         error: console.log,
-        complete: () => (this.isFollowing = !this.isFollowing),
+        complete: () => {
+          this.isFollowing = !this.isFollowing;
+          this.postsService.fetchFollowedPosts();
+        },
       });
-
-    this.postsService.getFollowedPosts(this.currentUser.id);
   }
 }

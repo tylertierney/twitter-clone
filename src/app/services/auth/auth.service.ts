@@ -43,6 +43,7 @@ export class AuthService {
 
   login(formData: { email: string; password: string }): void {
     this.http.post<IUser>(`/auth/login`, formData, {}).subscribe((user) => {
+      console.log(user);
       this.user$.next(user);
       this.router.navigate(['../home']);
     });

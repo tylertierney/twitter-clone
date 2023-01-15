@@ -11,25 +11,13 @@ import { ThemeService } from '../../services/theme/theme.service';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
-  user$: Observable<any>;
-
-  posts$ = this.authService.user$.pipe(
-    switchMap(({ id }) => {
-      return this.postsService.getFollowedPosts(id);
-    })
-  );
-
   constructor(
     public postsService: PostsService,
     public authService: AuthService,
     public themeService: ThemeService
   ) {}
 
-  ngOnInit(): void {}
-
-  getUser() {
-    this.authService.user$.subscribe(console.log);
+  ngOnInit(): void {
+    this.postsService.fetchFollowedPosts();
   }
-
-  tweetForm: FormGroup;
 }
