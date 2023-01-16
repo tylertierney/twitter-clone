@@ -1,0 +1,15 @@
+<form (submit)="addTag(text)">
+  <input
+    #input
+    type="text"
+    placeholder="Add tags"
+    [(ngModel)]="text"
+    name="tagInput"
+    autocomplete="off"
+    maxlength="140"
+  />
+  <app-submit-button style="font-size: 0.8rem; flex-shrink: 0" type="outline"
+    >Add Tag</app-submit-button
+  >
+  <input type="submit" style="display: none" />
+</form>

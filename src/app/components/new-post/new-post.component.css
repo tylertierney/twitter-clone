@@ -33,7 +33,6 @@ textarea {
   overflow: hidden;
   white-space: pre-wrap;
   color: inherit;
-  /* border-bottom: 1px solid rgba(var(--text-color), 0.08); */
 }
 
 textarea::-webkit-scrollbar {
@@ -62,6 +61,61 @@ textarea:focus {
   right: 0.5rem;
 }
 
+.tagsContainer {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 1.2rem;
+  color: rgba(var(--brand-primary));
+  position: relative;
+}
+
+.tag button {
+  display: none;
+  border-radius: 100%;
+  background-color: rgba(var(--text-color));
+  color: rgba(var(--bkg-color));
+  font-size: 0.9rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  padding: 0;
+  translate: 50% -50%;
+  cursor: pointer;
+}
+
+.tag:hover button {
+  display: flex;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(var(--text-color), 0.08);
+}
+
+.toolbarButton {
+  color: rgba(var(--brand-primary));
+  margin-right: auto;
+  background-color: transparent;
+}
+
+.toolbarButton:hover {
+  background-color: rgba(var(--brand-primary), 0.1);
+}
+
+#photoInput {
+  display: none;
+  appearance: none;
+}
+
 .create-post-submit-btn {
   background-color: rgba(var(--brand-primary));
   color: white;
@@ -84,39 +138,4 @@ textarea:focus {
 
 .create-post-submit-btn:disabled {
   opacity: 0.5;
-}
-
-.toolbar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-top: 1px solid rgba(var(--text-color), 0.08);
-  margin-top: 0.5rem;
-}
-
-/* .circleButton {
-  color: rgba(var(--brand-primary));
-  margin-right: auto;
-  background-color: transparent;
-}
-
-.circleButton:hover {
-  background-color: rgba(var(--brand-primary), 0.1);
-} */
-
-.toolbarButton {
-  color: rgba(var(--brand-primary));
-  margin-right: auto;
-  background-color: transparent;
-}
-
-.toolbarButton:hover {
-  background-color: rgba(var(--brand-primary), 0.1);
-}
-
-#photoInput {
-  display: none;
-  appearance: none;
 }

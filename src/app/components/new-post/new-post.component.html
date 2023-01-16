@@ -31,23 +31,46 @@
         close
       </button>
     </div>
-
+    <div class="tagsContainer">
+      <span
+        *ngFor="let tag of tweetForm.controls['tags'].value; let i = index"
+        class="tag"
+        >#{{ tag }}
+        <button class="material-symbols-outlined" (click)="removeTag(i)">
+          close
+        </button>
+      </span>
+    </div>
+    <app-tags
+      style="margin-bottom: 0.5rem"
+      *ngIf="showTags"
+      (tag)="addTag($event)"
+    ></app-tags>
     <div class="toolbar">
-      <label
-        for="photoInput"
-        class="material-symbols-outlined circleButton toolbarButton"
-      >
-        imagesmode
-        <input
-          type="file"
-          name="photoInput"
-          id="photoInput"
-          accept="image/*"
-          (change)="setPhoto($event)"
-        />
-      </label>
+      <div>
+        <label
+          for="photoInput"
+          class="material-symbols-outlined circleButton toolbarButton"
+        >
+          imagesmode
+          <input
+            type="file"
+            name="photoInput"
+            id="photoInput"
+            accept="image/*"
+            (change)="setPhoto($event)"
+          />
+        </label>
+        <button
+          (click)="showTags = !showTags"
+          class="material-symbols-outlined circleButton toolbarButton"
+        >
+          tag
+        </button>
+      </div>
 
       <app-circular-progress
+        style="margin-left: auto"
         *ngIf="(tweetLength$ | async) > 0"
         [val]="((tweetLength$ | async) / 280) * 100"
       ></app-circular-progress>

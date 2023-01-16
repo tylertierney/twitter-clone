@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith, tap } from 'rxjs';
 import { IUser } from '../../../services/user/user.service';
 
 @Component({
@@ -43,11 +43,10 @@ export class EditProfileFormComponent implements OnInit {
 
     this.descriptionLength = this.editProfileForm.valueChanges.pipe(
       map((form) => form.description.length),
-      startWith(this.user.description.length)
+      startWith(this.user.description?.length ?? 0)
     );
 
     this.editProfileForm.valueChanges.subscribe((formData) => {
-      // console.log(formData);
       this.formData.emit(formData);
     });
   }

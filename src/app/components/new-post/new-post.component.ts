@@ -46,11 +46,13 @@ export class NewPostComponent implements OnInit {
     replying_to: new FormControl(this.replying_to, {
       nonNullable: true,
     }),
+    tags: new FormControl([], {
+      nonNullable: true,
+    }),
   });
 
   tweetLength$ = this.tweetForm.valueChanges.pipe(
     map((form) => {
-      console.log(form);
       if (form && form.text && form.text.length) return form.text.length;
       return 0;
     })
@@ -66,6 +68,8 @@ export class NewPostComponent implements OnInit {
       return '';
     })
   );
+
+  showTags = false;
 
   constructor(
     public postsService: PostsService,
@@ -96,5 +100,18 @@ export class NewPostComponent implements OnInit {
       const file = files[0];
       this.tweetForm.patchValue({ photo_file: file });
     }
+  }
+
+  tags: string[] = [];
+
+  addTag(tag: string) {
+    const oldTags = this.tweetForm.controls['tags'].value;
+    this.tweetForm.patchValue({ tags: [...oldTags, tag] });
+  }
+
+  removeTag(i: number) {
+    const oldTags = this.tweetForm.controls['tags'].value;
+    oldTags.splice(i, 1);
+    this.tweetForm.patchValue({ tags: oldTags });
   }
 }

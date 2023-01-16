@@ -8,12 +8,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/shared/modal/modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
+import { RouterModule } from '@angular/router';
+import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 
 @NgModule({
   declarations: [
     CircularProgressComponent,
     ModalComponent,
     SubmitButtonComponent,
+    ReadableDatePipe,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
       tapToDismiss: true,
       newestOnTop: false,
     }),
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -43,6 +47,8 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
     ModalComponent,
     ToastrModule,
     SubmitButtonComponent,
+    RouterModule,
+    ReadableDatePipe,
   ],
 })
 export class SharedModule {}

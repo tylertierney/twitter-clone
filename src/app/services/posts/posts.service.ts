@@ -15,6 +15,7 @@ export interface IPost {
   profile_pic: string;
   photo_url: string;
   replying_to: null | string;
+  tags: string[];
 }
 
 export interface ITweetForm {
@@ -71,7 +72,10 @@ export class PostsService {
   // }
 
   createNewPost(form: FormGroup) {
+    console.log(form);
     const formData = new FormData();
+
+    // formData.append('text', form.value.text);
     formData.append('text', form.controls['text'].value);
     const photo_file = form.controls['photo_file'].value;
     if (photo_file) {
@@ -82,6 +86,7 @@ export class PostsService {
       formData.append('replying_to', replying_to);
     }
     formData.append('author', this.userId);
+    formData.append('tags', JSON.stringify(form.controls['tags'].value));
 
     return this.http.post('/posts', formData).subscribe((_) => {
       this.toast.success('Your tweet was posted!');
@@ -103,5 +108,9 @@ export class PostsService {
 
   togglePostLiked(post_id: string, user_id: string) {
     return this.http.post<boolean>(`/posts/like/${post_id}/${user_id}`, {});
+  }
+
+  getAllTagsByPostId(post_id: string) {
+    return this.http.get<string[]>(`/posts/${post_id}/tags`);
   }
 }

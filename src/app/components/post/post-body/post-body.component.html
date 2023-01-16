@@ -4,7 +4,11 @@
   class="photo"
   [src]="domain + '/posts/' + post.id + '/photo_url/' + post.photo_url"
 />
-
+<div class="tagsContainer">
+  <span *ngFor="let tag of post.tags; let i = index" class="tag"
+    >#{{ tag }}</span
+  >
+</div>
 <app-post-toolbar
   *ngIf="showToolbar"
   [currentUser]="currentUser"

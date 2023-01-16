@@ -32,5 +32,9 @@ export class PostComponent implements OnInit {
       this.showReplyHandle = true;
       this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
     }
+
+    this.postsService.getAllTagsByPostId(this.post.id).subscribe((tags) => {
+      this.post.tags = tags;
+    });
   }
 }

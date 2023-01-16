@@ -4,6 +4,22 @@
   gap: 0.5rem;
 }
 
+.backArrow {
+  text-decoration: none;
+  font-size: 2rem;
+  color: rgba(var(--text-color));
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.backArrow:hover {
+  background-color: rgba(var(--text-color), 0.1);
+}
+
 .circleButton {
   text-decoration: none;
 }
