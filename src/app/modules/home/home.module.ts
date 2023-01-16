@@ -5,7 +5,6 @@ import { HomeComponent } from '../../components/home/home.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SettingsMenuComponent } from '../../components/navbar/settings-menu/settings-menu.component';
 import { UserMenuComponent } from '../../components/navbar/user-menu/user-menu.component';
-import { NewPostComponent } from '../../components/new-post/new-post.component';
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { ProfileComponent } from '../../components/profile/profile.component';
@@ -15,9 +14,9 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfileHeaderComponent } from '../../components/profile/profile-header/profile-header.component';
-import { ReplyComponent } from '../../components/reply/reply.component';
 import { EditProfileFormComponent } from '../../components/profile/edit-profile-form/edit-profile-form.component';
 import { PostModule } from '../post/post.module';
+import { ExpandedPostComponent } from '../../components/expanded-post/expanded-post.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +29,9 @@ import { PostModule } from '../post/post.module';
     UserFollowLinkComponent,
     SearchbarComponent,
     FeedComponent,
-    // NewPostComponent,
+    ExpandedPostComponent,
     ProfileComponent,
     ProfileHeaderComponent,
-    // ReplyComponent,
     EditProfileFormComponent,
   ],
   imports: [

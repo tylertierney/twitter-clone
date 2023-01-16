@@ -6,7 +6,11 @@
   (onSubmit)="postsService.createNewPost($event)"
 ></app-new-post>
 <ng-container *ngIf="postsService.followedPosts$ | async as posts">
-  <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  <app-post
+    *ngFor="let post of posts"
+    [post]="post"
+    [showReplyHandle]="true"
+  ></app-post>
   <article *ngIf="posts.length < 1">
     Follow some users to view all kinds of exciting content!
   </article>

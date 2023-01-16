@@ -7,6 +7,7 @@
   gap: 0.6rem;
   padding: 1rem 1rem 0.3rem 1rem;
   cursor: pointer;
+  border-bottom: 1px solid rgba(var(--text-color), 0.1);
 }
 
 .post:hover {
@@ -57,6 +58,6 @@ a {
   translate: 0 0.5rem;
 }
 
-.borderBottom {
-  border-bottom: 1px solid rgba(var(--text-color), 0.1);
+.noBorder {
+  border-bottom: none;
 }

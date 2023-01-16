@@ -1,9 +1,13 @@
 <ng-container *ngIf="user$ | async as user">
   <ng-container *ngIf="posts$ | async as posts">
     <div class="sub-nav" style="z-index: 2">
-      <a routerLink="../" class="material-symbols-outlined backArrow">
+      <button
+        (click)="location.back()"
+        routerLink="../"
+        class="material-symbols-outlined backArrow"
+      >
         arrow_back
-      </a>
+      </button>
       <div class="navInfo">
         <h4>{{ user.name }}</h4>
         <span>{{ posts.length }} Tweets</span>

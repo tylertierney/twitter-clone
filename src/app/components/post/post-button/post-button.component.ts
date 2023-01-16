@@ -17,4 +17,9 @@ export class PostButtonComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  clicked(e: Event) {
+    e.stopPropagation();
+    this.onClick.emit(e);
+  }
 }

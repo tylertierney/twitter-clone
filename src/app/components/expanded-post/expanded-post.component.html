@@ -1,0 +1,29 @@
+<div class="sub-nav" style="z-index: 2">
+  <button (click)="location.back()" class="material-symbols-outlined backArrow">
+    arrow_back
+  </button>
+  <h4>Tweet</h4>
+</div>
+<ng-container *ngIf="post$ | async as post">
+  <app-post [post]="post"></app-post>
+</ng-container>
+<div class="replyCount" *ngIf="replies$ | async as replies">
+  {{
+    replies.length +
+      " " +
+      (replies.length > 0
+        ? replies.length > 1
+          ? "replies"
+          : "reply"
+        : "replies yet")
+  }}
+</div>
+<app-new-post placeholder="Tweet your reply"></app-new-post>
+<ng-container *ngIf="replies$ | async as replies">
+  <app-post
+    *ngFor="let post of replies"
+    [post]="post"
+    [showParent]="false"
+    [showReplyHandle]="false"
+  ></app-post>
+</ng-container>

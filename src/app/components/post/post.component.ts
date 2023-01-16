@@ -11,11 +11,9 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost;
-  @Input() expanded: boolean;
-  // @Input() type: 'reply' | 'feed' | 'expanded';
-  // @Input() isReply: boolean;
   domain = environment.domain;
   @Input() showToolbar = true;
+  isReply: boolean = false;
   @Input() showReplyHandle = false;
   @Input() showParent = true;
   @Input() showMedia = true;
@@ -29,12 +27,16 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.post.replying_to) {
-      this.showReplyHandle = true;
+      this.isReply = true;
       this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
     }
 
     this.postsService.getAllTagsByPostId(this.post.id).subscribe((tags) => {
       this.post.tags = tags;
     });
+  }
+
+  test() {
+    console.log('clicked');
   }
 }

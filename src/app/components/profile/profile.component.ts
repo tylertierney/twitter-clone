@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
     private postsService: PostsService,
     public themeService: ThemeService,
     public sanitizer: DomSanitizer,
-    private http: HttpClient
+    private http: HttpClient,
+    public location: Location
   ) {}
 
   ngOnInit(): void {

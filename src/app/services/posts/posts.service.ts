@@ -113,4 +113,8 @@ export class PostsService {
   getAllTagsByPostId(post_id: string) {
     return this.http.get<string[]>(`/posts/${post_id}/tags`);
   }
+
+  getRepliesByPostId(post_id: string) {
+    return this.http.get<IPost[]>(`/posts/${post_id}/replies`);
+  }
 }
