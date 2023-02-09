@@ -1,3 +1,9 @@
-<menu [style.left]="left + 'px'" [style.top]="top + 'px'">
+<menu
+  [style.left]="left + 'px'"
+  [style.top]="top + 'px'"
+  (clickOutside)="test($event)"
+  [style.height]="height"
+  [style.width]="width"
+>
   <ng-template [ngTemplateOutlet]="content"></ng-template>
 </menu>

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
+import { Observable, ReplaySubject, share, shareReplay, switchMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 export interface IPost {
@@ -18,80 +18,65 @@ export interface IPost {
   tags: string[];
 }
 
-export interface ITweetForm {
-  text: FormControl<string>;
-  photo_file: FormControl<File | null>;
-  replying_to: FormControl<string | null>;
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  userId: string;
-
-  // followedPosts$: Observable<IPost[]>;
-  // refreshFollowedPosts$ = new BehaviorSubject<boolean>(false);
-
-  followedPosts$ = new BehaviorSubject<IPost[]>([]);
+  userId$ = new ReplaySubject<string>();
+  followedPosts$ = new ReplaySubject<IPost[]>();
 
   constructor(
     private http: HttpClient,
     public authService: AuthService,
     private toast: ToastrService
   ) {
-    this.authService.user$.subscribe((user) => {
-      if (user && user.id) {
-        this.userId = user.id;
-      }
-    });
+    this.authService.user$.subscribe(({ id }) => this.userId$.next(id));
 
-    // this.authService.user$.pipe(switchMap(({ id }) => {
-    //   return this.http.get<IPost[]>(`/posts/${id}/feed`)
-    // }))
-
-    // this.followedPosts$.next()
-
-    // this.followedPosts$ = this.authService.user$.pipe(
-    //   switchMap(({ id }) => {
-    //     return this.http.get<IPost[]>(`/posts/${id}/feed`);
-    //   })
-    // );
+    this.userId$
+      .pipe(
+        shareReplay(1),
+        switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
+      )
+      .subscribe((posts) => {
+        this.followedPosts$.next(posts);
+      });
   }
 
   fetchFollowedPosts() {
-    this.authService.user$.subscribe(({ id }) => {
-      this.http.get<IPost[]>(`/posts/${id}/feed`).subscribe((posts) => {
+    this.userId$
+      .pipe(
+        shareReplay(1),
+        switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
+      )
+      .subscribe((posts) => {
         this.followedPosts$.next(posts);
       });
-    });
   }
 
-  // getFollowedPosts(userId: string): Observable<IPost[]> {
-  //   return this.http.get<IPost[]>(`/posts/${userId}/feed`);
-  // }
-
   createNewPost(form: FormGroup) {
-    console.log(form);
-    const formData = new FormData();
-
-    // formData.append('text', form.value.text);
-    formData.append('text', form.controls['text'].value);
-    const photo_file = form.controls['photo_file'].value;
-    if (photo_file) {
-      formData.append('photo_file', new Blob([photo_file]));
-    }
-    const replying_to = form.controls['replying_to'].value;
-    if (replying_to) {
-      formData.append('replying_to', replying_to);
-    }
-    formData.append('author', this.userId);
-    formData.append('tags', JSON.stringify(form.controls['tags'].value));
-
-    return this.http.post('/posts', formData).subscribe((_) => {
-      this.toast.success('Your tweet was posted!');
-      form.reset();
-    });
+    return this.userId$
+      .pipe(
+        switchMap((userId) => {
+          const formData = new FormData();
+          formData.append('text', form.controls['text'].value);
+          const photo_file = form.controls['photo_file'].value;
+          if (photo_file) {
+            formData.append('photo_file', new Blob([photo_file]));
+          }
+          const replying_to = form.controls['replying_to'].value;
+          if (replying_to) {
+            formData.append('replying_to', replying_to);
+          }
+          formData.append('tags', JSON.stringify(form.controls['tags'].value));
+          formData.append('author', userId);
+          return this.http.post('/posts', formData);
+        })
+      )
+      .subscribe(() => {
+        this.fetchFollowedPosts();
+        this.toast.success('Your tweet was posted');
+        form.reset();
+      });
   }
 
   getPostsByUsername(username: string): Observable<any[]> {

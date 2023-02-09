@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalService } from '../../../services/modal/modal.service';
 import { IPost, PostsService } from '../../../services/posts/posts.service';
@@ -53,4 +60,8 @@ export class PostToolbarComponent implements OnInit {
       content: template,
     });
   }
+
+  // test() {
+  //   this.host.nativeElement.remove();
+  // }
 }

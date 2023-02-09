@@ -14,4 +14,8 @@ export class PostHeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  stopPropagation(e: Event) {
+    e.stopPropagation();
+  }
 }

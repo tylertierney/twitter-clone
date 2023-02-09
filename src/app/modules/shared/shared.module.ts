@@ -10,6 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
 import { RouterModule } from '@angular/router';
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
     ModalComponent,
     SubmitButtonComponent,
     ReadableDatePipe,
+    // ClickOutsideDirective,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
       newestOnTop: false,
     }),
     RouterModule,
+    MatMenuModule,
   ],
   exports: [
     CommonModule,
@@ -49,6 +53,8 @@ import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
     SubmitButtonComponent,
     RouterModule,
     ReadableDatePipe,
+    MatMenuModule,
+    // ClickOutsideDirective,
   ],
 })
 export class SharedModule {}

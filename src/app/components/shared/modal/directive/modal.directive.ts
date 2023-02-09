@@ -11,14 +11,14 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { MenuComponent } from '../menu.component';
+import { ModalComponent } from '../modal.component';
 
 @Directive({
-  selector: '[menu]',
+  selector: '[modal]',
 })
-export class MenuDirective {
-  @Input() menu: TemplateRef<any>;
-  private componentRef: ComponentRef<MenuComponent> | null;
+export class ModalDirective {
+  @Input() modal: TemplateRef<any>;
+  private componentRef: ComponentRef<ModalComponent> | null;
 
   constructor(
     private elementRef: ElementRef,
@@ -38,37 +38,20 @@ export class MenuDirective {
   onClick(): void {
     if (!this.componentRef) {
       const componentFactoryResolver =
-        this.componentFactoryResolver.resolveComponentFactory(MenuComponent);
+        this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
       this.componentRef = componentFactoryResolver.create(this.injector);
       this.appRef.attachView(this.componentRef.hostView);
       const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
         .rootNodes[0];
       document.body.appendChild(domElem);
-      this.setMenuComponentProperties();
+      this.setModalComponentProperties();
+      console.log(this.componentRef);
     }
   }
 
-  setMenuComponentProperties() {
+  setModalComponentProperties() {
     if (this.componentRef !== null && this.componentRef.instance !== null) {
-      this.componentRef.instance.content = this.menu;
-      const { right, top, height, left } =
-        this.elementRef.nativeElement.getBoundingClientRect();
-      // this.componentRef.instance.left = parseInt(right, 10) + 16;
-      // this.componentRef.instance.top = top - Math.floor(height / 4);
-
-      if (window.innerWidth <= 460) {
-        this.componentRef.instance.left = 0;
-        this.componentRef.instance.top = 0;
-        this.componentRef.instance.height = '100vh';
-        this.componentRef.instance.width = '100%';
-        // this.componentRef.instance.
-      } else {
-        this.componentRef.instance.left = parseInt(right, 10) + 16;
-        this.componentRef.instance.top = top - Math.floor(height / 4);
-      }
-
-      // this.componentRef.instance.left = parseInt(left, 10);
-      // this.componentRef.instance.top = parseInt(top, 10) - height;
+      this.componentRef.instance.content = this.modal;
     }
   }
 
@@ -76,8 +59,9 @@ export class MenuDirective {
   clickout(e: Event) {
     if (!this.componentRef) return;
     if (
-      !this.componentRef.location.nativeElement.contains(e.target) &&
-      !this.elementRef.nativeElement.contains(e.target)
+      this.componentRef.location.nativeElement.contains(e.target)
+      // &&
+      // this.elementRef.nativeElement.contains(e.target)
     ) {
       this.destroy();
     }

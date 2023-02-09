@@ -28,19 +28,23 @@
   </a>
   <a
     [routerLinkActive]="'active'"
-    [routerLink]="'' + (authService.user$ | async)?.username"
+    [routerLink]="'../' + (authService.user$ | async)?.username"
   >
     <button>
       <span class="material-symbols-outlined">person</span>
       <span class="navItemLabel">Profile</span>
     </button>
   </a>
-  <button [menu]="settingsMenu">
+  <!-- [menu]="settingsMenu" -->
+  <button [matMenuTriggerFor]="menu">
     <span style="font-size: inherit" class="material-symbols-outlined">
-      settings
+      pending
     </span>
     <span class="navItemLabel">More</span>
   </button>
+  <mat-menu #menu="matMenu" class="something">
+    <app-settings-menu></app-settings-menu>
+  </mat-menu>
   <ng-template #settingsMenu>
     <app-settings-menu></app-settings-menu>
   </ng-template>

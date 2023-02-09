@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, ReplaySubject, tap } from 'rxjs';
 import { IUser } from '../user/user.service';
 
 export interface IRegistration {}
@@ -10,9 +10,11 @@ export interface IRegistration {}
   providedIn: 'root',
 })
 export class AuthService {
-  user$ = new BehaviorSubject<any>(null);
+  user$ = new ReplaySubject<IUser>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.http.get<IUser>(`/auth`).subscribe((user) => this.user$.next(user));
+  }
 
   register(formData: {
     email: string;
@@ -22,8 +24,7 @@ export class AuthService {
   }): void {
     const profilePics = ['coral', 'bluejeans', 'aeroblue', 'pastelpink'];
 
-    const profile_pic =
-      profilePics[Math.floor(Math.random() * profilePics.length)];
+    const profile_pic = profilePics[~~(Math.random() * profilePics.length)];
 
     const body = { ...formData, profile_pic };
 
@@ -42,15 +43,19 @@ export class AuthService {
   }
 
   login(formData: { email: string; password: string }): void {
-    this.http.post<IUser>(`/auth/login`, formData, {}).subscribe((user) => {
-      console.log(user);
-      this.user$.next(user);
-      this.router.navigate(['../home']);
-    });
+    this.http
+      .post<IUser>(`/auth/login`, formData, {})
+      .pipe(
+        tap((_) => {
+          console.log(_);
+          this.router.navigate(['../home']);
+        })
+      )
+      .subscribe((_) => this.user$.next(_));
   }
 
   logout(): void {
-    this.http.get(`/auth/logout`, {}).subscribe(() => {
+    this.http.get(`/auth/logout`).subscribe(() => {
       this.router.navigate(['login']);
     });
   }

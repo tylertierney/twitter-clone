@@ -17,6 +17,8 @@ import { ProfileHeaderComponent } from '../../components/profile/profile-header/
 import { EditProfileFormComponent } from '../../components/profile/edit-profile-form/edit-profile-form.component';
 import { PostModule } from '../post/post.module';
 import { ExpandedPostComponent } from '../../components/expanded-post/expanded-post.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { HomeRouteReuseStrategy } from './home-route-reuse-strategy';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ExpandedPostComponent } from '../../components/expanded-post/expanded-p
     PostModule,
   ],
   exports: [],
-  providers: [],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: HomeRouteReuseStrategy },
+  ],
 })
 export class HomeModule {}

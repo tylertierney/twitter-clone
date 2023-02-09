@@ -13,6 +13,8 @@ import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
 import { ApiInterceptor } from '../../interceptors/api-interceptor';
 import { SharedModule } from '../shared/shared.module';
+import { RouteReuseStrategy } from '@angular/router';
+import { HomeRouteReuseStrategy } from '../home/home-route-reuse-strategy';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { SharedModule } from '../shared/shared.module';
   providers: [
     AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    // { provide: RouteReuseStrategy, useClass: HomeRouteReuseStrategy },
   ],
   bootstrap: [AppComponent],
 })

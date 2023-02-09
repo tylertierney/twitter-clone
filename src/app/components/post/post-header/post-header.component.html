@@ -1,3 +1,8 @@
 <span class="name">{{ name }}&nbsp;</span>
-<a [routerLink]="'../' + username" class="username">{{ "@" + username }}</a>
-<span class="date">{{ date | readableDate }}</span>
+<a
+  (click)="stopPropagation($event)"
+  [routerLink]="'../' + username"
+  class="username"
+  >{{ "@" + username }}</a
+>
+<span class="date">&nbsp;&nbsp;&bull;&nbsp;{{ date | readableDate }}</span>

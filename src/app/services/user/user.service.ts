@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 export interface IUser {
   id: string;
@@ -29,7 +28,7 @@ export class UserService {
   }
 
   getAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`/users/`, {
+    return this.http.get<IUser[]>(`/users/`, {
       // withCredentials: true,
     });
   }

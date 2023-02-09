@@ -125,3 +125,8 @@ body {
     translate: 0;
   }
 }
+
+.something {
+  background-color: rgba(var(--bkg-color));
+  box-shadow: 0px 0px 10px 1px rgba(var(--text-color), 0.1) !important;
+}

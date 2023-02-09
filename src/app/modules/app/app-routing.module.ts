@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from '../../components/auth/register/register.component';
 import { LoginComponent } from 'src/app/components/auth/login/login.component';
+import { HomeRouteReuseStrategy } from '../home/home-route-reuse-strategy';
 
 const routes: Routes = [
   {
@@ -39,7 +40,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

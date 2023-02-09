@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { IUser, UserService } from 'src/app/services/user/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { PostsService } from '../../services/posts/posts.service';
 import { ThemeService } from '../../services/theme/theme.service';
 
@@ -13,15 +13,25 @@ import { ThemeService } from '../../services/theme/theme.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
-  profile$: Observable<any>;
-  user$: Observable<IUser>;
-  posts$: Observable<any[]>;
+export class ProfileComponent {
   newHeaderPicUrl: SafeUrl;
   newHeaderPicFile: File;
 
-  numOfFollowing$: Observable<number>;
-  numOfFollowers$: Observable<number>;
+  username$ = this.activatedRoute.params.pipe(
+    map((params) => params['username'])
+  );
+  user$ = this.username$.pipe(
+    switchMap((username) => this.userService.getUserByUsername(username))
+  );
+  posts$ = this.username$.pipe(
+    switchMap((username) => this.postsService.getPostsByUsername(username))
+  );
+  numOfFollowing$ = this.user$.pipe(
+    switchMap(({ id }) => this.http.get<number>('/users/' + id + '/following/'))
+  );
+  numOfFollowers$ = this.user$.pipe(
+    switchMap(({ id }) => this.http.get<number>('/users/' + id + '/followers/'))
+  );
 
   constructor(
     public userService: UserService,
@@ -32,30 +42,4 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     public location: Location
   ) {}
-
-  ngOnInit(): void {
-    const username$ = this.activatedRoute.params.pipe(
-      map((params) => params['username'])
-    );
-
-    this.user$ = username$.pipe(
-      switchMap((username) => this.userService.getUserByUsername(username))
-    );
-
-    this.posts$ = username$.pipe(
-      switchMap((username) => this.postsService.getPostsByUsername(username))
-    );
-
-    this.numOfFollowing$ = this.user$.pipe(
-      switchMap(({ id }) =>
-        this.http.get<number>('/users/' + id + '/following/')
-      )
-    );
-
-    this.numOfFollowers$ = this.user$.pipe(
-      switchMap(({ id }) =>
-        this.http.get<number>('/users/' + id + '/followers/')
-      )
-    );
-  }
 }
