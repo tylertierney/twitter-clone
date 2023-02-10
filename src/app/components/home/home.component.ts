@@ -14,6 +14,7 @@ import { UserService } from '../../services/user/user.service';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('spacer') spacer: ElementRef<HTMLDivElement>;
+  // @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;
 
   constructor(
     private userService: UserService,
@@ -28,21 +29,28 @@ export class HomeComponent implements OnInit {
 
   scrollPosition = window.scrollY;
 
-  @HostListener('document:scroll', ['$event', '$event.target'])
-  public onScroll() {
-    const offset = window.scrollY;
-    if (offset > this.scrollPosition) {
-      // console.log('scrolling down');
-      // this.host.nativeElement.style.marginTop = 'auto';
-      // this.host.nativeElement.style.bottom = '0';
-      // this.host.nativeElement.style.top = 'unset';
-      // this.host.nativeElement.style.marginBottom = 'unset';
-      // this.spacer.nativeElement.style.marginTop = offset + 'px';
-    } else {
-      this.spacer.nativeElement.style.marginTop = offset + 'px';
+  // @HostListener('document:scroll', ['$event', '$event.target'])
+  // public onScroll() {
+  //   const offset = window.scrollY;
+  //   if (offset > this.scrollPosition) {
+  //     // console.log('scrolling down');
+  //     // this.host.nativeElement.style.marginTop = 'auto';
+  //     // this.host.nativeElement.style.bottom = '0';
+  //     // this.host.nativeElement.style.top = 'unset';
+  //     // this.host.nativeElement.style.marginBottom = 'unset';
+  //     // this.spacer.nativeElement.style.marginTop = offset + 'px';
+  //   } else {
+  //     const sidebarHeight = parseInt(
+  //       window.getComputedStyle(this.sidebar.nativeElement).height,
+  //       10
+  //     );
+  //     console.log(sidebarHeight);
 
-      console.log('scrolling up');
-    }
-    this.scrollPosition = offset;
-  }
+  //     // this.spacer.nativeElement.style.marginTop =
+  //     //   (offset - sidebarHeight > 0 ? offset + sidebarHeight : 0) + 'px';
+  //     this.spacer.nativeElement.style.marginTop = offset + 'px';
+  //     console.log('scrolling up');
+  //   }
+  //   this.scrollPosition = offset;
+  // }
 }

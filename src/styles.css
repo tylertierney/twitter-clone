@@ -23,8 +23,12 @@ body {
 
   --text-color: 34, 34, 34;
   --bkg-color: 255, 255, 255;
-  --brand-primary: 61, 194, 196;
-  --brand-primary-dark: 27, 146, 148;
+  /* --brand-primary: 61, 194, 196; */
+  /* --brand-primary-dark: 27, 146, 148; */
+
+  --brand-primary: 29, 155, 240;
+  --brand-primary-dark: 0, 125, 209;
+
   --hover-color: 15, 20, 25, 0.1;
   --box-shadow-color: 0, 0, 0;
   --panel-color: #e8e8e863;
@@ -32,10 +36,13 @@ body {
 
 body.dark-theme {
   --text-color: 238, 238, 238;
-  --bkg-color: 37, 34, 34;
-  --hover-color: 45, 45, 52;
+  /* --bkg-color: 37, 34, 34; */
+  --bkg-color: 21, 31, 43;
+  /* --hover-color: 45, 45, 52; */
+  --hover-color: 45, 55, 67;
   --box-shadow-color: 190, 190, 190;
-  --panel-color: #14141a;
+  /* --panel-color: #14141a; */
+  --panel-color: #1e2732;
 }
 
 .circleButton {

@@ -1,4 +1,4 @@
-<div class="hostContainer">
+<form [formGroup]="searchForm">
   <div class="searchbarContainer">
     <svg
       stroke="currentColor"
@@ -14,6 +14,34 @@
       ></path>
     </svg>
 
-    <input type="search" placeholder="Search Twitter" />
+    <input
+      formControlName="searchTerm"
+      type="search"
+      placeholder="Search Twitter"
+    />
   </div>
-</div>
+  <ng-container *ngIf="searchResult$ | async as results">
+    <div class="searchResultsDropdown" *ngIf="results.length > 0">
+      <h3>Results</h3>
+      <a
+        class="searchResult"
+        *ngFor="let result of results"
+        [routerLink]="'../' + result.username"
+      >
+        <img
+          [src]="
+            domain +
+            '/users/' +
+            result.username +
+            '/profile_pic/' +
+            result.profile_pic
+          "
+        />
+        <div class="names">
+          <span class="name">{{ result.name }}</span>
+          <span class="username">{{ result.username }}</span>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</form>

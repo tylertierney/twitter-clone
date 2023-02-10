@@ -49,3 +49,14 @@ button:disabled {
 .secondary:disabled {
   opacity: 0.5;
 }
+
+.danger {
+  background-color: rgb(255, 94, 94);
+  border: 2px solid rgb(255, 94, 94);
+  color: white;
+}
+
+.danger:hover {
+  border: 2px solid rgb(255, 49, 49);
+  background-color: rgb(255, 49, 49);
+}

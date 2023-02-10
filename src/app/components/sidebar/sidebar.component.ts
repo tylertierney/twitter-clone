@@ -14,29 +14,29 @@ export class SidebarComponent implements OnInit {
     this.scrollPosition = window.scrollY;
   }
 
-  @HostListener('document:scroll', ['$event', '$event.target'])
-  public onClick(e: MouseEvent, targetElement: HTMLElement): void {
-    const offset = window.scrollY;
-    if (offset > this.scrollPosition) {
-      // console.log('scrolling down');
-      // this.host.nativeElement.style.marginTop = 'auto';
-      // this.host.nativeElement.style.bottom = '0';
-      // this.host.nativeElement.style.top = 'unset';
-      // this.host.nativeElement.style.marginBottom = 'unset';
+  // @HostListener('document:scroll', ['$event', '$event.target'])
+  // public onClick(e: MouseEvent, targetElement: HTMLElement): void {
+  //   const offset = window.scrollY;
+  //   if (offset > this.scrollPosition) {
+  //     // console.log('scrolling down');
+  //     // this.host.nativeElement.style.marginTop = 'auto';
+  //     // this.host.nativeElement.style.bottom = '0';
+  //     // this.host.nativeElement.style.top = 'unset';
+  //     // this.host.nativeElement.style.marginBottom = 'unset';
 
-      this.host.nativeElement.style.top = '-290px';
-      this.host.nativeElement.style.removeProperty('bottom');
-    } else {
-      // this.host.nativeElement.style.marginTop = 'unset';
-      // this.host.nativeElement.style.bottom = 'unset';
-      // this.host.nativeElement.style.marginBottom = 'auto';
-      // this.host.nativeElement.style.top = -420 + 'px';
+  //     this.host.nativeElement.style.top = '-299px';
+  //     this.host.nativeElement.style.removeProperty('bottom');
+  //   } else {
+  //     // this.host.nativeElement.style.marginTop = 'unset';
+  //     // this.host.nativeElement.style.bottom = 'unset';
+  //     // this.host.nativeElement.style.marginBottom = 'auto';
+  //     // this.host.nativeElement.style.top = -420 + 'px';
 
-      // console.log('scrolling up');
+  //     // console.log('scrolling up');
 
-      this.host.nativeElement.style.bottom = '-280px';
-      this.host.nativeElement.style.removeProperty('top');
-    }
-    this.scrollPosition = offset;
-  }
+  //     this.host.nativeElement.style.bottom = '-289px';
+  //     this.host.nativeElement.style.removeProperty('top');
+  //   }
+  //   this.scrollPosition = offset;
+  // }
 }

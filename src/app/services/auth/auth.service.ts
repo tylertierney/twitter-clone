@@ -46,8 +46,7 @@ export class AuthService {
     this.http
       .post<IUser>(`/auth/login`, formData, {})
       .pipe(
-        tap((_) => {
-          console.log(_);
+        tap(() => {
           this.router.navigate(['../home']);
         })
       )

@@ -1,8 +1,34 @@
-<span class="name">{{ name }}&nbsp;</span>
-<a
-  (click)="stopPropagation($event)"
-  [routerLink]="'../' + username"
-  class="username"
-  >{{ "@" + username }}</a
->
-<span class="date">&nbsp;&nbsp;&bull;&nbsp;{{ date | readableDate }}</span>
+<ng-container *ngIf="authService.user$ | async as currentUser">
+  <span class="name">{{ post.name }}&nbsp;</span>
+  <a
+    (click)="stopPropagation($event)"
+    [routerLink]="'../' + post.username"
+    class="username"
+    >{{ "@" + post.username }}</a
+  >
+  <span class="date"
+    >&nbsp;&nbsp;&bull;&nbsp;{{ post.date | readableDate }}</span
+  >
+  <span
+    *ngIf="post.username === currentUser.username"
+    class="material-symbols-outlined trashIcon"
+    (click)="openModal($event, confirmDeleteDialog)"
+    >delete</span
+  >
+</ng-container>
+<ng-template #confirmDeleteDialog>
+  <div class="confirmDeleteDialog">
+    <p>Are you sure you want to delete this tweet?</p>
+    <div class="controls">
+      <app-submit-button
+        type="outline"
+        style="border-color: rgba(var(--text-color), 0.5)"
+        (click)="modalService.close()"
+        >Cancel</app-submit-button
+      >
+      <app-submit-button type="danger" (click)="deletePostById(post.id)"
+        >Delete</app-submit-button
+      >
+    </div>
+  </div>
+</ng-template>

@@ -30,13 +30,9 @@ export class PostComponent implements OnInit {
       this.isReply = true;
       this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
     }
-
-    this.postsService.getAllTagsByPostId(this.post.id).subscribe((tags) => {
-      this.post.tags = tags;
-    });
   }
 
   test() {
-    console.log('clicked');
+    this.postsService.getPostById(this.post.id).subscribe(console.log);
   }
 }

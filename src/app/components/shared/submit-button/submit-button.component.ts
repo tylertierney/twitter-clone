@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./submit-button.component.css'],
 })
 export class SubmitButtonComponent implements OnInit {
-  @Input() type: 'outline' | 'primary' | 'secondary' = 'primary';
+  @Input() type: 'outline' | 'primary' | 'secondary' | 'danger' = 'primary';
   @Output() click = new EventEmitter();
 
   constructor() {}

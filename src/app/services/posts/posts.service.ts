@@ -95,11 +95,12 @@ export class PostsService {
     return this.http.post<boolean>(`/posts/like/${post_id}/${user_id}`, {});
   }
 
-  getAllTagsByPostId(post_id: string) {
-    return this.http.get<string[]>(`/posts/${post_id}/tags`);
-  }
-
   getRepliesByPostId(post_id: string) {
     return this.http.get<IPost[]>(`/posts/${post_id}/replies`);
+  }
+
+  deletePostById(post_id: string) {
+    console.log(post_id);
+    return this.http.delete<any>(`/posts/${post_id}`);
   }
 }

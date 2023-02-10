@@ -25,12 +25,7 @@
       </div>
     </div>
     <div class="body">
-      <app-post-header
-        [user_id]="post.user_id"
-        [username]="post.username"
-        [date]="post.date"
-        [name]="post.name"
-      ></app-post-header>
+      <app-post-header [post]="post"></app-post-header>
       <app-post-body
         [showToolbar]="showToolbar"
         [currentUser]="currentUser"
@@ -43,3 +38,4 @@
     <app-post [post]="repliedPost"></app-post>
   </ng-container>
 </ng-container>
+<!-- <button (click)="test()">test</button> -->
