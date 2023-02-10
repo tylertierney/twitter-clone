@@ -52,7 +52,7 @@ a {
 .handle {
   padding: 1rem 0;
   width: 3px;
-  background-color: rgba(var(--text-color), 0.09);
+  background-color: rgba(var(--hover-color));
   border-radius: 10px;
   height: calc(100% + 1rem);
   translate: 0 0.5rem;

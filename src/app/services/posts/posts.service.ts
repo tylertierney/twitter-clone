@@ -2,7 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, ReplaySubject, share, shareReplay, switchMap } from 'rxjs';
+import {
+  map,
+  Observable,
+  ReplaySubject,
+  share,
+  shareReplay,
+  switchMap,
+  take,
+} from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 export interface IPost {
@@ -38,7 +46,7 @@ export class PostsService {
         switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
       )
       .subscribe((posts) => {
-        this.followedPosts$.next(posts);
+        this.followedPosts$.next(posts.slice(0, 1));
       });
   }
 

@@ -38,4 +38,44 @@
     <app-post [post]="repliedPost"></app-post>
   </ng-container>
 </ng-container>
-<!-- <button (click)="test()">test</button> -->
+
+<!-- <ng-container *ngIf="authService.user$ | async as currentUser">
+  <ng-container *ngIf="showParent && (repliedPost$ | async) as repliedPost">
+    <app-post [post]="repliedPost" [showReplyHandle]="true"></app-post>
+  </ng-container>
+  <div
+    [routerLink]="'../' + post.username + '/' + post.id"
+    class="post"
+    [ngClass]="{ noBorder: showParent && isReply && showReplyHandle }"
+  >
+    <div class="post_left">
+      <a [routerLink]="'../' + post.username">
+        <img
+          [src]="post.profile_pic"
+          [src]="
+            domain +
+            '/users/' +
+            post.username +
+            '/profile_pic/' +
+            post.profile_pic
+          "
+          height="48px"
+          width="48px"
+          class="profile_pic"
+        />
+      </a>
+      <div *ngIf="isReply && showReplyHandle" class="handleContainer">
+        <div class="handle"></div>
+      </div>
+    </div>
+    <div class="body">
+      <app-post-header [post]="post"></app-post-header>
+      <app-post-body
+        [showToolbar]="showToolbar"
+        [currentUser]="currentUser"
+        [post]="post"
+        [showMedia]="showMedia"
+      ></app-post-body>
+    </div>
+  </div>
+</ng-container> -->

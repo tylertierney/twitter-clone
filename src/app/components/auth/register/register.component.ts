@@ -1,5 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UniqueEmailValidator } from '../validators/UniqueEmailValidator';
 import { UniqueUsernameValidator } from '../validators/UniqueUsernameValidator';
@@ -9,7 +13,7 @@ import { UniqueUsernameValidator } from '../validators/UniqueUsernameValidator';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   showPassword = false;
 
   constructor(
@@ -60,8 +64,6 @@ export class RegisterComponent implements OnInit {
       updateOn: 'change',
     }),
   });
-
-  ngOnInit(): void {}
 
   submit(): void {
     this.authService.register(this.registrationForm.value);

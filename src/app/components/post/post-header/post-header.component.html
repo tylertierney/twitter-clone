@@ -23,10 +23,10 @@
       <app-submit-button
         type="outline"
         style="border-color: rgba(var(--text-color), 0.5)"
-        (click)="modalService.close()"
+        (onClick)="modalService.close()"
         >Cancel</app-submit-button
       >
-      <app-submit-button type="danger" (click)="deletePostById(post.id)"
+      <app-submit-button type="danger" (onClick)="deletePostById(post.id)"
         >Delete</app-submit-button
       >
     </div>

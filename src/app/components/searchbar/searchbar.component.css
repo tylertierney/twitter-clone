@@ -87,11 +87,13 @@ form .searchResultsDropdown {
   border-radius: 0.5rem;
   min-height: 100px;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .searchResultsDropdown h3 {
   margin: 0;
   padding: 1rem;
+  font-weight: 900;
 }
 
 .searchResult {

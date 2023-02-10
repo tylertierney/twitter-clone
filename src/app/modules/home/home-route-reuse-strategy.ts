@@ -9,9 +9,6 @@ export class HomeRouteReuseStrategy implements RouteReuseStrategy {
   private storedRoutes = new Map<string, DetachedRouteHandle>();
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    // console.log(route.routeConfig);
-    console.log(route.routeConfig?.path);
-    console.log(this.storedRoutes);
     // return route.routeConfig!.path === 'home';
     // return true;
 

@@ -1,7 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, of, ReplaySubject, tap } from 'rxjs';
+import {
+  catchError,
+  map,
+  Observable,
+  of,
+  ReplaySubject,
+  tap,
+  throwError,
+} from 'rxjs';
 import { IUser } from '../user/user.service';
 
 export interface IRegistration {}
@@ -22,18 +30,27 @@ export class AuthService {
     username: string;
     name: string;
   }): void {
-    const profilePics = ['coral', 'bluejeans', 'aeroblue', 'pastelpink'];
+    const profilePics = [
+      'coral',
+      'bluejeans',
+      'aeroblue',
+      'pastelpink',
+      'lightblue',
+      'lightgreen',
+      'mediumslateblue',
+      'deepskyblue',
+      'plum',
+    ];
 
     const profile_pic = profilePics[~~(Math.random() * profilePics.length)];
 
     const body = { ...formData, profile_pic };
 
     this.http
-      .post(`/auth/register`, body, {})
+      .post<IUser>(`/auth/register`, body)
       .pipe(
         catchError((err) => {
-          console.log('caught error');
-          return of(err);
+          return throwError(() => new Error(err.error));
         })
       )
       .subscribe((user) => {
