@@ -9,7 +9,7 @@
   <app-post
     *ngFor="let post of posts"
     [post]="post"
-    [showReplyHandle]="true"
+    [showReplyHandle]="false"
   ></app-post>
   <article *ngIf="posts.length < 1">
     Follow some users to view all kinds of exciting content!

@@ -1,9 +1,14 @@
-<div class="container" *ngIf="authService.user$ | async as currentUser">
-  <h3>Who To Follow</h3>
-  <li *ngFor="let targetUser of allUsers$ | async">
-    <app-user-follow-link
-      [currentUser]="currentUser"
-      [targetUser]="targetUser"
-    ></app-user-follow-link>
-  </li>
-</div>
+<ng-container *ngIf="allUsers$ | async as users">
+  <div class="container" *ngIf="authService.user$ | async as currentUser">
+    <h3>Who To Follow</h3>
+    <li *ngFor="let targetUser of users.slice(0, showingMore ? 7 : 3)">
+      <app-user-follow-link
+        [currentUser]="currentUser"
+        [targetUser]="targetUser"
+      ></app-user-follow-link>
+    </li>
+    <button (click)="showingMore = !showingMore">
+      Show {{ showingMore ? "Less" : "More" }}
+    </button>
+  </div>
+</ng-container>

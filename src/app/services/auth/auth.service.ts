@@ -21,7 +21,9 @@ export class AuthService {
   user$ = new ReplaySubject<IUser>();
 
   constructor(private http: HttpClient, private router: Router) {
-    this.http.get<IUser>(`/auth`).subscribe((user) => this.user$.next(user));
+    this.http.get<IUser>(`/auth`).subscribe((user) => {
+      if (user) this.user$.next(user);
+    });
   }
 
   register(formData: {

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import {
   map,
   Observable,
+  of,
   ReplaySubject,
   share,
   shareReplay,
@@ -43,10 +44,15 @@ export class PostsService {
     this.userId$
       .pipe(
         shareReplay(1),
-        switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
+        switchMap((userId) => {
+          return userId
+            ? this.http.get<IPost[]>(`/posts/${userId}/feed`)
+            : of([]);
+        })
       )
       .subscribe((posts) => {
-        this.followedPosts$.next(posts.slice(0, 1));
+        this.followedPosts$.next(posts);
+        // this.followedPosts$.next(posts.slice(0, 1));
       });
   }
 

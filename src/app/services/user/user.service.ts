@@ -28,8 +28,6 @@ export class UserService {
   }
 
   getAllUsers(): Observable<any[]> {
-    return this.http.get<IUser[]>(`/users/`, {
-      // withCredentials: true,
-    });
+    return this.http.get<IUser[]>(`/users/`);
   }
 }

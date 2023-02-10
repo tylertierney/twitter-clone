@@ -66,6 +66,8 @@ export class RegisterComponent {
   });
 
   submit(): void {
-    this.authService.register(this.registrationForm.value);
+    if (this.registrationForm.valid) {
+      this.authService.register(this.registrationForm.value);
+    }
   }
 }

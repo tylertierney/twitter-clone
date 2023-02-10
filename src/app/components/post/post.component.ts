@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { IPost, PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
@@ -13,10 +13,11 @@ export class PostComponent implements OnInit {
   @Input() post: IPost;
   domain = environment.domain;
   @Input() showToolbar = true;
-  isReply: boolean = false;
+  @Input() hasReply: boolean = false;
   @Input() showReplyHandle = false;
   @Input() showParent = true;
   @Input() showMedia = true;
+  @Input() helperText: TemplateRef<HTMLElement>;
 
   repliedPost$: Observable<IPost>;
 
@@ -27,7 +28,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.post.replying_to) {
-      this.isReply = true;
+      // this.hasReply = true;
       this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
     }
   }

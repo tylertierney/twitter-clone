@@ -12,6 +12,7 @@ import { UserService } from '../../services/user/user.service';
 })
 export class WhoToFollowComponent implements OnInit {
   allUsers$: Observable<any[]>;
+  showingMore = false;
 
   constructor(
     public usersService: UserService,
