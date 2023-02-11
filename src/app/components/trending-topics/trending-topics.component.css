@@ -1,7 +1,3 @@
-:host {
-  display: flex;
-}
-
 .sidebarMenu {
   border-radius: 16px;
   background-color: var(--panel-color);
@@ -41,6 +37,24 @@ ul {
 li {
   list-style-type: none;
   width: 100%;
+}
+
+li:hover {
+  background-color: rgba(var(--hover-color));
+}
+
+a {
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+}
+
+.count {
+  opacity: 0.5;
+  font-size: 0.8rem;
 }
 
 button {

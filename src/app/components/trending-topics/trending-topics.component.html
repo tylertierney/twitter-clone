@@ -1,0 +1,17 @@
+<div class="sidebarMenu" *ngIf="trendingTags | async as tags">
+  <div class="header">
+    <h3>Trending Topics</h3>
+    <span class="material-symbols-outlined"> trending_up </span>
+  </div>
+  <ul>
+    <li *ngFor="let tag of tags.slice(0, showingMore ? 6 : 3)">
+      <a>
+        <span class="tag">#{{ tag.text }}</span>
+        <span class="count">{{ tag.ct }} Tweet{{ tag.ct > 1 ? "s" : "" }}</span>
+      </a>
+    </li>
+  </ul>
+  <button (click)="showingMore = !showingMore">
+    Show {{ showingMore ? "Less" : "More" }}
+  </button>
+</div>

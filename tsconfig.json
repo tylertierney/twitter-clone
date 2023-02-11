@@ -17,15 +17,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "strictPropertyInitialization": false,
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

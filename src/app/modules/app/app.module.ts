@@ -7,22 +7,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from '../../components/auth/login/login.component';
 import { RegisterComponent } from '../../components/auth/register/register.component';
-// import { SubmitButtonComponent } from '../../components/shared/submit-button/submit-button.component';
 import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
 import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
 import { ApiInterceptor } from '../../interceptors/api-interceptor';
 import { SharedModule } from '../shared/shared.module';
-import { RouteReuseStrategy } from '@angular/router';
-import { HomeRouteReuseStrategy } from '../home/home-route-reuse-strategy';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    // SubmitButtonComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +28,6 @@ import { HomeRouteReuseStrategy } from '../home/home-route-reuse-strategy';
   providers: [
     AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    // { provide: RouteReuseStrategy, useClass: HomeRouteReuseStrategy },
   ],
   bootstrap: [AppComponent],
 })

@@ -5,11 +5,11 @@ import { HomeComponent } from '../../components/home/home.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SettingsMenuComponent } from '../../components/navbar/settings-menu/settings-menu.component';
 import { UserMenuComponent } from '../../components/navbar/user-menu/user-menu.component';
-import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+// import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
+// import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { ProfileComponent } from '../../components/profile/profile.component';
-import { UserFollowLinkComponent } from '../../components/who-to-follow/user-follow-link/user-follow-link.component';
-import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-follow.component';
+// import { UserFollowLinkComponent } from '../../components/who-to-follow/user-follow-link/user-follow-link.component';
+// import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-follow.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,17 +19,14 @@ import { PostModule } from '../post/post.module';
 import { ExpandedPostComponent } from '../../components/expanded-post/expanded-post.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { HomeRouteReuseStrategy } from './home-route-reuse-strategy';
+import { SidebarModule } from '../sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
-    SidebarComponent,
     SettingsMenuComponent,
     UserMenuComponent,
-    WhoToFollowComponent,
-    UserFollowLinkComponent,
-    SearchbarComponent,
     FeedComponent,
     ExpandedPostComponent,
     ProfileComponent,
@@ -42,6 +39,7 @@ import { HomeRouteReuseStrategy } from './home-route-reuse-strategy';
     SharedModule,
     HomeRoutingModule,
     PostModule,
+    SidebarModule,
   ],
   exports: [],
   providers: [

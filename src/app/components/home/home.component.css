@@ -7,7 +7,7 @@ app-navbar {
   display: flex;
 }
 .middle {
-  max-width: 580px;
+  max-width: 600px;
   flex-grow: 1;
   border-right: 1px solid rgba(var(--text-color), 0.08);
   /* padding-bottom: 1.5rem; */

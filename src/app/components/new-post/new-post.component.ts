@@ -30,7 +30,7 @@ export class NewPostComponent implements OnInit {
   domain = environment.domain;
   @Input() helperText: TemplateRef<HTMLSpanElement>;
   @Input() label: 'Reply' | 'Tweet' = 'Tweet';
-  @Input() placeholder = "What's on your mind?";
+  @Input() placeholder = "What's happening?";
   @Output() onSubmit = new EventEmitter<FormGroup>();
   @Input() replying_to: string | null = null;
 

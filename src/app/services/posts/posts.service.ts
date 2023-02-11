@@ -52,7 +52,6 @@ export class PostsService {
       )
       .subscribe((posts) => {
         this.followedPosts$.next(posts);
-        // this.followedPosts$.next(posts.slice(0, 1));
       });
   }
 
@@ -114,7 +113,10 @@ export class PostsService {
   }
 
   deletePostById(post_id: string) {
-    console.log(post_id);
     return this.http.delete<any>(`/posts/${post_id}`);
+  }
+
+  getTrendingTags() {
+    return this.http.get<any[]>(`/tags`);
   }
 }
