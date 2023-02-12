@@ -70,9 +70,20 @@ a {
   background-color: rgba(var(--hover-color));
   border-radius: 10px;
   height: calc(100% + 1rem);
-  translate: 0 0.5rem;
+  translate: 0 0.7rem;
 }
 
 .noBorder {
   border-bottom: none;
+}
+
+@media screen and (max-width: 460px) {
+  .post {
+    padding: 0.2rem 0.2rem 0 0.2rem;
+  }
+
+  .handle {
+    height: calc(100% + 0.2rem);
+    translate: 0 0.1rem;
+  }
 }

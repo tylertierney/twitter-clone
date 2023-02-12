@@ -36,13 +36,13 @@ export class SearchbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  searchResult$: Observable<IUser[]> = this.searchForm.valueChanges.pipe(
-    debounceTime(500),
-    map((form) => form.searchTerm ?? ''),
-    switchMap((q) => this.searchService.searchUsers(q))
-  );
+  // searchResult$: Observable<IUser[]> = this.searchForm.valueChanges.pipe(
+  //   debounceTime(500),
+  //   map((form) => form.searchTerm ?? ''),
+  //   switchMap((q) => this.searchService.searchUsers(q))
+  // );
 
-  searchResult2$: Observable<ISearchResults> = this.searchForm.valueChanges
+  searchResult$: Observable<ISearchResults> = this.searchForm.valueChanges
     .pipe(
       debounceTime(500),
       map((form) => form.searchTerm ?? ''),

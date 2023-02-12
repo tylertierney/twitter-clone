@@ -150,10 +150,23 @@ li:hover {
 
   nav {
     justify-content: space-around;
-    padding: 0.1rem 0.8rem;
+    padding: 0.1rem 0.4rem;
+    gap: 0.2rem;
   }
 
   .logo {
     margin-bottom: unset;
+    display: none;
+  }
+
+  button,
+  span,
+  .material-symbols-outlined {
+    font-size: 1.8rem;
+  }
+
+  .profile_pic {
+    height: 1.8rem;
+    width: 1.8rem;
   }
 }

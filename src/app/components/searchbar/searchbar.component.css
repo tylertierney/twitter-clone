@@ -87,7 +87,8 @@ form .searchResultsDropdown {
   border-radius: 0.5rem;
   min-height: 100px;
   flex-direction: column;
-  overflow: hidden;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
 }
 
 .searchResultsDropdown h3 {
@@ -111,6 +112,10 @@ form .searchResultsDropdown {
 }
 
 .searchResult img {
+  object-fit: cover;
+}
+
+.userProfilePicPreview {
   object-fit: cover;
   border-radius: 100%;
   height: 3rem;
@@ -156,4 +161,17 @@ form .searchResultsDropdown {
 
 .searchResult.post .textAndPhoto img {
   border-radius: 4px;
+}
+
+.postTextPreview {
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  font-weight: 200;
+}
+
+.postPhotoPreview {
+  height: 2.4rem;
+  width: 2.4rem;
 }

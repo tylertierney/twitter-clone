@@ -1,5 +1,6 @@
 :host {
   display: flex;
+  margin-bottom: 1rem;
 }
 
 .sidebarMenu {
@@ -37,6 +38,7 @@ h3 {
 ul {
   width: 100%;
   padding: 0;
+  margin: 0;
 }
 
 li {

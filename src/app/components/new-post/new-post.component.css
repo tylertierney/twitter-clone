@@ -141,3 +141,13 @@ textarea:focus {
 .create-post-submit-btn:disabled {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 460px) {
+  .post {
+    padding: 0.2rem 0.2rem 0 0.2rem;
+  }
+
+  a {
+    display: none;
+  }
+}

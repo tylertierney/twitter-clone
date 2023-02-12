@@ -11,7 +11,7 @@ import {
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   content: TemplateRef<any>;
   left = 0;
   top = 0;
@@ -22,9 +22,5 @@ export class MenuComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
-
-  test(e: Event) {
-    console.log('clicked outside');
-  }
+  test(e: Event) {}
 }

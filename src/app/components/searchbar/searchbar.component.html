@@ -43,7 +43,7 @@
       </a>
     </div>
   </ng-container> -->
-  <ng-container *ngIf="searchResult2$ | async as result">
+  <ng-container *ngIf="searchResult$ | async as result">
     <div class="searchResultsDropdown">
       <ng-container *ngIf="result.users.length > 0">
         <h3>People</h3>
@@ -53,6 +53,7 @@
           [routerLink]="'../' + user.username"
         >
           <img
+            class="userProfilePicPreview"
             [src]="
               domain +
               '/users/' +
@@ -75,21 +76,24 @@
           [routerLink]="'../' + post.username + '/' + post.id"
         >
           <div class="names">
-            <span class="name">{{ post.name }}</span>
-            <span class="username">&nbsp;@{{ post.username }}</span>
-            <span class="date"
-              >&nbsp;&bull;&nbsp;{{ post.date | readableDate }}</span
-            >
+            <span>@{{ post.username }}</span>
           </div>
           <div class="textAndPhoto">
-            <span>{{ post.text }}</span>
+            <span class="postTextPreview">{{ post.text }}</span>
             <img
+              class="postPhotoPreview"
               *ngIf="post.photo_url"
               [src]="
                 domain + '/posts/' + post.id + '/photo_url/' + post.photo_url
               "
             />
           </div>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="result.tags.length > 0">
+        <h3>Hashtags</h3>
+        <a class="searchResult" *ngFor="let tag of result.tags">
+          <span>#{{ tag.text }}</span>
         </a>
       </ng-container>
     </div>
