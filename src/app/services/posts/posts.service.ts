@@ -33,6 +33,7 @@ export interface IPost {
 export class PostsService {
   userId$ = new ReplaySubject<string>();
   followedPosts$ = new ReplaySubject<IPost[]>();
+  allPosts$ = new ReplaySubject<IPost[]>();
 
   constructor(
     private http: HttpClient,
@@ -53,6 +54,16 @@ export class PostsService {
       .subscribe((posts) => {
         this.followedPosts$.next(posts);
       });
+
+    this.http
+      .get<IPost[]>(`/posts/`)
+      .subscribe((posts) => this.allPosts$.next(posts));
+  }
+
+  fetchAllPosts() {
+    this.http
+      .get<IPost[]>(`/posts/`)
+      .subscribe((posts) => this.allPosts$.next(posts));
   }
 
   fetchFollowedPosts() {

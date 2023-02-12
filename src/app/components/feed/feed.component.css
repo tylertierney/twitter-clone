@@ -4,9 +4,44 @@
   border-right: 1px solid rgba(var(--text-color), 0.08);
 }
 
+.sub-nav {
+  padding: 0;
+}
+
+.sub-nav h4 {
+  padding: 0.8rem 1rem;
+}
+
 article {
   padding: 2rem;
   font-size: 1.2rem;
   color: rgba(var(--text-color), 0.5);
   text-align: center;
+}
+
+.tabs {
+  display: flex;
+}
+
+button.tab {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: rgba(var(--text-color), 0.6);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 1rem 1rem;
+}
+
+button.tab:hover {
+  background-color: rgba(var(--hover-color), 0.6);
+}
+
+button.tab span {
+  padding: 0.5rem 0;
+}
+
+.activeTab span {
+  border-bottom: 2px solid rgba(var(--brand-primary));
+  color: rgba(var(--text-color));
 }
