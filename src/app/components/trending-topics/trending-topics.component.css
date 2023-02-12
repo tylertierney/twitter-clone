@@ -22,6 +22,7 @@
 .header > span {
   opacity: 0.2;
   font-size: 2rem;
+  user-select: none;
 }
 
 h3 {

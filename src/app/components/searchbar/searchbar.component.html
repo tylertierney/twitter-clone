@@ -13,14 +13,13 @@
         d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"
       ></path>
     </svg>
-
     <input
       formControlName="searchTerm"
       type="search"
       placeholder="Search Twitter"
     />
   </div>
-  <ng-container *ngIf="searchResult$ | async as results">
+  <!-- <ng-container *ngIf="searchResult$ | async as results">
     <div class="searchResultsDropdown" *ngIf="results.length > 0">
       <h3>Results</h3>
       <a
@@ -39,9 +38,60 @@
         />
         <div class="names">
           <span class="name">{{ result.name }}</span>
-          <span class="username">{{ result.username }}</span>
+          <span class="username">@{{ result.username }}</span>
         </div>
       </a>
+    </div>
+  </ng-container> -->
+  <ng-container *ngIf="searchResult2$ | async as result">
+    <div class="searchResultsDropdown">
+      <ng-container *ngIf="result.users.length > 0">
+        <h3>People</h3>
+        <a
+          class="searchResult"
+          *ngFor="let user of result.users"
+          [routerLink]="'../' + user.username"
+        >
+          <img
+            [src]="
+              domain +
+              '/users/' +
+              user.username +
+              '/profile_pic/' +
+              user.profile_pic
+            "
+          />
+          <div class="names">
+            <span class="name">{{ user.name }}</span>
+            <span class="username">@{{ user.username }}</span>
+          </div>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="result.posts.length > 0">
+        <h3>Tweets</h3>
+        <a
+          class="searchResult post"
+          *ngFor="let post of result.posts"
+          [routerLink]="'../' + post.username + '/' + post.id"
+        >
+          <div class="names">
+            <span class="name">{{ post.name }}</span>
+            <span class="username">&nbsp;@{{ post.username }}</span>
+            <span class="date"
+              >&nbsp;&bull;&nbsp;{{ post.date | readableDate }}</span
+            >
+          </div>
+          <div class="textAndPhoto">
+            <span>{{ post.text }}</span>
+            <img
+              *ngIf="post.photo_url"
+              [src]="
+                domain + '/posts/' + post.id + '/photo_url/' + post.photo_url
+              "
+            />
+          </div>
+        </a>
+      </ng-container>
     </div>
   </ng-container>
 </form>

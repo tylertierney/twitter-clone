@@ -116,12 +116,15 @@
     </div>
   </div>
   <button
-    *ngIf="isEditable"
+    *ngIf="isEditable; else followToggle"
     class="editProfileBtn"
     (click)="openEditProfileModal(editProfileModal)"
   >
     Edit Profile
   </button>
+  <ng-template #followToggle>
+    <button class="editProfileBtn" (click)="test()">Follow</button>
+  </ng-template>
   <ng-template #editProfileModal>
     <app-edit-profile-form
       (formData)="getFormData($event)"

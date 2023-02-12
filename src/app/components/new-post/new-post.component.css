@@ -65,6 +65,8 @@ textarea:focus {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 1rem;
 }
 
 .tag {

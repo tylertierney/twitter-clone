@@ -77,13 +77,13 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 form .searchResultsDropdown {
-  display: none;
+  display: flex;
   position: absolute;
   top: calc(100% - 0.8rem);
-  right: 0;
+  left: -0.25rem;
   background-color: rgba(var(--bkg-color));
   box-shadow: 0px 0px 10px 1px rgba(var(--box-shadow-color), 0.2);
-  min-width: 300px;
+  width: calc(100% + 0.5rem);
   border-radius: 0.5rem;
   min-height: 100px;
   flex-direction: column;
@@ -129,4 +129,31 @@ form .searchResultsDropdown {
 .username {
   font-weight: 100;
   opacity: 0.75;
+}
+
+.searchResult.post {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.searchResult.post .names {
+  flex-direction: row;
+  gap: unset;
+  align-items: center;
+}
+
+.searchResult.post .date {
+  font-size: 0.8rem;
+  opacity: 0.3;
+}
+
+.searchResult.post .textAndPhoto {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.searchResult.post .textAndPhoto img {
+  border-radius: 4px;
 }

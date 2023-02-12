@@ -141,4 +141,8 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
     this.editProfileFormData.name = formData.name;
     this.editProfileFormData.description = formData.description;
   }
+
+  test() {
+    console.log('hi');
+  }
 }

@@ -1,9 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { debounce, debounceTime, map, Observable, of, switchMap } from 'rxjs';
+import {
+  combineLatest,
+  debounce,
+  debounceTime,
+  map,
+  Observable,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { SearchService } from '../../services/search/search.service';
+import { IPost } from '../../services/posts/posts.service';
+import { ITag, SearchService } from '../../services/search/search.service';
 import { IUser } from '../../services/user/user.service';
+
+interface ISearchResults {
+  users: IUser[];
+  posts: IPost[];
+  tags: ITag[];
+}
 
 @Component({
   selector: 'app-searchbar',
@@ -25,5 +41,18 @@ export class SearchbarComponent implements OnInit {
     map((form) => form.searchTerm ?? ''),
     switchMap((q) => this.searchService.searchUsers(q))
   );
-  // .subscribe(console.log);
+
+  searchResult2$: Observable<ISearchResults> = this.searchForm.valueChanges
+    .pipe(
+      debounceTime(500),
+      map((form) => form.searchTerm ?? ''),
+      switchMap((q) => {
+        return combineLatest({
+          users: this.searchService.searchUsers(q),
+          tags: this.searchService.searchTags(q),
+          posts: this.searchService.searchPosts(q),
+        });
+      })
+    )
+    .pipe(tap(console.log));
 }
