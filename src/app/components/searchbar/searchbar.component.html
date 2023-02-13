@@ -19,30 +19,6 @@
       placeholder="Search Twitter"
     />
   </div>
-  <!-- <ng-container *ngIf="searchResult$ | async as results">
-    <div class="searchResultsDropdown" *ngIf="results.length > 0">
-      <h3>Results</h3>
-      <a
-        class="searchResult"
-        *ngFor="let result of results"
-        [routerLink]="'../' + result.username"
-      >
-        <img
-          [src]="
-            domain +
-            '/users/' +
-            result.username +
-            '/profile_pic/' +
-            result.profile_pic
-          "
-        />
-        <div class="names">
-          <span class="name">{{ result.name }}</span>
-          <span class="username">@{{ result.username }}</span>
-        </div>
-      </a>
-    </div>
-  </ng-container> -->
   <ng-container *ngIf="searchResult$ | async as result">
     <div class="searchResultsDropdown">
       <ng-container *ngIf="result.users.length > 0">
@@ -92,7 +68,11 @@
       </ng-container>
       <ng-container *ngIf="result.tags.length > 0">
         <h3>Hashtags</h3>
-        <a class="searchResult" *ngFor="let tag of result.tags">
+        <a
+          style="padding: 1rem"
+          class="searchResult"
+          *ngFor="let tag of result.tags"
+        >
           <span>#{{ tag.text }}</span>
         </a>
       </ng-container>

@@ -11,6 +11,8 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
 import { RouterModule } from '@angular/router';
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { MatMenuModule } from '@angular/material/menu';
+import { NavTabsComponent } from '../../components/shared/nav-tabs/nav-tabs.component';
+import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ModalComponent,
     SubmitButtonComponent,
     ReadableDatePipe,
+    NavTabsComponent,
+    SearchbarComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +56,8 @@ import { MatMenuModule } from '@angular/material/menu';
     RouterModule,
     ReadableDatePipe,
     MatMenuModule,
+    NavTabsComponent,
+    SearchbarComponent,
   ],
 })
 export class SharedModule {}

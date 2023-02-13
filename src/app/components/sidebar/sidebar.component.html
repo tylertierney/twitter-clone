@@ -1,4 +1,5 @@
 <div
+  [style.padding-top]="location.isCurrentPathEqualTo('/search') ? '1rem' : '0'"
   style="
     max-height: 100vh;
     overflow: auto;
@@ -8,7 +9,9 @@
     flex-direction: column;
   "
 >
-  <app-searchbar></app-searchbar>
+  <app-searchbar
+    *ngIf="!location.isCurrentPathEqualTo('/search')"
+  ></app-searchbar>
   <app-who-to-follow></app-who-to-follow>
   <app-trending-topics></app-trending-topics>
 </div>

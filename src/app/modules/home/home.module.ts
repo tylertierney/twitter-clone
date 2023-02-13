@@ -20,6 +20,7 @@ import { ExpandedPostComponent } from '../../components/expanded-post/expanded-p
 import { RouteReuseStrategy } from '@angular/router';
 import { HomeRouteReuseStrategy } from './home-route-reuse-strategy';
 import { SidebarModule } from '../sidebar/sidebar.module';
+import { SearchComponent } from '../../components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SidebarModule } from '../sidebar/sidebar.module';
     ProfileComponent,
     ProfileHeaderComponent,
     EditProfileFormComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

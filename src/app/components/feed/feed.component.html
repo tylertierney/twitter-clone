@@ -1,40 +1,14 @@
 <div class="sub-nav">
   <h4>Home</h4>
-  <div class="tabs">
-    <button
-      class="tab"
-      (click)="this.selectedFeed$ = this.postsService.allPosts$"
-      [ngClass]="{
-        activeTab: this.selectedFeed$ === this.postsService.allPosts$
-      }"
-    >
-      <span>Everyone</span>
-    </button>
-    <button
-      class="tab"
-      (click)="this.selectedFeed$ = this.postsService.followedPosts$"
-      [ngClass]="{
-        activeTab: this.selectedFeed$ === this.postsService.followedPosts$
-      }"
-    >
-      <span>Following</span>
-    </button>
-  </div>
+  <app-nav-tabs
+    [tabs]="['Everyone', 'Following']"
+    (selectTab)="handleTabChange($event)"
+  ></app-nav-tabs>
 </div>
 <app-new-post
   [replying_to]="null"
   (onSubmit)="postsService.createNewPost($event)"
 ></app-new-post>
-<!-- <ng-container *ngIf="postsService.followedPosts$ | async as posts">
-  <app-post
-    *ngFor="let post of posts"
-    [post]="post"
-    [showReplyHandle]="false"
-  ></app-post>
-  <article *ngIf="posts.length < 1">
-    Follow some users to view all kinds of exciting content!
-  </article>
-</ng-container> -->
 <ng-container *ngIf="selectedFeed$ | async as posts">
   <app-post
     *ngFor="let post of posts"

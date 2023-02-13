@@ -30,4 +30,12 @@ export class FeedComponent {
     public authService: AuthService,
     public themeService: ThemeService
   ) {}
+
+  handleTabChange(label: string) {
+    if (label === 'Everyone') {
+      this.selectedFeed$ = this.postsService.allPosts$;
+    } else {
+      this.selectedFeed$ = this.postsService.followedPosts$;
+    }
+  }
 }

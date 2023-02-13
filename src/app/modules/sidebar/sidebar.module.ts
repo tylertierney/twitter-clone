@@ -4,7 +4,6 @@ import { SharedModule } from '../../modules/shared/shared.module';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { WhoToFollowComponent } from '../../components/who-to-follow/who-to-follow.component';
 import { UserFollowLinkComponent } from '../../components/who-to-follow/user-follow-link/user-follow-link.component';
-import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 import { TrendingTopicsComponent } from '../../components/trending-topics/trending-topics.component';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { TrendingTopicsComponent } from '../../components/trending-topics/trendi
     SidebarComponent,
     WhoToFollowComponent,
     UserFollowLinkComponent,
-    SearchbarComponent,
     TrendingTopicsComponent,
   ],
   exports: [SidebarComponent],
