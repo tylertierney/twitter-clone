@@ -22,10 +22,10 @@ export class ModalService {
   constructor() {
     this.isOpen$.subscribe((open) => {
       if (open) {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflowY = 'hidden';
         document.body.style.paddingRight = '15px';
       } else {
-        document.body.style.overflow = 'unset';
+        document.body.style.overflowY = 'scroll';
         document.body.style.paddingRight = '0px';
       }
     });

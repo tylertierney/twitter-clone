@@ -1,58 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import {
-  combineLatest,
-  debounce,
-  debounceTime,
-  map,
-  Observable,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { IPost } from '../../services/posts/posts.service';
-import { ITag, SearchService } from '../../services/search/search.service';
-import { IUser } from '../../services/user/user.service';
-
-interface ISearchResults {
-  users: IUser[];
-  posts: IPost[];
-  tags: ITag[];
-}
+import { SearchService } from '../../services/search/search.service';
 
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.css'],
 })
-export class SearchbarComponent implements OnInit {
+export class SearchbarComponent {
+  @ViewChild('input') input: ElementRef<HTMLInputElement>;
+
   domain = environment.domain;
-  searchForm = this.fb.group({
-    searchTerm: this.fb.control('', { nonNullable: true }),
-  });
 
-  constructor(private fb: FormBuilder, private searchService: SearchService) {}
+  onSearchPage = window.location.pathname === '/search';
 
-  ngOnInit(): void {}
+  constructor(public searchService: SearchService, private router: Router) {}
 
-  // searchResult$: Observable<IUser[]> = this.searchForm.valueChanges.pipe(
-  //   debounceTime(500),
-  //   map((form) => form.searchTerm ?? ''),
-  //   switchMap((q) => this.searchService.searchUsers(q))
-  // );
-
-  searchResult$: Observable<ISearchResults> = this.searchForm.valueChanges
-    .pipe(
-      debounceTime(500),
-      map((form) => form.searchTerm ?? ''),
-      switchMap((q) => {
-        return combineLatest({
-          users: this.searchService.searchUsers(q),
-          tags: this.searchService.searchTags(q),
-          posts: this.searchService.searchPosts(q),
-        });
-      })
-    )
-    .pipe(tap(console.log));
+  submit() {
+    this.input.nativeElement.blur();
+    this.searchService.submissionEvent$.next(null);
+    this.searchService.searchForm.markAllAsTouched();
+    this.router.navigate(['/search'], {
+      queryParams: { q: this.searchService.searchForm.value.searchTerm },
+    });
+  }
 }

@@ -1,5 +1,16 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import {
+  ActivatedRoute,
+  Event,
+  NavigationEnd,
+  NavigationStart,
+  RouteConfigLoadStart,
+  Router,
+  RouterEvent,
+} from '@angular/router';
+import { filter, map, startWith, switchMap } from 'rxjs';
+import { SearchService } from '../../services/search/search.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,5 +18,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  constructor(public location: Location) {}
+  onSearchPage = window.location.pathname === '/search';
+
+  constructor(
+    public location: Location,
+    private searchService: SearchService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 }

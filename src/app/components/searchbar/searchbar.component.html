@@ -1,4 +1,10 @@
-<form [formGroup]="searchForm">
+<form
+  [formGroup]="searchService.searchForm"
+  (submit)="submit()"
+  [style.background-color]="
+    onSearchPage ? 'transparent' : 'rgba(var(--bkg-color), 1)'
+  "
+>
   <div class="searchbarContainer">
     <svg
       stroke="currentColor"
@@ -14,12 +20,14 @@
       ></path>
     </svg>
     <input
+      #input
       formControlName="searchTerm"
       type="search"
       placeholder="Search Twitter"
+      [value]="searchService.searchForm.value.searchTerm"
     />
   </div>
-  <ng-container *ngIf="searchResult$ | async as result">
+  <ng-container *ngIf="searchService.searchPreview$ | async as result">
     <div class="searchResultsDropdown">
       <ng-container *ngIf="result.users.length > 0">
         <h3>People</h3>
@@ -78,4 +86,5 @@
       </ng-container>
     </div>
   </ng-container>
+  <button style="display: none" type="submit"></button>
 </form>

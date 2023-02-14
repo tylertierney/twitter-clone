@@ -27,13 +27,11 @@ export class ExpandedPostComponent implements OnInit {
       })
     );
 
-    this.replies$ = this.activatedRoute.params
-      .pipe(
-        switchMap((params) => {
-          const id = params['post_id'];
-          return this.postsService.getRepliesByPostId(id);
-        })
-      )
-      .pipe(tap(console.log));
+    this.replies$ = this.activatedRoute.params.pipe(
+      switchMap((params) => {
+        const id = params['post_id'];
+        return this.postsService.getRepliesByPostId(id);
+      })
+    );
   }
 }

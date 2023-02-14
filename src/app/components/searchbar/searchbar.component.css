@@ -3,12 +3,10 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: rgba(var(--bkg-color));
 }
 
 form {
   padding: 1rem 0;
-  background-color: rgba(var(--bkg-color), 1);
   position: relative;
 }
 

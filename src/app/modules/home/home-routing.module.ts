@@ -20,9 +20,9 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: '', pathMatch: 'full', component: FeedComponent },
+      { path: 'search', component: SearchComponent },
       { path: ':username', component: ProfileComponent },
       { path: ':username/:post_id', component: ExpandedPostComponent },
-      { path: 'search', component: SearchComponent },
     ],
   },
 ];

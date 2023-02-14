@@ -39,7 +39,7 @@ button {
 }
 
 button {
-  font-size: 2rem;
+  /* font-size: 2rem; */
   border: none;
   background-color: transparent;
   color: inherit;
@@ -49,6 +49,10 @@ button {
   padding: 0.5rem;
   position: relative;
   color: rgba(var(--text-color), 1);
+}
+
+button span {
+  font-size: 1.3rem;
 }
 
 button:hover,
@@ -78,6 +82,7 @@ button:hover,
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 1rem;
 }
 
 ul {
@@ -104,11 +109,27 @@ li:hover {
   object-fit: cover;
 }
 
+svg:not(.logoSvg) {
+  fill: transparent;
+  stroke: rgba(var(--text-color));
+  stroke-width: 2;
+  width: 1.8em;
+}
+
+.active > button svg {
+  fill: rgba(var(--text-color), 1);
+  stroke-width: 0;
+}
+
+.moreSvg path {
+  fill: rgba(var(--text-color));
+}
+
 @media screen and (min-width: 1024px) {
   nav {
     align-items: flex-start;
-    padding-left: 2.4rem;
-    padding-right: 0;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
   }
 
   .navItemLabel {
@@ -118,11 +139,11 @@ li:hover {
   button {
     border-radius: 1000px;
     padding: 0.6rem 1rem;
-    translate: -1.5rem 0;
   }
 
   .userAvatar {
     border-radius: 1000px;
+    padding: 0.6rem;
   }
 
   .userAvatarLabel {
@@ -159,10 +180,8 @@ li:hover {
     display: none;
   }
 
-  button,
-  span,
-  .material-symbols-outlined {
-    font-size: 1.8rem;
+  svg:not(.logoSvg) {
+    width: 2em;
   }
 
   .profile_pic {

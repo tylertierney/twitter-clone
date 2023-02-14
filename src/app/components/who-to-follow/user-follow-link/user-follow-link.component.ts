@@ -40,6 +40,7 @@ export class UserFollowLinkComponent implements OnInit {
         complete: () => {
           this.isFollowing = !this.isFollowing;
           this.postsService.fetchFollowedPosts();
+          this.postsService.fetchAllPosts();
         },
       });
   }
