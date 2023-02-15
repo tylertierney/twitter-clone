@@ -59,19 +59,19 @@
           *ngFor="let post of result.posts"
           [routerLink]="'../' + post.username + '/' + post.id"
         >
-          <div class="names">
+          <div class="nameAndText">
             <span>@{{ post.username }}</span>
-          </div>
-          <div class="textAndPhoto">
             <span class="postTextPreview">{{ post.text }}</span>
-            <img
-              class="postPhotoPreview"
-              *ngIf="post.photo_url"
-              [src]="
-                domain + '/posts/' + post.id + '/photo_url/' + post.photo_url
-              "
-            />
           </div>
+          <!-- <div class="textAndPhoto"> -->
+          <img
+            class="postPhotoPreview"
+            *ngIf="post.photo_url"
+            [src]="
+              domain + '/posts/' + post.id + '/photo_url/' + post.photo_url
+            "
+          />
+          <!-- </div> -->
         </a>
       </ng-container>
       <ng-container *ngIf="result.tags.length > 0">

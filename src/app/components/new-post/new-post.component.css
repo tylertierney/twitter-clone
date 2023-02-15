@@ -109,8 +109,10 @@ textarea:focus {
   background-color: transparent;
 }
 
-.toolbarButton:hover {
-  background-color: rgba(var(--brand-primary), 0.1);
+@media (hover: hover) {
+  .toolbarButton:hover {
+    background-color: rgba(var(--brand-primary), 0.1);
+  }
 }
 
 #photoInput {

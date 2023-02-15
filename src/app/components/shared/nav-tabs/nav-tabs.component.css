@@ -12,8 +12,10 @@ button.tab {
   padding: 1rem 1rem;
 }
 
-button.tab:hover {
-  background-color: rgba(var(--hover-color), 0.6);
+@media (hover: hover) {
+  button.tab:hover {
+    background-color: rgba(var(--hover-color), 0.6);
+  }
 }
 
 button.tab span {

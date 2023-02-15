@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, map, Observable, switchMap, tap } from 'rxjs';
 import { UserService } from 'src/app/services/user/user.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { PostsService } from '../../services/posts/posts.service';
 import { ThemeService } from '../../services/theme/theme.service';
 
@@ -32,8 +33,12 @@ export class ProfileComponent {
   numOfFollowers$ = this.user$.pipe(
     switchMap(({ id }) => this.http.get<number>('/users/' + id + '/followers/'))
   );
+  isEditable$ = combineLatest([this.authService.user$, this.user$]).pipe(
+    map(([currentUser, targetUser]) => currentUser.id === targetUser.id)
+  );
 
   constructor(
+    public authService: AuthService,
     public userService: UserService,
     private activatedRoute: ActivatedRoute,
     private postsService: PostsService,

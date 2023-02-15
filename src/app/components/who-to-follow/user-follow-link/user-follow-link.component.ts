@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { PostsService } from '../../../services/posts/posts.service';
 import { ThemeService } from '../../../services/theme/theme.service';
-import { IUser } from '../../../services/user/user.service';
+import { IUser, UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-user-follow-link',
@@ -19,29 +19,23 @@ export class UserFollowLinkComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public themeService: ThemeService,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.http
-      .get(`/follow/${this.currentUser.id}/${this.targetUser.id}`)
-      .subscribe((res: any) => {
-        this.isFollowing = res.following;
-      });
+    this.userService
+      .getFollowingUser(this.currentUser.id, this.targetUser.id)
+      .subscribe((following) => (this.isFollowing = following));
   }
 
   followUser(): void {
-    this.http
-      .post(`/follow/${this.currentUser.id}/${this.targetUser.id}`, {
-        action: this.isFollowing ? 'unfollow' : 'follow',
-      })
-      .subscribe({
-        error: console.log,
-        complete: () => {
-          this.isFollowing = !this.isFollowing;
-          this.postsService.fetchFollowedPosts();
-          this.postsService.fetchAllPosts();
-        },
+    this.userService
+      .followUser(this.currentUser.id, this.targetUser.id, this.isFollowing)
+      .subscribe(() => {
+        this.isFollowing = !this.isFollowing;
+        this.postsService.fetchFollowedPosts();
+        this.postsService.fetchAllPosts();
       });
   }
 }

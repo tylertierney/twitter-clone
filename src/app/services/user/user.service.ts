@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 export interface IUser {
   id: string;
@@ -29,5 +29,24 @@ export class UserService {
 
   getAllUsers(): Observable<any[]> {
     return this.http.get<IUser[]>(`/users/`);
+  }
+
+  getFollowingUser(
+    currentUserId: string,
+    targetUserId: string
+  ): Observable<boolean> {
+    return this.http
+      .get<{ following: boolean }>(`/follow/${currentUserId}/${targetUserId}`)
+      .pipe(map((res) => res.following));
+  }
+
+  followUser(
+    currentUserId: string,
+    targetUserId: string,
+    currentlyFollowing: boolean
+  ) {
+    return this.http.post(`/follow/${currentUserId}/${targetUserId}`, {
+      action: currentlyFollowing ? 'unfollow' : 'follow',
+    });
   }
 }

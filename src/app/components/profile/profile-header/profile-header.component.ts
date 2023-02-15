@@ -14,7 +14,14 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalService } from '../../../services/modal/modal.service';
 import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  map,
+  Observable,
+  ReplaySubject,
+  Subject,
+  tap,
+} from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -23,7 +30,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './profile-header.component.html',
   styleUrls: ['./profile-header.component.css'],
 })
-export class ProfileHeaderComponent implements OnInit, OnChanges {
+export class ProfileHeaderComponent implements OnInit {
+  @Input() isEditable = false;
   currentUser: IUser;
   @Input() user: IUser;
   newHeaderPicUrl: SafeUrl;
@@ -32,7 +40,7 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
   newProfilePicUrl: SafeUrl;
   newProfilePicFile: File;
   domain = environment.domain;
-  isEditable = false;
+  // isEditable = false;
 
   editProfileFormData: { name: string; description: string };
 
@@ -46,52 +54,53 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((currentUser) => {
-      this.currentUser = currentUser;
-      if (currentUser.id === this.user.id) {
-        this.isEditable = true;
-      }
-    });
-
-    this.editProfileFormData = {
-      name: this.user.name,
-      description: this.user.description,
-    };
+    // this.authService.user$.subscribe((currentUser) => {
+    //   this.currentUser = currentUser;
+    //   if (currentUser.id === this.user.id) {
+    //     this.isEditable = true;
+    //   }
+    // });
+    // this.editProfileFormData = {
+    //   name: this.user.name,
+    //   description: this.user.description,
+    // };
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      this.currentUser &&
-      changes['user'] &&
-      changes['user'].currentValue &&
-      changes['user'].currentValue.id
-    ) {
-      if (changes['user'].currentValue.id === this.currentUser.id) {
-        this.isEditable = true;
-      } else {
-        this.isEditable = false;
-      }
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (
+  //     this.currentUser &&
+  //     changes['user'] &&
+  //     changes['user'].currentValue &&
+  //     changes['user'].currentValue.id
+  //   ) {
+  //     if (changes['user'].currentValue.id === this.currentUser.id) {
+  //       this.isEditable = true;
+  //     } else {
+  //       this.isEditable = false;
+  //     }
+  //   }
+  // }
 
-  setNewHeaderPicUrl(e: Event) {
+  getPhotoPreview = (e: Event): { file: File; previewUrl: SafeUrl } => {
     const files = (e.target as HTMLInputElement).files;
     if (files && files.length) {
       const file = files[0];
-      this.newHeaderPicFile = file;
       const url = URL.createObjectURL(file);
-      this.newHeaderPicUrl = this.sanitizer.bypassSecurityTrustUrl(url);
+      return { file, previewUrl: this.sanitizer.bypassSecurityTrustUrl(url) };
     }
+    return { file: new File([], ''), previewUrl: '' };
+  };
+
+  setNewHeaderPicUrl(e: Event) {
+    const { file, previewUrl } = this.getPhotoPreview(e);
+    this.newHeaderPicFile = file;
+    this.newHeaderPicUrl = previewUrl;
   }
 
   setNewProfilePicUrl(e: Event) {
-    const files = (e.target as HTMLInputElement).files;
-    if (files && files.length) {
-      const file = files[0];
-      this.newProfilePicFile = file;
-      const url = URL.createObjectURL(file);
-      this.newProfilePicUrl = this.sanitizer.bypassSecurityTrustUrl(url);
-    }
+    const { file, previewUrl } = this.getPhotoPreview(e);
+    this.newProfilePicFile = file;
+    this.newProfilePicUrl = previewUrl;
   }
 
   confirmUpdatedHeaderPic(username: string, newHeaderPicFile: File) {
@@ -140,9 +149,5 @@ export class ProfileHeaderComponent implements OnInit, OnChanges {
   getFormData(formData: { name: string; description: string }) {
     this.editProfileFormData.name = formData.name;
     this.editProfileFormData.description = formData.description;
-  }
-
-  test() {
-    console.log('hi');
   }
 }

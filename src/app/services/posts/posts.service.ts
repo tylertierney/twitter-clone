@@ -97,6 +97,7 @@ export class PostsService {
         })
       )
       .subscribe(() => {
+        this.fetchAllPosts();
         this.fetchFollowedPosts();
         this.toast.success('Your tweet was posted');
         form.reset();

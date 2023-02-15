@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  domain: 'http://localhost:8080/api',
-  // domain: 'https://192.168.254.32:3000/api',
+  // domain: 'https://localhost:8080/api',
+  domain: 'https://192.168.254.32:8080/api',
 };
 
 /*

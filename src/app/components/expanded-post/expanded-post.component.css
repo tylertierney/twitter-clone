@@ -9,18 +9,25 @@
   font-size: 2rem;
   color: rgba(var(--text-color));
   border-radius: 100%;
+  /* border-radius: 1000px; */
+
+  /*Just added for mobile*/
+  padding: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 1.8em;
+  height: 1.8em;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-.backArrow:hover {
-  background-color: rgba(var(--text-color), 0.1);
+@media (hover: hover) {
+  .backArrow:hover {
+    background-color: rgba(var(--text-color), 0.1);
+  }
 }
 
 .replyCount {
