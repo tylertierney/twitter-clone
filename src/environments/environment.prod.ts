@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  domain: 'http://localhost:8080/api',
+  domain: 'https://twitter-backend-2te8.onrender.com/api',
 };

@@ -79,6 +79,7 @@ body.dark-theme {
   position: sticky;
   top: 0;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 1;
   display: flex;
   flex-direction: column;

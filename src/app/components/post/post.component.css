@@ -12,10 +12,6 @@
   max-width: 100vw;
 }
 
-/* .post:hover {
-  background-color: rgba(var(--text-color), 0.03);
-} */
-
 @media (hover: hover) {
   .post:hover {
     background-color: rgba(var(--text-color), 0.03);

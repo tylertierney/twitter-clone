@@ -32,7 +32,10 @@
     </div>
     <div class="postContent">
       <div class="post_left">
-        <a [routerLink]="'../' + post.username">
+        <a
+          [routerLink]="'../' + post.username"
+          (click)="$event.stopPropagation()"
+        >
           <img
             [src]="post.profile_pic"
             [src]="
