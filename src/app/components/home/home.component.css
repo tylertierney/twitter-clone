@@ -9,6 +9,7 @@ app-navbar {
 .middle {
   flex-grow: 1;
   padding-bottom: 4rem;
+  border-right: 1px solid rgba(var(--text-color), 0.08);
 }
 app-sidebar {
   display: none;

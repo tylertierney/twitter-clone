@@ -146,10 +146,10 @@ textarea:focus {
 
 @media screen and (max-width: 460px) {
   .post {
-    padding: 0.2rem 0.2rem 0 0.2rem;
+    padding: 1rem 0.2rem 0 0.2rem;
   }
 
-  a {
+  /* a {
     display: none;
-  }
+  } */
 }
