@@ -24,6 +24,10 @@
   cursor: pointer;
 }
 
+.backArrow:active {
+  background-color: rgba(var(--text-color), 0.1);
+}
+
 @media (hover: hover) {
   .backArrow:hover {
     background-color: rgba(var(--text-color), 0.1);
