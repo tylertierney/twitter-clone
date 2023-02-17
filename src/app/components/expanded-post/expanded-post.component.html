@@ -1,7 +1,5 @@
 <div class="sub-nav" style="z-index: 2">
-  <button (click)="location.back()" class="material-symbols-outlined backArrow">
-    arrow_back
-  </button>
+  <app-back-button></app-back-button>
   <h4>Tweet</h4>
 </div>
 <ng-container *ngIf="post$ | async as post">

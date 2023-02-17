@@ -13,6 +13,7 @@ import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavTabsComponent } from '../../components/shared/nav-tabs/nav-tabs.component';
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
+import { BackButtonComponent } from '../../components/shared/back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchbarComponent } from '../../components/searchbar/searchbar.compone
     ReadableDatePipe,
     NavTabsComponent,
     SearchbarComponent,
+    BackButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +60,7 @@ import { SearchbarComponent } from '../../components/searchbar/searchbar.compone
     MatMenuModule,
     NavTabsComponent,
     SearchbarComponent,
+    BackButtonComponent,
   ],
 })
 export class SharedModule {}

@@ -1,11 +1,6 @@
 <div class="sub-nav">
   <div>
-    <button
-      (click)="location.back()"
-      class="material-symbols-outlined backArrow"
-    >
-      arrow_back
-    </button>
+    <app-back-button></app-back-button>
     <app-searchbar></app-searchbar>
   </div>
   <app-nav-tabs [tabs]="tabs" (selectTab)="selectedTab = $event"></app-nav-tabs>
@@ -24,12 +19,4 @@
       <div *ngFor="let tag of searchResult.tags">#{{ tag.text }}</div>
     </ng-container>
   </ng-container>
-  <!-- <ng-container *ngIf="selectedTab === 'Posts'">
-    <app-post *ngFor="let post of searchResult.posts" [post]="post">{{
-      post.text
-    }}</app-post>
-  </ng-container> -->
 </ng-container>
-<!-- <ng-container *ngIf="searchService.searchResult$ | async as searchResult">
-  <div *ngFor="let post of searchResult.posts">{{ post.text }}</div>
-</ng-container> -->

@@ -11,24 +11,3 @@
   gap: 1rem;
   padding: 0 1rem;
 }
-
-.backArrow {
-  text-decoration: none;
-  font-size: 2rem;
-  color: rgba(var(--text-color));
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-@media (hover: hover) {
-  .backArrow:hover {
-    background-color: rgba(var(--text-color), 0.1);
-  }
-}
