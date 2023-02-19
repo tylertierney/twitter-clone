@@ -1,0 +1,59 @@
+.searchResult {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.searchResult:focus {
+  background-color: red;
+}
+
+.searchResult:hover {
+  background-color: rgba(var(--hover-color));
+}
+
+.searchResult img {
+  object-fit: cover;
+}
+
+.userProfilePicPreview {
+  object-fit: cover;
+  border-radius: 100%;
+  height: 3rem;
+  width: 3rem;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 0.4rem;
+}
+
+.mainInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.names {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.username {
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.description {
+  font-weight: normal;
+}

@@ -1,0 +1,48 @@
+.searchResult {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.searchResult:hover {
+  background-color: rgba(var(--hover-color));
+}
+
+.searchResult img {
+  object-fit: cover;
+}
+
+.searchResult.post {
+  gap: 0.4rem;
+  justify-content: space-between;
+}
+
+.searchResult.post .date {
+  font-size: 0.8rem;
+  opacity: 0.3;
+}
+
+.searchResult.post .textAndPhoto {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.postTextPreview {
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  font-weight: 200;
+  word-break: break-word;
+}
+
+.postPhotoPreview {
+  border-radius: 4px;
+  height: 3rem;
+  width: 3rem;
+}

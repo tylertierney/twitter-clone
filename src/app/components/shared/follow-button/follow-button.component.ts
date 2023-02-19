@@ -1,26 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { PostsService } from '../../../services/posts/posts.service';
 import { ThemeService } from '../../../services/theme/theme.service';
 import { IUser, UserService } from '../../../services/user/user.service';
 
 @Component({
-  selector: 'app-user-follow-link',
-  templateUrl: './user-follow-link.component.html',
-  styleUrls: ['./user-follow-link.component.css'],
+  selector: 'app-follow-button',
+  templateUrl: './follow-button.component.html',
+  styleUrls: ['./follow-button.component.css'],
 })
-export class UserFollowLinkComponent implements OnInit {
-  @Input() currentUser: any;
-  @Input() targetUser: any;
+export class FollowButtonComponent implements OnInit {
+  @Input() currentUser: IUser;
+  @Input() targetUser: IUser;
   isFollowing: boolean;
-  domain = environment.domain;
 
   constructor(
-    private http: HttpClient,
-    public themeService: ThemeService,
-    private postsService: PostsService,
-    private userService: UserService
+    public userService: UserService,
+    public postsService: PostsService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +25,8 @@ export class UserFollowLinkComponent implements OnInit {
       .subscribe((following) => (this.isFollowing = following));
   }
 
-  followUser(): void {
+  followUser(e: MouseEvent): void {
+    e.stopPropagation();
     this.userService
       .followUser(this.currentUser.id, this.targetUser.id, this.isFollowing)
       .subscribe(() => {

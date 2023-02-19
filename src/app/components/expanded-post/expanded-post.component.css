@@ -1,7 +1,11 @@
 .sub-nav {
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+
+.sub-nav h4 {
+  margin: 0;
 }
 
 .replyCount {

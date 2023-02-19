@@ -26,53 +26,24 @@
       placeholder="Search Twitter"
       [value]="searchService.searchForm.value.searchTerm"
     />
+    <button style="display: none" type="submit"></button>
   </div>
   <ng-container *ngIf="searchService.searchPreview$ | async as result">
-    <div class="searchResultsDropdown">
+    <div class="searchResultsDropdown" #searchResultsDropdown>
       <ng-container *ngIf="result.users.length > 0">
         <h3>People</h3>
-        <a
-          class="searchResult"
+        <app-user-search-result
           *ngFor="let user of result.users"
-          [routerLink]="'../' + user.username"
-        >
-          <img
-            class="userProfilePicPreview"
-            [src]="
-              domain +
-              '/users/' +
-              user.username +
-              '/profile_pic/' +
-              user.profile_pic
-            "
-          />
-          <div class="names">
-            <span class="name">{{ user.name }}</span>
-            <span class="username">@{{ user.username }}</span>
-          </div>
-        </a>
+          [user]="user"
+          [showFollowButton]="false"
+        ></app-user-search-result>
       </ng-container>
       <ng-container *ngIf="result.posts.length > 0">
         <h3>Tweets</h3>
-        <a
-          class="searchResult post"
+        <app-tweet-search-result
           *ngFor="let post of result.posts"
-          [routerLink]="'../' + post.username + '/' + post.id"
-        >
-          <div class="nameAndText">
-            <span>@{{ post.username }}</span>
-            <span class="postTextPreview">{{ post.text }}</span>
-          </div>
-          <!-- <div class="textAndPhoto"> -->
-          <img
-            class="postPhotoPreview"
-            *ngIf="post.photo_url"
-            [src]="
-              domain + '/posts/' + post.id + '/photo_url/' + post.photo_url
-            "
-          />
-          <!-- </div> -->
-        </a>
+          [post]="post"
+        ></app-tweet-search-result>
       </ng-container>
       <ng-container *ngIf="result.tags.length > 0">
         <h3>Hashtags</h3>
@@ -86,5 +57,4 @@
       </ng-container>
     </div>
   </ng-container>
-  <button style="display: none" type="submit"></button>
 </form>

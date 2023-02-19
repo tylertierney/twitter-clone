@@ -125,6 +125,16 @@ svg:not(.logoSvg) {
   fill: rgba(var(--text-color));
 }
 
+.explore button svg {
+  stroke-width: 0;
+  fill: rgba(var(--text-color), 1);
+}
+
+.exploreActive > button svg {
+  /* fill: rgba(var(--text-color), 1); */
+  stroke-width: 1;
+}
+
 @media screen and (min-width: 1024px) {
   nav {
     align-items: flex-start;

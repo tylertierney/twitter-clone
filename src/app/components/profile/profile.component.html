@@ -1,12 +1,27 @@
 <ng-container *ngIf="user$ | async as user">
   <ng-container *ngIf="posts$ | async as posts">
-    <div class="sub-nav" style="z-index: 2">
+    <!-- <div class="sub-nav" style="z-index: 2">
       <app-back-button></app-back-button>
       <div class="navInfo">
         <h4>{{ user.name }}</h4>
-        <span>{{ posts.length }} Tweet{{ posts.length > 1 ? "s" : "" }}</span>
+        <span
+          >{{ posts.length }} Tweet{{
+            posts.length > 1 || posts.length === 0 ? "s" : ""
+          }}</span
+        >
       </div>
-    </div>
+    </div> -->
+    <app-sub-nav class="sub-nav">
+      <app-back-button></app-back-button>
+      <div class="navInfo">
+        <h4>{{ user.name }}</h4>
+        <span
+          >{{ posts.length }} Tweet{{
+            posts.length > 1 || posts.length === 0 ? "s" : ""
+          }}</span
+        >
+      </div>
+    </app-sub-nav>
     <app-profile-header
       [user]="user"
       [isEditable]="(isEditable$ | async) === true"

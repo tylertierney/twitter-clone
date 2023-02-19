@@ -1,0 +1,28 @@
+<a class="searchResult" [routerLink]="'../' + user.username">
+  <img
+    class="userProfilePicPreview"
+    [src]="
+      domain + '/users/' + user.username + '/profile_pic/' + user.profile_pic
+    "
+  />
+  <div class="userDetails">
+    <div class="mainInfo">
+      <div class="names">
+        <span class="name">{{ user.name }}</span>
+        <span class="username">@{{ user.username }}</span>
+      </div>
+      <app-follow-button
+        *ngIf="showFollowButton && (authService.user$ | async) as currentUser"
+        [currentUser]="currentUser"
+        [targetUser]="user"
+        (click)="stopPropagation($event)"
+      ></app-follow-button>
+      <!-- <button (click)="$event.stopPropagation(); stopPropagation($event)">
+        test
+      </button> -->
+    </div>
+    <div *ngIf="user.description && showDescription">
+      <span class="description">{{ user.description }}</span>
+    </div>
+  </div>
+</a>

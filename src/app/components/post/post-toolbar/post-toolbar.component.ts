@@ -40,6 +40,7 @@ export class PostToolbarComponent implements OnInit {
     this.http
       .get<number>(`/posts/${this.post.id}/likes`)
       .subscribe((x) => (this.numOfLikes = x));
+    // this.numOfLikes = (this.post as any)['like_count'];
 
     this.http
       .get<number>(`/posts/${this.post.id}/reply-count`)

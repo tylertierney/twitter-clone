@@ -1,10 +1,10 @@
-<div class="sub-nav">
+<app-sub-nav class="sub-nav">
   <h4>Home</h4>
   <app-nav-tabs
     [tabs]="['Everyone', 'Following']"
     (selectTab)="handleTabChange($event)"
   ></app-nav-tabs>
-</div>
+</app-sub-nav>
 <app-new-post
   [replying_to]="null"
   (onSubmit)="postsService.createNewPost($event)"

@@ -1,7 +1,7 @@
-<div class="sub-nav" style="z-index: 2">
+<app-sub-nav class="sub-nav">
   <app-back-button></app-back-button>
   <h4>Tweet</h4>
-</div>
+</app-sub-nav>
 <ng-container *ngIf="post$ | async as post">
   <app-post [post]="post"></app-post>
 </ng-container>

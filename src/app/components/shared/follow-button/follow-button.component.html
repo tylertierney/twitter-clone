@@ -1,0 +1,9 @@
+<button
+  [ngStyle]="{
+    'background-color': themeService.usingDarkTheme ? 'white' : '#4a4a4a',
+    color: themeService.usingDarkTheme ? 'black' : 'white'
+  }"
+  (click)="$event.preventDefault(); followUser($event)"
+>
+  {{ isFollowing ? "Following" : "Follow" }}
+</button>

@@ -40,6 +40,7 @@ export class SearchService {
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
+      console.log(params['q']);
       this.searchForm.controls.searchTerm.setValue(params['q']);
       // this.submissionEvent$.next(null);
     });
@@ -83,17 +84,17 @@ export class SearchService {
   );
 
   searchUsers(q: string) {
-    if (!q) return of([]);
-    return this.http.get<IUser[]>('/search/users', { params: { q } });
+    // if (!q) return of([]);
+    return this.http.get<IUser[]>('/search/users', { params: { q: q ?? '' } });
   }
 
   searchPosts(q: string) {
-    if (!q) return of([]);
-    return this.http.get<IPost[]>('/search/posts', { params: { q } });
+    // if (!q) return of([]);
+    return this.http.get<IPost[]>('/search/posts', { params: { q: q ?? '' } });
   }
 
   searchTags(q: string) {
-    if (!q) return of([]);
-    return this.http.get<ITag[]>('/search/tags', { params: { q } });
+    // if (!q) return of([]);
+    return this.http.get<ITag[]>('/search/tags', { params: { q: q ?? '' } });
   }
 }

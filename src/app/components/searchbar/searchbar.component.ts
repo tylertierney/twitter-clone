@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { SearchService } from '../../services/search/search.service';
@@ -10,6 +10,8 @@ import { SearchService } from '../../services/search/search.service';
 })
 export class SearchbarComponent {
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
+  @ViewChild('searchResultsDropdown')
+  searchResultsDropdown: ElementRef<HTMLInputElement>;
 
   domain = environment.domain;
 
@@ -17,7 +19,15 @@ export class SearchbarComponent {
 
   constructor(public searchService: SearchService, private router: Router) {}
 
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      this.input.nativeElement.blur();
+    }
+  }
+
   submit() {
+    console.log('submit event');
     this.input.nativeElement.blur();
     this.searchService.submissionEvent$.next(null);
     this.searchService.searchForm.markAllAsTouched();

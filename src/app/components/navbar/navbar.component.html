@@ -34,12 +34,24 @@
       <span class="navItemLabel">Home</span>
     </button>
   </a>
+  <a routerLink="/search" routerLinkActive="exploreActive" class="explore">
+    <button>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <g>
+          <path
+            d="M10.09 3.098L9.72 7h5.99l.39-4.089 1.99.187L17.72 7h3.78v2h-3.97l-.56 6h3.53v2h-3.72l-.38 4.089-1.99-.187.36-3.902H8.78l-.38 4.089-1.99-.187L6.77 17H2.5v-2h4.46l.56-6H3.5V7h4.21l.39-4.089 1.99.187zM14.96 15l.56-6H9.53l-.56 6h5.99z"
+          ></path>
+        </g>
+      </svg>
+
+      <span class="navItemLabel">Explore</span>
+    </button>
+  </a>
   <a
     routerLinkActive="active"
     [routerLink]="'../' + (authService.user$ | async)?.username"
   >
     <button>
-      <!-- <span class="material-symbols-outlined">person</span> -->
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M 11.998 13.339 C 15.324 13.339 18.022 10.64 18.022 7.316 C 18.022 3.989 15.324 1.292 11.998 1.292 C 8.672 1.292 5.976 3.989 5.976 7.316 C 5.976 10.64 8.672 13.339 11.998 13.339 Z M 17.355 14.675 L 15.047 14.675 C 14.12 15.104 13.088 15.345 11.998 15.345 C 10.912 15.345 9.882 15.104 8.951 14.675 L 6.645 14.675 C 3.689 14.675 1.292 17.072 1.292 20.031 L 1.292 20.698 C 1.292 21.809 2.191 22.708 3.3 22.708 L 20.698 22.708 C 21.809 22.708 22.708 21.809 22.708 20.698 L 22.708 20.031 C 22.708 17.072 20.311 14.675 17.355 14.675 Z"
@@ -48,11 +60,7 @@
       <span class="navItemLabel">Profile</span>
     </button>
   </a>
-  <!-- [menu]="settingsMenu" -->
   <button [matMenuTriggerFor]="menu">
-    <!-- <span style="font-size: inherit" class="material-symbols-outlined">
-      pending
-    </span> -->
     <svg
       class="moreSvg"
       viewBox="0 0 24 24"
