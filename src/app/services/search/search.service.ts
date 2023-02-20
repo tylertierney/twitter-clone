@@ -40,9 +40,7 @@ export class SearchService {
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
-      console.log(params['q']);
-      this.searchForm.controls.searchTerm.setValue(params['q']);
-      // this.submissionEvent$.next(null);
+      this.searchForm.controls.searchTerm.setValue(params['q'] ?? '');
     });
   }
 

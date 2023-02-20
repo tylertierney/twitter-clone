@@ -12,19 +12,6 @@ import { ThemeService } from '../../services/theme/theme.service';
 export class FeedComponent {
   selectedFeed$: Observable<IPost[]> = this.postsService.allPosts$;
 
-  // feeds = [
-  //   {
-  //     displayName: 'Everyone',
-  //     selected: true,
-  //     data: this.postsService.allPosts$,
-  //   },
-  //   {
-  //     displayName: 'Following',
-  //     selected: false,
-  //     data: this.postsService.followedPosts$,
-  //   },
-  // ];
-
   constructor(
     public postsService: PostsService,
     public authService: AuthService,

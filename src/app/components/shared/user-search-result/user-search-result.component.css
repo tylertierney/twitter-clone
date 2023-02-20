@@ -8,10 +8,6 @@
   color: inherit;
 }
 
-.searchResult:focus {
-  background-color: red;
-}
-
 .searchResult:hover {
   background-color: rgba(var(--hover-color));
 }

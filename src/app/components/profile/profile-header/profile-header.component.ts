@@ -32,7 +32,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProfileHeaderComponent implements OnInit {
   @Input() isEditable = false;
-  currentUser: IUser;
+  // currentUser: IUser;
   @Input() user: IUser;
   newHeaderPicUrl: SafeUrl;
   newHeaderPicFile: File;
@@ -47,7 +47,7 @@ export class ProfileHeaderComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     public editProfileService: EditProfileService,
-    private authService: AuthService,
+    public authService: AuthService,
     public dialog: Dialog,
     private modalService: ModalService,
     private toast: ToastrService

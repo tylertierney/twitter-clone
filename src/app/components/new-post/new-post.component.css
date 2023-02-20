@@ -107,6 +107,11 @@ textarea:focus {
   color: rgba(var(--brand-primary));
   margin-right: auto;
   background-color: transparent;
+  border: none;
+}
+
+.toolbarButton:active {
+  background-color: rgba(var(--brand-primary), 0.1);
 }
 
 @media (hover: hover) {

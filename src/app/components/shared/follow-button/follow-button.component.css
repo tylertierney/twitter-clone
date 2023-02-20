@@ -1,13 +1,9 @@
 button {
   border-radius: 1000px;
-  background-color: rgb(218, 218, 218);
+  background-color: rgba(var(--text-color), 0.9);
+  color: rgba(var(--bkg-color), 1);
   border: none;
-  font-weight: bold;
+  font-weight: 900;
   padding: 0.4rem 1rem;
   cursor: pointer;
-  margin-left: auto;
-}
-
-button:focus {
-  background-color: red;
 }

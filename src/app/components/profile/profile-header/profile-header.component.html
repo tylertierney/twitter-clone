@@ -123,7 +123,11 @@
     Edit Profile
   </button>
   <ng-template #followToggle>
-    <button class="editProfileBtn">Follow</button>
+    <app-follow-button
+      *ngIf="authService.user$ | async as currentUser"
+      [targetUser]="user"
+      [currentUser]="currentUser"
+    ></app-follow-button>
   </ng-template>
   <ng-template #editProfileModal>
     <app-edit-profile-form

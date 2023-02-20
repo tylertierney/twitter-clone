@@ -51,9 +51,7 @@ export class PostsService {
             : of([]);
         })
       )
-      .subscribe((posts) => {
-        this.followedPosts$.next(posts);
-      });
+      .subscribe(this.followedPosts$);
 
     this.http
       .get<IPost[]>(`/posts/`)

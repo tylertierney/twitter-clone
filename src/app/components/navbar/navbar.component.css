@@ -116,6 +116,11 @@ svg:not(.logoSvg) {
   width: 1.8em;
 }
 
+.active .navItemLabel,
+.exploreActive .navItemLabel {
+  font-weight: 500;
+}
+
 .active > button svg {
   fill: rgba(var(--text-color), 1);
   stroke-width: 0;

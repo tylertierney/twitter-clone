@@ -6,7 +6,10 @@
     </div>
     <ul>
       <li *ngFor="let targetUser of users.slice(0, showingMore ? 7 : 3)">
-        <app-user-search-result [user]="targetUser"></app-user-search-result>
+        <app-user-search-result
+          [user]="targetUser"
+          [showFollowButton]="true"
+        ></app-user-search-result>
       </li>
     </ul>
     <button (click)="showingMore = !showingMore">
