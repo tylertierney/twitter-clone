@@ -46,7 +46,7 @@ li {
   width: 100%;
 }
 
-button {
+a {
   display: flex;
   background: transparent;
   border: none;
@@ -55,8 +55,15 @@ button {
   width: 100%;
   padding: 0.8rem 1.2rem;
   cursor: pointer;
+  text-decoration: none;
 }
 
-button:hover {
-  background-color: rgba(var(--hover-color));
+@media (hover: hover) {
+  a:hover {
+    background-color: rgba(var(--hover-color));
+  }
 }
+
+/* a:hover {
+  background-color: rgba(var(--hover-color));
+} */

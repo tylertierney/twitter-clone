@@ -1,0 +1,11 @@
+<div class="tabs">
+  <a
+    *ngFor="let tab of tabs"
+    class="tab"
+    [routerLink]="tab.routerLink"
+    routerLinkActive="active"
+    queryParamsHandling="preserve"
+  >
+    <span>{{ tab.label }}</span>
+  </a>
+</div>

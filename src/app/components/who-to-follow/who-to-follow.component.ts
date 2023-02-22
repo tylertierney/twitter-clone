@@ -12,7 +12,7 @@ import { IUser, UserService } from '../../services/user/user.service';
 })
 export class WhoToFollowComponent {
   allUsers$: Observable<IUser[]> = this.usersService.getAllUsers();
-  showingMore = false;
+  // showingMore = false;
 
   constructor(
     public usersService: UserService,

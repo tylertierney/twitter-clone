@@ -18,7 +18,7 @@ import { SearchService } from '../../services/search/search.service';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  onSearchPage = window.location.pathname === '/search';
+  onSearchPage = window.location.pathname.includes('/search');
 
   constructor(
     public location: Location,

@@ -6,6 +6,7 @@ import {
   Routes,
 } from '@angular/router';
 import { ExpandedPostComponent } from '../../components/expanded-post/expanded-post.component';
+import { ExpandedTagComponent } from '../../components/expanded-tag/expanded-tag.component';
 import { FeedComponent } from '../../components/feed/feed.component';
 import { HomeComponent } from '../../components/home/home.component';
 import { ProfileComponent } from '../../components/profile/profile.component';
@@ -20,7 +21,13 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: '', pathMatch: 'full', component: FeedComponent },
-      { path: 'search', component: SearchComponent },
+      // { path: 'search', component: SearchComponent },
+      {
+        path: 'search',
+        loadChildren: () =>
+          import('../search/search.module').then((m) => m.SearchModule),
+      },
+      { path: 'tag/:tag', component: ExpandedTagComponent },
       { path: ':username', component: ProfileComponent },
       { path: ':username/:post_id', component: ExpandedPostComponent },
     ],

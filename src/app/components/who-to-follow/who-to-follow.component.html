@@ -5,15 +5,13 @@
       <span class="material-symbols-outlined"> groups </span>
     </div>
     <ul>
-      <li *ngFor="let targetUser of users.slice(0, showingMore ? 7 : 3)">
+      <li *ngFor="let targetUser of users.slice(0, 3)">
         <app-user-search-result
           [user]="targetUser"
           [showFollowButton]="true"
         ></app-user-search-result>
       </li>
     </ul>
-    <button (click)="showingMore = !showingMore">
-      Show {{ showingMore ? "Less" : "More" }}
-    </button>
+    <a routerLink="search/people"> Show More </a>
   </div>
 </ng-container>

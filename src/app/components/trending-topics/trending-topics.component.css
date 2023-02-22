@@ -59,7 +59,7 @@ a {
   font-size: 0.8rem;
 }
 
-button {
+.showMoreButton {
   display: flex;
   background: transparent;
   border: none;
@@ -70,6 +70,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.showMoreButton:hover {
   background-color: rgba(var(--hover-color));
 }

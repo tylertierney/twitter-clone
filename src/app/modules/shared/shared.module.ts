@@ -11,13 +11,14 @@ import { SubmitButtonComponent } from '../../components/shared/submit-button/sub
 import { RouterModule } from '@angular/router';
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { MatMenuModule } from '@angular/material/menu';
-import { NavTabsComponent } from '../../components/shared/nav-tabs/nav-tabs.component';
+import { NavTabsComponent } from '../../components/shared/tabs/nav-tabs/nav-tabs.component';
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 import { BackButtonComponent } from '../../components/shared/back-button/back-button.component';
 import { SubNavComponent } from '../../components/shared/sub-nav/sub-nav.component';
 import { UserSearchResultComponent } from '../../components/shared/user-search-result/user-search-result.component';
 import { FollowButtonComponent } from '../../components/shared/follow-button/follow-button.component';
 import { TweetSearchResultComponent } from '../../components/shared/tweet-search-result/tweet-search-result.component';
+import { RoutedNavTabsComponent } from '../../components/shared/tabs/routed-nav-tabs/routed-nav-tabs.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TweetSearchResultComponent } from '../../components/shared/tweet-search
     SubmitButtonComponent,
     ReadableDatePipe,
     NavTabsComponent,
+    RoutedNavTabsComponent,
     SearchbarComponent,
     BackButtonComponent,
     SubNavComponent,
@@ -67,6 +69,7 @@ import { TweetSearchResultComponent } from '../../components/shared/tweet-search
     ReadableDatePipe,
     MatMenuModule,
     NavTabsComponent,
+    RoutedNavTabsComponent,
     SearchbarComponent,
     BackButtonComponent,
     SubNavComponent,

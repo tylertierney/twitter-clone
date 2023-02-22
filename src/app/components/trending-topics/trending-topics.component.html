@@ -4,14 +4,14 @@
     <span class="material-symbols-outlined"> trending_up </span>
   </div>
   <ul>
-    <li *ngFor="let tag of tags.slice(0, showingMore ? 6 : 3)">
+    <li *ngFor="let tag of tags.slice(0, 3)">
       <a>
         <span class="tag">#{{ tag.text }}</span>
-        <span class="count">{{ tag.ct }} Tweet{{ tag.ct > 1 ? "s" : "" }}</span>
+        <span class="count"
+          >{{ tag.count }} Tweet{{ tag.count > 1 ? "s" : "" }}</span
+        >
       </a>
     </li>
   </ul>
-  <button (click)="showingMore = !showingMore">
-    Show {{ showingMore ? "Less" : "More" }}
-  </button>
+  <a class="showMoreButton" routerLink="search/tags"> Show More </a>
 </div>

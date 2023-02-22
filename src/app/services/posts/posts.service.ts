@@ -42,26 +42,12 @@ export class PostsService {
   ) {
     this.authService.user$.subscribe(({ id }) => this.userId$.next(id));
 
-    this.userId$
-      .pipe(
-        shareReplay(1),
-        switchMap((userId) => {
-          return userId
-            ? this.http.get<IPost[]>(`/posts/${userId}/feed`)
-            : of([]);
-        })
-      )
-      .subscribe(this.followedPosts$);
-
-    this.http
-      .get<IPost[]>(`/posts/`)
-      .subscribe((posts) => this.allPosts$.next(posts));
+    this.fetchAllPosts();
+    this.fetchFollowedPosts();
   }
 
   fetchAllPosts() {
-    this.http
-      .get<IPost[]>(`/posts/`)
-      .subscribe((posts) => this.allPosts$.next(posts));
+    this.http.get<IPost[]>(`/posts/`).subscribe(this.allPosts$);
   }
 
   fetchFollowedPosts() {
@@ -70,9 +56,7 @@ export class PostsService {
         shareReplay(1),
         switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
       )
-      .subscribe((posts) => {
-        this.followedPosts$.next(posts);
-      });
+      .subscribe(this.followedPosts$);
   }
 
   createNewPost(form: FormGroup) {

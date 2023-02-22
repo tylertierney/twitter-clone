@@ -17,6 +17,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { HomeRouteReuseStrategy } from './home-route-reuse-strategy';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { SearchComponent } from '../../components/search/search.component';
+import { SearchModule } from '../search/search.module';
+import { ExpandedTagComponent } from '../../components/expanded-tag/expanded-tag.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,10 @@ import { SearchComponent } from '../../components/search/search.component';
     UserMenuComponent,
     FeedComponent,
     ExpandedPostComponent,
+    ExpandedTagComponent,
     ProfileComponent,
     ProfileHeaderComponent,
     EditProfileFormComponent,
-    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { SearchComponent } from '../../components/search/search.component';
     HomeRoutingModule,
     PostModule,
     SidebarModule,
+    SearchModule,
   ],
   exports: [],
   providers: [

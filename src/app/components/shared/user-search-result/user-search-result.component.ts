@@ -13,7 +13,7 @@ import { IUser } from '../../../services/user/user.service';
   selector: 'app-user-search-result',
   templateUrl: './user-search-result.component.html',
   styleUrls: ['./user-search-result.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSearchResultComponent {
   domain = environment.domain;

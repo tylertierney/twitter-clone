@@ -15,9 +15,7 @@ export class FollowButtonComponent implements OnInit {
   @Input() targetUser: IUser;
   isFollowing: boolean;
 
-  // @Input() buttonStyle: NgStyle;
-
-  isFollowing$ = new BehaviorSubject(false);
+  // isFollowing$ = new BehaviorSubject(false);
 
   constructor(
     public userService: UserService,
@@ -27,7 +25,15 @@ export class FollowButtonComponent implements OnInit {
   ngOnInit(): void {
     this.userService
       .getFollowingUser(this.currentUser.id, this.targetUser.id)
-      .subscribe((following) => (this.isFollowing = following));
+      .subscribe((following) => {
+        if (this.targetUser.id === '89') {
+          // console.log(following);
+          console.log(
+            `Is ${this.currentUser.username} following ${this.targetUser.username}? ${following}`
+          );
+        }
+        this.isFollowing = following;
+      });
 
     // this.userService
     //   .getFollowingUser(this.currentUser.id, this.targetUser.id)

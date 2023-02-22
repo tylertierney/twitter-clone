@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   domain: 'http://localhost:8080/api',
-  // domain: 'https://192.168.254.32:8080/api',
+  // domain: 'http://192.168.254.32:8080/api',
   // domain: 'https://twitter-backend-2te8.onrender.com/api',
 };
 

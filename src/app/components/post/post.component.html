@@ -23,7 +23,7 @@
     </ng-template>
   </ng-container>
   <div
-    [routerLink]="'../' + post.username + '/' + post.id"
+    [routerLink]="'/' + post.username + '/' + post.id"
     class="post"
     [ngClass]="{ noBorder: showParent && showReplyHandle }"
   >
@@ -33,7 +33,7 @@
     <div class="postContent">
       <div class="post_left">
         <a
-          [routerLink]="'../' + post.username"
+          [routerLink]="'/' + post.username"
           (click)="$event.stopPropagation()"
         >
           <img

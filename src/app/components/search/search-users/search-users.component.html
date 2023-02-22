@@ -1,0 +1,8 @@
+<ng-container *ngIf="searchService.searchResult$ | async as searchResult">
+  <app-user-search-result
+    *ngFor="let user of searchResult.users"
+    [user]="user"
+    [showDescription]="true"
+    [showFollowButton]="true"
+  ></app-user-search-result>
+</ng-container>

@@ -15,7 +15,7 @@ export class SearchbarComponent {
 
   domain = environment.domain;
 
-  onSearchPage = window.location.pathname === '/search';
+  onSearchPage = window.location.pathname.includes('/search');
 
   constructor(public searchService: SearchService, private router: Router) {}
 
