@@ -113,4 +113,8 @@ export class PostsService {
   getTrendingTags() {
     return this.http.get<any[]>(`/tags`);
   }
+
+  getPostsByTag(tag: string) {
+    return this.http.get<IPost[]>(`/tags/${tag}`);
+  }
 }

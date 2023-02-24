@@ -69,7 +69,7 @@ export class AuthService {
           this.router.navigate(['../home']);
         })
       )
-      .subscribe((_) => this.user$.next(_));
+      .subscribe(this.user$);
   }
 
   logout(): void {
@@ -101,6 +101,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.http.get<IUser>(`/auth`, {});
+    return this.http.get<IUser>(`/auth`);
   }
 }

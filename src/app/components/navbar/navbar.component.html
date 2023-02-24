@@ -21,7 +21,11 @@
     </svg>
   </a>
 
-  <a routerLink="/home" routerLinkActive="active">
+  <a
+    routerLink="/home"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
     <button>
       <svg viewBox="0 0 24 24">
         <g>
@@ -34,7 +38,7 @@
       <span class="navItemLabel">Home</span>
     </button>
   </a>
-  <a routerLink="/search" routerLinkActive="exploreActive" class="explore">
+  <a routerLink="search" routerLinkActive="exploreActive" class="explore">
     <button>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <g>

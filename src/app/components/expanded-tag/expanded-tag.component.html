@@ -1,1 +1,16 @@
-<p>expanded-tag works!</p>
+<ng-container *ngIf="postsWithThisTag$ | async as posts">
+  <app-sub-nav class="sub-nav">
+    <app-back-button></app-back-button>
+    <div class="navInfo">
+      <!-- <h4>{{ user.name }}</h4> -->
+      <h4>#{{ tag$ | async }}</h4>
+      <span
+        >{{ posts.length }} tweet{{
+          posts.length > 1 || posts.length === 0 ? "s" : ""
+        }}
+        about this</span
+      >
+    </div>
+  </app-sub-nav>
+  <app-post *ngFor="let post of posts" [post]="post"></app-post>
+</ng-container>

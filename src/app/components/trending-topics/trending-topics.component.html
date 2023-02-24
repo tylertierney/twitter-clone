@@ -5,7 +5,7 @@
   </div>
   <ul>
     <li *ngFor="let tag of tags.slice(0, 3)">
-      <a>
+      <a [routerLink]="'tag/' + tag.text">
         <span class="tag">#{{ tag.text }}</span>
         <span class="count"
           >{{ tag.count }} Tweet{{ tag.count > 1 ? "s" : "" }}</span
