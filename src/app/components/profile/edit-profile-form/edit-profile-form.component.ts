@@ -47,7 +47,12 @@ export class EditProfileFormComponent implements OnInit {
     );
 
     this.editProfileForm.valueChanges.subscribe((formData) => {
+      console.log(formData);
       this.formData.emit(formData);
     });
+  }
+
+  test() {
+    console.log(this.editProfileForm);
   }
 }

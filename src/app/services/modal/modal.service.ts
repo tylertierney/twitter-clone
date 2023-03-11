@@ -1,5 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface IModalConfig {
   title?: string;
@@ -23,10 +23,8 @@ export class ModalService {
     this.isOpen$.subscribe((open) => {
       if (open) {
         document.body.style.overflowY = 'hidden';
-        // document.body.style.paddingRight = '15px';
       } else {
         document.body.style.overflowY = 'scroll';
-        // document.body.style.paddingRight = '0px';
       }
     });
   }

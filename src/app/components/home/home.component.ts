@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ModalService } from '../../services/modal/modal.service';
 import { UserService } from '../../services/user/user.service';
 
 @Component({
@@ -14,12 +15,16 @@ import { UserService } from '../../services/user/user.service';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('spacer') spacer: ElementRef<HTMLDivElement>;
-  // @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;
 
   constructor(
     private userService: UserService,
-    private host: ElementRef<HTMLElement>
+    public modalService: ModalService
   ) {}
+
+  @HostListener('window:keyup.escape', ['$event'])
+  handleKeyDown() {
+    this.modalService.close();
+  }
 
   ngOnInit(): void {}
 

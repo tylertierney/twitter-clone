@@ -1,0 +1,18 @@
+a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  color: inherit;
+}
+
+.count {
+  opacity: 0.5;
+}
+
+
+@media (hover: hover) {
+  a:hover {
+    background-color: rgba(var(--hover-color), 0.6);
+  }
+}

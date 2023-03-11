@@ -1,25 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   combineLatest,
   debounceTime,
   map,
   Observable,
-  of,
-  ReplaySubject,
   Subject,
   switchMap,
-  tap,
-  withLatestFrom,
 } from 'rxjs';
 import { IPost } from '../posts/posts.service';
 import { IUser } from '../user/user.service';
 
 export interface ITag {
-  post_id: string;
   text: string;
+  count: number;
 }
 
 export interface ISearchResults {
@@ -54,7 +50,6 @@ export class SearchService {
 
   searchPreview$: Observable<ISearchResults> =
     this.searchForm.valueChanges.pipe(
-      tap(console.log),
       debounceTime(500),
       map((form) => form.searchTerm ?? ''),
       switchMap((q) => {

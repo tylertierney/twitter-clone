@@ -1,4 +1,4 @@
-<a class="searchResult" [routerLink]="'../' + user.username">
+<a class="searchResult" [routerLink]="'../../' + user.username">
   <img
     class="userProfilePicPreview"
     [src]="
@@ -17,9 +17,6 @@
         [targetUser]="user"
         (click)="stopPropagation($event)"
       ></app-follow-button>
-      <!-- <button (click)="$event.stopPropagation(); stopPropagation($event)">
-        test
-      </button> -->
     </div>
     <div *ngIf="user.description && showDescription">
       <span class="description">{{ user.description }}</span>

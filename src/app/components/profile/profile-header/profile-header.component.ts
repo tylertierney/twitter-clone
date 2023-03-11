@@ -42,7 +42,10 @@ export class ProfileHeaderComponent implements OnInit {
   domain = environment.domain;
   // isEditable = false;
 
-  editProfileFormData: { name: string; description: string };
+  editProfileFormData: { name: string; description: string } = {
+    name: '',
+    description: '',
+  };
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -54,32 +57,11 @@ export class ProfileHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.authService.user$.subscribe((currentUser) => {
-    //   this.currentUser = currentUser;
-    //   if (currentUser.id === this.user.id) {
-    //     this.isEditable = true;
-    //   }
-    // });
-    // this.editProfileFormData = {
-    //   name: this.user.name,
-    //   description: this.user.description,
-    // };
+    this.editProfileFormData = {
+      name: this.user.name,
+      description: this.user.description,
+    };
   }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (
-  //     this.currentUser &&
-  //     changes['user'] &&
-  //     changes['user'].currentValue &&
-  //     changes['user'].currentValue.id
-  //   ) {
-  //     if (changes['user'].currentValue.id === this.currentUser.id) {
-  //       this.isEditable = true;
-  //     } else {
-  //       this.isEditable = false;
-  //     }
-  //   }
-  // }
 
   getPhotoPreview = (e: Event): { file: File; previewUrl: SafeUrl } => {
     const files = (e.target as HTMLInputElement).files;
@@ -147,6 +129,7 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   getFormData(formData: { name: string; description: string }) {
+    console.log(this.editProfileFormData);
     this.editProfileFormData.name = formData.name;
     this.editProfileFormData.description = formData.description;
   }

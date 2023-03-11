@@ -19,6 +19,7 @@ import { UserSearchResultComponent } from '../../components/shared/user-search-r
 import { FollowButtonComponent } from '../../components/shared/follow-button/follow-button.component';
 import { TweetSearchResultComponent } from '../../components/shared/tweet-search-result/tweet-search-result.component';
 import { RoutedNavTabsComponent } from '../../components/shared/tabs/routed-nav-tabs/routed-nav-tabs.component';
+import { TagSearchResultComponent } from '../../components/shared/tag-search-result/tag-search-result.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RoutedNavTabsComponent } from '../../components/shared/tabs/routed-nav-
     SubNavComponent,
     UserSearchResultComponent,
     TweetSearchResultComponent,
+    TagSearchResultComponent,
     FollowButtonComponent,
   ],
   imports: [
@@ -75,6 +77,7 @@ import { RoutedNavTabsComponent } from '../../components/shared/tabs/routed-nav-
     SubNavComponent,
     UserSearchResultComponent,
     TweetSearchResultComponent,
+    TagSearchResultComponent,
     FollowButtonComponent,
   ],
 })

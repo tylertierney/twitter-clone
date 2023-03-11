@@ -11,8 +11,10 @@ import {
   shareReplay,
   switchMap,
   take,
+  tap,
 } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { ITag } from '../search/search.service';
 
 export interface IPost {
   id: string;
@@ -110,8 +112,14 @@ export class PostsService {
     return this.http.delete<any>(`/posts/${post_id}`);
   }
 
-  getTrendingTags() {
-    return this.http.get<any[]>(`/tags`);
+  getTrendingTags(): Observable<ITag[]> {
+    return this.http
+      .get<{ text: string; count: string }[]>(`/tags`)
+      .pipe(
+        map((arr) =>
+          arr.map((tag) => ({ ...tag, count: parseInt(tag.count, 10) }))
+        )
+      );
   }
 
   getPostsByTag(tag: string) {

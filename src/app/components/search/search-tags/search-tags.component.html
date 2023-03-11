@@ -1,3 +1,6 @@
 <ng-container *ngIf="searchService.searchResult$ | async as searchResult">
-  <div *ngFor="let tag of searchResult.tags">#{{ tag.text }}</div>
+  <app-tag-search-result
+    *ngFor="let tag of searchResult.tags"
+    [tag]="tag"
+  ></app-tag-search-result>
 </ng-container>

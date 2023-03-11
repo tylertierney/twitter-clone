@@ -1,8 +1,5 @@
-import { NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { PostsService } from '../../../services/posts/posts.service';
-import { ThemeService } from '../../../services/theme/theme.service';
 import { IUser, UserService } from '../../../services/user/user.service';
 
 @Component({
@@ -15,8 +12,6 @@ export class FollowButtonComponent implements OnInit {
   @Input() targetUser: IUser;
   isFollowing: boolean;
 
-  // isFollowing$ = new BehaviorSubject(false);
-
   constructor(
     public userService: UserService,
     public postsService: PostsService
@@ -27,17 +22,9 @@ export class FollowButtonComponent implements OnInit {
       .getFollowingUser(this.currentUser.id, this.targetUser.id)
       .subscribe((following) => {
         if (this.targetUser.id === '89') {
-          // console.log(following);
-          console.log(
-            `Is ${this.currentUser.username} following ${this.targetUser.username}? ${following}`
-          );
         }
         this.isFollowing = following;
       });
-
-    // this.userService
-    //   .getFollowingUser(this.currentUser.id, this.targetUser.id)
-    //   .subscribe(this.isFollowing$);
   }
 
   followUser(e: MouseEvent): void {
