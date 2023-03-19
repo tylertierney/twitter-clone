@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { map, Observable, startWith, tap } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { IUser } from '../../../services/user/user.service';
 
 @Component({
@@ -47,12 +47,7 @@ export class EditProfileFormComponent implements OnInit {
     );
 
     this.editProfileForm.valueChanges.subscribe((formData) => {
-      console.log(formData);
       this.formData.emit(formData);
     });
-  }
-
-  test() {
-    console.log(this.editProfileForm);
   }
 }
