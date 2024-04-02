@@ -2,7 +2,7 @@
   <span class="name">{{ post.name }}&nbsp;</span>
   <a
     (click)="stopPropagation($event)"
-    [routerLink]="'/' + post.username"
+    [routerLink]="['/', post.username]"
     class="username"
     >{{ "@" + post.username }}</a
   >
