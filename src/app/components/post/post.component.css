@@ -41,6 +41,11 @@ a {
   border-radius: 50%;
   object-fit: cover;
   aspect-ratio: 1;
+  max-height: 48px;
+  max-width: 48px;
+  display: flex;
+  overflow: hidden;
+  font-size: 0.75rem;
 }
 
 .username {

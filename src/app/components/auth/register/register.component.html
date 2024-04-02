@@ -63,7 +63,7 @@
         spellcheck="false"
       />
       <span class="usernameLength"
-        >{{ registrationForm.value.username.length }}/15</span
+        >{{ registrationForm.get("username")?.value?.length ?? 0 }}/15</span
       >
     </div>
     <div style="min-height: 1.1rem">
@@ -116,16 +116,11 @@
         [type]="showPassword ? 'text' : 'password'"
         autocomplete="password"
       />
+
       <div class="showPasswordIcon" (click)="showPassword = !showPassword">
-        <span
-          *ngIf="!showPassword; else elseBlock"
-          class="material-symbols-outlined"
-        >
-          visibility
+        <span class="material-symbols-outlined">
+          {{ showPassword ? "visibility" : "visibility_off" }}
         </span>
-        <ng-template #elseBlock>
-          <span class="material-symbols-outlined"> visibility_off </span>
-        </ng-template>
       </div>
     </div>
     <div style="min-height: 1.1rem">

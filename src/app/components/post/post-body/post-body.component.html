@@ -5,8 +5,12 @@
   [src]="domain + '/posts/' + post.id + '/photo_url/' + post.photo_url"
 />
 <div class="tagsContainer">
-  <span *ngFor="let tag of post.tags; let i = index" class="tag"
-    >#{{ tag }}</span
+  <a
+    [routerLink]="'/home/tag/' + tag"
+    *ngFor="let tag of post.tags"
+    class="tag"
+    (click)="$event.stopPropagation()"
+    >#{{ tag }}</a
   >
 </div>
 <app-post-toolbar

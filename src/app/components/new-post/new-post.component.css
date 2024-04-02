@@ -46,13 +46,14 @@ textarea:focus {
 .photoContainer {
   width: 100%;
   position: relative;
+  margin: 0.5rem 0;
 }
 
 .photo {
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 12px;
   max-height: 400px;
-  margin-top: 0.5rem;
 }
 
 .cancelPhotoBtn {

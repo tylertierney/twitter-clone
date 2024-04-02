@@ -1,17 +1,28 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
+  FormGroup,
   UntypedFormBuilder,
-  UntypedFormControl,
+  FormControl,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UniqueEmailValidator } from '../validators/UniqueEmailValidator';
 import { UniqueUsernameValidator } from '../validators/UniqueUsernameValidator';
+import { BehaviorSubject } from 'rxjs';
+
+interface RegistrationForm {
+  name: FormControl<string>;
+  username: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+}
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
   showPassword = false;
@@ -23,15 +34,17 @@ export class RegisterComponent {
     private uniqueEmailValidator: UniqueEmailValidator
   ) {}
 
-  registrationForm = this.fb.group({
-    name: new UntypedFormControl('', {
+  registrationForm = new FormGroup<RegistrationForm>({
+    name: new FormControl('', {
+      nonNullable: true,
       validators: [
         Validators.required,
         Validators.maxLength(50),
         Validators.minLength(1),
       ],
     }),
-    username: new UntypedFormControl('', {
+    username: new FormControl<string>('', {
+      nonNullable: true,
       asyncValidators: [
         this.uniqueUsernameValidator.validate.bind(
           this.uniqueUsernameValidator
@@ -44,7 +57,8 @@ export class RegisterComponent {
       ],
       updateOn: 'change',
     }),
-    email: new UntypedFormControl('', {
+    email: new FormControl('', {
+      nonNullable: true,
       asyncValidators: [
         this.uniqueEmailValidator.validate.bind(this.uniqueEmailValidator),
       ],
@@ -55,7 +69,8 @@ export class RegisterComponent {
       ],
       updateOn: 'change',
     }),
-    password: new UntypedFormControl('', {
+    password: new FormControl('', {
+      nonNullable: true,
       validators: [
         Validators.required,
         Validators.minLength(8),
@@ -67,7 +82,7 @@ export class RegisterComponent {
 
   submit(): void {
     if (this.registrationForm.valid) {
-      this.authService.register(this.registrationForm.value);
+      this.authService.register(this.registrationForm.getRawValue());
     }
   }
 }

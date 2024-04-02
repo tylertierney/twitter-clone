@@ -129,7 +129,6 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   getFormData(formData: { name: string; description: string }) {
-    console.log(this.editProfileFormData);
     this.editProfileFormData.name = formData.name;
     this.editProfileFormData.description = formData.description;
   }

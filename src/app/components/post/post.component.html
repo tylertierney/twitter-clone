@@ -37,6 +37,7 @@
           (click)="$event.stopPropagation()"
         >
           <img
+            (error)="test()"
             [src]="post.profile_pic"
             [src]="
               domain +
@@ -48,6 +49,7 @@
             height="48px"
             width="48px"
             class="profile_pic"
+            [alt]="altText"
           />
         </a>
         <div *ngIf="showReplyHandle" class="handleContainer">

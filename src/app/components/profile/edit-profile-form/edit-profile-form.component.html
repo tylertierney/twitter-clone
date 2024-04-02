@@ -2,7 +2,7 @@
   <div class="textbox">
     <div class="heading">
       <span class="textbox-title">Name</span>
-      <span class="maxLengthIndicator">{{ nameLength | async }}/50</span>
+      <span class="maxLengthIndicator">{{ nameLength$ | async }}/50</span>
     </div>
     <input
       id="name"
@@ -18,9 +18,10 @@
     <div class="heading">
       <span class="textbox-title">Bio</span>
       <span class="maxLengthIndicator"
-        >{{ descriptionLength | async }}/160</span
+        >{{ descriptionLength$ | async }}/160</span
       >
     </div>
     <textarea formControlName="description" maxlength="160"></textarea>
   </div>
 </form>
+<pre>{{ nameLength$ | async }}</pre>

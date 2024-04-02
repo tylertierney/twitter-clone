@@ -34,6 +34,10 @@ export class PostComponent implements OnInit {
   }
 
   test() {
-    this.postsService.getPostById(this.post.id).subscribe(console.log);
+    console.log('an error happened w/ an image');
+  }
+
+  get altText() {
+    return `${this.post.name}'s Profile Picture`;
   }
 }

@@ -31,7 +31,6 @@ import { ExpandedTagComponent } from '../../components/expanded-tag/expanded-tag
     ExpandedTagComponent,
     ProfileComponent,
     ProfileHeaderComponent,
-    EditProfileFormComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +40,7 @@ import { ExpandedTagComponent } from '../../components/expanded-tag/expanded-tag
     PostModule,
     SidebarModule,
     SearchModule,
+    EditProfileFormComponent,
   ],
   exports: [],
   providers: [

@@ -25,13 +25,17 @@ export class ProfileComponent {
     switchMap((username) => this.userService.getUserByUsername(username))
   );
   posts$ = this.username$.pipe(
-    switchMap((username) => this.postsService.getPostsByUsername(username))
+    switchMap((username) => this.postsService.getPostsByUsername(username)),
+    tap(console.log)
   );
   numOfFollowing$ = this.user$.pipe(
     switchMap(({ id }) => this.http.get<number>('/users/' + id + '/following/'))
   );
   numOfFollowers$ = this.user$.pipe(
     switchMap(({ id }) => this.http.get<number>('/users/' + id + '/followers/'))
+  );
+  numOfFollowersText$ = this.numOfFollowers$.pipe(
+    map((num) => (num === 0 ? 'followers' : num > 1 ? 'followers' : 'follower'))
   );
   isEditable$ = combineLatest([this.authService.user$, this.user$]).pipe(
     map(([currentUser, targetUser]) => currentUser.id === targetUser.id)

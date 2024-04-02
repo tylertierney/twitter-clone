@@ -31,16 +31,9 @@
         <span class="value">{{ numOfFollowing$ | async }}</span>
         <span>Following</span>
       </div>
-      <div
-        class="followerCount"
-        *ngIf="numOfFollowers$ | async as numOfFollowers"
-      >
-        <span class="value">{{ numOfFollowers }}</span>
-        <span
-          >Follower{{
-            numOfFollowers === 0 ? "s" : numOfFollowers > 1 ? "s" : ""
-          }}</span
-        >
+      <div class="followerCount">
+        <span class="value">{{ numOfFollowers$ | async }}</span>
+        <span>{{ numOfFollowersText$ | async }}</span>
       </div>
     </div>
     <app-post

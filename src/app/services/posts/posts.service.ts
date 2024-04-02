@@ -69,7 +69,7 @@ export class PostsService {
           formData.append('text', form.controls['text'].value);
           const photo_file = form.controls['photo_file'].value;
           if (photo_file) {
-            formData.append('photo_file', new Blob([photo_file]));
+            formData.append('photo_file', photo_file);
           }
           const replying_to = form.controls['replying_to'].value;
           if (replying_to) {
