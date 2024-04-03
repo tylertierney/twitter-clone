@@ -25,8 +25,7 @@ export class ProfileComponent {
     switchMap((username) => this.userService.getUserByUsername(username))
   );
   posts$ = this.username$.pipe(
-    switchMap((username) => this.postsService.getPostsByUsername(username)),
-    tap(console.log)
+    switchMap((username) => this.postsService.getPostsByUsername(username))
   );
   numOfFollowing$ = this.user$.pipe(
     switchMap(({ id }) => this.http.get<number>('/users/' + id + '/following/'))

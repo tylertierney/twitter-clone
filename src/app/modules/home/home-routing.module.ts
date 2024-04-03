@@ -1,24 +1,17 @@
 import { NgModule } from '@angular/core';
-import {
-  BaseRouteReuseStrategy,
-  RouteReuseStrategy,
-  RouterModule,
-  Routes,
-} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ExpandedPostComponent } from '../../components/expanded-post/expanded-post.component';
 import { ExpandedTagComponent } from '../../components/expanded-tag/expanded-tag.component';
 import { FeedComponent } from '../../components/feed/feed.component';
 import { HomeComponent } from '../../components/home/home.component';
 import { ProfileComponent } from '../../components/profile/profile.component';
-import { SearchComponent } from '../../components/search/search.component';
-import { AuthGuardService } from '../../services/auth-guard/auth-guard.service';
-import { HomeRouteReuseStrategy } from './home-route-reuse-strategy';
+import { authCanActivate } from '../../components/guards/auth-guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [authCanActivate()],
     children: [
       { path: '', pathMatch: 'full', component: FeedComponent },
       // { path: 'search', component: SearchComponent },

@@ -101,7 +101,5 @@ export class EditProfileFormComponent implements OnInit {
     //   .subscribe((formData) => {
     //     this.formData.emit(formData);
     //   });
-
-    this.nameLength$.subscribe(console.log);
   }
 }

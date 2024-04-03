@@ -66,7 +66,7 @@ export class AuthService {
       .post<IUser>(`/auth/login`, formData, { withCredentials: true })
       .pipe(
         tap(() => {
-          this.router.navigate(['../home']);
+          this.router.navigate(['home']);
         })
       )
       .subscribe(this.user$);

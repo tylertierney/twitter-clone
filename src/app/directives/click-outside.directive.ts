@@ -26,8 +26,6 @@ export class ClickOutsideDirective {
     if (!clickedInside) {
       this.clickOutside.emit(event);
     } else {
-      console.log('clicked inside?');
-      console.log(this.vc);
       // const newComp = this.vc.createComponent(NewPostComponent);
       // this.vc.createEmbeddedView(this.elementRef.nativeElement);
     }

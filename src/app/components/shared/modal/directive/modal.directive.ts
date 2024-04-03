@@ -45,7 +45,6 @@ export class ModalDirective {
         .rootNodes[0];
       document.body.appendChild(domElem);
       this.setModalComponentProperties();
-      console.log(this.componentRef);
     }
   }
 

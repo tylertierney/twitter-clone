@@ -26,6 +26,5 @@ export class UserSearchResultComponent {
 
   stopPropagation(e: MouseEvent) {
     e.stopPropagation();
-    console.log('clicked');
   }
 }

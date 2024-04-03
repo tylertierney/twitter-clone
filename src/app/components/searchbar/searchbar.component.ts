@@ -27,11 +27,10 @@ export class SearchbarComponent {
   }
 
   submit() {
-    console.log('submit event');
     this.input.nativeElement.blur();
     this.searchService.submissionEvent$.next(null);
     this.searchService.searchForm.markAllAsTouched();
-    this.router.navigate(['/search'], {
+    this.router.navigate(['search'], {
       queryParams: { q: this.searchService.searchForm.value.searchTerm },
     });
   }
