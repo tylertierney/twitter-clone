@@ -1,5 +1,5 @@
-import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnInit, TemplateRef } from '@angular/core';
+import { BehaviorSubject, of } from 'rxjs';
 
 export interface IModalConfig {
   title?: string;
@@ -15,7 +15,6 @@ export interface IModalConfig {
 export class ModalService {
   isOpen$ = new BehaviorSubject<boolean>(false);
   content$ = new BehaviorSubject<TemplateRef<any> | null>(null);
-  title$ = new BehaviorSubject<string>('');
 
   config$ = new BehaviorSubject<IModalConfig | null>(null);
 

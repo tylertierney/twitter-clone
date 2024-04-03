@@ -12,6 +12,7 @@ import { MenuModule } from '../menu/menu.module';
 import { HomeModule } from '../home/home.module';
 import { ApiInterceptor } from '../../interceptors/api-interceptor';
 import { SharedModule } from '../shared/shared.module';
+import { provideRouter } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegisterComponent],

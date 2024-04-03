@@ -131,7 +131,7 @@
   </ng-template>
   <ng-template #editProfileModal>
     <app-edit-profile-form
-      (formData)="getFormData($event)"
+      (valueChangesSubject)="getFormData($event)"
       [user]="user"
     ></app-edit-profile-form>
   </ng-template>

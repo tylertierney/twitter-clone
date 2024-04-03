@@ -18,12 +18,14 @@ import {
   BehaviorSubject,
   map,
   Observable,
+  of,
   ReplaySubject,
   Subject,
   tap,
 } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile-header',

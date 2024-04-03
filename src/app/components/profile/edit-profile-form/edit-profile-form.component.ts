@@ -17,10 +17,12 @@ import {
   filter,
   map,
   Observable,
+  of,
   ReplaySubject,
   share,
   shareReplay,
   startWith,
+  tap,
 } from 'rxjs';
 import { IUser } from '../../../services/user/user.service';
 import { CommonModule } from '@angular/common';
@@ -52,7 +54,9 @@ export class EditProfileFormComponent implements OnInit {
     map((user) => ({ name: user.name, description: user.description }))
   );
 
-  @Output() formData = new EventEmitter<NameAndDescription>();
+  // @Output() formData = new EventEmitter<NameAndDescription>();
+
+  @Output() valueChangesSubject = new ReplaySubject<NameAndDescription>(1);
 
   editProfileForm = this.fb.group<IUserForm>({
     name: new FormControl('', {
@@ -65,40 +69,39 @@ export class EditProfileFormComponent implements OnInit {
     }),
   });
 
-  nameLength$ = this.editProfileForm.valueChanges.pipe(
+  nameLength$ = this.valueChangesSubject.pipe(
     map((form) => form.name ?? ''),
-    map((name) => name.length),
-    shareReplay(1)
-    // startWith(this.editProfileForm.controls.name.getRawValue().length)
+    map((name) => name.length)
   );
 
-  descriptionLength$ = this.editProfileForm.valueChanges.pipe(
+  descriptionLength$ = this.valueChangesSubject.pipe(
     map((form) => form.description ?? ''),
-    map((description) => description.length),
-    shareReplay(1)
-    // startWith(this.editProfileForm.controls.description.getRawValue().length)
+    map((description) => description.length)
   );
-
-  // value$ = this.editProfileForm.valueChanges.subscribe(console.log);
-  test = this.nameLength$.subscribe(console.log);
 
   ngOnInit() {
+    this.editProfileForm.valueChanges
+      .pipe(map(() => this.editProfileForm.getRawValue() as NameAndDescription))
+      .subscribe(this.valueChangesSubject);
+
     this.nameAndDescription$.subscribe((nameAndDescription) => {
       this.editProfileForm.patchValue(nameAndDescription);
     });
 
-    this.editProfileForm.valueChanges
-      .pipe(
-        map(
-          ({ name, description }) =>
-            ({
-              name: name ?? '',
-              description: description ?? '',
-            } as NameAndDescription)
-        )
-      )
-      .subscribe((formData) => {
-        this.formData.emit(formData);
-      });
+    // this.valueChangesSubject
+    //   .pipe(
+    //     map(
+    //       ({ name, description }) =>
+    //         ({
+    //           name: name ?? '',
+    //           description: description ?? '',
+    //         } as NameAndDescription)
+    //     )
+    //   )
+    //   .subscribe((formData) => {
+    //     this.formData.emit(formData);
+    //   });
+
+    this.nameLength$.subscribe(console.log);
   }
 }
