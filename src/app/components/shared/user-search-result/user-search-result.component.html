@@ -9,7 +9,7 @@
     <div class="mainInfo">
       <div class="names">
         <span class="name">{{ user.name }}</span>
-        <span class="username">@{{ user.username }}</span>
+        <span class="username">&#64;{{ user.username }}</span>
       </div>
       <app-follow-button
         *ngIf="showFollowButton && (authService.user$ | async) as currentUser"
