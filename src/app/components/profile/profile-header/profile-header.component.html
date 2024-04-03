@@ -8,6 +8,7 @@
     "
     width="100%"
     class="header_pic"
+    (error)="onHeaderPicError($event)"
   />
   <ng-template #header_pic_bkg>
     <div
@@ -77,6 +78,7 @@
       "
       width="100%"
       class="profile_pic"
+      (error)="onProfilePicError($event)"
     />
     <div class="editPhotoControls" style="padding: 0" *ngIf="isEditable">
       <div *ngIf="newProfilePicUrl; else profilePicInput">

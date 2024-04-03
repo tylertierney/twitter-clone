@@ -28,12 +28,20 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.post.replying_to) {
-      // this.hasReply = true;
       this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
     }
+
+    this.photo_url = this.post.photo_url;
   }
+
+  photo_url = '';
 
   get altText() {
     return `${this.post.name}'s Profile Picture`;
+  }
+
+  onError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/user-avatar/gray.svg';
   }
 }

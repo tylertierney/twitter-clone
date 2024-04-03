@@ -27,4 +27,9 @@ export class UserSearchResultComponent {
   stopPropagation(e: MouseEvent) {
     e.stopPropagation();
   }
+
+  onImageError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/user-avatar/gray.svg';
+  }
 }

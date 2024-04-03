@@ -21,4 +21,9 @@ export class NavbarComponent implements OnInit {
   getUser() {
     this.authService.user$.subscribe(console.log);
   }
+
+  onImageError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/user-avatar/gray.svg';
+  }
 }

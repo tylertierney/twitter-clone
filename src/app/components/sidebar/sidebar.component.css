@@ -6,8 +6,9 @@
   position: sticky;
   width: 350px;
   align-items: center;
-  margin-top: auto;
-  bottom: 0px;
+  /* margin-top: auto; */
+  /* bottom: 0px; */
+  top: 0;
 }
 
 /* .sidebarMenu {

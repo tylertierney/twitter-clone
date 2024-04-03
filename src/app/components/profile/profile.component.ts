@@ -15,9 +15,6 @@ import { ThemeService } from '../../services/theme/theme.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  newHeaderPicUrl: SafeUrl;
-  newHeaderPicFile: File;
-
   username$ = this.activatedRoute.params.pipe(
     map((params) => params['username'])
   );

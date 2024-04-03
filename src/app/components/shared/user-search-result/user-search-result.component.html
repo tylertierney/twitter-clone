@@ -4,6 +4,7 @@
     [src]="
       domain + '/users/' + user.username + '/profile_pic/' + user.profile_pic
     "
+    (error)="onImageError($event)"
   />
   <div class="userDetails">
     <div class="mainInfo">

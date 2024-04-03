@@ -90,6 +90,7 @@
       "
       width="38px"
       class="profile_pic"
+      (error)="onImageError($event)"
     />
     <div class="userAvatarLabel">
       <span>{{ user.name }}</span>

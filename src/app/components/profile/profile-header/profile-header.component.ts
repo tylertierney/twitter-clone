@@ -134,4 +134,14 @@ export class ProfileHeaderComponent implements OnInit {
     this.editProfileFormData.name = formData.name;
     this.editProfileFormData.description = formData.description;
   }
+
+  onHeaderPicError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/header-pics/gray-header-pic.svg';
+  }
+
+  onProfilePicError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/user-avatar/gray.svg';
+  }
 }

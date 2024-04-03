@@ -40,4 +40,9 @@ export class PostBodyComponent implements OnInit {
   openDialog() {
     this.dialog.open(NewPostComponent);
   }
+
+  onImageError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/header-pics/gray-header-pic.svg';
+  }
 }
