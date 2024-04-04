@@ -4,8 +4,12 @@ import {
   IModalConfig,
   ModalService,
 } from '../../../services/modal/modal.service';
+import { CommonModule } from '@angular/common';
+import { SubmitButtonComponent } from '../submit-button/submit-button.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, SubmitButtonComponent],
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],

@@ -8,10 +8,12 @@ import { TrendingTopicsComponent } from '../../components/trending-topics/trendi
 @NgModule({
   imports: [SharedModule, CommonModule],
   declarations: [
-    SidebarComponent,
-    WhoToFollowComponent,
-    TrendingTopicsComponent,
+    // SidebarComponent,
+    // WhoToFollowComponent,
+    // TrendingTopicsComponent,
   ],
-  exports: [SidebarComponent],
+  exports: [
+    // SidebarComponent
+  ],
 })
 export class SidebarModule {}

@@ -4,7 +4,10 @@ import { ModalDirective } from '../../components/shared/modal/directive/modal.di
 import { ModalComponent } from '../../components/shared/modal/modal.component';
 
 @NgModule({
-  declarations: [ModalComponent, ModalDirective],
+  declarations: [
+    // ModalComponent,
+    ModalDirective,
+  ],
   imports: [CommonModule],
   exports: [ModalDirective],
 })

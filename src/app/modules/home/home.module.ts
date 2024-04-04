@@ -22,10 +22,10 @@ import { ExpandedTagComponent } from '../../components/expanded-tag/expanded-tag
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    NavbarComponent,
-    SettingsMenuComponent,
-    UserMenuComponent,
+    // HomeComponent,
+    // NavbarComponent,
+    // SettingsMenuComponent,
+    // UserMenuComponent,
     FeedComponent,
     ExpandedPostComponent,
     ExpandedTagComponent,

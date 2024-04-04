@@ -2,8 +2,19 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { SearchService } from '../../services/search/search.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserSearchResultComponent } from '../shared/user-search-result/user-search-result.component';
+import { TweetSearchResultComponent } from '../shared/tweet-search-result/tweet-search-result.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    UserSearchResultComponent,
+    TweetSearchResultComponent,
+  ],
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.css'],

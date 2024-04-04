@@ -8,8 +8,13 @@ import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ThemeService } from '../../../services/theme/theme.service';
 import { IUser } from '../../../services/user/user.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FollowButtonComponent } from '../follow-button/follow-button.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, FollowButtonComponent],
   selector: 'app-user-search-result',
   templateUrl: './user-search-result.component.html',
   styleUrls: ['./user-search-result.component.css'],

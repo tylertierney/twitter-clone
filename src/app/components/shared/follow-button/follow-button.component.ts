@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PostsService } from '../../../services/posts/posts.service';
 import { IUser, UserService } from '../../../services/user/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-follow-button',
   templateUrl: './follow-button.component.html',
   styleUrls: ['./follow-button.component.css'],

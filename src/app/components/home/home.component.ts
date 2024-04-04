@@ -7,11 +7,24 @@ import {
 } from '@angular/core';
 import { ModalService } from '../../services/modal/modal.service';
 import { UserService } from '../../services/user/user.service';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { Router, RouterModule } from '@angular/router';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    NavbarComponent,
+    RouterModule,
+    SidebarComponent,
+    ModalComponent,
+  ],
 })
 export class HomeComponent implements OnInit {
   @ViewChild('spacer') spacer: ElementRef<HTMLDivElement>;
