@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 export interface IRoutedTab {
   label: string;
@@ -6,6 +8,8 @@ export interface IRoutedTab {
 }
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   selector: 'app-routed-nav-tabs',
   templateUrl: './routed-nav-tabs.component.html',
   styleUrls: ['../tabs.component.css'],

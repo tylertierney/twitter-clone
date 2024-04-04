@@ -1,12 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
-import { ThemeService } from '../../../services/theme/theme.service';
 import { IUser } from '../../../services/user/user.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

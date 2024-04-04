@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-nav-tabs',
   templateUrl: './nav-tabs.component.html',
   styleUrls: ['../tabs.component.css'],

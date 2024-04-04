@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-post-button',
   templateUrl: './post-button.component.html',
   styleUrls: ['./post-button.component.css'],

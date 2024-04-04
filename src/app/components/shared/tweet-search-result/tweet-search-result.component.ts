@@ -15,4 +15,9 @@ export class TweetSearchResultComponent {
   domain = environment.domain;
 
   @Input() post: IPost;
+
+  onImageError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    target.src = 'assets/svg/header-pics/gray-header-pic.svg';
+  }
 }

@@ -12,8 +12,12 @@ import { ModalService } from '../../../services/modal/modal.service';
 import { IPost, PostsService } from '../../../services/posts/posts.service';
 import { IUser } from '../../../services/user/user.service';
 import { ReplyComponent } from '../../reply/reply.component';
+import { CommonModule } from '@angular/common';
+import { PostButtonComponent } from '../post-button/post-button.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, PostButtonComponent, ReplyComponent],
   selector: 'app-post-toolbar',
   templateUrl: './post-toolbar.component.html',
   styleUrls: ['./post-toolbar.component.css'],

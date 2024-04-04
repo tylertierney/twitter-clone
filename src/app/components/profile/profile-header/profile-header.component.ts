@@ -26,8 +26,12 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
+import { FollowButtonComponent } from '../../shared/follow-button/follow-button.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FollowButtonComponent, EditProfileFormComponent],
   selector: 'app-profile-header',
   templateUrl: './profile-header.component.html',
   styleUrls: ['./profile-header.component.css'],

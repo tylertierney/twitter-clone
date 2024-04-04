@@ -1,4 +1,3 @@
-<!-- *ngFor="let post of result.posts" -->
 <a
   class="searchResult post"
   [routerLink]="'../' + post.username + '/' + post.id"
@@ -8,6 +7,7 @@
     <span class="postTextPreview">{{ post.text }}</span>
   </div>
   <img
+    (error)="onImageError($event)"
     class="postPhotoPreview"
     *ngIf="post.photo_url"
     [src]="domain + '/posts/' + post.id + '/photo_url/' + post.photo_url"

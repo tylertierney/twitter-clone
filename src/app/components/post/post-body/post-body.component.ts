@@ -15,8 +15,13 @@ import { Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
 import { NewPostComponent } from '../../new-post/new-post.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalService } from '../../../services/modal/modal.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { PostToolbarComponent } from '../post-toolbar/post-toolbar.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, PostToolbarComponent],
   selector: 'app-post-body',
   templateUrl: './post-body.component.html',
   styleUrls: ['./post-body.component.css'],

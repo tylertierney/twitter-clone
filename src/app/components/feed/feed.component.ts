@@ -3,8 +3,21 @@ import { Observable } from 'rxjs';
 import { IPost, PostsService } from 'src/app/services/posts/posts.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { ThemeService } from '../../services/theme/theme.service';
+import { CommonModule } from '@angular/common';
+import { SubNavComponent } from '../shared/sub-nav/sub-nav.component';
+import { NavTabsComponent } from '../shared/tabs/nav-tabs/nav-tabs.component';
+import { NewPostComponent } from '../new-post/new-post.component';
+import { PostComponent } from '../post/post.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    SubNavComponent,
+    NavTabsComponent,
+    NewPostComponent,
+    PostComponent,
+  ],
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],

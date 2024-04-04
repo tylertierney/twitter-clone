@@ -11,6 +11,7 @@ import {
 import {
   FormControl,
   FormGroup,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
@@ -19,8 +20,20 @@ import { PostsService } from '../../services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { CircularProgressComponent } from '../shared/circular-progress/circular-progress.component';
+import { RouterModule } from '@angular/router';
+import { TagsComponent } from './tags/tags.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    CircularProgressComponent,
+    RouterModule,
+    ReactiveFormsModule,
+    TagsComponent,
+  ],
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
   styleUrls: ['./new-post.component.css'],

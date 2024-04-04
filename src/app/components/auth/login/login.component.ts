@@ -1,8 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    SubmitButtonComponent,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -10,7 +25,10 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class LoginComponent implements OnInit {
   showPassword = false;
 
-  constructor(private fb: UntypedFormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private authService: AuthService
+  ) {}
 
   loginForm = this.fb.group({
     email: new UntypedFormControl('', {

@@ -3,8 +3,14 @@ import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { IPost, PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { PostHeaderComponent } from './post-header/post-header.component';
+import { PostBodyComponent } from './post-body/post-body.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, PostHeaderComponent, PostBodyComponent],
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],

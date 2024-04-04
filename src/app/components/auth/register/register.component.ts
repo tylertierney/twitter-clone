@@ -1,15 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  FormGroup,
-  UntypedFormBuilder,
   FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { UniqueEmailValidator } from '../validators/UniqueEmailValidator';
 import { UniqueUsernameValidator } from '../validators/UniqueUsernameValidator';
-import { BehaviorSubject } from 'rxjs';
 
 interface RegistrationForm {
   name: FormControl<string>;
@@ -19,6 +21,13 @@ interface RegistrationForm {
 }
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    SubmitButtonComponent,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],

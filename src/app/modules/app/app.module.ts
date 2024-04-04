@@ -13,7 +13,7 @@ import { ApiInterceptor } from '../../interceptors/api-interceptor';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -3,8 +3,19 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ModalService } from '../../../services/modal/modal.service';
 import { IPost, PostsService } from '../../../services/posts/posts.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReadableDatePipe } from '../../../pipes/readable-date.pipe';
+import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReadableDatePipe,
+    SubmitButtonComponent,
+  ],
   selector: 'app-post-header',
   templateUrl: './post-header.component.html',
   styleUrls: ['./post-header.component.css'],

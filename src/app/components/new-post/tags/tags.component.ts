@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -6,9 +7,22 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SubmitButtonComponent,
+  ],
   selector: 'app-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.css'],
