@@ -1,28 +1,32 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { routes } from '../../routes/app.routes';
 import { AppComponent } from '../../app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoginComponent } from '../../components/auth/login/login.component';
-import { RegisterComponent } from '../../components/auth/register/register.component';
-import { MenuModule } from '../menu/menu.module';
-import { HomeModule } from '../home/home.module';
 import { ApiInterceptor } from '../../interceptors/api-interceptor';
-import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    SharedModule,
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
-    MenuModule,
-    HomeModule,
+    ToastrModule.forRoot({
+      maxOpened: 4,
+      autoDismiss: true,
+      timeOut: 5000,
+      positionClass: 'toastPosition',
+      toastClass: 'toastClass',
+      easing: 'ease-in-out',
+      tapToDismiss: true,
+      newestOnTop: false,
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

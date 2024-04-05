@@ -83,7 +83,7 @@
   <mat-menu #menu="matMenu" class="menu">
     <app-settings-menu></app-settings-menu>
   </mat-menu>
-  <button [menu]="userMenu" class="userAvatar">
+  <button [matMenuTriggerFor]="userMenu" class="userAvatar">
     <img
       [src]="
         domain + '/users/' + user.username + '/profile_pic/' + user.profile_pic
@@ -97,7 +97,7 @@
       <span>&#64;{{ user.username }}</span>
     </div>
   </button>
-  <ng-template #userMenu>
+  <mat-menu #userMenu="matMenu" class="menu">
     <app-user-menu></app-user-menu>
-  </ng-template>
+  </mat-menu>
 </nav>
