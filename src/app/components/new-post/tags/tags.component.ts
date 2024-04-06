@@ -40,7 +40,7 @@ export class TagsComponent implements AfterViewInit {
 
   addTag(text: string): void {
     if (!text) return;
-    const trimmed = text.toLowerCase().trim().replace(' ', '');
+    const trimmed = text.toLowerCase().trim().replace(/ /g, '');
     this.tag.emit(trimmed);
     this.text = '';
   }

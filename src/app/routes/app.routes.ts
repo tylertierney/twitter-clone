@@ -14,6 +14,14 @@ import { SearchComponent } from '../components/search/search.component';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
     path: '',
     component: HomeComponent,
     canActivate: [authCanActivate()],
@@ -34,13 +42,5 @@ export const routes: Routes = [
       { path: ':username', component: ProfileComponent },
       { path: ':username/:post_id', component: ExpandedPostComponent },
     ],
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
   },
 ];

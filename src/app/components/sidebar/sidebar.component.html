@@ -1,15 +1,15 @@
 <div
-  [style.padding-top]="onSearchPage ? '1rem' : '0'"
+  [style.padding-top]="(showSearchBar$ | async) === true ? '0' : '1rem'"
   style="
     max-height: 100vh;
     overflow: auto;
-    padding: 0 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     width: inherit;
     display: flex;
     flex-direction: column;
   "
 >
-  <app-searchbar *ngIf="!onSearchPage"></app-searchbar>
+  <app-searchbar *ngIf="showSearchBar$ | async"></app-searchbar>
   <app-who-to-follow></app-who-to-follow>
   <app-trending-topics></app-trending-topics>
 </div>

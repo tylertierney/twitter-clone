@@ -1,19 +1,10 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
-import {
-  ActivatedRoute,
-  Event,
-  NavigationEnd,
-  NavigationStart,
-  RouteConfigLoadStart,
-  Router,
-  RouterEvent,
-} from '@angular/router';
-import { filter, map, startWith, switchMap } from 'rxjs';
-import { SearchService } from '../../services/search/search.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, shareReplay, startWith } from 'rxjs';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
-import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
 import { TrendingTopicsComponent } from '../trending-topics/trending-topics.component';
+import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
 
 @Component({
   standalone: true,
@@ -28,12 +19,13 @@ import { TrendingTopicsComponent } from '../trending-topics/trending-topics.comp
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  onSearchPage = window.location.pathname.includes('/search');
+  showSearchBar$ = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+    map(() => this.location.path().includes('search')),
+    startWith(this.location.path().includes('search')),
+    map((onSearchRoute) => !onSearchRoute),
+    shareReplay(1)
+  );
 
-  constructor(
-    public location: Location,
-    private searchService: SearchService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(public location: Location, private router: Router) {}
 }
