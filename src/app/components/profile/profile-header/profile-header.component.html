@@ -117,13 +117,24 @@
       </ng-template>
     </div>
   </div>
-  <button
-    *ngIf="isEditable; else followToggle"
-    class="editProfileBtn"
-    (click)="openEditProfileModal(editProfileModal)"
-  >
-    Edit Profile
-  </button>
+  <div style="display: flex; gap: 0.5rem" *ngIf="isEditable; else followToggle">
+    <button
+      class="editProfileBtn"
+      (click)="openEditProfileModal(editProfileModal)"
+    >
+      Edit Profile
+    </button>
+    <button
+      [matMenuTriggerFor]="profileOptions"
+      style="font-size: 1.4rem"
+      class="editProfileBtn material-symbols-outlined"
+    >
+      menu
+    </button>
+    <mat-menu #profileOptions="matMenu" class="menu">
+      <app-menu [menuItems]="profileOptionsMenuItems"></app-menu>
+    </mat-menu>
+  </div>
   <ng-template #followToggle>
     <app-follow-button
       *ngIf="authService.user$ | async as currentUser"
@@ -141,3 +152,20 @@
     <div class="profile_pic_bkg"></div>
   </ng-template>
 </div>
+
+<ng-template #deleteProfileModal>
+  <div class="confirmDeleteDialog">
+    <p>Are you sure you want to delete your profile?</p>
+    <div class="controls">
+      <app-submit-button
+        type="outline"
+        style="border-color: rgba(var(--text-color), 0.5)"
+        (onClick)="modalService.close()"
+        >Cancel</app-submit-button
+      >
+      <app-submit-button type="danger" (onClick)="deleteProfileConfirm()"
+        >Delete</app-submit-button
+      >
+    </div>
+  </div>
+</ng-template>

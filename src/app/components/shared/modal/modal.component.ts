@@ -1,9 +1,5 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import {
-  IModalConfig,
-  ModalService,
-} from '../../../services/modal/modal.service';
+import { Component, OnInit } from '@angular/core';
+import { ModalService } from '../../../services/modal/modal.service';
 import { CommonModule } from '@angular/common';
 import { SubmitButtonComponent } from '../submit-button/submit-button.component';
 
@@ -15,10 +11,6 @@ import { SubmitButtonComponent } from '../submit-button/submit-button.component'
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnInit {
-  // @Input() content: TemplateRef<any>;
-  // @Input() title: string;
-  // @Input() config: IModalConfig;
-
   constructor(public modalService: ModalService) {}
 
   ngOnInit(): void {}

@@ -86,3 +86,27 @@
   font-size: 1rem;
   color: rgba(var(--text-color));
 }
+
+
+
+
+.confirmDeleteDialog {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  gap: 1rem;
+}
+
+.confirmDeleteDialog p {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.confirmDeleteDialog .controls {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: flex-end;
+}

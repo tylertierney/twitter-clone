@@ -1,44 +1,44 @@
 import {
   Component,
+  DestroyRef,
+  inject,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EditProfileService } from '../../../services/profile/edit-profile.service';
-import { IUser } from '../../../services/user/user.service';
+import { IUser, UserService } from '../../../services/user/user.service';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalService } from '../../../services/modal/modal.service';
 import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
-import {
-  BehaviorSubject,
-  map,
-  Observable,
-  of,
-  ReplaySubject,
-  Subject,
-  tap,
-} from 'rxjs';
-import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FollowButtonComponent } from '../../shared/follow-button/follow-button.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MenuComponent, MenuItem } from '../../menu/menu.component';
+import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FollowButtonComponent, EditProfileFormComponent],
+  imports: [
+    CommonModule,
+    FollowButtonComponent,
+    EditProfileFormComponent,
+    MatMenuModule,
+    MenuComponent,
+    SubmitButtonComponent,
+  ],
   selector: 'app-profile-header',
   templateUrl: './profile-header.component.html',
   styleUrls: ['./profile-header.component.css'],
 })
 export class ProfileHeaderComponent implements OnInit {
   @Input() isEditable = false;
-  // currentUser: IUser;
   @Input() user: IUser;
   newHeaderPicUrl: SafeUrl;
   newHeaderPicFile: File;
@@ -46,7 +46,6 @@ export class ProfileHeaderComponent implements OnInit {
   newProfilePicUrl: SafeUrl;
   newProfilePicFile: File;
   domain = environment.domain;
-  // isEditable = false;
 
   editProfileFormData: { name: string; description: string } = {
     name: '',
@@ -58,8 +57,9 @@ export class ProfileHeaderComponent implements OnInit {
     public editProfileService: EditProfileService,
     public authService: AuthService,
     public dialog: Dialog,
-    private modalService: ModalService,
-    private toast: ToastrService
+    public modalService: ModalService,
+    private toast: ToastrService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -147,5 +147,36 @@ export class ProfileHeaderComponent implements OnInit {
   onProfilePicError(e: Event) {
     const target = e.target as HTMLImageElement;
     target.src = 'assets/svg/user-avatar/gray.svg';
+  }
+
+  destroyRef = inject(DestroyRef);
+
+  profileOptionsMenuItems: MenuItem[] = [
+    {
+      label: 'Delete Profile',
+      onClick: () => this.deleteProfileClick(),
+      icon: 'delete',
+    },
+  ];
+
+  @ViewChild('deleteProfileModal')
+  deleteProfileModal: TemplateRef<HTMLDivElement>;
+
+  deleteProfileClick() {
+    this.modalService.open({
+      title: 'Delete Profile',
+      content: this.deleteProfileModal,
+      showSubmitButton: false,
+    });
+  }
+
+  deleteProfileConfirm() {
+    this.userService
+      .deleteProfile(this.user.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res) => {
+        console.log(res);
+        this.authService.logout();
+      });
   }
 }

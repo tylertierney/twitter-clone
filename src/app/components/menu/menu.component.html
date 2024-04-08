@@ -1,0 +1,11 @@
+<ul>
+  <ng-content></ng-content>
+  <li *ngFor="let menuItem of menuItems">
+    <button style="font-size: inherit" (click)="menuItem.onClick($event)">
+      <span *ngIf="menuItem.icon" class="material-symbols-outlined">
+        {{ menuItem.icon }}
+      </span>
+      {{ menuItem.label }}
+    </button>
+  </li>
+</ul>

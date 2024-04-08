@@ -61,15 +61,10 @@ export class AuthService {
       });
   }
 
-  login(formData: { email: string; password: string }): void {
-    this.http
-      .post<IUser>(`/auth/login`, formData, { withCredentials: true })
-      .pipe(
-        tap(() => {
-          this.router.navigate(['home']);
-        })
-      )
-      .subscribe(this.user$);
+  login(formData: { email: string; password: string }) {
+    return this.http.post<IUser>(`/auth/login`, formData, {
+      withCredentials: true,
+    });
   }
 
   logout(): void {

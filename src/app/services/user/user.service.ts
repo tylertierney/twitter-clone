@@ -49,4 +49,8 @@ export class UserService {
       action: currentlyFollowing ? 'unfollow' : 'follow',
     });
   }
+
+  deleteProfile(currentUserId: string) {
+    return this.http.delete(`/users/${currentUserId}`);
+  }
 }

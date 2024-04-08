@@ -1,7 +1,5 @@
-<!-- <button [ngClass]="color" (click)="onClick.emit($event)" [ngSwitch]="type"> -->
 <button [ngClass]="color" (click)="clicked($event)" [ngSwitch]="type">
   <ng-container *ngSwitchCase="'like'" class="pink">
-    <!-- style="color: rgba(var(--text-color))" -->
     <svg
       stroke="currentColor"
       fill="currentColor"

@@ -42,7 +42,7 @@ a {
 .confirmDeleteDialog {
   display: flex;
   flex-direction: column;
-  padding: 0 1rem 1rem;
+  padding: 1rem;
   align-items: center;
   gap: 1rem;
 }

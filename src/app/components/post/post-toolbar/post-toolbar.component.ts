@@ -65,8 +65,4 @@ export class PostToolbarComponent implements OnInit {
       content: template,
     });
   }
-
-  // test() {
-  //   this.host.nativeElement.remove();
-  // }
 }

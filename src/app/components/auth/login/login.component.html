@@ -71,13 +71,21 @@
       >
     </div>
   </div>
+  <span style="color: #ff7b7b; text-align: center">{{
+    errorMessage$ | async
+  }}</span>
   <span style="text-align: center"
     >Don't have an account yet?
     <a style="color: #3ccbfb; white-space: nowrap" routerLink="/register"
       >Sign up!</a
     >
   </span>
-  <app-submit-button (onClick)="submit()" style="width: 100%"
+  <!-- <app-submit-button (onClick)="submit()" style="width: 100%"
+    >Submit</app-submit-button
+  > -->
+  <app-submit-button
+    (onClick)="submitButtonClickSubject.next()"
+    style="width: 100%"
     >Submit</app-submit-button
   >
 </form>
