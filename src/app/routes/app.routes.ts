@@ -26,7 +26,7 @@ export const routes: Routes = [
     component: HomeComponent,
     canActivate: [authCanActivate()],
     children: [
-      { path: '', pathMatch: 'full', component: FeedComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'home', pathMatch: 'full', component: FeedComponent },
       {
         path: 'search',

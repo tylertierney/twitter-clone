@@ -26,49 +26,24 @@ import { ModalComponent } from '../shared/modal/modal.component';
     ModalComponent,
   ],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   @ViewChild('spacer') spacer: ElementRef<HTMLDivElement>;
 
-  constructor(
-    private userService: UserService,
-    public modalService: ModalService
-  ) {}
+  constructor(public modalService: ModalService) {}
 
   @HostListener('window:keyup.escape', ['$event'])
   handleKeyDown() {
     this.modalService.close();
   }
 
-  ngOnInit(): void {}
-
-  getUsers() {
-    this.userService.getAllUsers().subscribe(console.log);
-  }
-
   scrollPosition = window.scrollY;
 
-  // @HostListener('document:scroll', ['$event', '$event.target'])
-  // public onScroll() {
-  //   const offset = window.scrollY;
-  //   if (offset > this.scrollPosition) {
-  //     // console.log('scrolling down');
-  //     // this.host.nativeElement.style.marginTop = 'auto';
-  //     // this.host.nativeElement.style.bottom = '0';
-  //     // this.host.nativeElement.style.top = 'unset';
-  //     // this.host.nativeElement.style.marginBottom = 'unset';
-  //     // this.spacer.nativeElement.style.marginTop = offset + 'px';
-  //   } else {
-  //     const sidebarHeight = parseInt(
-  //       window.getComputedStyle(this.sidebar.nativeElement).height,
-  //       10
-  //     );
-  //     console.log(sidebarHeight);
+  @ViewChild('sidebar', { read: ElementRef }) sidebar!: ElementRef;
 
-  //     // this.spacer.nativeElement.style.marginTop =
-  //     //   (offset - sidebarHeight > 0 ? offset + sidebarHeight : 0) + 'px';
-  //     this.spacer.nativeElement.style.marginTop = offset + 'px';
-  //     console.log('scrolling up');
-  //   }
-  //   this.scrollPosition = offset;
-  // }
+  @HostListener('window:scroll', ['$event', '$event.target'])
+  onScroll() {
+    const offset = window.scrollY - this.scrollPosition;
+    this.sidebar.nativeElement?.scrollBy(0, offset);
+    this.scrollPosition = window.scrollY;
+  }
 }

@@ -1,8 +1,6 @@
 <div
   [style.padding-top]="(showSearchBar$ | async) === true ? '0' : '1rem'"
   style="
-    max-height: 100vh;
-    overflow: auto;
     padding: 1rem 1rem 1rem 1rem;
     width: inherit;
     display: flex;
@@ -12,4 +10,14 @@
   <app-searchbar *ngIf="showSearchBar$ | async"></app-searchbar>
   <app-who-to-follow></app-who-to-follow>
   <app-trending-topics></app-trending-topics>
+  <p style="text-align: center; color: rgba(var(--text-color), 70%)">
+    This site was created by
+    <a
+      style="color: rgba(var(--brand-primary))"
+      href="https://tylertierney.com"
+      target="_blank"
+    >
+      Tyler Tierney</a
+    >
+  </p>
 </div>

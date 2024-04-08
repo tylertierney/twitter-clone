@@ -23,7 +23,7 @@ export class ModalService {
       if (open) {
         document.body.style.overflowY = 'hidden';
       } else {
-        document.body.style.overflowY = 'scroll';
+        document.body.style.overflowY = 'unset';
       }
     });
   }
