@@ -12,10 +12,9 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { filter, map, shareReplay, startWith } from 'rxjs';
 import { PostsService } from '../../services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
@@ -24,6 +23,16 @@ import { CommonModule } from '@angular/common';
 import { CircularProgressComponent } from '../shared/circular-progress/circular-progress.component';
 import { RouterModule } from '@angular/router';
 import { TagsComponent } from './tags/tags.component';
+import { RxPush } from '@rx-angular/template/push';
+
+const TWEET_MAX_LENGTH = 280;
+
+interface TweetForm {
+  text: FormControl<string>;
+  photo_file: FormControl<File | undefined>;
+  replying_to: FormControl<string | undefined>;
+  tags: FormControl<string[]>;
+}
 
 @Component({
   standalone: true,
@@ -33,6 +42,7 @@ import { TagsComponent } from './tags/tags.component';
     RouterModule,
     ReactiveFormsModule,
     TagsComponent,
+    RxPush,
   ],
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
@@ -45,15 +55,15 @@ export class NewPostComponent implements OnInit {
   @Input() label: 'Reply' | 'Tweet' = 'Tweet';
   @Input() placeholder = "What's happening?";
   @Output() onSubmit = new EventEmitter<FormGroup>();
-  @Input() replying_to: string | null = null;
+  @Input() replying_to?: string;
 
-  tweetForm = this.fb.group({
+  tweetForm = new FormGroup<TweetForm>({
     text: new FormControl('', {
-      validators: [Validators.required, Validators.maxLength(280)],
+      validators: [Validators.required, Validators.maxLength(TWEET_MAX_LENGTH)],
       updateOn: 'change',
       nonNullable: true,
     }),
-    photo_file: new FormControl(null, {
+    photo_file: new FormControl(undefined, {
       nonNullable: true,
     }),
     replying_to: new FormControl(this.replying_to, {
@@ -64,21 +74,22 @@ export class NewPostComponent implements OnInit {
     }),
   });
 
-  tweetLength$ = this.tweetForm.valueChanges.pipe(
-    map((form) => {
-      if (form && form.text && form.text.length) return form.text.length;
-      return 0;
-    })
+  tweetLength$ = this.tweetForm.controls.text.valueChanges.pipe(
+    map((text) => text.length),
+    startWith(0),
+    shareReplay(1)
   );
 
-  safePhotoUrl$ = this.tweetForm.valueChanges.pipe(
-    map((form) => {
-      const file = form.photo_file;
-      if (file) {
-        const url = URL.createObjectURL(form.photo_file);
-        return this.sanitizer.bypassSecurityTrustUrl(url);
-      }
-      return '';
+  circularProgressValue$ = this.tweetLength$.pipe(
+    filter((length) => length > 0),
+    map((length) => (length / TWEET_MAX_LENGTH) * 100)
+  );
+
+  safePhotoUrl$ = this.tweetForm.controls.photo_file.valueChanges.pipe(
+    filter(Boolean),
+    map((file) => {
+      const url = URL.createObjectURL(file);
+      return this.sanitizer.bypassSecurityTrustUrl(url);
     })
   );
 
@@ -87,7 +98,6 @@ export class NewPostComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public authService: AuthService,
-    private fb: UntypedFormBuilder,
     private sanitizer: DomSanitizer
   ) {}
 

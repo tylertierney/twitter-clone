@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs';
 import { PostsService } from '../../services/posts/posts.service';
 import { CommonModule } from '@angular/common';
 import { SubNavComponent } from '../shared/sub-nav/sub-nav.component';
@@ -15,7 +15,10 @@ import { PostComponent } from '../post/post.component';
   styleUrls: ['./expanded-tag.component.css'],
 })
 export class ExpandedTagComponent {
-  tag$ = this.activatedRoute.params.pipe(map((params) => params['tag']));
+  tag$ = this.activatedRoute.params.pipe(
+    map(({ tag }) => tag),
+    filter(Boolean)
+  );
 
   postsWithThisTag$ = this.tag$.pipe(
     switchMap((tag) => this.postsService.getPostsByTag(tag))

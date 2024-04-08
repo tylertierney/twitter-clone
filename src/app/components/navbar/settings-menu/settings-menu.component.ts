@@ -9,8 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './settings-menu.component.html',
   styleUrls: ['./settings-menu.component.css'],
 })
-export class SettingsMenuComponent implements OnInit {
+export class SettingsMenuComponent {
   constructor(public themeService: ThemeService) {}
-
-  ngOnInit(): void {}
 }

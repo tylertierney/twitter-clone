@@ -24,6 +24,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@rx-angular/template": "^17.1.0",
     "@types/node": "^18.11.11",
     "ngx-toastr": "^16.0.1",
     "rxjs": "~7.8.1",

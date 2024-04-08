@@ -5,10 +5,7 @@
     (selectTab)="handleTabChange($event)"
   ></app-nav-tabs>
 </app-sub-nav>
-<app-new-post
-  [replying_to]="null"
-  (onSubmit)="postsService.createNewPost($event)"
-></app-new-post>
+<app-new-post (onSubmit)="postsService.createNewPost($event)"></app-new-post>
 <ng-container *ngIf="selectedFeed$ | async as posts">
   <app-post
     *ngFor="let post of posts"

@@ -26,7 +26,7 @@
       <button
         *ngIf="safePhotoUrl$ | async"
         class="material-symbols-outlined circleButton cancelPhotoBtn"
-        (click)="tweetForm.patchValue({ photo_file: null })"
+        (click)="tweetForm.patchValue({ photo_file: undefined })"
       >
         close
       </button>
@@ -68,11 +68,10 @@
           tag
         </button>
       </div>
-
       <app-circular-progress
         style="margin-left: auto"
-        *ngIf="(tweetLength$ | async) > 0"
-        [val]="((tweetLength$ | async) / 280) * 100"
+        *ngIf="tweetLength$ | push"
+        [val]="circularProgressValue$ | push"
       ></app-circular-progress>
       <button
         id="create-post-submit-btn"

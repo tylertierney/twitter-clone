@@ -9,8 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.css'],
 })
-export class UserMenuComponent implements OnInit {
+export class UserMenuComponent {
   constructor(public authService: AuthService) {}
-
-  ngOnInit(): void {}
 }

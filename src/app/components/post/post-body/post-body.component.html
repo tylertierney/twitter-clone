@@ -7,7 +7,7 @@
 />
 <div class="tagsContainer">
   <a
-    [routerLink]="'/home/tag/' + tag"
+    [routerLink]="['/tag', tag]"
     *ngFor="let tag of post.tags"
     class="tag"
     (click)="$event.stopPropagation()"
