@@ -1,7 +1,4 @@
-<a
-  class="searchResult post"
-  [routerLink]="'../' + post.username + '/' + post.id"
->
+<a class="searchResult post" [routerLink]="['/' + post.username, post.id]">
   <div class="nameAndText">
     <span>&#64;{{ post.username }}</span>
     <span class="postTextPreview">{{ post.text }}</span>

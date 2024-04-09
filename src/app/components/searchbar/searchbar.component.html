@@ -2,7 +2,9 @@
   [formGroup]="searchService.searchForm"
   (submit)="submit()"
   [style.background-color]="
-    onSearchPage ? 'transparent' : 'rgba(var(--bkg-color), 1)'
+    (searchService.onSearchRoute$ | push) === true
+      ? 'transparent'
+      : 'rgba(var(--bkg-color), 1)'
   "
 >
   <div class="searchbarContainer">
@@ -28,32 +30,29 @@
     />
     <button style="display: none" type="submit"></button>
   </div>
-  <ng-container *ngIf="searchService.searchPreview$ | async as result">
+  <ng-container *ngIf="searchPreview$ | push">
     <div class="searchResultsDropdown" #searchResultsDropdown>
-      <ng-container *ngIf="result.users.length > 0">
+      <ng-container *ngIf="(users$ | push).length > 0">
         <h3>People</h3>
         <app-user-search-result
-          *ngFor="let user of result.users"
+          *ngFor="let user of users$ | push"
           [user]="user"
           [showFollowButton]="false"
         ></app-user-search-result>
       </ng-container>
-      <ng-container *ngIf="result.posts.length > 0">
+      <ng-container *ngIf="(posts$ | push).length > 0">
         <h3>Tweets</h3>
         <app-tweet-search-result
-          *ngFor="let post of result.posts"
+          *ngFor="let post of posts$ | push"
           [post]="post"
         ></app-tweet-search-result>
       </ng-container>
-      <ng-container *ngIf="result.tags.length > 0">
+      <ng-container *ngIf="(tags$ | push).length > 0">
         <h3>Hashtags</h3>
-        <a
-          style="padding: 1rem"
-          class="searchResult"
-          *ngFor="let tag of result.tags"
-        >
-          <span>#{{ tag.text }}</span>
-        </a>
+        <app-tag-search-result
+          *ngFor="let tag of tags$ | push"
+          [tag]="tag"
+        ></app-tag-search-result>
       </ng-container>
     </div>
   </ng-container>

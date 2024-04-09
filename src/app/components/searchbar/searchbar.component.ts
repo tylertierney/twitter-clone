@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserSearchResultComponent } from '../shared/user-search-result/user-search-result.component';
 import { TweetSearchResultComponent } from '../shared/tweet-search-result/tweet-search-result.component';
+import { TagSearchResultComponent } from '../shared/tag-search-result/tag-search-result.component';
+import { RxPush } from '@rx-angular/template/push';
+import { map } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -14,6 +17,8 @@ import { TweetSearchResultComponent } from '../shared/tweet-search-result/tweet-
     ReactiveFormsModule,
     UserSearchResultComponent,
     TweetSearchResultComponent,
+    TagSearchResultComponent,
+    RxPush,
   ],
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
@@ -25,8 +30,6 @@ export class SearchbarComponent {
   searchResultsDropdown: ElementRef<HTMLInputElement>;
 
   domain = environment.domain;
-
-  onSearchPage = window.location.pathname.includes('/search');
 
   constructor(public searchService: SearchService, private router: Router) {}
 
@@ -45,4 +48,12 @@ export class SearchbarComponent {
       queryParams: { q: this.searchService.searchForm.value.searchTerm },
     });
   }
+
+  searchPreview$ = this.searchService.searchPreview$;
+
+  users$ = this.searchPreview$.pipe(map(({ users }) => users));
+
+  posts$ = this.searchPreview$.pipe(map(({ posts }) => posts));
+
+  tags$ = this.searchPreview$.pipe(map(({ tags }) => tags));
 }

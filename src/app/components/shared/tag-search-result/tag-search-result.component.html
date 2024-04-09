@@ -1,4 +1,4 @@
-<a [routerLink]="'../../tag/' + tag.text">
+<a [routerLink]="['/tag', tag.text]">
   <span>#{{ tag.text }}</span>
   <span class="count"
     >{{ tag.count }} tweet{{ tag.count > 1 ? "s" : "" }} about this</span

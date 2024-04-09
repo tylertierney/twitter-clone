@@ -5,6 +5,7 @@ import { filter, map, shareReplay, startWith } from 'rxjs';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { TrendingTopicsComponent } from '../trending-topics/trending-topics.component';
 import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
+import { SearchService } from '../../services/search/search.service';
 
 @Component({
   standalone: true,
@@ -19,13 +20,14 @@ import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  showSearchBar$ = this.router.events.pipe(
-    filter((event) => event instanceof NavigationEnd),
-    map(() => this.location.path().includes('search')),
-    startWith(this.location.path().includes('search')),
+  showSearchBar$ = this.searchService.onSearchRoute$.pipe(
     map((onSearchRoute) => !onSearchRoute),
     shareReplay(1)
   );
 
-  constructor(public location: Location, private router: Router) {}
+  constructor(
+    public location: Location,
+    private router: Router,
+    private searchService: SearchService
+  ) {}
 }

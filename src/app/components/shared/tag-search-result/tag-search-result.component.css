@@ -6,6 +6,11 @@ a {
   color: inherit;
 }
 
+/* a:hover {
+  background-color: rgba(var(--hover-color));
+  cursor: pointer;
+} */
+
 .count {
   opacity: 0.5;
 }

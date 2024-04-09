@@ -1,17 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import {
   combineLatest,
   debounceTime,
+  filter,
   map,
   Observable,
+  shareReplay,
+  startWith,
   Subject,
   switchMap,
 } from 'rxjs';
 import { IPost } from '../posts/posts.service';
 import { IUser } from '../user/user.service';
+import { Location } from '@angular/common';
 
 export interface ITag {
   text: string;
@@ -33,10 +37,12 @@ export class SearchService {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.searchForm.controls.searchTerm.setValue(params['q'] ?? '');
+    this.activatedRoute.queryParams.subscribe(({ q }) => {
+      this.searchForm.controls.searchTerm.setValue(q ?? '');
     });
   }
 
@@ -58,13 +64,9 @@ export class SearchService {
           tags: this.searchTags(q),
           posts: this.searchPosts(q),
         });
-      })
+      }),
+      shareReplay(1)
     );
-
-  // searchResult$ = this.submissionEvent$.pipe(
-  //   withLatestFrom(this.searchPreview$),
-  //   map(([x, y]) => y)
-  // );
 
   searchResult$ = this.activatedRoute.queryParams.pipe(
     switchMap((params) =>
@@ -77,17 +79,21 @@ export class SearchService {
   );
 
   searchUsers(q: string) {
-    // if (!q) return of([]);
     return this.http.get<IUser[]>('/search/users', { params: { q: q ?? '' } });
   }
 
   searchPosts(q: string) {
-    // if (!q) return of([]);
     return this.http.get<IPost[]>('/search/posts', { params: { q: q ?? '' } });
   }
 
   searchTags(q: string) {
-    // if (!q) return of([]);
     return this.http.get<ITag[]>('/search/tags', { params: { q: q ?? '' } });
   }
+
+  onSearchRoute$ = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+    map(() => this.location.path().includes('search')),
+    startWith(this.location.path().includes('search')),
+    shareReplay(1)
+  );
 }
