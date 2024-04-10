@@ -1,22 +1,22 @@
 <app-post-button
-  [isActive]="isLiked"
-  (onClick)="togglePostLiked(post.id, currentUser.id)"
+  [isActive]="isLiked$ | push"
   color="pink"
-  [value]="numOfLikes"
+  [value]="numOfLikes$ | push"
   type="like"
+  (onClick)="likeToggleClickSubject.next()"
   >favorite</app-post-button
 >
-<app-post-button color="green" [value]="numOfLikes" type="retweet"
+<app-post-button color="green" [value]="0" type="retweet"
   >cached</app-post-button
 >
 
 <app-post-button
   color="blue"
-  [value]="numOfReplies"
+  [value]="replyCount$ | push"
   type="reply"
   (onClick)="openModal(reply)"
   >chat_bubble</app-post-button
 >
 <ng-template #reply>
-  <app-reply [post]="post"></app-reply>
+  <app-reply [post]="postSubject | push"></app-reply>
 </ng-template>

@@ -2,17 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {
-  map,
-  Observable,
-  of,
-  ReplaySubject,
-  share,
-  shareReplay,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs';
+import { map, Observable, ReplaySubject, shareReplay, switchMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ITag } from '../search/search.service';
 
@@ -27,6 +17,8 @@ export interface IPost {
   photo_url: string;
   replying_to: null | string;
   tags: string[];
+  likes: string[];
+  reply_count: number;
 }
 
 @Injectable({

@@ -1,33 +1,77 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
-  ElementRef,
-  HostListener,
+  DestroyRef,
+  inject,
   Input,
-  OnInit,
   TemplateRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
+import { RxPush } from '@rx-angular/template/push';
+import {
+  filter,
+  map,
+  merge,
+  ReplaySubject,
+  startWith,
+  Subject,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
 import { ModalService } from '../../../services/modal/modal.service';
 import { IPost, PostsService } from '../../../services/posts/posts.service';
 import { IUser } from '../../../services/user/user.service';
 import { ReplyComponent } from '../../reply/reply.component';
-import { CommonModule } from '@angular/common';
 import { PostButtonComponent } from '../post-button/post-button.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, PostButtonComponent, ReplyComponent],
+  imports: [CommonModule, PostButtonComponent, ReplyComponent, RxPush],
   selector: 'app-post-toolbar',
   templateUrl: './post-toolbar.component.html',
   styleUrls: ['./post-toolbar.component.css'],
 })
-export class PostToolbarComponent implements OnInit {
+export class PostToolbarComponent {
   @Input() currentUser: IUser;
-  @Input() post: IPost;
-  isLiked: boolean;
-  numOfLikes: number;
-  numOfReplies: number;
+
+  postSubject = new ReplaySubject<IPost>(1);
+
+  @Input() set post(post: IPost) {
+    this.postSubject.next(post);
+  }
+
+  likes$ = this.postSubject.pipe(
+    map(({ likes }) => likes),
+    filter(Boolean)
+  );
+
+  numOfLikes$ = this.likes$.pipe(map((likes) => likes.length));
+
+  likeToggleClickSubject = new Subject<void>();
+
+  initialPostIsLiked$ = this.likes$.pipe(
+    map((likes) => likes.includes(this.currentUser.id))
+  );
+
+  destroyRef = inject(DestroyRef);
+
+  likeToggleApiResult$ = this.likeToggleClickSubject.pipe(
+    takeUntilDestroyed(this.destroyRef),
+    withLatestFrom(this.postSubject, (_, post) => post.id),
+    switchMap((post_id) =>
+      this.postsService.togglePostLiked(post_id, this.currentUser.id)
+    )
+  );
+
+  isLiked$ = merge(this.initialPostIsLiked$, this.likeToggleApiResult$);
+
+  replyCount$ = this.postSubject.pipe(
+    map(({ reply_count }) => reply_count),
+    filter(Boolean),
+    startWith(0)
+  );
 
   constructor(
     public postsService: PostsService,
@@ -35,30 +79,6 @@ export class PostToolbarComponent implements OnInit {
     private http: HttpClient,
     public modalService: ModalService
   ) {}
-
-  ngOnInit(): void {
-    this.postsService
-      .getPostIsLiked(this.post.id, this.currentUser.id)
-      .subscribe((isLiked) => (this.isLiked = isLiked));
-
-    this.http
-      .get<number>(`/posts/${this.post.id}/likes`)
-      .subscribe((x) => (this.numOfLikes = x));
-    // this.numOfLikes = (this.post as any)['like_count'];
-
-    this.http
-      .get<number>(`/posts/${this.post.id}/reply-count`)
-      .subscribe((x) => {
-        this.numOfReplies = x;
-      });
-  }
-
-  togglePostLiked(post_id: string, user_id: string) {
-    this.postsService.togglePostLiked(post_id, user_id).subscribe((isLiked) => {
-      this.isLiked = isLiked;
-      isLiked ? (this.numOfLikes += 1) : (this.numOfLikes -= 1);
-    });
-  }
 
   openModal(template: TemplateRef<ReplyComponent>) {
     this.modalService.open({
