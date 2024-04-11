@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   inject,
@@ -32,6 +33,7 @@ import { PostButtonComponent } from '../post-button/post-button.component';
   selector: 'app-post-toolbar',
   templateUrl: './post-toolbar.component.html',
   styleUrls: ['./post-toolbar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostToolbarComponent {
   @Input() currentUser: IUser;
@@ -46,8 +48,6 @@ export class PostToolbarComponent {
     map(({ likes }) => likes),
     filter(Boolean)
   );
-
-  numOfLikes$ = this.likes$.pipe(map((likes) => likes.length));
 
   likeToggleClickSubject = new Subject<void>();
 
@@ -66,6 +66,13 @@ export class PostToolbarComponent {
   );
 
   isLiked$ = merge(this.initialPostIsLiked$, this.likeToggleApiResult$);
+
+  numOfLikes$ = this.isLiked$.pipe(
+    map(Number),
+    withLatestFrom(this.likes$.pipe(map(({ length }) => length))),
+    map(([isLiked, likeCount]) => isLiked + likeCount - 1),
+    map((count) => (count >= 0 ? count : 0))
+  );
 
   replyCount$ = this.postSubject.pipe(
     map(({ reply_count }) => reply_count),
