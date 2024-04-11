@@ -1,4 +1,4 @@
-<div class="post" *ngIf="authService.user$ | async as user">
+<div class="post" *ngIf="authService.userSubject | push as user">
   <a [routerLink]="'../' + user.username">
     <img
       [src]="
@@ -22,9 +22,9 @@
       maxlength="280"
     ></textarea>
     <div class="photoContainer">
-      <img class="photo" [src]="safePhotoUrl$ | async" />
+      <img class="photo" [src]="safePhotoUrl$ | push" />
       <button
-        *ngIf="safePhotoUrl$ | async"
+        *ngIf="safePhotoUrl$ | push"
         class="material-symbols-outlined circleButton cancelPhotoBtn"
         (click)="tweetForm.patchValue({ photo_file: undefined })"
       >

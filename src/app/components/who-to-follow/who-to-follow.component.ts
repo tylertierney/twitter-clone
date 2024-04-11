@@ -6,10 +6,11 @@ import { IUser, UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
 import { UserSearchResultComponent } from '../shared/user-search-result/user-search-result.component';
 import { RouterModule } from '@angular/router';
+import { RxPush } from '@rx-angular/template/push';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UserSearchResultComponent, RouterModule],
+  imports: [CommonModule, UserSearchResultComponent, RouterModule, RxPush],
   selector: 'app-who-to-follow',
   templateUrl: './who-to-follow.component.html',
   styleUrls: ['./who-to-follow.component.css'],

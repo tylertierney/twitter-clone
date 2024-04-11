@@ -18,11 +18,11 @@ export interface IRegistration {}
   providedIn: 'root',
 })
 export class AuthService {
-  user$ = new ReplaySubject<IUser>();
+  userSubject = new ReplaySubject<IUser>(1);
 
   constructor(private http: HttpClient, private router: Router) {
     this.http.get<IUser>(`/auth`).subscribe((user) => {
-      if (user) this.user$.next(user);
+      if (user) this.userSubject.next(user);
     });
   }
 

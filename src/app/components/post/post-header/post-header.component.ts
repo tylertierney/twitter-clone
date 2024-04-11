@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReadableDatePipe } from '../../../pipes/readable-date.pipe';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
+import { RxPush } from '@rx-angular/template/push';
 
 @Component({
   standalone: true,
@@ -15,6 +16,7 @@ import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.
     RouterModule,
     ReadableDatePipe,
     SubmitButtonComponent,
+    RxPush,
   ],
   selector: 'app-post-header',
   templateUrl: './post-header.component.html',
@@ -44,10 +46,10 @@ export class PostHeaderComponent implements OnInit {
   }
 
   deletePostById(id: string) {
-    this.postsService.deletePostById(id).subscribe((res) => {
+    this.postsService.deletePostById(id).subscribe(() => {
       this.toast.success('Tweet deleted');
       this.modalService.close();
-      this.postsService.fetchFollowedPosts();
+      this.postsService.fetchFollowedPostsSubject.next();
     });
   }
 }

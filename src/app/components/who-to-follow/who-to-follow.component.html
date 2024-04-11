@@ -1,5 +1,8 @@
-<ng-container *ngIf="allUsers$ | async as users">
-  <div class="sidebarMenu" *ngIf="authService.user$ | async as currentUser">
+<ng-container *ngIf="allUsers$ | push as users">
+  <div
+    class="sidebarMenu"
+    *ngIf="authService.userSubject | push as currentUser"
+  >
     <div class="header">
       <h3>Who To Follow</h3>
       <span class="material-symbols-outlined"> groups </span>

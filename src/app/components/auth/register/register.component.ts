@@ -141,7 +141,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.successfulResult$.subscribe((user) => {
-      this.authService.user$.next(user);
+      this.authService.userSubject.next(user);
       this.router.navigate(['']);
     });
   }

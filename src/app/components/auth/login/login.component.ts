@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
         filter(Boolean)
       )
       .subscribe((user) => {
-        this.authService.user$.next(user);
+        this.authService.userSubject.next(user);
         this.router.navigate(['home']);
       });
   }

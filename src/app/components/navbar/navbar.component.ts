@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { SettingsMenuComponent } from './settings-menu/settings-menu.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
+import { RxPush } from '@rx-angular/template/push';
 
 @Component({
   standalone: true,
@@ -16,6 +17,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
     MatMenuModule,
     SettingsMenuComponent,
     UserMenuComponent,
+    RxPush,
   ],
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

@@ -7,10 +7,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PostHeaderComponent } from './post-header/post-header.component';
 import { PostBodyComponent } from './post-body/post-body.component';
+import { RxPush } from '@rx-angular/template/push';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, PostHeaderComponent, PostBodyComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    PostHeaderComponent,
+    PostBodyComponent,
+    RxPush,
+  ],
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],

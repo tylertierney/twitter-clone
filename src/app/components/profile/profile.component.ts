@@ -12,6 +12,7 @@ import { SubNavComponent } from '../shared/sub-nav/sub-nav.component';
 import { BackButtonComponent } from '../shared/back-button/back-button.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { PostComponent } from '../post/post.component';
+import { RxPush } from '@rx-angular/template/push';
 
 @Component({
   standalone: true,
@@ -21,6 +22,7 @@ import { PostComponent } from '../post/post.component';
     BackButtonComponent,
     ProfileHeaderComponent,
     PostComponent,
+    RxPush,
   ],
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -45,7 +47,7 @@ export class ProfileComponent {
   numOfFollowersText$ = this.numOfFollowers$.pipe(
     map((num) => (num === 0 ? 'followers' : num > 1 ? 'followers' : 'follower'))
   );
-  isEditable$ = combineLatest([this.authService.user$, this.user$]).pipe(
+  isEditable$ = combineLatest([this.authService.userSubject, this.user$]).pipe(
     map(([currentUser, targetUser]) => currentUser.id === targetUser.id)
   );
 

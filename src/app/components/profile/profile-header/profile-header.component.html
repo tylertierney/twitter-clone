@@ -137,7 +137,7 @@
   </div>
   <ng-template #followToggle>
     <app-follow-button
-      *ngIf="authService.user$ | async as currentUser"
+      *ngIf="authService.userSubject | push as currentUser"
       [targetUser]="user"
       [currentUser]="currentUser"
     ></app-follow-button>

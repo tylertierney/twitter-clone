@@ -2,7 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable, ReplaySubject, shareReplay, switchMap } from 'rxjs';
+import {
+  filter,
+  map,
+  Observable,
+  ReplaySubject,
+  shareReplay,
+  Subject,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ITag } from '../search/search.service';
 
@@ -25,32 +34,32 @@ export interface IPost {
   providedIn: 'root',
 })
 export class PostsService {
-  userId$ = new ReplaySubject<string>();
-  followedPosts$ = new ReplaySubject<IPost[]>();
-  allPosts$ = new ReplaySubject<IPost[]>();
+  private userId$ = this.authService.userSubject.pipe(
+    map(({ id }) => id),
+    filter(Boolean)
+  );
+
+  fetchAllPostsSubject = new ReplaySubject<void>(1);
+
+  readonly allPosts$ = this.fetchAllPostsSubject.pipe(
+    switchMap(() => this.http.get<IPost[]>(`/posts/`)),
+    shareReplay(1)
+  );
+
+  fetchFollowedPostsSubject = new ReplaySubject<void>(1);
+
+  readonly followedPosts$ = this.fetchFollowedPostsSubject.pipe(
+    withLatestFrom(this.userId$, (_, id) => id),
+    switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
+  );
 
   constructor(
     private http: HttpClient,
     public authService: AuthService,
     private toast: ToastrService
   ) {
-    this.authService.user$.subscribe(({ id }) => this.userId$.next(id));
-
-    this.fetchAllPosts();
-    this.fetchFollowedPosts();
-  }
-
-  fetchAllPosts() {
-    this.http.get<IPost[]>(`/posts/`).subscribe(this.allPosts$);
-  }
-
-  fetchFollowedPosts() {
-    this.userId$
-      .pipe(
-        shareReplay(1),
-        switchMap((userId) => this.http.get<IPost[]>(`/posts/${userId}/feed`))
-      )
-      .subscribe(this.followedPosts$);
+    this.fetchAllPostsSubject.next();
+    this.fetchFollowedPostsSubject.next();
   }
 
   createNewPost(form: FormGroup) {
@@ -73,8 +82,8 @@ export class PostsService {
         })
       )
       .subscribe(() => {
-        this.fetchAllPosts();
-        this.fetchFollowedPosts();
+        this.fetchAllPostsSubject.next();
+        this.fetchFollowedPostsSubject.next();
         this.toast.success('Your tweet was posted');
         form.reset();
       });

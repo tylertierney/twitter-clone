@@ -1,4 +1,4 @@
-<ng-container *ngIf="authService.user$ | async as currentUser">
+<ng-container *ngIf="authService.userSubject | push as currentUser">
   <span class="name">{{ post.name }}&nbsp;</span>
   <a
     (click)="stopPropagation($event)"

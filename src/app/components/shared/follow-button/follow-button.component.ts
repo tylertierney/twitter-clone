@@ -24,8 +24,6 @@ export class FollowButtonComponent implements OnInit {
     this.userService
       .getFollowingUser(this.currentUser.id, this.targetUser.id)
       .subscribe((following) => {
-        if (this.targetUser.id === '89') {
-        }
         this.isFollowing = following;
       });
   }
@@ -36,8 +34,8 @@ export class FollowButtonComponent implements OnInit {
       .followUser(this.currentUser.id, this.targetUser.id, this.isFollowing)
       .subscribe(() => {
         this.isFollowing = !this.isFollowing;
-        this.postsService.fetchFollowedPosts();
-        this.postsService.fetchAllPosts();
+        this.postsService.fetchFollowedPostsSubject.next();
+        this.postsService.fetchAllPostsSubject.next();
       });
   }
 }

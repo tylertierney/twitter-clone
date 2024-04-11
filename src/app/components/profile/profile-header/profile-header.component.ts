@@ -22,6 +22,7 @@ import { FollowButtonComponent } from '../../shared/follow-button/follow-button.
 import { MatMenuModule } from '@angular/material/menu';
 import { MenuComponent, MenuItem } from '../../menu/menu.component';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
+import { RxPush } from '@rx-angular/template/push';
 
 @Component({
   standalone: true,
@@ -32,6 +33,7 @@ import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.
     MatMenuModule,
     MenuComponent,
     SubmitButtonComponent,
+    RxPush,
   ],
   selector: 'app-profile-header',
   templateUrl: './profile-header.component.html',
@@ -97,7 +99,7 @@ export class ProfileHeaderComponent implements OnInit {
       .subscribe((user) => {
         this.newHeaderPicUrl = '';
         this.user = user;
-        this.authService.user$.next(user);
+        this.authService.userSubject.next(user);
         this.toast.success('Header pic updated!');
       });
   }
@@ -108,7 +110,7 @@ export class ProfileHeaderComponent implements OnInit {
       .subscribe((user) => {
         this.newProfilePicUrl = '';
         this.user = user;
-        this.authService.user$.next(user);
+        this.authService.userSubject.next(user);
         this.toast.success('Profile pic updated!');
       });
   }
@@ -127,7 +129,7 @@ export class ProfileHeaderComponent implements OnInit {
           .subscribe((updatedUser) => {
             this.modalService.close();
             this.toast.success('Your profile was updated!');
-            this.authService.user$.next(updatedUser);
+            this.authService.userSubject.next(updatedUser);
           });
       },
       submitButtonLabel: 'Save',
