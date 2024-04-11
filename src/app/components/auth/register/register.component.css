@@ -16,7 +16,7 @@
 form {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 94%;
   max-width: 400px;
   gap: 1.2rem;
 }
@@ -95,7 +95,7 @@ input {
   content: "Password";
 }
 
-.usernameLength {
+.inputLength {
   position: absolute;
   transition: 0.1s ease-in-out;
   background-color: rgba(var(--bkg-color));
@@ -107,11 +107,11 @@ input {
   pointer-events: none;
 }
 
-.inputContainer:focus-within .usernameLength {
+.inputContainer:focus-within .inputLength {
   top: 0;
 }
 
-.inputContainer.placeholderShown .usernameLength {
+.inputContainer.placeholderShown .inputLength {
   top: 50%;
 }
 
@@ -136,6 +136,12 @@ input {
   outline: none;
 }
 
+.errorsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
 .formControlInvalid label,
 small {
   color: var(--red);
@@ -154,4 +160,9 @@ input:-webkit-autofill {
 
 .material-symbols-outlined {
   user-select: none;
+}
+
+small.submissionError {
+  text-align: center;
+  font-size: 1rem;
 }

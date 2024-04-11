@@ -14,7 +14,7 @@ export class UniqueUsernameValidator implements AsyncValidator {
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
     return this.authService.checkUsernameAvailable(control.value).pipe(
       map((isAvailable) => {
-        return isAvailable ? null : { availableUsername: false };
+        return isAvailable ? null : { usernameTaken: true };
       }),
       catchError(() => of(null))
     );

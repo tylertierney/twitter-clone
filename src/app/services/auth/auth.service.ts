@@ -31,7 +31,7 @@ export class AuthService {
     password: string;
     username: string;
     name: string;
-  }): void {
+  }): Observable<IUser> {
     const profilePics = [
       'coral',
       'bluejeans',
@@ -48,17 +48,7 @@ export class AuthService {
 
     const body = { ...formData, profile_pic };
 
-    this.http
-      .post<IUser>(`/auth/register`, body)
-      .pipe(
-        catchError((err) => {
-          return throwError(() => new Error(err.error));
-        })
-      )
-      .subscribe((user) => {
-        this.user$.next(user);
-        this.router.navigate(['']);
-      });
+    return this.http.post<IUser>(`/auth/register`, body);
   }
 
   login(formData: { email: string; password: string }) {

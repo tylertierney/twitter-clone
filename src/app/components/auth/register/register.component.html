@@ -16,18 +16,16 @@
   </div>
   <div
     [ngClass]="{
-      formControlInvalid:
-        registrationForm.controls['name'].invalid &&
-        !registrationForm.controls['name'].pristine
+      formControlInvalid: nameInvalid$ | push
     }"
   >
     <div
       class="inputContainer name"
-      [ngClass]="{ placeholderShown: registrationForm.value.name === '' }"
+      [ngClass]="{ placeholderShown: namePlaceholderShown$ | push }"
     >
       <input
-        id="field1"
-        name="field1"
+        id="name"
+        name="name"
         formControlName="name"
         type="text"
         autocomplete="off"
@@ -35,53 +33,38 @@
         spellcheck="false"
         autofill
       />
+      <span class="inputLength">{{ nameLength$ | push }}/50</span>
     </div>
-    <div style="min-height: 1.1rem">
-      <small
-        *ngIf="registrationForm.controls?.['name']?.errors?.['minlength'] || registrationForm.controls?.['name']?.errors?.['maxlength']"
-        >Name must be 1-50 characters.</small
-      >
-      <small
-        *ngIf="registrationForm.controls?.['name']?.dirty && registrationForm.controls?.['name']?.errors?.['required']"
-        >What's your name?</small
-      >
+    <div class="errorsContainer" style="min-height: 1.1rem">
+      <small *ngFor="let error of nameErrors$ | push">{{ error }}</small>
     </div>
   </div>
   <div>
     <div
       class="inputContainer username"
-      [ngClass]="{ placeholderShown: registrationForm.value.username === '' }"
+      [ngClass]="{ placeholderShown: usernamePlaceholderShown$ | push }"
       #usernameInputContainer
     >
       <input
         formControlName="username"
-        id="field2"
-        name="field2"
+        id="username"
+        name="username"
         type="text"
         autocomplete="off"
         maxlength="15"
         spellcheck="false"
       />
-      <span class="usernameLength"
-        >{{ registrationForm.get("username")?.value?.length ?? 0 }}/15</span
-      >
+      <span class="inputLength">{{ usernameLength$ | push }}/15</span>
     </div>
-    <div style="min-height: 1.1rem">
-      <small
-        *ngIf="registrationForm.controls?.['username']?.errors?.['minlength'] || registrationForm.controls?.['username']?.errors?.['maxlength'] || registrationForm.controls?.['username']?.dirty && registrationForm.controls?.['username']?.errors?.['required']"
-        >Username must be 4-15 characters.</small
-      >
-      <small
-        *ngIf="registrationForm.controls?.['username']?.errors?.['availableUsername'] === false"
-        >Username is already taken.</small
-      >
+    <div class="errorsContainer" style="min-height: 1.1rem">
+      <small *ngFor="let error of usernameErrors$ | push">{{ error }}</small>
     </div>
   </div>
 
   <div>
     <div
       class="inputContainer email"
-      [ngClass]="{ placeholderShown: registrationForm.value.email === '' }"
+      [ngClass]="{ placeholderShown: emailPlaceholderShown$ | push }"
     >
       <input
         formControlName="email"
@@ -92,22 +75,15 @@
         spellcheck="false"
       />
     </div>
-    <div style="min-height: 1.1rem">
-      <small
-        *ngIf="registrationForm.controls?.['email']?.errors?.['email'] || registrationForm.controls?.['email']?.dirty && registrationForm.controls?.['email']?.errors?.['required']"
-        >Enter a valid email address.</small
-      >
-      <small
-        *ngIf="registrationForm.controls?.['email']?.errors?.['availableEmail'] === false"
-        >Email address is already taken.</small
-      >
+    <div class="errorsContainer" style="min-height: 1.1rem">
+      <small *ngFor="let error of emailErrors$ | push">{{ error }}</small>
     </div>
   </div>
 
   <div>
     <div
       class="inputContainer password"
-      [ngClass]="{ placeholderShown: registrationForm.value.password === '' }"
+      [ngClass]="{ placeholderShown: passwordPlaceholderShown$ | push }"
     >
       <input
         formControlName="password"
@@ -123,11 +99,8 @@
         </span>
       </div>
     </div>
-    <div style="min-height: 1.1rem">
-      <small
-        *ngIf="registrationForm.controls?.['password']?.errors?.['minlength'] || registrationForm.controls?.['password']?.dirty && registrationForm.controls?.['password']?.errors?.['required']"
-        >Password must be at least 8 characters.</small
-      >
+    <div class="errorsContainer" style="min-height: 1.1rem">
+      <small *ngFor="let error of passwordErrors$ | push">{{ error }}</small>
     </div>
   </div>
   <span style="text-align: center"
@@ -136,5 +109,10 @@
       >Sign in!</a
     >
   </span>
-  <app-submit-button (onClick)="submit()">Submit</app-submit-button>
+  <app-submit-button
+    [disabled]="disableSubmit$ | push"
+    (onClick)="submitClickSubject.next()"
+    >Submit</app-submit-button
+  >
+  <small class="submissionError">{{ errorResult$ | push }}</small>
 </form>

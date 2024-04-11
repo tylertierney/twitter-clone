@@ -20,6 +20,7 @@ button:active {
 
 button:disabled {
   background-color: rgba(var(--brand-primary-dark));
+  cursor: not-allowed;
 }
 
 .primary {

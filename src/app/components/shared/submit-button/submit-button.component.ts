@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./submit-button.component.css'],
 })
 export class SubmitButtonComponent {
+  @Input() disabled = false;
   @Input() type: 'outline' | 'primary' | 'secondary' | 'danger' = 'primary';
   @Output() onClick = new EventEmitter();
 

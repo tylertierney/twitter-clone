@@ -14,7 +14,7 @@ export class UniqueEmailValidator implements AsyncValidator {
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
     return this.authService.checkEmailAvailable(control.value).pipe(
       map((isAvailable) => {
-        return isAvailable ? null : { availableEmail: false };
+        return isAvailable ? null : { emailTaken: true };
       }),
       catchError(() => of(null))
     );
