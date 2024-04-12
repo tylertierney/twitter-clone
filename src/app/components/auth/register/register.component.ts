@@ -24,7 +24,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { UniqueEmailValidator } from '../validators/UniqueEmailValidator';
 import { UniqueUsernameValidator } from '../validators/UniqueUsernameValidator';
-import { usernameTextValidator } from '../validators/UsernameTextValidator';
+import { usernameTextValidator } from '../validators/usernameTextValidator';
 
 interface RegistrationForm {
   name: FormControl<string>;
