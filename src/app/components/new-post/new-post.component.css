@@ -138,9 +138,9 @@ textarea:focus {
   cursor: pointer;
 }
 
-.create-post-submit-btn:hover {
+/* .create-post-submit-btn:hover {
   background-color: rgba(var(--brand-primary-dark));
-}
+} */
 
 .create-post-submit-btn:active {
   translate: 0 1px;
@@ -154,8 +154,4 @@ textarea:focus {
   .post {
     padding: 1rem 0.2rem 0 0.2rem;
   }
-
-  /* a {
-    display: none;
-  } */
 }
