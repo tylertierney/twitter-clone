@@ -1,6 +1,9 @@
 <nav
   [ngStyle]="{
-    color: themeService.usingDarkTheme ? 'white' : 'rgba(var(--brand-primary))'
+    color:
+      (themeService.usingDarkThemeSubject | push)
+        ? 'white'
+        : 'rgba(var(--brand-primary))'
   }"
   *ngIf="authService.userSubject | push as user"
 >
@@ -80,7 +83,7 @@
     </svg>
     <span class="navItemLabel">More</span>
   </button>
-  <mat-menu #menu="matMenu" class="menu">
+  <mat-menu #menu class="menu">
     <app-settings-menu></app-settings-menu>
   </mat-menu>
   <button [matMenuTriggerFor]="userMenu" class="userAvatar">

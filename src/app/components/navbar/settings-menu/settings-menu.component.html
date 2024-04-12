@@ -1,7 +1,32 @@
-<button style="font-size: inherit" (click)="themeService.toggleTheme()">
-  <span class="material-symbols-outlined">
-    {{ themeService.usingDarkTheme ? "light_mode" : "dark_mode" }}
-  </span>
-  Toggle Theme
-</button>
-<!-- <app-menu [menuItems]="menuItems$ | push"></app-menu> -->
+<div (click)="$event.stopPropagation()" class="wrapper">
+  <button style="font-size: inherit" (click)="themeService.toggleTheme()">
+    <span class="material-symbols-outlined">
+      {{
+        (themeService.usingDarkThemeSubject | push) ? "light_mode" : "dark_mode"
+      }}
+    </span>
+    Toggle Theme
+  </button>
+
+  <button
+    style="font-size: inherit"
+    (click)="colorChangerIsOpen = !colorChangerIsOpen"
+  >
+    <span class="material-symbols-outlined"> palette </span>
+    Change Colors
+    <span class="material-symbols-outlined">
+      {{ colorChangerIsOpen ? "expand_less" : "expand_more" }}
+    </span>
+  </button>
+  <div *ngIf="colorChangerIsOpen" class="colorChanger">
+    <div
+      *ngFor="let color of colors"
+      class="colorSplotch"
+      [style]="{
+        background:
+          'rgba(' + color[0] + ', ' + color[1] + ', ' + color[2] + ', 1)'
+      }"
+      (click)="setNewThemeColor(color)"
+    ></div>
+  </div>
+</div>
