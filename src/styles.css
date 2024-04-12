@@ -74,8 +74,9 @@ body {
 
 .toastPosition.toast-container {
   position: fixed;
-  top: 4rem;
+  top: 3rem;
   right: 0.5rem;
+  z-index: 1;
 }
 
 .toastClass {
@@ -86,6 +87,8 @@ body {
   margin-bottom: 0.5rem;
   max-width: 350px;
   font-size: 0.9rem;
+  min-width: 200px;
+  z-index: 3;
 }
 
 .toastClass::before {

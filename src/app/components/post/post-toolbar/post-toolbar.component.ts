@@ -6,6 +6,7 @@ import {
   DestroyRef,
   inject,
   Input,
+  OnInit,
   TemplateRef,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -16,6 +17,7 @@ import {
   map,
   merge,
   ReplaySubject,
+  shareReplay,
   startWith,
   Subject,
   switchMap,
@@ -35,7 +37,7 @@ import { PostButtonComponent } from '../post-button/post-button.component';
   styleUrls: ['./post-toolbar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostToolbarComponent {
+export class PostToolbarComponent implements OnInit {
   @Input() currentUser: IUser;
 
   postSubject = new ReplaySubject<IPost>(1);
@@ -62,17 +64,36 @@ export class PostToolbarComponent {
     withLatestFrom(this.postSubject, (_, post) => post.id),
     switchMap((post_id) =>
       this.postsService.togglePostLiked(post_id, this.currentUser.id)
-    )
+    ),
+    shareReplay(1)
   );
 
-  isLiked$ = merge(this.initialPostIsLiked$, this.likeToggleApiResult$);
-
-  numOfLikes$ = this.isLiked$.pipe(
-    map(Number),
-    withLatestFrom(this.likes$.pipe(map(({ length }) => length))),
-    map(([isLiked, likeCount]) => isLiked + likeCount - 1),
-    map((count) => (count >= 0 ? count : 0))
+  isLiked$ = merge(this.initialPostIsLiked$, this.likeToggleApiResult$).pipe(
+    shareReplay(1)
   );
+
+  numOfLikes = 0;
+
+  ngOnInit(): void {
+    this.likes$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        map(({ length }) => length)
+      )
+      .subscribe((num) => {
+        this.numOfLikes = num;
+      });
+
+    this.likeToggleApiResult$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((liked) => {
+        if (liked) {
+          this.numOfLikes = this.numOfLikes + 1;
+        } else {
+          this.numOfLikes = this.numOfLikes - 1;
+        }
+      });
+  }
 
   replyCount$ = this.postSubject.pipe(
     map(({ reply_count }) => reply_count),

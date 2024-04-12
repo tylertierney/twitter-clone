@@ -176,8 +176,8 @@ export class ProfileHeaderComponent implements OnInit {
     this.userService
       .deleteProfile(this.user.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe(() => {
+        this.modalService.close();
         this.authService.logout();
       });
   }

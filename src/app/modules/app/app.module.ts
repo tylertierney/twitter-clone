@@ -18,8 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FontAwesomeModule,
     ToastrModule.forRoot({
-      maxOpened: 4,
-      autoDismiss: true,
+      maxOpened: 6,
+      autoDismiss: false,
       timeOut: 5000,
       positionClass: 'toastPosition',
       toastClass: 'toastClass',

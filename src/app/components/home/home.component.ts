@@ -1,17 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { ModalService } from '../../services/modal/modal.service';
-import { UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ModalService } from '../../services/modal/modal.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router, RouterModule } from '@angular/router';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ModalComponent } from '../shared/modal/modal.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',

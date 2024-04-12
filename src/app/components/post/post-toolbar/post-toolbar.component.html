@@ -1,7 +1,7 @@
 <app-post-button
   [isActive]="isLiked$ | push"
   color="pink"
-  [value]="numOfLikes$ | push"
+  [value]="numOfLikes"
   type="like"
   (onClick)="likeToggleClickSubject.next()"
   >favorite</app-post-button

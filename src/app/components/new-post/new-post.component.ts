@@ -86,8 +86,8 @@ export class NewPostComponent implements OnInit {
   );
 
   safePhotoUrl$ = this.tweetForm.controls.photo_file.valueChanges.pipe(
-    filter(Boolean),
     map((file) => {
+      if (!file) return '';
       const url = URL.createObjectURL(file);
       return this.sanitizer.bypassSecurityTrustUrl(url);
     })
