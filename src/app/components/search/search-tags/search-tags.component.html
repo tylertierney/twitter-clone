@@ -1,6 +1,11 @@
-<ng-container *ngIf="searchService.searchResult$ | async as searchResult">
+<ng-container *ngIf="(tags$ | push).length > 0; else noResultsMessage">
   <app-tag-search-result
-    *ngFor="let tag of searchResult.tags"
+    *ngFor="let tag of tags$ | push"
     [tag]="tag"
   ></app-tag-search-result>
 </ng-container>
+<ng-template #noResultsMessage>
+  <p class="noResultsMessage">
+    There are no topics that match that search criteria
+  </p>
+</ng-template>

@@ -1,8 +1,13 @@
-<ng-container *ngIf="searchService.searchResult$ | async as searchResult">
+<ng-container *ngIf="(users$ | push).length > 0; else noResultsMessage">
   <app-user-search-result
-    *ngFor="let user of searchResult.users"
+    *ngFor="let user of users$ | push"
     [user]="user"
     [showDescription]="true"
     [showFollowButton]="true"
   ></app-user-search-result>
 </ng-container>
+<ng-template #noResultsMessage>
+  <p class="noResultsMessage">
+    There are no users that match that search criteria
+  </p>
+</ng-template>

@@ -1,28 +1,27 @@
+import { Dialog } from '@angular/cdk/dialog';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
   inject,
   Input,
-  OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatMenuModule } from '@angular/material/menu';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { EditProfileService } from '../../../services/profile/edit-profile.service';
-import { IUser, UserService } from '../../../services/user/user.service';
+import { RxPush } from '@rx-angular/template/push';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Dialog } from '@angular/cdk/dialog';
 import { ModalService } from '../../../services/modal/modal.service';
-import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
-import { ToastrService } from 'ngx-toastr';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CommonModule } from '@angular/common';
-import { FollowButtonComponent } from '../../shared/follow-button/follow-button.component';
-import { MatMenuModule } from '@angular/material/menu';
+import { EditProfileService } from '../../../services/profile/edit-profile.service';
+import { IUser, UserService } from '../../../services/user/user.service';
 import { MenuComponent, MenuItem } from '../../menu/menu.component';
+import { FollowButtonComponent } from '../../shared/follow-button/follow-button.component';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
-import { RxPush } from '@rx-angular/template/push';
+import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
 
 @Component({
   standalone: true,
@@ -39,7 +38,7 @@ import { RxPush } from '@rx-angular/template/push';
   templateUrl: './profile-header.component.html',
   styleUrls: ['./profile-header.component.css'],
 })
-export class ProfileHeaderComponent implements OnInit {
+export class ProfileHeaderComponent {
   @Input() isEditable = false;
   @Input() user: IUser;
 
@@ -64,8 +63,6 @@ export class ProfileHeaderComponent implements OnInit {
     private toast: ToastrService,
     private userService: UserService
   ) {}
-
-  ngOnInit(): void {}
 
   getPhotoPreview = (e: Event): { file: File; previewUrl: SafeUrl } => {
     const files = (e.target as HTMLInputElement).files;

@@ -1,18 +1,12 @@
-import { CommonModule, Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RxPush } from '@rx-angular/template/push';
 import { filter, map, switchMap } from 'rxjs';
 import { UserService } from 'src/app/services/user/user.service';
-import { AuthService } from '../../services/auth/auth.service';
 import { PostsService } from '../../services/posts/posts.service';
-import { ThemeService } from '../../services/theme/theme.service';
-import { PostComponent } from '../post/post.component';
 import { BackButtonComponent } from '../shared/back-button/back-button.component';
 import { SubNavComponent } from '../shared/sub-nav/sub-nav.component';
-import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 
 @Component({
   standalone: true,
