@@ -42,6 +42,7 @@ import { RxPush } from '@rx-angular/template/push';
 export class ProfileHeaderComponent implements OnInit {
   @Input() isEditable = false;
   @Input() user: IUser;
+
   newHeaderPicUrl: SafeUrl;
   newHeaderPicFile: File;
 
@@ -64,12 +65,7 @@ export class ProfileHeaderComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  ngOnInit(): void {
-    this.editProfileFormData = {
-      name: this.user.name,
-      description: this.user.description,
-    };
-  }
+  ngOnInit(): void {}
 
   getPhotoPreview = (e: Event): { file: File; previewUrl: SafeUrl } => {
     const files = (e.target as HTMLInputElement).files;

@@ -11,6 +11,8 @@ import { SearchPostsComponent } from '../components/search/search-posts/search-p
 import { SearchTagsComponent } from '../components/search/search-tags/search-tags.component';
 import { SearchUsersComponent } from '../components/search/search-users/search-users.component';
 import { SearchComponent } from '../components/search/search.component';
+import { FollowingComponent } from '../components/profile/following/following.component';
+import { ProfileMainComponent } from '../components/profile/profile-main/profile-main.component';
 
 export const routes: Routes = [
   {
@@ -39,7 +41,18 @@ export const routes: Routes = [
         ],
       },
       { path: 'tag/:tag', component: ExpandedTagComponent },
-      { path: ':username', component: ProfileComponent },
+      {
+        path: ':username',
+        component: ProfileComponent,
+        children: [
+          {
+            path: '',
+            component: ProfileMainComponent,
+          },
+          { path: 'following', component: FollowingComponent },
+          { path: 'followers', component: FollowingComponent },
+        ],
+      },
       { path: ':username/:post_id', component: ExpandedPostComponent },
     ],
   },

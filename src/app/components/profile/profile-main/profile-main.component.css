@@ -1,0 +1,54 @@
+.names,
+.memberSinceContainer,
+.followersContainer,
+.descriptionContainer {
+  padding: 0 0 1rem 1rem;
+}
+
+.followersContainer {
+  a {
+    text-decoration: none;
+    display: flex;
+    color: rgba(var(--text-color));
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.name {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.username {
+  color: rgba(var(--text-color), 0.7);
+}
+
+.memberSinceContainer {
+  color: rgba(var(--text-color), 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.memberSinceContainer .material-symbols-outlined {
+  font-size: 1.4rem;
+}
+
+.followersContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(var(--text-color), 0.1);
+}
+
+.followersContainer div {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.value {
+  font-weight: bold;
+}

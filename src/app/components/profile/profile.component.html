@@ -1,45 +1,12 @@
-<ng-container *ngIf="user$ | async as user">
-  <ng-container *ngIf="posts$ | async as posts">
+<ng-container *ngIf="user$ | push as user">
+  <ng-container *ngIf="posts$ | push as posts">
     <app-sub-nav class="sub-nav">
       <app-back-button></app-back-button>
       <div class="navInfo">
         <h4>{{ user.name }}</h4>
-        <span
-          >{{ posts.length }} Tweet{{
-            posts.length > 1 || posts.length === 0 ? "s" : ""
-          }}</span
-        >
+        <span>{{ postsText$ | push }}</span>
       </div>
     </app-sub-nav>
-    <app-profile-header
-      [user]="user"
-      [isEditable]="(isEditable$ | async) === true"
-    ></app-profile-header>
-    <div class="names">
-      <h2 class="name">{{ user.name }}</h2>
-      <span class="username">&#64;{{ user.username }}</span>
-    </div>
-    <div class="descriptionContainer">
-      <p style="margin: 0">{{ user.description }}</p>
-    </div>
-    <div class="memberSinceContainer">
-      <span class="material-symbols-outlined"> calendar_month </span>
-      <span>Joined {{ user.created_at | date : "MMM YYYY" }}</span>
-    </div>
-    <div class="followersContainer">
-      <div class="followerCount">
-        <span class="value">{{ numOfFollowing$ | async }}</span>
-        <span>Following</span>
-      </div>
-      <div class="followerCount">
-        <span class="value">{{ numOfFollowers$ | async }}</span>
-        <span>{{ numOfFollowersText$ | async }}</span>
-      </div>
-    </div>
-    <app-post
-      *ngFor="let post of posts"
-      [post]="post"
-      [showReplyHandle]="false"
-    ></app-post>
+    <router-outlet></router-outlet>
   </ng-container>
 </ng-container>

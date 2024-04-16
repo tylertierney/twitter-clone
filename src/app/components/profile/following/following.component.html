@@ -1,0 +1,8 @@
+<app-routed-nav-tabs [tabs]="tabs"></app-routed-nav-tabs>
+<app-user-search-result
+  style="margin-bottom: 1rem"
+  *ngFor="let user of selectedList$ | push"
+  [user]="user"
+  [showDescription]="true"
+  [showFollowButton]="true"
+></app-user-search-result>

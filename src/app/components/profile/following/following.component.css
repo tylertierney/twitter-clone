@@ -1,11 +1,12 @@
 .sub-nav {
-  display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.circleButton {
-  text-decoration: none;
+.sub-nav h4 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 .navInfo {
@@ -16,10 +17,4 @@
 .navInfo span {
   font-size: 0.8rem;
   opacity: 0.7;
-}
-
-h4 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0;
 }

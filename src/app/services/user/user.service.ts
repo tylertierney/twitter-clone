@@ -53,4 +53,12 @@ export class UserService {
   deleteProfile(currentUserId: string) {
     return this.http.delete(`/users/${currentUserId}`);
   }
+
+  getFollowersListForAUser(username: string) {
+    return this.http.get<IUser[]>(`/users/${username}/followers`);
+  }
+
+  getFollowingListForAUser(username: string) {
+    return this.http.get<IUser[]>(`/users/${username}/following`);
+  }
 }
