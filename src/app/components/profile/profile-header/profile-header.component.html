@@ -152,31 +152,32 @@
         [currentUser]="currentUser"
       ></app-follow-button>
     </ng-template>
-    <ng-template #editProfileModal>
-      <app-edit-profile-form
-        (valueChangesSubject)="getFormData($event)"
-        [user]="user"
-      ></app-edit-profile-form>
-    </ng-template>
+
     <ng-template #profile_pic_bkg>
       <div class="profile_pic_bkg"></div>
     </ng-template>
   </div>
-
-  <ng-template #deleteProfileModal>
-    <div class="confirmDeleteDialog">
-      <p>Are you sure you want to delete your profile?</p>
-      <div class="controls">
-        <app-submit-button
-          type="outline"
-          style="border-color: rgba(var(--text-color), 0.5)"
-          (onClick)="modalService.close()"
-          >Cancel</app-submit-button
-        >
-        <app-submit-button type="danger" (onClick)="deleteProfileConfirm()"
-          >Delete</app-submit-button
-        >
-      </div>
-    </div>
-  </ng-template>
 </ng-container>
+<ng-template #editProfileModal>
+  <!-- (valueChangesSubject)="getFormData($event)" -->
+  <app-edit-profile-form
+    (valueChangesSubject)="editProfileFormSubject.next($event)"
+    [user]="user"
+  ></app-edit-profile-form>
+</ng-template>
+<ng-template #deleteProfileModal>
+  <div class="confirmDeleteDialog">
+    <p>Are you sure you want to delete your profile?</p>
+    <div class="controls">
+      <app-submit-button
+        type="outline"
+        style="border-color: rgba(var(--text-color), 0.5)"
+        (onClick)="modalService.close()"
+        >Cancel</app-submit-button
+      >
+      <app-submit-button type="danger" (onClick)="deleteProfileConfirm()"
+        >Delete</app-submit-button
+      >
+    </div>
+  </div>
+</ng-template>

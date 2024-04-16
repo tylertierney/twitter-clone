@@ -1,7 +1,7 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
   OnInit,
   Output,
@@ -9,25 +9,13 @@ import {
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  filter,
-  map,
-  Observable,
-  of,
-  ReplaySubject,
-  share,
-  shareReplay,
-  startWith,
-  tap,
-} from 'rxjs';
+import { map, Observable, ReplaySubject } from 'rxjs';
 import { IUser } from '../../../services/user/user.service';
-import { CommonModule } from '@angular/common';
 
-type NameAndDescription = Pick<IUser, 'name' | 'description'>;
+export type NameAndDescription = Pick<IUser, 'name' | 'description'>;
 
 interface IUserForm {
   name: FormControl<string>;

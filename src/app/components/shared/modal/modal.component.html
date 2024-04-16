@@ -1,11 +1,10 @@
-<!-- <button (click)="test()">click</button> -->
-<ng-container *ngIf="modalService.config$ | async as config">
+<ng-container *ngIf="modalService.config$ | push as config">
   <div
     class="overlay"
-    [style.display]="(modalService.isOpen$ | async) === true ? 'flex' : 'none'"
+    [style.display]="(modalService.isOpen$ | push) === true ? 'flex' : 'none'"
     (click)="modalService.close()"
   >
-    <div class="modal" (click)="test($event)">
+    <div class="modal" (click)="$event.stopPropagation()">
       <div class="toolbar">
         <button
           class="material-symbols-outlined closeButton"

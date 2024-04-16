@@ -5,6 +5,7 @@ import {
   DestroyRef,
   inject,
   Input,
+  OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -21,7 +22,11 @@ import { IUser, UserService } from '../../../services/user/user.service';
 import { MenuComponent, MenuItem } from '../../menu/menu.component';
 import { FollowButtonComponent } from '../../shared/follow-button/follow-button.component';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
-import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
+import {
+  EditProfileFormComponent,
+  NameAndDescription,
+} from '../edit-profile-form/edit-profile-form.component';
+import { ReplaySubject, Subject, switchMap, withLatestFrom } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -38,7 +43,7 @@ import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form
   templateUrl: './profile-header.component.html',
   styleUrls: ['./profile-header.component.css'],
 })
-export class ProfileHeaderComponent {
+export class ProfileHeaderComponent implements OnInit {
   @Input() isEditable = false;
   @Input() user: IUser;
 
@@ -48,11 +53,6 @@ export class ProfileHeaderComponent {
   newProfilePicUrl: SafeUrl;
   newProfilePicFile: File;
   domain = environment.domain;
-
-  editProfileFormData: { name: string; description: string } = {
-    name: '',
-    description: '',
-  };
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -113,25 +113,31 @@ export class ProfileHeaderComponent {
       title: 'Edit Profile',
       content: template,
       showSubmitButton: true,
-      onSubmit: () => {
-        this.editProfileService
-          .updateNameAndDescription(
-            this.user.username,
-            this.editProfileFormData
-          )
-          .subscribe((updatedUser) => {
-            this.modalService.close();
-            this.toast.success('Your profile was updated!');
-            this.authService.userSubject.next(updatedUser);
-          });
-      },
+      onSubmit: () => this.editProfileSubmitClick.next(),
       submitButtonLabel: 'Save',
     });
   }
 
-  getFormData(formData: { name: string; description: string }) {
-    this.editProfileFormData.name = formData.name;
-    this.editProfileFormData.description = formData.description;
+  editProfileFormSubject = new ReplaySubject<NameAndDescription>(1);
+  editProfileSubmitClick = new Subject<void>();
+
+  ngOnInit(): void {
+    this.editProfileSubmitClick
+      .pipe(
+        withLatestFrom(this.editProfileFormSubject, (_, form) => form),
+        switchMap((nameAndDescription) =>
+          this.editProfileService.updateNameAndDescription(
+            this.user.username,
+            nameAndDescription
+          )
+        )
+      )
+      .subscribe((updatedUser) => {
+        this.toast.success('Your profile was updated!');
+        this.authService.userSubject.next(updatedUser);
+        this.user = updatedUser;
+        this.modalService.close();
+      });
   }
 
   onHeaderPicError(e: Event) {
