@@ -1,9 +1,9 @@
-<form (submit)="addTag(text)">
+<form [formGroup]="formGroup" (submit)="addTagSubject.next()">
   <input
     #input
     type="text"
     placeholder="Add tags"
-    [(ngModel)]="text"
+    formControlName="tag"
     name="tagInput"
     autocomplete="off"
     maxlength="140"

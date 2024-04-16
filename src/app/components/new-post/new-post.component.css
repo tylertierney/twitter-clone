@@ -121,7 +121,7 @@ textarea:focus {
   }
 }
 
-#photoInput {
+.photoInput {
   display: none;
   appearance: none;
 }

@@ -57,4 +57,6 @@ export class PostComponent implements OnInit {
     const target = e.target as HTMLImageElement;
     target.src = 'assets/svg/user-avatar/gray.svg';
   }
+
+  postDeleted = false;
 }

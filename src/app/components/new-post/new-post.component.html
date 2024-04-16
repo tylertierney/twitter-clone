@@ -32,9 +32,7 @@
       </button>
     </div>
     <div class="tagsContainer">
-      <span
-        *ngFor="let tag of tweetForm.controls['tags'].value; let i = index"
-        class="tag"
+      <span *ngFor="let tag of tags$ | push; let i = index" class="tag"
         >#{{ tag }}
         <button class="material-symbols-outlined" (click)="removeTag(i)">
           close
@@ -43,26 +41,27 @@
     </div>
     <app-tags
       style="margin-bottom: 0.5rem"
-      *ngIf="showTags"
+      *ngIf="showTags$ | push"
       (tag)="addTag($event)"
     ></app-tags>
     <div class="toolbar">
       <div>
         <label
-          for="photoInput"
+          [htmlFor]="photoInputNameAttribute"
           class="material-symbols-outlined circleButton toolbarButton"
         >
           imagesmode
           <input
+            [id]="photoInputNameAttribute"
+            [name]="photoInputNameAttribute"
             type="file"
-            name="photoInput"
-            id="photoInput"
             accept="image/*"
             (change)="setPhoto($event)"
+            class="photoInput"
           />
         </label>
         <button
-          (click)="showTags = !showTags"
+          (click)="showTagsToggle.next()"
           class="material-symbols-outlined circleButton toolbarButton"
         >
           tag
@@ -78,8 +77,8 @@
         name="create-post-submit-btn"
         class="create-post-submit-btn"
         type="submit"
-        (click)="onSubmit.emit(tweetForm)"
-        [disabled]="tweetForm.controls['text'].invalid"
+        (click)="onSubmit.next()"
+        [disabled]="tweetForm.get('text')?.invalid"
       >
         {{ label }}
       </button>

@@ -1,18 +1,23 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
-  EventEmitter,
+  inject,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  FormBuilder,
   FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { filter, map, ReplaySubject, Subject, withLatestFrom } from 'rxjs';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 
 @Component({
@@ -26,22 +31,40 @@ import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.
   selector: 'app-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TagsComponent implements AfterViewInit {
+export class TagsComponent implements AfterViewInit, OnInit {
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
-  @Output() tag = new EventEmitter<string>();
-  text = '';
+  @Output() tag = new ReplaySubject<string>(1);
 
-  constructor(private fb: FormBuilder) {}
+  formGroup = new FormGroup({
+    tag: new FormControl('', { nonNullable: true }),
+  });
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.input.nativeElement.focus();
   }
 
-  addTag(text: string): void {
-    if (!text) return;
-    const trimmed = text.toLowerCase().trim().replace(/ /g, '');
-    this.tag.emit(trimmed);
-    this.text = '';
+  addTagSubject = new Subject<void>();
+
+  destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this.addTagSubject
+      .pipe(
+        withLatestFrom(
+          this.formGroup.controls.tag.valueChanges,
+          (_, tag) => tag
+        ),
+        map((text) => text.toLowerCase()),
+        filter(Boolean),
+        map((text) => text.trim().replace(/ /g, '')),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((tag) => {
+        this.tag.next(tag);
+        this.formGroup.controls.tag.patchValue('', { emitEvent: false });
+      });
   }
 }

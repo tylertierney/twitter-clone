@@ -93,6 +93,8 @@ export class PostToolbarComponent implements OnInit {
           this.numOfLikes = this.numOfLikes - 1;
         }
       });
+
+    // this.retweetClicked$.pipe(switchMap(() => this.postsService.createNewPost()))
   }
 
   replyCount$ = this.postSubject.pipe(
@@ -113,4 +115,6 @@ export class PostToolbarComponent implements OnInit {
       content: template,
     });
   }
+
+  retweetClicked$ = new Subject<void>();
 }

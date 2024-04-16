@@ -1,5 +1,5 @@
 <app-post
-  [post]="post"
+  [post]="postSubject | push"
   [showToolbar]="false"
   [showReplyHandle]="true"
   [showParent]="false"
@@ -9,16 +9,16 @@
   [helperText]="replyingTo"
   label="Reply"
   placeholder="Tweet your reply"
-  [replying_to]="post.id"
-  (onSubmit)="postsService.createNewPost($event)"
+  [replying_to]="id$ | push"
+  successToastMessage="Your reply was posted"
 ></app-new-post>
 <ng-template #replyingTo>
   <span
     >Replying to
     <a
-      [routerLink]="post.username"
+      [routerLink]="username$ | push"
       style="color: rgba(var(--brand-primary)); text-decoration: none"
-      >&#64;{{ post.username }}</a
+      >&#64;{{ username$ | push }}</a
     ></span
   >
 </ng-template>

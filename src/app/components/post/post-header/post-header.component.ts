@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ModalService } from '../../../services/modal/modal.service';
@@ -24,6 +31,7 @@ import { RxPush } from '@rx-angular/template/push';
 })
 export class PostHeaderComponent implements OnInit {
   @Input() post: IPost;
+  @Output() postDeleted = new EventEmitter<void>();
 
   constructor(
     public authService: AuthService,
@@ -50,6 +58,7 @@ export class PostHeaderComponent implements OnInit {
       this.toast.success('Tweet deleted');
       this.modalService.close();
       this.postsService.fetchFollowedPostsSubject.next();
+      this.postDeleted.emit();
     });
   }
 }

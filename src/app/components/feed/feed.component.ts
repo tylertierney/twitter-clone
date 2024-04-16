@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IPost, PostsService } from 'src/app/services/posts/posts.service';
+import { Component, OnInit } from '@angular/core';
+import { Observable, ReplaySubject, Subject, withLatestFrom } from 'rxjs';
+import {
+  IPost,
+  NewPost,
+  PostsService,
+} from 'src/app/services/posts/posts.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { ThemeService } from '../../services/theme/theme.service';
 import { CommonModule } from '@angular/common';
@@ -22,8 +26,12 @@ import { PostComponent } from '../post/post.component';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
 })
-export class FeedComponent {
+export class FeedComponent implements OnInit {
   selectedFeed$: Observable<IPost[]> = this.postsService.allPosts$;
+
+  // newPostValueSubject = new ReplaySubject<NewPost>(1);
+
+  // newPostSubmissionSubject = new Subject<void>();
 
   constructor(
     public postsService: PostsService,
@@ -37,5 +45,11 @@ export class FeedComponent {
     } else {
       this.selectedFeed$ = this.postsService.followedPosts$;
     }
+  }
+
+  ngOnInit(): void {
+    // this.newPostSubmissionSubject
+    //   .pipe(withLatestFrom(this.newPostValueSubject, (_, form) => form))
+    //   .subscribe(console.log);
   }
 }

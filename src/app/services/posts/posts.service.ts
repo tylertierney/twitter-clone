@@ -15,6 +15,13 @@ import {
 import { AuthService } from '../auth/auth.service';
 import { ITag } from '../search/search.service';
 
+export interface NewPost {
+  text: string;
+  photo_file: File | undefined;
+  replying_to: string | undefined;
+  tags: string[];
+}
+
 export interface IPost {
   id: string;
   date: string;
@@ -62,38 +69,29 @@ export class PostsService {
     this.fetchFollowedPostsSubject.next();
   }
 
-  createNewPost(form: FormGroup) {
-    return this.userId$
-      .pipe(
-        switchMap((userId) => {
-          const formData = new FormData();
-          formData.append('text', form.controls['text'].value);
-          const photo_file = form.controls['photo_file'].value;
-          if (photo_file) {
-            formData.append('photo_file', photo_file);
-          }
-          const replying_to = form.controls['replying_to'].value;
-          if (replying_to) {
-            formData.append('replying_to', replying_to);
-          }
-          formData.append('tags', JSON.stringify(form.controls['tags'].value));
-          formData.append('author', userId);
-          return this.http.post('/posts', formData);
-        })
-      )
-      .subscribe(() => {
-        this.fetchAllPostsSubject.next();
-        this.fetchFollowedPostsSubject.next();
-        this.toast.success('Your tweet was posted');
-        form.reset();
-      });
+  createNewPost(post: NewPost) {
+    return this.userId$.pipe(
+      switchMap((userId) => {
+        const formData = new FormData();
+        formData.append('text', post.text);
+        if (post.photo_file) {
+          formData.append('photo_file', post.photo_file);
+        }
+        if (post.replying_to) {
+          formData.append('replying_to', post.replying_to);
+        }
+        formData.append('tags', JSON.stringify(post.tags ?? []));
+        formData.append('author', userId);
+        return this.http.post('/posts', formData);
+      })
+    );
   }
 
-  getPostsByUsername(username: string): Observable<any[]> {
-    return this.http.get<any[]>(`/users/${username}/posts`);
+  getPostsByUsername(username: string): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`/users/${username}/posts`);
   }
 
-  getPostIsLiked(post_id: string, user_id: string) {
+  getPostIsLiked(post_id: string, user_id: string): Observable<boolean> {
     return this.http.get<boolean>(`/posts/like/${post_id}/${user_id}`);
   }
 
@@ -101,11 +99,11 @@ export class PostsService {
     return this.http.get<IPost>(`/posts/${id}`);
   }
 
-  togglePostLiked(post_id: string, user_id: string) {
+  togglePostLiked(post_id: string, user_id: string): Observable<boolean> {
     return this.http.post<boolean>(`/posts/like/${post_id}/${user_id}`, {});
   }
 
-  getRepliesByPostId(post_id: string) {
+  getRepliesByPostId(post_id: string): Observable<IPost[]> {
     return this.http.get<IPost[]>(`/posts/${post_id}/replies`);
   }
 
@@ -123,7 +121,7 @@ export class PostsService {
       );
   }
 
-  getPostsByTag(tag: string) {
+  getPostsByTag(tag: string): Observable<IPost[]> {
     return this.http.get<IPost[]>(`/tags/${tag}`);
   }
 }
