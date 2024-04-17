@@ -1,4 +1,4 @@
-<ng-container *ngIf="(users$ | push).length > 0; else noResultsMessage">
+<ng-container *ngIf="(usersListLength$ | push) > 0; else noResultsMessage">
   <app-user-search-result
     *ngFor="let user of users$ | push"
     [user]="user"

@@ -29,4 +29,6 @@ export class SearchPostsComponent {
     map(({ posts }) => posts),
     shareReplay(1)
   );
+
+  postsListLength$ = this.posts$.pipe(map((posts) => posts.length));
 }

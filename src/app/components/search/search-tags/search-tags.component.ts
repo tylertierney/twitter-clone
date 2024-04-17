@@ -29,4 +29,6 @@ export class SearchTagsComponent {
     map(({ tags }) => tags),
     shareReplay(1)
   );
+
+  tagsListLength$ = this.tags$.pipe(map((tags) => tags.length));
 }

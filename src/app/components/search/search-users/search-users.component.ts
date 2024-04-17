@@ -29,4 +29,6 @@ export class SearchUsersComponent {
     map(({ users }) => users),
     shareReplay(1)
   );
+
+  usersListLength$ = this.users$.pipe(map((users) => users.length));
 }

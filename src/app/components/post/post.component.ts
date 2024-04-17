@@ -1,13 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { RouterModule } from '@angular/router';
+import { RxPush } from '@rx-angular/template/push';
+import {
+  filter,
+  map,
+  ReplaySubject,
+  shareReplay,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
 import { IPost, PostsService } from 'src/app/services/posts/posts.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { PostHeaderComponent } from './post-header/post-header.component';
 import { PostBodyComponent } from './post-body/post-body.component';
-import { RxPush } from '@rx-angular/template/push';
+import { PostHeaderComponent } from './post-header/post-header.component';
 
 @Component({
   standalone: true,
@@ -23,8 +30,12 @@ import { RxPush } from '@rx-angular/template/push';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
-  @Input() post: IPost;
-  domain = environment.domain;
+  postSubject = new ReplaySubject<IPost>(1);
+  @Input() set post(post: IPost) {
+    this.postSubject.next(post);
+  }
+  // @Input() post: IPost;
+  // domain = environment.domain;
   @Input() showToolbar = true;
   @Input() hasReply: boolean = false;
   @Input() showReplyHandle = false;
@@ -32,7 +43,12 @@ export class PostComponent implements OnInit {
   @Input() showMedia = true;
   @Input() helperText: TemplateRef<HTMLElement>;
 
-  repliedPost$: Observable<IPost>;
+  repliedPost$ = this.postSubject.pipe(
+    map(({ replying_to }) => replying_to),
+    filter(Boolean),
+    switchMap((id) => this.postsService.getPostById(id)),
+    shareReplay(1)
+  );
 
   constructor(
     public authService: AuthService,
@@ -40,18 +56,48 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.post.replying_to) {
-      this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
-    }
-
-    this.photo_url = this.post.photo_url;
+    // if (this.post.replying_to) {
+    //   this.repliedPost$ = this.postsService.getPostById(this.post.replying_to);
+    // }
+    // this.photo_url = this.post.photo_url;
   }
 
-  photo_url = '';
+  id$ = this.postSubject.pipe(
+    map(({ id }) => id),
+    filter(Boolean)
+  );
 
-  get altText() {
-    return `${this.post.name}'s Profile Picture`;
-  }
+  username$ = this.postSubject.pipe(
+    map(({ username }) => username),
+    filter(Boolean)
+  );
+
+  expandedPostLink$ = this.username$.pipe(
+    withLatestFrom(this.id$),
+    map(([username, id]) => `/${username}/${id}`)
+  );
+
+  name$ = this.postSubject.pipe(
+    map(({ name }) => name),
+    filter(Boolean)
+  );
+
+  altText$ = this.name$.pipe(map((name) => `${name}'s Profile Picture`));
+
+  userLink$ = this.username$.pipe(map((username) => `/${username}`));
+
+  profile_pic$ = this.postSubject.pipe(
+    map(({ profile_pic }) => profile_pic),
+    filter(Boolean)
+  );
+
+  imageSrc$ = this.username$.pipe(
+    withLatestFrom(this.profile_pic$),
+    map(
+      ([username, profile_pic]) =>
+        `${environment.domain}/users/${username}/profile_pic/${profile_pic}`
+    )
+  );
 
   onError(e: Event) {
     const target = e.target as HTMLImageElement;
@@ -59,4 +105,6 @@ export class PostComponent implements OnInit {
   }
 
   postDeleted = false;
+
+  currentUser$ = this.authService.userSubject;
 }

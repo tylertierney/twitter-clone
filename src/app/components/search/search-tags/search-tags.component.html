@@ -1,4 +1,4 @@
-<ng-container *ngIf="(tags$ | push).length > 0; else noResultsMessage">
+<ng-container *ngIf="(tagsListLength$ | push) > 0; else noResultsMessage">
   <app-tag-search-result
     *ngFor="let tag of tags$ | push"
     [tag]="tag"
