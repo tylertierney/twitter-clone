@@ -45,7 +45,7 @@ export class UserService {
     targetUserId: string,
     currentlyFollowing: boolean
   ) {
-    return this.http.post(`/follow/${currentUserId}/${targetUserId}`, {
+    return this.http.post<boolean>(`/follow/${currentUserId}/${targetUserId}`, {
       action: currentlyFollowing ? 'unfollow' : 'follow',
     });
   }

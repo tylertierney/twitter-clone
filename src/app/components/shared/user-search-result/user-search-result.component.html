@@ -1,28 +1,24 @@
-<a class="searchResult" [routerLink]="['/' + user.username]">
+<a class="searchResult" [routerLink]="profileLink$ | push">
   <img
     class="userProfilePicPreview"
-    [src]="
-      domain + '/users/' + user.username + '/profile_pic/' + user.profile_pic
-    "
+    [src]="profile_pic_link$ | push"
     (error)="onImageError($event)"
   />
   <div class="userDetails">
     <div class="mainInfo">
       <div class="names">
-        <span class="name">{{ user.name }}</span>
-        <span class="username">&#64;{{ user.username }}</span>
+        <span class="name">{{ name$ | push }}</span>
+        <span class="username">&#64;{{ username$ | push }}</span>
       </div>
       <app-follow-button
-        *ngIf="
-          showFollowButton && (authService.userSubject | async) as currentUser
-        "
-        [currentUser]="currentUser"
-        [targetUser]="user"
+        *ngIf="showFollowButton && (currentUser$ | push)"
+        [currentUser]="currentUser$ | push"
+        [targetUser]="userSubject | push"
         (click)="stopPropagation($event)"
       ></app-follow-button>
     </div>
-    <div *ngIf="user.description && showDescription">
-      <span class="description">{{ user.description }}</span>
+    <div *ngIf="showDescription">
+      <span class="description">{{ description$ | push }}</span>
     </div>
   </div>
 </a>
