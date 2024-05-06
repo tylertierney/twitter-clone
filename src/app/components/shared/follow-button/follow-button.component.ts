@@ -36,7 +36,9 @@ export class FollowButtonComponent implements OnInit {
 
   targetUserSubject = new ReplaySubject<IUser>(1);
   @Input() set targetUser(user: IUser) {
-    this.targetUserSubject.next(user);
+    if (user) {
+      this.targetUserSubject.next(user);
+    }
   }
 
   isFollowingSubject = new BehaviorSubject(false);

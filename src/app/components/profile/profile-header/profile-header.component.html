@@ -1,168 +1,174 @@
-<ng-container *ngIf="user">
-  <div class="headerPicContainer">
+<div class="headerPicContainer">
+  <img
+    *ngIf="(header_pic$ | push) || newHeaderPicUrl; else header_pic_bkg"
+    [src]="
+      newHeaderPicUrl
+        ? newHeaderPicUrl
+        : domain +
+          '/users/' +
+          (username$ | push) +
+          '/header_pic/' +
+          (header_pic$ | push)
+    "
+    width="100%"
+    class="header_pic"
+    (error)="onHeaderPicError($event)"
+  />
+  <ng-template #header_pic_bkg>
+    <div
+      style="
+        width: 100%;
+        background: rgb(207, 217, 222);
+        background: linear-gradient(
+          162deg,
+          rgba(207, 217, 222, 1) 0%,
+          rgb(146, 164, 172) 100%
+        );
+        padding-bottom: 56.25%;
+        resize: horizontal;
+      "
+    ></div>
+  </ng-template>
+  <div
+    class="editPhotoControls"
+    style="z-index: 1"
+    *ngIf="isEditableSubject | push"
+  >
+    <div *ngIf="newHeaderPicUrl; else headerPicInput">
+      <button
+        class="material-symbols-outlined circleButton"
+        (click)="newHeaderPicUrl = ''"
+      >
+        close
+      </button>
+      <button
+        *ngIf="username$ | push as username"
+        class="material-symbols-outlined circleButton"
+        (click)="confirmUpdatedHeaderPic(username, newHeaderPicFile)"
+      >
+        done
+      </button>
+    </div>
+    <ng-template #headerPicInput>
+      <label for="headerPicInput" class="material-symbols-outlined circleButton"
+        >add_a_photo
+        <input
+          style="display: none; appearance: none"
+          id="headerPicInput"
+          name="headerPicInput"
+          type="file"
+          accept="image/*"
+          (change)="setNewHeaderPicUrl($event)"
+      /></label>
+    </ng-template>
+  </div>
+</div>
+
+<div class="profileInfo">
+  <div class="profilePicContainer">
+    <input
+      style="display: none; appearance: none"
+      id="profilePicInput"
+      name="profilePicInput"
+      type="file"
+      accept="image/*"
+      (change)="setNewProfilePicUrl($event)"
+    />
     <img
-      *ngIf="user.header_pic || newHeaderPicUrl; else header_pic_bkg"
+      *ngIf="(profile_pic$ | push) || newProfilePicUrl; else profile_pic_bkg"
       [src]="
-        newHeaderPicUrl
-          ? newHeaderPicUrl
+        newProfilePicUrl
+          ? newProfilePicUrl
           : domain +
             '/users/' +
-            user.username +
-            '/header_pic/' +
-            user.header_pic
+            (username$ | push) +
+            '/profile_pic/' +
+            (profile_pic$ | push)
       "
       width="100%"
-      class="header_pic"
-      (error)="onHeaderPicError($event)"
+      class="profile_pic"
+      (error)="onProfilePicError($event)"
     />
-    <ng-template #header_pic_bkg>
-      <div
-        style="
-          width: 100%;
-          background: rgb(207, 217, 222);
-          background: linear-gradient(
-            162deg,
-            rgba(207, 217, 222, 1) 0%,
-            rgb(146, 164, 172) 100%
-          );
-          padding-bottom: 56.25%;
-          resize: horizontal;
-        "
-      ></div>
-    </ng-template>
-    <div class="editPhotoControls" style="z-index: 1" *ngIf="isEditable">
-      <div *ngIf="newHeaderPicUrl; else headerPicInput">
+    <div
+      class="editPhotoControls"
+      style="padding: 0"
+      *ngIf="isEditableSubject | push"
+    >
+      <div *ngIf="newProfilePicUrl; else profilePicInput">
         <button
           class="material-symbols-outlined circleButton"
-          (click)="newHeaderPicUrl = ''"
+          (click)="newProfilePicUrl = ''"
         >
           close
         </button>
         <button
+          *ngIf="username$ | push as username"
           class="material-symbols-outlined circleButton"
-          (click)="confirmUpdatedHeaderPic(user.username, newHeaderPicFile)"
+          (click)="
+            editProfileService.updateProfilePic(username, newProfilePicFile)
+          "
+          (click)="confirmUpdatedProfilePic(username, newProfilePicFile)"
         >
           done
         </button>
       </div>
-      <ng-template #headerPicInput>
+      <ng-template #profilePicInput>
         <label
-          for="headerPicInput"
+          for="profilePicInput"
           class="material-symbols-outlined circleButton"
           >add_a_photo
           <input
             style="display: none; appearance: none"
-            id="headerPicInput"
-            name="headerPicInput"
+            id="profilePicInput"
+            name="profilePicInput"
             type="file"
             accept="image/*"
-            (change)="setNewHeaderPicUrl($event)"
+            (change)="setNewProfilePicUrl($event)"
         /></label>
       </ng-template>
     </div>
   </div>
 
-  <div class="profileInfo">
-    <div class="profilePicContainer">
-      <input
-        style="display: none; appearance: none"
-        id="profilePicInput"
-        name="profilePicInput"
-        type="file"
-        accept="image/*"
-        (change)="setNewProfilePicUrl($event)"
-      />
-      <img
-        *ngIf="user.profile_pic || newProfilePicUrl; else profile_pic_bkg"
-        [src]="
-          newProfilePicUrl
-            ? newProfilePicUrl
-            : domain +
-              '/users/' +
-              user.username +
-              '/profile_pic/' +
-              user.profile_pic
-        "
-        width="100%"
-        class="profile_pic"
-        (error)="onProfilePicError($event)"
-      />
-      <div class="editPhotoControls" style="padding: 0" *ngIf="isEditable">
-        <div *ngIf="newProfilePicUrl; else profilePicInput">
-          <button
-            class="material-symbols-outlined circleButton"
-            (click)="newProfilePicUrl = ''"
-          >
-            close
-          </button>
-          <button
-            class="material-symbols-outlined circleButton"
-            (click)="
-              editProfileService.updateProfilePic(
-                user.username,
-                newProfilePicFile
-              )
-            "
-            (click)="confirmUpdatedProfilePic(user.username, newProfilePicFile)"
-          >
-            done
-          </button>
-        </div>
-        <ng-template #profilePicInput>
-          <label
-            for="profilePicInput"
-            class="material-symbols-outlined circleButton"
-            >add_a_photo
-            <input
-              style="display: none; appearance: none"
-              id="profilePicInput"
-              name="profilePicInput"
-              type="file"
-              accept="image/*"
-              (change)="setNewProfilePicUrl($event)"
-          /></label>
-        </ng-template>
-      </div>
-    </div>
-    <div
-      style="display: flex; gap: 0.5rem"
-      *ngIf="isEditable; else followToggle"
+  <div
+    style="display: flex; gap: 0.5rem"
+    [ngStyle]="{
+      display: (isEditableSubject | push) === true ? 'flex' : 'none'
+    }"
+  >
+    <button
+      class="editProfileBtn"
+      (click)="openEditProfileModal(editProfileModal)"
     >
-      <button
-        class="editProfileBtn"
-        (click)="openEditProfileModal(editProfileModal)"
-      >
-        Edit Profile
-      </button>
-      <button
-        [matMenuTriggerFor]="profileOptions"
-        style="font-size: 1.4rem"
-        class="editProfileBtn material-symbols-outlined"
-      >
-        menu
-      </button>
-      <mat-menu #profileOptions="matMenu" class="menu">
-        <app-menu [menuItems]="profileOptionsMenuItems"></app-menu>
-      </mat-menu>
-    </div>
-    <ng-template #followToggle>
-      <app-follow-button
-        *ngIf="authService.userSubject | push as currentUser"
-        [targetUser]="user"
-        [currentUser]="currentUser"
-      ></app-follow-button>
-    </ng-template>
-
-    <ng-template #profile_pic_bkg>
-      <div class="profile_pic_bkg"></div>
-    </ng-template>
+      Edit Profile
+    </button>
+    <button
+      [matMenuTriggerFor]="profileOptions"
+      style="font-size: 1.4rem"
+      class="editProfileBtn material-symbols-outlined"
+    >
+      menu
+    </button>
+    <mat-menu #profileOptions class="menu">
+      <app-menu [menuItems]="profileOptionsMenuItems"></app-menu>
+    </mat-menu>
   </div>
-</ng-container>
+  <app-follow-button
+    *ngIf="authService.userSubject | push as currentUser"
+    [ngStyle]="{
+      display: (isEditableSubject | push) === true ? 'none' : 'flex'
+    }"
+    [targetUser]="userSubject | push"
+    [currentUser]="currentUser"
+  ></app-follow-button>
+
+  <ng-template #profile_pic_bkg>
+    <div class="profile_pic_bkg"></div>
+  </ng-template>
+</div>
 <ng-template #editProfileModal>
-  <!-- (valueChangesSubject)="getFormData($event)" -->
   <app-edit-profile-form
     (valueChangesSubject)="editProfileFormSubject.next($event)"
-    [user]="user"
+    [user]="userSubject | push"
   ></app-edit-profile-form>
 </ng-template>
 <ng-template #deleteProfileModal>

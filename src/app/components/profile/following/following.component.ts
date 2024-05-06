@@ -53,7 +53,6 @@ export class FollowingComponent implements OnInit {
   followingSubject = new ReplaySubject<IUser[]>(1);
 
   username$ = this.activatedRoute.parent?.params.pipe(
-    tap(console.log),
     map(({ username }) => username),
     filter(Boolean),
     shareReplay(1)
@@ -92,8 +91,7 @@ export class FollowingComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
         switchMap((username) =>
           this.userService.getFollowingListForAUser(username)
-        ),
-        tap(console.log)
+        )
       )
       .subscribe(this.followingSubject);
   }

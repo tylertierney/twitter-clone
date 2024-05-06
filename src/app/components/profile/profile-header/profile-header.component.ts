@@ -26,7 +26,15 @@ import {
   EditProfileFormComponent,
   NameAndDescription,
 } from '../edit-profile-form/edit-profile-form.component';
-import { ReplaySubject, Subject, switchMap, withLatestFrom } from 'rxjs';
+import {
+  BehaviorSubject,
+  filter,
+  map,
+  ReplaySubject,
+  Subject,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
 
 @Component({
   standalone: true,
@@ -44,8 +52,32 @@ import { ReplaySubject, Subject, switchMap, withLatestFrom } from 'rxjs';
   styleUrls: ['./profile-header.component.css'],
 })
 export class ProfileHeaderComponent implements OnInit {
-  @Input() isEditable = false;
-  @Input() user: IUser;
+  isEditableSubject = new BehaviorSubject(false);
+  @Input() set isEditable(isEditable: boolean) {
+    this.isEditableSubject.next(isEditable);
+  }
+
+  userSubject = new ReplaySubject<IUser>(1);
+  @Input() set user(user: IUser) {
+    if (user) {
+      this.userSubject.next(user);
+    }
+  }
+
+  header_pic$ = this.userSubject.pipe(
+    map(({ header_pic }) => header_pic),
+    filter(Boolean)
+  );
+
+  username$ = this.userSubject.pipe(
+    map(({ username }) => username),
+    filter(Boolean)
+  );
+
+  profile_pic$ = this.userSubject.pipe(
+    map(({ profile_pic }) => profile_pic),
+    filter(Boolean)
+  );
 
   newHeaderPicUrl: SafeUrl;
   newHeaderPicFile: File;
@@ -91,7 +123,8 @@ export class ProfileHeaderComponent implements OnInit {
       .updateHeaderPic(username, newHeaderPicFile)
       .subscribe((user) => {
         this.newHeaderPicUrl = '';
-        this.user = user;
+        // this.user = user;
+        this.userSubject.next(user);
         this.authService.userSubject.next(user);
         this.toast.success('Header pic updated!');
       });
@@ -102,7 +135,8 @@ export class ProfileHeaderComponent implements OnInit {
       .updateProfilePic(username, newProfilePicFile)
       .subscribe((user) => {
         this.newProfilePicUrl = '';
-        this.user = user;
+        // this.user = user;
+        this.userSubject.next(user);
         this.authService.userSubject.next(user);
         this.toast.success('Profile pic updated!');
       });
@@ -125,9 +159,10 @@ export class ProfileHeaderComponent implements OnInit {
     this.editProfileSubmitClick
       .pipe(
         withLatestFrom(this.editProfileFormSubject, (_, form) => form),
-        switchMap((nameAndDescription) =>
+        withLatestFrom(this.userSubject.pipe(map(({ username }) => username))),
+        switchMap(([nameAndDescription, username]) =>
           this.editProfileService.updateNameAndDescription(
-            this.user.username,
+            username,
             nameAndDescription
           )
         )
@@ -135,7 +170,8 @@ export class ProfileHeaderComponent implements OnInit {
       .subscribe((updatedUser) => {
         this.toast.success('Your profile was updated!');
         this.authService.userSubject.next(updatedUser);
-        this.user = updatedUser;
+        // this.user = updatedUser;
+        this.userSubject.next(updatedUser);
         this.modalService.close();
       });
   }
@@ -172,12 +208,23 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   deleteProfileConfirm() {
-    this.userService
-      .deleteProfile(this.user.id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+    this.userSubject
+      .pipe(
+        map(({ id }) => id),
+        switchMap((id) => this.userService.deleteProfile(id)),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe(() => {
         this.modalService.close();
         this.authService.logout();
       });
+
+    // this.userService
+    //   .deleteProfile(this.user.id)
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe(() => {
+    //     this.modalService.close();
+    //     this.authService.logout();
+    //   });
   }
 }

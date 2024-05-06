@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RxPush } from '@rx-angular/template/push';
 import { combineLatest, filter, map, shareReplay, switchMap } from 'rxjs';
@@ -28,22 +34,24 @@ import { ProfileHeaderComponent } from '../profile-header/profile-header.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileMainComponent {
+  destroyRef = inject(DestroyRef);
+
   username$ = this.activatedRoute.params.pipe(
     map(({ username }) => username),
-    filter(Boolean)
+    filter(Boolean),
+    takeUntilDestroyed(this.destroyRef)
   );
   user$ = this.username$.pipe(
     switchMap((username) => this.userService.getUserByUsername(username)),
-    shareReplay(1)
+    filter(Boolean),
+    shareReplay(1),
+    takeUntilDestroyed(this.destroyRef)
   );
   name$ = this.user$.pipe(
     map(({ name }) => name),
     filter(Boolean)
   );
-  description$ = this.user$.pipe(
-    map(({ description }) => description),
-    filter(Boolean)
-  );
+  description$ = this.user$.pipe(map(({ description }) => description));
   created_at$ = this.user$.pipe(
     map(({ created_at }) => created_at),
     filter(Boolean)

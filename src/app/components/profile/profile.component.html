@@ -1,12 +1,8 @@
-<ng-container *ngIf="user$ | push as user">
-  <ng-container *ngIf="posts$ | push as posts">
-    <app-sub-nav class="sub-nav">
-      <app-back-button></app-back-button>
-      <div class="navInfo">
-        <h4>{{ user.name }}</h4>
-        <span>{{ postsText$ | push }}</span>
-      </div>
-    </app-sub-nav>
-    <router-outlet></router-outlet>
-  </ng-container>
-</ng-container>
+<app-sub-nav class="sub-nav">
+  <app-back-button></app-back-button>
+  <div class="navInfo">
+    <h4>{{ name$ | push }}</h4>
+    <span>{{ postsText$ | push }}</span>
+  </div>
+</app-sub-nav>
+<router-outlet></router-outlet>

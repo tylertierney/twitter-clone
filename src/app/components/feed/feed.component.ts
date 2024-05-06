@@ -26,7 +26,7 @@ import { PostComponent } from '../post/post.component';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent {
   selectedFeed$: Observable<IPost[]> = this.postsService.allPosts$;
 
   // newPostValueSubject = new ReplaySubject<NewPost>(1);
@@ -45,11 +45,5 @@ export class FeedComponent implements OnInit {
     } else {
       this.selectedFeed$ = this.postsService.followedPosts$;
     }
-  }
-
-  ngOnInit(): void {
-    // this.newPostSubmissionSubject
-    //   .pipe(withLatestFrom(this.newPostValueSubject, (_, form) => form))
-    //   .subscribe(console.log);
   }
 }
